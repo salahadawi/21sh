@@ -6,7 +6,7 @@
 #    By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/04/10 19:27:20 by sadawi            #+#    #+#              #
-#    Updated: 2020/04/17 14:58:06 by sadawi           ###   ########.fr        #
+#    Updated: 2020/04/28 19:33:50 by sadawi           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,18 +30,19 @@ INCLUDES = -I includes -I libft/includes
 
 FLAGS = -Wall -Wextra -Werror
 
-RUN_LIB = make -C libft/ fclean && make -C libft/
+RUN_LIB = make --no-print-directory -C libft/
 
-all: $(NAME)
-
-$(NAME):
+all: 
 	@$(RUN_LIB)
+	@make --no-print-director $(NAME)
+
+$(NAME): $(SRCS) libft/
 	@rm -rf objs
 	@echo Compiling $(NAME)...
 	@gcc $(FLAGS) $(INCLUDES) -c $(SRCS)
 	@mkdir objs
 	@mv $(notdir $(SRCS:.c=.o)) objs
-	@gcc $(FLAGS) $(INCLUDES) -o $(NAME) $(OBJS) libft/libft.a
+	@gcc $(FLAGS) $(INCLUDES) -o $(NAME) $(OBJS) libft/libft.a -ltermcap
 	@echo $(NAME) compiled succesfully!
 
 lib:
@@ -53,7 +54,7 @@ noflags:
 	@gcc $(INCLUDES) -c $(SRCS)
 	@mkdir objs
 	@mv $(notdir $(SRCS:.c=.o)) objs
-	@gcc $(INCLUDES) -o $(NAME) $(OBJS) libft/libft.a
+	@gcc $(INCLUDES) -o $(NAME) $(OBJS) libft/libft.a -ltermcap
 	@echo $(NAME) compiled without flags succesfully!
 
 clean:
@@ -62,7 +63,12 @@ clean:
 	@make -C libft/ clean
 	@echo Clean successful!
 
-fclean: clean
+clean_binary:
+	@/bin/rm -f $(OBJS)
+	@rm -rf objs
+	@echo Clean successful!
+
+fclean: clean_binary
 	@/bin/rm -f $(NAME)
 	@make -C libft/ fclean
 	@echo Clean successful!
