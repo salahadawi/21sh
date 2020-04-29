@@ -6,74 +6,73 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 14:12:23 by sadawi            #+#    #+#             */
-/*   Updated: 2020/04/29 12:49:29 by sadawi           ###   ########.fr       */
+/*   Updated: 2020/04/29 13:11:37 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh.h"
 
-void	init_env(t_env **env, char *envp[])
+void	init_env(char *envp[])
 {
 	int i;
 
 	i = count_env_amount(envp);
-	(*env) = (t_env*)ft_memalloc(sizeof(t_env));
-	(*env)->envp = (char**)ft_memalloc(sizeof(char*) * (i + 1));
+	g_21sh->envp = (char**)ft_memalloc(sizeof(char*) * (i + 1));
 	i = 0;
 	while (envp[i])
 	{
-		(*env)->envp[i] = ft_strdup(envp[i]);
+		g_21sh->envp[i] = ft_strdup(envp[i]);
 		i++;
 	}
-	(*env)->envp[i] = NULL;
-	init_builtins(*env);
-	init_shortcuts(*env);
+	g_21sh->envp[i] = NULL;
+	init_builtins();
+	init_shortcuts();
 }
 
-void	init_builtins(t_env *env)
+void	init_builtins(void)
 {
 	char	*builtin_names;
 	int		count;
 
 	builtin_names = "echo exit env setenv unsetenv cd";
-	env->builtin_names = ft_strsplit(builtin_names, ' ');
+	g_21sh->builtins.names = ft_strsplit(builtin_names, ' ');
 	count = 0;
-	while (env->builtin_names[count])
+	while (g_21sh->builtins.names[count])
 		count++;
-	env->builtin_funcs = (t_builtin_func**)ft_memalloc(sizeof(t_builtin_func*)
+	g_21sh->builtins.funcs = (t_builtin_func**)ft_memalloc(sizeof(t_builtin_func*)
 	* count);
-	env->builtin_funcs[0] = &builtin_echo;
-	env->builtin_funcs[1] = &builtin_exit;
-	env->builtin_funcs[2] = &builtin_env;
-	env->builtin_funcs[3] = &builtin_setenv;
-	env->builtin_funcs[4] = &builtin_unsetenv;
-	env->builtin_funcs[5] = &builtin_cd;
+	g_21sh->builtins.funcs[0] = &builtin_echo;
+	g_21sh->builtins.funcs[1] = &builtin_exit;
+	g_21sh->builtins.funcs[2] = &builtin_env;
+	g_21sh->builtins.funcs[3] = &builtin_setenv;
+	g_21sh->builtins.funcs[4] = &builtin_unsetenv;
+	g_21sh->builtins.funcs[5] = &builtin_cd;
 }
 
 /*
 ** When adding a new shortcut function, add +1 to count
 */
 
-void	init_shortcuts(t_env *env)
+void	init_shortcuts(void)
 {
 	int		count;
 
 	count = 2;
-	env->shortcut_funcs = (t_shortcut_func**)ft_memalloc(
+	g_21sh->builtins.shortcuts = (t_shortcut_func**)ft_memalloc(
 		sizeof(t_shortcut_func*) * (count + 1));
-	env->shortcut_funcs[0] = &shortcut_cd;
-	env->shortcut_funcs[1] = &shortcut_setenv;
-	env->shortcut_funcs[2] = NULL;
+	g_21sh->builtins.shortcuts[0] = &shortcut_cd;
+	g_21sh->builtins.shortcuts[1] = &shortcut_setenv;
+	g_21sh->builtins.shortcuts[2] = NULL;
 }
 
-void	clear_screen(t_env *env)
+void	clear_screen(void)
 {
 	char **args;
 
 	args = (char**)ft_memalloc(sizeof(char*) * 2);
 	args[0] = ft_strdup("clear");
 	args[1] = NULL;
-	exec_cmd(env, args);
+	exec_cmd(args);
 	free(args[0]);
 	free(args);
 }

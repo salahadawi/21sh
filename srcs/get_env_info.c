@@ -6,13 +6,13 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 14:20:38 by sadawi            #+#    #+#             */
-/*   Updated: 2020/04/29 12:49:15 by sadawi           ###   ########.fr       */
+/*   Updated: 2020/04/29 13:13:31 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh.h"
 
-char	*get_env_value(t_env *env, char *name)
+char	*get_env_value(char *name)
 {
 	int len;
 	int i;
@@ -20,12 +20,12 @@ char	*get_env_value(t_env *env, char *name)
 	name = strsub_alphanumeric_underscore(name);
 	len = ft_strlen(name);
 	i = 0;
-	while (env->envp[i])
+	while (g_21sh->envp[i])
 	{
-		if (ft_strnequ(env->envp[i], name, len) && env->envp[i][len] == '=')
+		if (ft_strnequ(g_21sh->envp[i], name, len) && g_21sh->envp[i][len] == '=')
 		{
 			free(name);
-			return (ft_strchr(env->envp[i], '=') + 1);
+			return (ft_strchr(g_21sh->envp[i], '=') + 1);
 		}
 		i++;
 	}

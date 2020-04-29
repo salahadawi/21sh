@@ -6,13 +6,13 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 14:11:04 by sadawi            #+#    #+#             */
-/*   Updated: 2020/04/29 12:50:24 by sadawi           ###   ########.fr       */
+/*   Updated: 2020/04/29 13:17:24 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh.h"
 
-int		shortcut_cd(t_env *env, char **args)
+int		shortcut_cd(char **args)
 {
 	char *oldpwd;
 
@@ -22,7 +22,7 @@ int		shortcut_cd(t_env *env, char **args)
 		free(oldpwd);
 		return (0);
 	}
-	update_pwd(env);
-	update_oldpwd(env, oldpwd);
+	update_pwd();
+	update_oldpwd(oldpwd);
 	return (1);
 }

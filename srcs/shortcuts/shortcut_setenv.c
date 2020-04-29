@@ -6,13 +6,13 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 14:11:32 by sadawi            #+#    #+#             */
-/*   Updated: 2020/04/29 12:50:26 by sadawi           ###   ########.fr       */
+/*   Updated: 2020/04/29 13:23:40 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh.h"
 
-int		shortcut_setenv(t_env *env, char **args)
+int		shortcut_setenv(char **args)
 {
 	int i;
 
@@ -27,7 +27,7 @@ int		shortcut_setenv(t_env *env, char **args)
 	{
 		if (ft_strchr(args[i], '='))
 		{
-			add_env(env, args[i]);
+			add_env(args[i]);
 			print_error(ft_sprintf("%s added to enviroment!", args[i]));
 		}
 		i++;

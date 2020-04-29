@@ -6,14 +6,14 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 14:07:38 by sadawi            #+#    #+#             */
-/*   Updated: 2020/04/29 12:50:11 by sadawi           ###   ########.fr       */
+/*   Updated: 2020/04/29 13:19:15 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh.h"
 
-int		builtin_exit(t_env *env, char **args)
+int		builtin_exit(char **args)
 {
-	(void)(env && args);
+	(void)(args);
 	exit(0);
 }

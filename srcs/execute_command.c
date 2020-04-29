@@ -6,13 +6,13 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 14:18:58 by sadawi            #+#    #+#             */
-/*   Updated: 2020/04/29 12:49:04 by sadawi           ###   ########.fr       */
+/*   Updated: 2020/04/29 13:13:01 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh.h"
 
-int		exec_cmd(t_env *env, char **args)
+int		exec_cmd(char **args)
 {
 	char	*filepath;
 	pid_t	pid;
@@ -20,7 +20,7 @@ int		exec_cmd(t_env *env, char **args)
 	pid = fork();
 	if (pid == 0)
 	{
-		if (!(filepath = find_filepath(env, args[0])))
+		if (!(filepath = find_filepath(args[0])))
 		{
 			print_error(ft_sprintf("Command not found: '%s'", args[0]));
 			free(filepath);
@@ -28,7 +28,7 @@ int		exec_cmd(t_env *env, char **args)
 		}
 		else
 		{
-			if (execve(filepath, args, env->envp) == -1)
+			if (execve(filepath, args, g_21sh->envp) == -1)
 				print_error(ft_sprintf("%s: Permission denied.", filepath));
 		}
 	}
@@ -39,14 +39,14 @@ int		exec_cmd(t_env *env, char **args)
 	return (1);
 }
 
-char	*find_filepath(t_env *env, char *filename)
+char	*find_filepath(char *filename)
 {
 	char	*filepath;
 	char	**paths;
 	int		filename_len;
 	int		i;
 
-	paths = ft_strsplit(get_env_value(env, "PATH"), ':');
+	paths = ft_strsplit(get_env_value("PATH"), ':');
 	filename_len = ft_strlen(filename);
 	i = 0;
 	if (access(filename, F_OK) != -1)

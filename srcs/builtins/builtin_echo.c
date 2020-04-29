@@ -6,17 +6,16 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 14:04:26 by sadawi            #+#    #+#             */
-/*   Updated: 2020/04/29 12:50:04 by sadawi           ###   ########.fr       */
+/*   Updated: 2020/04/29 13:18:53 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh.h"
 
-int		builtin_echo(t_env *env, char **args)
+int		builtin_echo(char **args)
 {
 	int i;
 
-	(void)env;
 	i = 1;
 	while (args[i])
 	{

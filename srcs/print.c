@@ -6,7 +6,7 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 13:59:48 by sadawi            #+#    #+#             */
-/*   Updated: 2020/04/29 12:49:38 by sadawi           ###   ########.fr       */
+/*   Updated: 2020/04/29 13:14:28 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,11 @@ void	print_error(char *message)
 	free(message);
 }
 
-void	print_shell_info(t_env *env)
+void	print_shell_info(void)
 {
 	char *user;
 
-	if ((user = get_env_value(env, "USER")))
+	if ((user = get_env_value("USER")))
 		ft_printf(RED "%s" RESET, user);
 	ft_printf("@");
 	print_current_dir_basename();

@@ -6,32 +6,31 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 14:10:22 by sadawi            #+#    #+#             */
-/*   Updated: 2020/04/29 12:49:58 by sadawi           ###   ########.fr       */
+/*   Updated: 2020/04/29 13:18:37 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh.h"
 
-int		builtin_cd(t_env *env, char **args)
+int		builtin_cd(char **args)
 {
 	char *oldpwd;
 
-	(void)env;
 	oldpwd = store_oldpwd();
 	if (!args[1])
-		chdir(get_env_value(env, "HOME"));
+		chdir(get_env_value("HOME"));
 	else if (ft_strequ(args[1], "-"))
-		chdir(get_env_value(env, "OLDPWD"));
+		chdir(get_env_value("OLDPWD"));
 	else
 	{
 		if (chdir(args[1]) == -1)
 			print_error(ft_sprintf("cd: no such file or directory: %s",
 			args[1]));
 	}
-	update_pwd(env);
-	update_oldpwd(env, oldpwd);
+	update_pwd();
+	update_oldpwd(oldpwd);
 	if (ft_strequ(args[1], "-"))
-		ft_printf("%s\n", get_env_value(env, "PWD"));
+		ft_printf("%s\n", get_env_value("PWD"));
 	return (1);
 }
 
@@ -44,17 +43,17 @@ char	*store_oldpwd(void)
 	return (path);
 }
 
-void	update_oldpwd(t_env *env, char *path)
+void	update_oldpwd(char *path)
 {
 	char *env_var;
 
 	env_var = ft_strjoin("OLDPWD=", path);
-	add_env(env, env_var);
+	add_env(env_var);
 	free(path);
 	free(env_var);
 }
 
-void	update_pwd(t_env *env)
+void	update_pwd(void)
 {
 	char *path;
 	char *env_var;
@@ -62,7 +61,7 @@ void	update_pwd(t_env *env)
 	path = (char*)ft_memalloc(PATH_MAX + 1);
 	getcwd(path, PATH_MAX);
 	env_var = ft_strjoin("PWD=", path);
-	add_env(env, env_var);
+	add_env(env_var);
 	free(path);
 	free(env_var);
 }

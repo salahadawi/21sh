@@ -6,7 +6,7 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/10 12:20:24 by sadawi            #+#    #+#             */
-/*   Updated: 2020/04/29 12:48:45 by sadawi           ###   ########.fr       */
+/*   Updated: 2020/04/29 13:11:19 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,19 +44,16 @@
 # define SPACE 32
 # define BACKSPACE 127
 
-struct s_env;
+typedef int			t_builtin_func (char **args);
 
-typedef int			t_builtin_func (struct s_env *env, char **args);
+typedef int			t_shortcut_func (char **args);
 
-typedef int			t_shortcut_func (struct s_env *env, char **args);
-
-typedef struct		s_env
+typedef struct		s_builtins
 {
-	char			**envp;
-	char			**builtin_names;
-	t_builtin_func	**builtin_funcs;
-	t_shortcut_func	**shortcut_funcs;
-}					t_env;
+	char			**names;
+	t_builtin_func	**funcs;
+	t_shortcut_func	**shortcuts;
+}					t_builtins;
 
 typedef	struct		s_key_sequences
 {
@@ -72,7 +69,11 @@ typedef struct		s_21sh
 	struct termios	old;
 	struct termios	raw;
 	t_key_sequences	key_sequences;
-}					t_select;
+	char			**envp;
+	t_builtins		builtins;
+}					t_21sh;
+
+t_21sh				*g_21sh;
 
 void				print_error(char *message);
 
@@ -80,71 +81,71 @@ int					count_env_amount(char *envp[]);
 
 char				*ft_strsubchar(char const *s, size_t start, char c);
 
-int					builtin_echo(t_env *env, char **args);
+int					builtin_echo(char **args);
 
-int					builtin_exit(t_env *env, char **args);
+int					builtin_exit(char **args);
 
-int					builtin_env(t_env *env, char **args);
+int					builtin_env(char **args);
 
 int					check_names_match(char *var1, char *var2);
 
-void				add_env(t_env *env, char *arg);
+void				add_env(char *arg);
 
-int					builtin_setenv(t_env *env, char **args);
+int					builtin_setenv(char **args);
 
-int					shortcut_setenv(t_env *env, char **args);
+int					shortcut_setenv(char **args);
 
-int					update_env(t_env *env, char **new_envp, int deleted, int i);
+int					update_env(char **new_envp, int deleted, int i);
 
-int					delete_env(t_env *env, char *arg);
+int					delete_env(char *arg);
 
-int					builtin_unsetenv(t_env *env, char **args);
+int					builtin_unsetenv(char **args);
 
 char				*strsub_alphanumeric_underscore(char *str);
 
-char				*get_env_value(t_env *env, char *name);
+char				*get_env_value(char *name);
 
 char				*store_oldpwd(void);
 
-void				update_oldpwd(t_env *env, char *path);
+void				update_oldpwd(char *path);
 
-void				update_pwd(t_env *env);
+void				update_pwd(void);
 
-int					shortcut_cd(t_env *env, char **args);
+int					shortcut_cd(char **args);
 
-int					builtin_cd(t_env *env, char **args);
+int					builtin_cd(char **args);
 
-void				init_builtins(t_env *env);
+void				init_builtins(void);
 
-void				init_env(t_env **env, char *envp[]);
+void				init_env(char *envp[]);
 
-void				print_envs(t_env *env);
+void				print_envs(void);
 
 char				**split_line_args(char *line);
 
-char				*find_filepath(t_env *env, char *filename);
+char				*find_filepath(char *filename);
 
 void				wait_for_child(pid_t pid);
 
-int					exec_cmd(t_env *env, char **args);
+int					exec_cmd(char **args);
 
 int					find_size_pointers(char *str, char *ptr);
 
 int					get_env_name_len(char *str);
 
-char				*expand_tilde(t_env *env, char *str, char *ptr);
+char				*expand_tilde(char *str, char *ptr);
 
-char				*expand_dollar(t_env *env, char *str, char *ptr);
+char				*expand_dollar(char *str, char *ptr);
 
 char				*find_dollar(const char *s);
 
-void				handle_expansion(t_env *env, char **args);
+void				handle_expansion(char **args);
 
-int					handle_shortcuts(t_env *env, char **args);
+int					handle_shortcuts(char **args);
 
-int					handle_builtins(t_env *env, char **args);
+int					handle_builtins(char **args);
 
-int					check_cmd(t_env *env, char **args);
+int					check_cmd(char **args);
 
 void				print_current_dir_basename(void);
 
@@ -152,14 +153,14 @@ void				free_args(char **args);
 
 char				**split_line_commands(char *line);
 
-void				print_shell_info(t_env *env);
+void				print_shell_info(void);
 
-void				loop_shell(t_env *env);
+void				loop_shell(void);
 
-void				clear_screen(t_env *env);
+void				clear_screen(void);
 
 char				*create_filepath(char *path, char *filename, int len);
 
-void				init_shortcuts(t_env *env);
+void				init_shortcuts(void);
 
 #endif
