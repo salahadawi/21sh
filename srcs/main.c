@@ -6,7 +6,7 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/15 12:28:40 by sadawi            #+#    #+#             */
-/*   Updated: 2020/04/29 13:23:16 by sadawi           ###   ########.fr       */
+/*   Updated: 2020/04/29 13:53:52 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int		ft_putschar(int c)
 {
-	if (write(STDERR_FILENO, &c, 1) == -1)
+	if (write(STDOUT_FILENO, &c, 1) == -1)
 		return (-1);
 	return (0);
 }
@@ -26,7 +26,7 @@ void	set_terminal(char *id)
 
 void	restore_terminal_mode(void)
 {
-	tcsetattr(STDERR_FILENO, TCSAFLUSH, &g_21sh->old);
+	tcsetattr(STDOUT_FILENO, TCSAFLUSH, &g_21sh->old);
 	//set_terminal(CURSOR_VISIBLE);
 	//set_terminal(TEXT_NORMAL);
 	set_terminal(NORMAL_MODE);
@@ -34,7 +34,7 @@ void	restore_terminal_mode(void)
 
 void	handle_error(char *message, int reset)
 {
-	ft_fprintf(STDERR_FILENO, "Error: %s.\n", message);
+	ft_fprintf(STDOUT_FILENO, "Error: %s.\n", message);
 	if (reset)
 		restore_terminal_mode();
 	//free_memory();
@@ -74,12 +74,80 @@ void	init_termcaps(void)
 	if (tgetent(NULL, terminal_name) < 1)
 		handle_error("Terminal specified in env not found", 0);
 	init_key_sequences();
+	tcgetattr(STDOUT_FILENO, &g_21sh->old);
+}
+
+void	set_terminal_raw_mode(void)
+{
+	tcsetattr(STDOUT_FILENO, TCSAFLUSH, &g_21sh->raw);
+	//set_terminal(SPECIAL_MODE);
+}
+
+void	handle_signal_suspend(void)
+{
+	restore_terminal_mode();
+	signal(SIGTSTP, SIG_DFL);
+	ioctl(STDOUT_FILENO, TIOCSTI, "\032");
+}
+
+void	handle_signal_continue(void)
+{
+	set_terminal_raw_mode();
+	signal(SIGTSTP, handle_signal);
+}
+
+void	handle_signal_interrupt(void)
+{
+
+}
+
+void	handle_signal(int sig)
+{
+	if (sig == SIGTSTP)
+		handle_signal_suspend();
+	else if (sig == SIGCONT)
+		handle_signal_continue();
+	else if (sig == SIGINT)
+		handle_signal_interrupt();
+	else
+	{
+		restore_terminal_mode();
+		//free_memory(g_select);
+		exit(0);
+	}
+}
+
+void	init_signal_handling(void)
+{
+	int i;
+
+	i = 0;
+	while (i <= SIGRTMAX)
+		signal(i++, handle_signal);
+}
+
+void	restore_signals(void)
+{
+	int i;
+
+	i = 0;
+	while (i <= SIGRTMAX)
+		signal(i++, SIG_DFL);
+}
+
+void	create_terminal_raw_mode()
+{
+	tcgetattr(STDOUT_FILENO, &g_21sh->raw);
+	g_21sh->raw.c_lflag &= ~(ECHO | ICANON);
 }
 
 int		main(int argc, char **argv, char *envp[])
 {
-	init_termcaps();
 	(void)(argc && argv);
+	init_termcaps();
+	init_signal_handling();
+	create_terminal_raw_mode();
+	//set_terminal_raw_mode();
 	init_env(envp);
 	clear_screen();
 	loop_shell();

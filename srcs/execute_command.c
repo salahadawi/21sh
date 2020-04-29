@@ -6,7 +6,7 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 14:18:58 by sadawi            #+#    #+#             */
-/*   Updated: 2020/04/29 13:13:01 by sadawi           ###   ########.fr       */
+/*   Updated: 2020/04/29 13:55:03 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,9 @@ void	wait_for_child(pid_t pid)
 {
 	int status;
 
+	restore_signals();
 	waitpid(pid, &status, WUNTRACED);
 	while (!WIFEXITED(status) && !WIFSIGNALED(status))
 		waitpid(pid, &status, WUNTRACED);
+	init_signal_handling();
 }

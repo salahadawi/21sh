@@ -6,7 +6,7 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/10 12:20:24 by sadawi            #+#    #+#             */
-/*   Updated: 2020/04/29 13:11:19 by sadawi           ###   ########.fr       */
+/*   Updated: 2020/04/29 13:55:24 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,5 +162,11 @@ void				clear_screen(void);
 char				*create_filepath(char *path, char *filename, int len);
 
 void				init_shortcuts(void);
+
+void				handle_signal(int sig);
+
+void				restore_signals(void);
+
+void				init_signal_handling(void);
 
 #endif
