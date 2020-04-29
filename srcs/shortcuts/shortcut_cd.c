@@ -6,11 +6,11 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 14:11:04 by sadawi            #+#    #+#             */
-/*   Updated: 2020/04/17 14:43:15 by sadawi           ###   ########.fr       */
+/*   Updated: 2020/04/29 12:50:24 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "sh.h"
 
 int		shortcut_cd(t_env *env, char **args)
 {

@@ -6,11 +6,11 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 14:16:04 by sadawi            #+#    #+#             */
-/*   Updated: 2020/04/17 14:17:33 by sadawi           ###   ########.fr       */
+/*   Updated: 2020/04/29 12:49:07 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "sh.h"
 
 void	handle_expansion(t_env *env, char **args)
 {

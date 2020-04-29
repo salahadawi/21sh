@@ -6,11 +6,11 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 14:08:24 by sadawi            #+#    #+#             */
-/*   Updated: 2020/04/17 14:09:18 by sadawi           ###   ########.fr       */
+/*   Updated: 2020/04/29 12:50:14 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "sh.h"
 
 int		builtin_setenv(t_env *env, char **args)
 {

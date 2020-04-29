@@ -6,11 +6,11 @@
 #    By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/04/10 19:27:20 by sadawi            #+#    #+#              #
-#    Updated: 2020/04/28 19:33:50 by sadawi           ###   ########.fr        #
+#    Updated: 2020/04/29 12:45:54 by sadawi           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = minishell
+NAME = 21sh
 
 CFILES = compare_pointers.c execute_command.c expand_input.c free_memory.c \
 get_env_info.c handle_builtins.c handle_shortcuts.c init_shell.c main.c \

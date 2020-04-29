@@ -6,11 +6,11 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 14:20:38 by sadawi            #+#    #+#             */
-/*   Updated: 2020/04/17 14:21:08 by sadawi           ###   ########.fr       */
+/*   Updated: 2020/04/29 12:49:15 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "sh.h"
 
 char	*get_env_value(t_env *env, char *name)
 {

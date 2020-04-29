@@ -6,11 +6,11 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 14:21:47 by sadawi            #+#    #+#             */
-/*   Updated: 2020/04/17 14:22:02 by sadawi           ###   ########.fr       */
+/*   Updated: 2020/04/29 12:49:44 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "sh.h"
 
 char	*strsub_alphanumeric_underscore(char *str)
 {

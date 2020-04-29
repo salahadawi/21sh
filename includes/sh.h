@@ -1,22 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   sh.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/10 12:20:24 by sadawi            #+#    #+#             */
-/*   Updated: 2020/04/17 14:59:00 by sadawi           ###   ########.fr       */
+/*   Updated: 2020/04/29 12:48:45 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#ifndef SH_H
+# define SH_H
 
 # include "../libft/includes/libft.h"
+# include <sys/ioctl.h>
 # include <sys/types.h>
 # include <sys/stat.h>
 # include <sys/wait.h>
+# include <termios.h>
+# include <termcap.h>
 # include <dirent.h>
 # include <linux/limits.h>
 # include <signal.h>
@@ -25,6 +28,21 @@
 # define BOLDBLUE "\033[1m\033[36m"
 # define RED "\033[1m\033[31m"
 # define RESET "\033[0m"
+
+# define CLEAR_SCREEN "cl"
+# define LEFT_SEQUENCE "kl"
+# define RIGHT_SEQUENCE "kr"
+# define UP_SEQUENCE "ku"
+# define DOWN_SEQUENCE "kd"
+# define DELETE_SEQUENCE "kD"
+# define SPECIAL_MODE "ti"
+# define NORMAL_MODE "te"
+
+# define DELETE -49
+# define ENTER 10
+# define ESCAPE 27
+# define SPACE 32
+# define BACKSPACE 127
 
 struct s_env;
 
@@ -39,6 +57,22 @@ typedef struct		s_env
 	t_builtin_func	**builtin_funcs;
 	t_shortcut_func	**shortcut_funcs;
 }					t_env;
+
+typedef	struct		s_key_sequences
+{
+	char			left_arrow;
+	char			right_arrow;
+	char			up_arrow;
+	char			down_arrow;
+	char			delete;
+}					t_key_sequences;
+
+typedef struct		s_21sh
+{
+	struct termios	old;
+	struct termios	raw;
+	t_key_sequences	key_sequences;
+}					t_select;
 
 void				print_error(char *message);
 

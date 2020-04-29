@@ -6,11 +6,11 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 14:10:22 by sadawi            #+#    #+#             */
-/*   Updated: 2020/04/18 13:09:58 by sadawi           ###   ########.fr       */
+/*   Updated: 2020/04/29 12:49:58 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "sh.h"
 
 int		builtin_cd(t_env *env, char **args)
 {

@@ -6,11 +6,11 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 14:14:50 by sadawi            #+#    #+#             */
-/*   Updated: 2020/04/17 14:15:23 by sadawi           ###   ########.fr       */
+/*   Updated: 2020/04/29 12:49:41 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "sh.h"
 
 char	**split_line_args(char *line)
 {

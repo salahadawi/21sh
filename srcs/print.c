@@ -6,11 +6,11 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 13:59:48 by sadawi            #+#    #+#             */
-/*   Updated: 2020/04/17 14:07:16 by sadawi           ###   ########.fr       */
+/*   Updated: 2020/04/29 12:49:38 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "sh.h"
 
 void	print_error(char *message)
 {
