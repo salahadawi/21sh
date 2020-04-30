@@ -6,7 +6,7 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 13:59:48 by sadawi            #+#    #+#             */
-/*   Updated: 2020/04/29 13:14:28 by sadawi           ###   ########.fr       */
+/*   Updated: 2020/04/30 13:32:11 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,21 +20,32 @@ void	print_error(char *message)
 
 void	print_shell_info(void)
 {
-	char *user;
+	char	*user;
+	int		len;
 
+	len = 0;
 	if ((user = get_env_value("USER")))
+	{
+		len += ft_strlen(user);
 		ft_printf(RED "%s" RESET, user);
-	ft_printf("@");
-	print_current_dir_basename();
-	ft_printf("$> ");
+	}
+	len += ft_printf("@");
+	len += print_current_dir_basename();
+	len += ft_printf("$> ");
+	g_21sh->prompt_len = len;
 }
 
-void	print_current_dir_basename(void)
+int		print_current_dir_basename(void)
 {
-	char *path;
+	char	*path;
+	char	*basename;
+	int		len;
 
 	path = (char*)ft_memalloc(PATH_MAX + 1);
 	getcwd(path, PATH_MAX);
-	ft_printf(BOLDBLUE "%s" RESET, ft_strrchr(path, '/') + 1);
+	basename = ft_strrchr(path, '/') + 1;
+	len = ft_strlen(basename);
+	ft_printf(BOLDBLUE "%s" RESET, basename);
 	free(path);
+	return (len);
 }
