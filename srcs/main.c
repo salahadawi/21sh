@@ -6,7 +6,7 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/15 12:28:40 by sadawi            #+#    #+#             */
-/*   Updated: 2020/04/29 13:53:52 by sadawi           ###   ########.fr       */
+/*   Updated: 2020/04/30 13:17:15 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void	init_termcaps(void)
 {
 	char *terminal_name;
 
-	g_21sh = (t_21sh*)ft_memalloc(sizeof(g_21sh));
+	g_21sh = (t_21sh*)ft_memalloc(sizeof(t_21sh));
 	if (!(isatty(0)))
 		handle_error("Not a terminal", 0);
 	if (!(terminal_name = getenv("TERM")))
@@ -80,7 +80,7 @@ void	init_termcaps(void)
 void	set_terminal_raw_mode(void)
 {
 	tcsetattr(STDOUT_FILENO, TCSAFLUSH, &g_21sh->raw);
-	//set_terminal(SPECIAL_MODE);
+	set_terminal(SPECIAL_MODE);
 }
 
 void	handle_signal_suspend(void)
@@ -119,11 +119,11 @@ void	handle_signal(int sig)
 
 void	init_signal_handling(void)
 {
-	int i;
+	//int i;
 
-	i = 0;
-	while (i <= SIGRTMAX)
-		signal(i++, handle_signal);
+	//i = 0;
+	//while (i <= SIGRTMAX)
+		//signal(i++, handle_signal);
 }
 
 void	restore_signals(void)
@@ -139,6 +139,8 @@ void	create_terminal_raw_mode()
 {
 	tcgetattr(STDOUT_FILENO, &g_21sh->raw);
 	g_21sh->raw.c_lflag &= ~(ECHO | ICANON);
+	g_21sh->raw.c_cc[VMIN] = 0;
+	g_21sh->raw.c_cc[VTIME] = 1;
 }
 
 int		main(int argc, char **argv, char *envp[])
@@ -147,9 +149,10 @@ int		main(int argc, char **argv, char *envp[])
 	init_termcaps();
 	init_signal_handling();
 	create_terminal_raw_mode();
-	//set_terminal_raw_mode();
+	set_terminal_raw_mode();
 	init_env(envp);
 	clear_screen();
 	loop_shell();
+	restore_terminal_mode();
 	return (0);
 }
