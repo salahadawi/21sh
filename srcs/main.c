@@ -6,7 +6,7 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/15 12:28:40 by sadawi            #+#    #+#             */
-/*   Updated: 2020/04/30 13:17:15 by sadawi           ###   ########.fr       */
+/*   Updated: 2020/04/30 19:42:14 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,11 @@ void	handle_signal_continue(void)
 
 void	handle_signal_interrupt(void)
 {
-
+	free(g_21sh->line);
+	g_21sh->line = ft_strnew(1);
+	ft_printf("\n");
+	print_shell_info();
+	g_21sh->cursor.x = 0;
 }
 
 void	handle_signal(int sig)
