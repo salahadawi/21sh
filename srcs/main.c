@@ -6,7 +6,7 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/15 12:28:40 by sadawi            #+#    #+#             */
-/*   Updated: 2020/04/30 19:42:14 by sadawi           ###   ########.fr       */
+/*   Updated: 2020/04/30 21:00:21 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ void	init_termcaps(void)
 		handle_error("Terminal specified in env not found", 0);
 	init_key_sequences();
 	tcgetattr(STDOUT_FILENO, &g_21sh->old);
+	ioctl(STDOUT_FILENO, TIOCGWINSZ, &g_21sh->window);
 }
 
 void	set_terminal_raw_mode(void)
@@ -105,6 +106,11 @@ void	handle_signal_interrupt(void)
 	g_21sh->cursor.x = 0;
 }
 
+void	handle_signal_resize(void)
+{
+	ioctl(STDOUT_FILENO, TIOCGWINSZ, &g_21sh->window);
+}
+
 void	handle_signal(int sig)
 {
 	if (sig == SIGTSTP)
@@ -113,6 +119,8 @@ void	handle_signal(int sig)
 		handle_signal_continue();
 	else if (sig == SIGINT)
 		handle_signal_interrupt();
+	else if (sig == SIGWINCH)
+		handle_signal_resize();
 	else
 	{
 		restore_terminal_mode();
@@ -123,11 +131,11 @@ void	handle_signal(int sig)
 
 void	init_signal_handling(void)
 {
-	//int i;
+	int i;
 
-	//i = 0;
-	//while (i <= SIGRTMAX)
-		//signal(i++, handle_signal);
+	i = 0;
+	while (i <= SIGRTMAX)
+		signal(i++, handle_signal);
 }
 
 void	restore_signals(void)
