@@ -6,7 +6,7 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 14:23:12 by sadawi            #+#    #+#             */
-/*   Updated: 2020/04/30 15:37:11 by sadawi           ###   ########.fr       */
+/*   Updated: 2020/04/30 19:57:06 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,29 +14,16 @@
 
 int		read_key(void)
 {
-	char c;
-	char sequence[3];
+	char sequence[10];
 
-	c = 0;
-	if (read(STDOUT_FILENO, &c, 1) == -1)
+	if (read(STDOUT_FILENO, sequence, 10) == -1)
 		handle_error("Read failed", 1);
-	if (c == ESCAPE)
+	if (sequence[0] == ESCAPE)
 	{
-		if (read(STDOUT_FILENO, &sequence[0], 1) != 1)
-			return (0);
-		if (read(STDOUT_FILENO, &sequence[1], 1) != 1)
-			return (0);
-		if (sequence[0] == '[')
-		{
-			if (ft_isdigit(sequence[1]))
-			{
-				if (read(STDOUT_FILENO, &sequence[2], 1) != 1)
-					return (0);
-			}
-			return (sequence[1] - 100);
-		}
+		if (sequence[1] == '[')
+			return (sequence[2] - 100);
 	}
-	return (c);
+	return (sequence[0]);
 }
 
 char	*str_remove_char(char *str, int index)
