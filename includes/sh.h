@@ -6,7 +6,7 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/10 12:20:24 by sadawi            #+#    #+#             */
-/*   Updated: 2020/04/29 13:55:24 by sadawi           ###   ########.fr       */
+/*   Updated: 2020/04/30 13:01:38 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@
 # define DELETE -49
 # define ENTER 10
 # define ESCAPE 27
-# define SPACE 32
 # define BACKSPACE 127
 
 typedef int			t_builtin_func (char **args);
@@ -64,6 +63,11 @@ typedef	struct		s_key_sequences
 	char			delete;
 }					t_key_sequences;
 
+typedef struct		s_cursor
+{
+	int				x;
+}					t_cursor;
+
 typedef struct		s_21sh
 {
 	struct termios	old;
@@ -71,6 +75,8 @@ typedef struct		s_21sh
 	t_key_sequences	key_sequences;
 	char			**envp;
 	t_builtins		builtins;
+	t_cursor		cursor;
+	int				prompt_len;
 }					t_21sh;
 
 t_21sh				*g_21sh;
@@ -147,7 +153,7 @@ int					handle_builtins(char **args);
 
 int					check_cmd(char **args);
 
-void				print_current_dir_basename(void);
+int					print_current_dir_basename(void);
 
 void				free_args(char **args);
 
@@ -168,5 +174,9 @@ void				handle_signal(int sig);
 void				restore_signals(void);
 
 void				init_signal_handling(void);
+
+void				handle_error(char *message, int reset);
+
+void				set_terminal(char *id);
 
 #endif
