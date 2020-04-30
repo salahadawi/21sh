@@ -6,7 +6,7 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/10 12:20:24 by sadawi            #+#    #+#             */
-/*   Updated: 2020/04/30 13:01:38 by sadawi           ###   ########.fr       */
+/*   Updated: 2020/04/30 15:25:56 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@
 # define DELETE -49
 # define ENTER 10
 # define ESCAPE 27
+# define HOME 72
+# define END 70
 # define BACKSPACE 127
 
 typedef int			t_builtin_func (char **args);
@@ -77,6 +79,7 @@ typedef struct		s_21sh
 	t_builtins		builtins;
 	t_cursor		cursor;
 	int				prompt_len;
+	char			*line;
 }					t_21sh;
 
 t_21sh				*g_21sh;
