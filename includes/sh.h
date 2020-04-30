@@ -6,7 +6,7 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/10 12:20:24 by sadawi            #+#    #+#             */
-/*   Updated: 2020/04/30 15:25:56 by sadawi           ###   ########.fr       */
+/*   Updated: 2020/04/30 20:21:04 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ typedef	struct		s_key_sequences
 typedef struct		s_cursor
 {
 	int				x;
+	int				y;
 }					t_cursor;
 
 typedef struct		s_21sh
@@ -80,6 +81,7 @@ typedef struct		s_21sh
 	t_cursor		cursor;
 	int				prompt_len;
 	char			*line;
+	struct winsize	window;
 }					t_21sh;
 
 t_21sh				*g_21sh;
