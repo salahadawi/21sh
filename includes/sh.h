@@ -6,7 +6,7 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/10 12:20:24 by sadawi            #+#    #+#             */
-/*   Updated: 2020/04/30 20:21:04 by sadawi           ###   ########.fr       */
+/*   Updated: 2020/05/01 18:00:41 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,8 @@ typedef struct		s_cursor
 {
 	int				x;
 	int				y;
+	int				prompt_x;
+	int				prompt_y;
 }					t_cursor;
 
 typedef struct		s_21sh
@@ -183,5 +185,7 @@ void				init_signal_handling(void);
 void				handle_error(char *message, int reset);
 
 void				set_terminal(char *id);
+
+int					ft_putschar(int c);
 
 #endif

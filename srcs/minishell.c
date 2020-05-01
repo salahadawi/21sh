@@ -6,7 +6,7 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 14:23:12 by sadawi            #+#    #+#             */
-/*   Updated: 2020/04/30 19:57:06 by sadawi           ###   ########.fr       */
+/*   Updated: 2020/05/01 19:23:40 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,12 +155,13 @@ int		handle_keys(void)
 
 void	move_cursor_start(void)
 {
-	int len;
+	char *move_cursor;
+	char *tmp;
 
-	len = g_21sh->prompt_len;
-	set_terminal("cr");
-	while (len-- > 0)
-		set_terminal("nd");
+	move_cursor = tgetstr("cm", NULL);
+	//ft_printf("%d, %d", g_21sh->cursor.prompt_y, g_21sh->cursor.prompt_x);
+	tmp = tgoto(move_cursor, g_21sh->cursor.prompt_x - 1, g_21sh->cursor.prompt_y - 1);
+	tputs(tmp, 1, ft_putschar);
 }
 
 void	move_cursor(void)
@@ -172,9 +173,42 @@ void	move_cursor(void)
 		set_terminal("le");
 }
 
+int		ft_nbrlen(int nbr)
+{
+	int i;
+
+	i = 0;
+	while (nbr || !i)
+	{
+		nbr /= 10;
+		i++;
+	}
+	return (i);
+}
+
+void	get_cursor_position()
+{
+	char	sequence[10];
+	int		i;
+	int		x;
+	int		y;
+
+	ft_printf("%s", "\x1b[6n");
+	read(0, sequence, 10);
+	i = 0;
+	while (sequence[i] != '[' && i < 10)
+		i++;
+	y = ft_atoi(&sequence[i + 1]);
+	x = ft_atoi(&sequence[i + 2 + ft_nbrlen(y)]);
+	g_21sh->cursor.prompt_y = y ? y : g_21sh->cursor.prompt_y;
+	g_21sh->cursor.prompt_x = x ? x : g_21sh->cursor.prompt_x;// + g_21sh->prompt_len;
+	//ft_printf("%s", &sequence[i]);
+}
+
 int		get_input()
 {
 	g_21sh->line = ft_strnew(0);
+	get_cursor_position();
 	while (handle_keys())
 	{
 		move_cursor_start();
