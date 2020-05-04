@@ -6,7 +6,7 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 14:23:12 by sadawi            #+#    #+#             */
-/*   Updated: 2020/05/01 19:23:40 by sadawi           ###   ########.fr       */
+/*   Updated: 2020/05/04 14:02:58 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ void	handle_control_sequence(char *c)
 {
 	*c += 100;
 	
-	if (*c == g_21sh->key_sequences.delete)
+	if (*c == g_21sh->key_sequences.delete_key)
 		handle_delete();
 	else if (*c == g_21sh->key_sequences.left_arrow)
 		move_cursor_left();
@@ -164,15 +164,6 @@ void	move_cursor_start(void)
 	tputs(tmp, 1, ft_putschar);
 }
 
-void	move_cursor(void)
-{
-	int len;
-
-	len = g_21sh->cursor.x;
-	while (len++ < 0)
-		set_terminal("le");
-}
-
 int		ft_nbrlen(int nbr)
 {
 	int i;
@@ -186,17 +177,69 @@ int		ft_nbrlen(int nbr)
 	return (i);
 }
 
-void	get_cursor_position()
+void	get_cursor_position(int *x, int *y)
 {
-	char	sequence[10];
+	char	sequence[100];
+	int		i;
+
+	ft_printf("%s", "\x1b[6n");
+	read(0, sequence, 100);
+	i = 0;
+	while (sequence[i] != '[' && i < 100)
+		i++;
+	*y = ft_atoi(&sequence[i + 1]);
+	*x = ft_atoi(&sequence[i + 2 + ft_nbrlen(*y)]);
+}
+
+void	move_cursor_right_edge(void)
+{
+	int	right_moves;
+
+	right_moves = g_21sh->window.ws_col - 1;
+	set_terminal("cr");
+	while (right_moves--)
+		set_terminal("nd");
+}
+
+void	cursor_jump_up(int *left_len)
+{
+	int	text_len;
+	int rows;
+
+	text_len = g_21sh->prompt_len + ft_strlen(g_21sh->line);
+	rows = text_len / g_21sh->window.ws_col + 1;
+	if (text_len % g_21sh->window.ws_col + *left_len < 0)
+	{
+		while (text_len % g_21sh->window.ws_col + *left_len < 0 && rows-- > 1)
+		{
+			text_len -= text_len % g_21sh->window.ws_col;
+			*left_len += text_len % g_21sh->window.ws_col;
+			set_terminal("up");
+		}
+		move_cursor_right_edge();
+	}
+}
+
+void	move_cursor(void)
+{
+	int len;
+	len = g_21sh->cursor.x;
+	cursor_jump_up(&len);
+	while (len++ < 0)
+		set_terminal("le");
+}
+
+void	save_cursor_position()
+{
+	char	sequence[100];
 	int		i;
 	int		x;
 	int		y;
 
 	ft_printf("%s", "\x1b[6n");
-	read(0, sequence, 10);
+	read(0, sequence, 100);
 	i = 0;
-	while (sequence[i] != '[' && i < 10)
+	while (sequence[i] != '[' && i < 100)
 		i++;
 	y = ft_atoi(&sequence[i + 1]);
 	x = ft_atoi(&sequence[i + 2 + ft_nbrlen(y)]);
@@ -208,7 +251,7 @@ void	get_cursor_position()
 int		get_input()
 {
 	g_21sh->line = ft_strnew(0);
-	get_cursor_position();
+	save_cursor_position();
 	while (handle_keys())
 	{
 		move_cursor_start();
