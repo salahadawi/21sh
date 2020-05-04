@@ -6,7 +6,7 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/10 12:20:24 by sadawi            #+#    #+#             */
-/*   Updated: 2020/05/01 18:00:41 by sadawi           ###   ########.fr       */
+/*   Updated: 2020/05/04 13:17:45 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ typedef	struct		s_key_sequences
 	char			right_arrow;
 	char			up_arrow;
 	char			down_arrow;
-	char			delete;
+	char			delete_key;
 }					t_key_sequences;
 
 typedef struct		s_cursor

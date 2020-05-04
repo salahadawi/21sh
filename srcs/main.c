@@ -6,7 +6,7 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/15 12:28:40 by sadawi            #+#    #+#             */
-/*   Updated: 2020/05/01 18:59:29 by sadawi           ###   ########.fr       */
+/*   Updated: 2020/05/04 12:39:31 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	init_key_sequences()
 	g_21sh->key_sequences.down_arrow = ft_strlen(sequence) > 2 ?
 	sequence[2] : 0;
 	sequence = tgetstr(DELETE_SEQUENCE, NULL);
-	g_21sh->key_sequences.delete = ft_strlen(sequence) > 2 ?
+	g_21sh->key_sequences.delete_key = ft_strlen(sequence) > 2 ?
 	sequence[2] : 0;
 }
 
@@ -75,7 +75,7 @@ void	init_termcaps(void)
 		handle_error("Terminal specified in env not found", 0);
 	init_key_sequences();
 	tcgetattr(STDOUT_FILENO, &g_21sh->old);
-	//ioctl(STDOUT_FILENO, TIOCGWINSZ, &g_21sh->window);
+	ioctl(STDOUT_FILENO, TIOCGWINSZ, &g_21sh->window);
 }
 
 void	set_terminal_raw_mode(void)
@@ -108,7 +108,7 @@ void	handle_signal_interrupt(void)
 
 void	handle_signal_resize(void)
 {
-	//ioctl(STDOUT_FILENO, TIOCGWINSZ, &g_21sh->window);
+	ioctl(STDOUT_FILENO, TIOCGWINSZ, &g_21sh->window);
 }
 
 void	handle_signal(int sig)
@@ -131,12 +131,11 @@ void	handle_signal(int sig)
 
 void	init_signal_handling(void)
 {
-	//int i;
+	int i;
 
-	//i = 0;
-	//while (i <= SIGRTMAX)
-		//signal(i++, handle_signal);
-	signal(SIGWINCH, SIG_DFL);
+	i = 0;
+	while (i <= SIGRTMAX)
+		signal(i++, handle_signal);
 }
 
 void	restore_signals(void)
