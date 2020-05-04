@@ -6,7 +6,7 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 14:23:12 by sadawi            #+#    #+#             */
-/*   Updated: 2020/05/04 14:02:58 by sadawi           ###   ########.fr       */
+/*   Updated: 2020/05/04 16:38:30 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -204,16 +204,20 @@ void	move_cursor_right_edge(void)
 void	cursor_jump_up(int *left_len)
 {
 	int	text_len;
-	int rows;
+	//int rows;
+	int	chars_skipped;
 
 	text_len = g_21sh->prompt_len + ft_strlen(g_21sh->line);
-	rows = text_len / g_21sh->window.ws_col + 1;
-	if (text_len % g_21sh->window.ws_col + *left_len < 0)
+	//rows = text_len / g_21sh->window.ws_col + 1;
+	if (text_len % g_21sh->window.ws_col < abs(*left_len))
 	{
-		while (text_len % g_21sh->window.ws_col + *left_len < 0 && rows-- > 1)
+		while (text_len % g_21sh->window.ws_col < abs(*left_len))
 		{
-			text_len -= text_len % g_21sh->window.ws_col;
-			*left_len += text_len % g_21sh->window.ws_col;
+			chars_skipped = text_len % g_21sh->window.ws_col;
+			//chars_skipped = chars_skipped ? chars_skipped : g_21sh->window.ws_col;
+			*left_len += chars_skipped + 1;
+			text_len -= chars_skipped + 1;
+			//ft_fprintf(2, "%d, %d", text_len, chars_skipped);
 			set_terminal("up");
 		}
 		move_cursor_right_edge();
@@ -226,7 +230,16 @@ void	move_cursor(void)
 	len = g_21sh->cursor.x;
 	cursor_jump_up(&len);
 	while (len++ < 0)
-		set_terminal("le");
+	{
+		//if ((g_21sh->prompt_len + ft_strlen(g_21sh->line)) % g_21sh->window.ws_col + len == 0)
+		//{
+			//set_terminal("up");
+			//move_cursor_right_edge();
+			//ft_printf("%d", len);
+		//}
+		//else
+			set_terminal("le");
+	}
 }
 
 void	save_cursor_position()
@@ -257,6 +270,11 @@ int		get_input()
 		move_cursor_start();
 		set_terminal("cd");
 		ft_printf("%s", g_21sh->line);
+		if ((g_21sh->prompt_len + ft_strlen(g_21sh->line)) % g_21sh->window.ws_col == 0)
+		{
+			set_terminal("do");
+			set_terminal("cr");
+		}
 		move_cursor();
 	}
 	return (1);
