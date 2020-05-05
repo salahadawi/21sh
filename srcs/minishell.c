@@ -6,7 +6,7 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 14:23:12 by sadawi            #+#    #+#             */
-/*   Updated: 2020/05/04 17:15:50 by sadawi           ###   ########.fr       */
+/*   Updated: 2020/05/05 15:14:59 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -222,8 +222,14 @@ void	cursor_jump_up(int *left_len)
 
 void	move_cursor_next_line(void)
 {
-	set_terminal("do");
-	set_terminal("cr");
+	if (g_21sh->prompt_len + (int)ft_strlen(g_21sh->line)
+		< g_21sh->window.ws_col * g_21sh->window.ws_row)
+	{
+		set_terminal("do");
+		if (g_21sh->cursor.prompt_y + (ft_strlen(g_21sh->line) + g_21sh->prompt_len - 1) / g_21sh->window.ws_col == g_21sh->window.ws_row)
+			g_21sh->cursor.prompt_y--;
+		set_terminal("cr");
+	}
 }
 
 void	move_cursor(void)
@@ -234,7 +240,7 @@ void	move_cursor(void)
 		move_cursor_next_line();
 	cursor_jump_up(&len);
 	while (len++ < 0)
-			set_terminal("le");
+		set_terminal("le");
 }
 
 void	save_cursor_position()
