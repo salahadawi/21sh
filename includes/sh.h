@@ -6,7 +6,7 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/10 12:20:24 by sadawi            #+#    #+#             */
-/*   Updated: 2020/05/05 14:45:25 by sadawi           ###   ########.fr       */
+/*   Updated: 2020/05/05 17:02:52 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,46 +45,55 @@
 # define END 70
 # define BACKSPACE 127
 
-typedef int			t_builtin_func (char **args);
+typedef int				t_builtin_func (char **args);
 
-typedef int			t_shortcut_func (char **args);
+typedef int				t_shortcut_func (char **args);
 
-typedef struct		s_builtins
+typedef struct			s_builtins
 {
-	char			**names;
-	t_builtin_func	**funcs;
-	t_shortcut_func	**shortcuts;
-}					t_builtins;
+	char				**names;
+	t_builtin_func		**funcs;
+	t_shortcut_func		**shortcuts;
+}						t_builtins;
 
-typedef	struct		s_key_sequences
+typedef	struct			s_key_sequences
 {
-	char			left_arrow;
-	char			right_arrow;
-	char			up_arrow;
-	char			down_arrow;
-	char			delete_key;
-}					t_key_sequences;
+	char				left_arrow;
+	char				right_arrow;
+	char				up_arrow;
+	char				down_arrow;
+	char				delete_key;
+}						t_key_sequences;
 
-typedef struct		s_cursor
+typedef struct			s_cursor
 {
-	int				x;
-	int				y;
-	int				prompt_x;
-	int				prompt_y;
-}					t_cursor;
+	int					x;
+	int					y;
+	int					prompt_x;
+	int					prompt_y;
+}						t_cursor;
 
-typedef struct		s_21sh
+typedef struct			s_history
 {
-	struct termios	old;
-	struct termios	raw;
-	t_key_sequences	key_sequences;
-	char			**envp;
-	t_builtins		builtins;
-	t_cursor		cursor;
-	int				prompt_len;
-	char			*line;
-	struct winsize	window;
-}					t_21sh;
+	char				*cmd;
+	struct s_history	*prev;
+	struct s_history	*next;
+}						t_history;
+
+typedef struct			s_21sh
+{
+	struct termios		old;
+	struct termios		raw;
+	t_key_sequences		key_sequences;
+	char				**envp;
+	t_builtins			builtins;
+	t_cursor			cursor;
+	int					prompt_len;
+	char				*line;
+	struct winsize		window;
+	int					history_fd;
+	t_history			*history;
+}						t_21sh;
 
 t_21sh				*g_21sh;
 

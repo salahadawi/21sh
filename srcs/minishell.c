@@ -6,7 +6,7 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 14:23:12 by sadawi            #+#    #+#             */
-/*   Updated: 2020/05/05 15:14:59 by sadawi           ###   ########.fr       */
+/*   Updated: 2020/05/05 18:05:40 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,26 @@ void	handle_delete(void)
 	move_cursor_right();
 }
 
+void	get_history_prev(void)
+{
+	if (g_21sh->history->prev)
+	{
+		free(g_21sh->line);
+		g_21sh->history = g_21sh->history->prev;
+		g_21sh->line = ft_strdup(g_21sh->history->cmd);
+	}
+}
+
+void	get_history_next(void)
+{
+	if (g_21sh->history->next)
+	{
+		free(g_21sh->line);
+		g_21sh->history = g_21sh->history->next;
+		g_21sh->line = ft_strdup(g_21sh->history->cmd);
+	}
+}
+
 void	handle_control_sequence(char *c)
 {
 	*c += 100;
@@ -110,11 +130,9 @@ void	handle_control_sequence(char *c)
 	else if (*c == g_21sh->key_sequences.right_arrow)
 		move_cursor_right();
 	else if (*c == g_21sh->key_sequences.up_arrow)
-		;
+		get_history_prev();
 	else if (*c == g_21sh->key_sequences.down_arrow)
-	{
-			;
-	}
+		get_history_next();
 	else if (*c == HOME)
 		g_21sh->cursor.x = -ft_strlen(g_21sh->line);
 	else if (*c == END)
@@ -226,7 +244,7 @@ void	move_cursor_next_line(void)
 		< g_21sh->window.ws_col * g_21sh->window.ws_row)
 	{
 		set_terminal("do");
-		if (g_21sh->cursor.prompt_y + (ft_strlen(g_21sh->line) + g_21sh->prompt_len - 1) / g_21sh->window.ws_col == g_21sh->window.ws_row)
+		if (g_21sh->cursor.prompt_y + (ft_strlen(g_21sh->line) + g_21sh->prompt_len % g_21sh->window.ws_col - 1) / g_21sh->window.ws_col == g_21sh->window.ws_row)
 			g_21sh->cursor.prompt_y--;
 		set_terminal("cr");
 	}
@@ -276,6 +294,82 @@ int		get_input()
 	return (1);
 }
 
+t_history	*new_history_node(char *line, t_history *prev)
+{
+	t_history *node;
+
+	node = (t_history*)ft_memalloc(sizeof(t_history));
+	node->cmd = line;
+	node->prev = prev;
+	node->next = NULL;
+	return (node);
+}
+
+void	add_to_history(char *line)
+{
+	if (!g_21sh->history)
+		g_21sh->history = new_history_node(line, NULL);
+	else
+	{
+		g_21sh->history->next = new_history_node(line, g_21sh->history);
+		g_21sh->history = g_21sh->history->next;
+	}
+}
+
+void	open_history_file(void)
+{
+	char *line;
+
+	g_21sh->history = NULL;
+	g_21sh->history_fd = open(".21sh_history", O_RDWR | O_APPEND | O_CREAT, 0666);
+	while (get_next_line(g_21sh->history_fd, &line) > 0)
+		add_to_history(line);
+	add_to_history(ft_strdup(""));
+}
+
+int		same_as_previous_command()
+{
+	if (g_21sh->history->prev)
+		g_21sh->history = g_21sh->history->prev;
+	while (g_21sh->history->next->next)
+		g_21sh->history = g_21sh->history->next;
+	if (ft_strequ(g_21sh->line, g_21sh->history->cmd))
+		return (1);
+	return (0);
+}
+
+int		input_just_whitespace(void)
+{
+	int i;
+
+	i = 0;
+	while (g_21sh->line[i])
+		if (!ft_strchr(" \t\n\v\f\r",g_21sh->line[i++]))
+			return (0);
+	return (1);
+}
+
+void	save_command_history(void)
+{
+	
+	if (!same_as_previous_command() && !input_just_whitespace())
+		ft_putendl_fd(g_21sh->line, g_21sh->history_fd);
+}
+
+void	free_history(void)
+{
+	t_history *tmp;
+	while (g_21sh->history->prev)
+		g_21sh->history = g_21sh->history->prev;
+	while (g_21sh->history)
+	{
+		tmp = g_21sh->history->next;
+		free(g_21sh->history->cmd);
+		free(g_21sh->history);
+		g_21sh->history = tmp;
+	}
+}
+
 void	loop_shell(void)
 {
 	char	**commands;
@@ -286,10 +380,12 @@ void	loop_shell(void)
 	loop = 1;
 	while (loop)
 	{
+		open_history_file();
 		g_21sh->cursor.x = 0;
 		print_shell_info();
 		if (get_input() < 1)
 			break ;
+		save_command_history();
 		ft_printf("\n");
 		commands = split_line_commands(g_21sh->line);
 		i = 0;
@@ -300,6 +396,7 @@ void	loop_shell(void)
 			free_args(args);
 			free(commands[i++]);
 		}
+		free_history();
 		free(commands);
 		free(g_21sh->line);
 	}
