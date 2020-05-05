@@ -6,7 +6,7 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/15 12:28:40 by sadawi            #+#    #+#             */
-/*   Updated: 2020/05/04 12:39:31 by sadawi           ###   ########.fr       */
+/*   Updated: 2020/05/05 14:45:02 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,6 @@ void	set_terminal(char *id)
 void	restore_terminal_mode(void)
 {
 	tcsetattr(STDOUT_FILENO, TCSAFLUSH, &g_21sh->old);
-	//set_terminal(CURSOR_VISIBLE);
-	//set_terminal(TEXT_NORMAL);
 	set_terminal(NORMAL_MODE);
 }
 
@@ -80,6 +78,9 @@ void	init_termcaps(void)
 
 void	set_terminal_raw_mode(void)
 {
+	g_21sh->raw.c_lflag &= ~(ECHO | ICANON);
+	g_21sh->raw.c_cc[VMIN] = 0;
+	g_21sh->raw.c_cc[VTIME] = 1;
 	tcsetattr(STDOUT_FILENO, TCSAFLUSH, &g_21sh->raw);
 	set_terminal(SPECIAL_MODE);
 }
@@ -104,6 +105,7 @@ void	handle_signal_interrupt(void)
 	ft_printf("\n");
 	print_shell_info();
 	g_21sh->cursor.x = 0;
+	save_cursor_position();
 }
 
 void	handle_signal_resize(void)
@@ -150,9 +152,6 @@ void	restore_signals(void)
 void	create_terminal_raw_mode()
 {
 	tcgetattr(STDOUT_FILENO, &g_21sh->raw);
-	g_21sh->raw.c_lflag &= ~(ECHO | ICANON);
-	g_21sh->raw.c_cc[VMIN] = 0;
-	g_21sh->raw.c_cc[VTIME] = 1;
 }
 
 int		main(int argc, char **argv, char *envp[])

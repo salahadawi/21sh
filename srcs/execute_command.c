@@ -6,7 +6,7 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 14:18:58 by sadawi            #+#    #+#             */
-/*   Updated: 2020/04/29 13:55:03 by sadawi           ###   ########.fr       */
+/*   Updated: 2020/05/05 14:38:59 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ int		exec_cmd(char **args)
 	pid_t	pid;
 
 	pid = fork();
+	tcsetattr(STDOUT_FILENO, TCSAFLUSH, &g_21sh->old);
 	if (pid == 0)
 	{
 		if (!(filepath = find_filepath(args[0])))
@@ -36,6 +37,7 @@ int		exec_cmd(char **args)
 		print_error(ft_sprintf("Error forking"));
 	else
 		wait_for_child(pid);
+	tcsetattr(STDOUT_FILENO, TCSAFLUSH, &g_21sh->raw);
 	return (1);
 }
 
@@ -82,8 +84,16 @@ void	wait_for_child(pid_t pid)
 	int status;
 
 	restore_signals();
+	signal(SIGINT, SIG_IGN);
 	waitpid(pid, &status, WUNTRACED);
-	while (!WIFEXITED(status) && !WIFSIGNALED(status))
+	while (!WIFEXITED(status))
+	{
+		if (WIFSIGNALED(status))
+		{
+			ft_printf("\n");
+			break;	
+		}
 		waitpid(pid, &status, WUNTRACED);
+	}
 	init_signal_handling();
 }
