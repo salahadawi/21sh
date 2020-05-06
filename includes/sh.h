@@ -6,7 +6,7 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/10 12:20:24 by sadawi            #+#    #+#             */
-/*   Updated: 2020/05/05 17:02:52 by sadawi           ###   ########.fr       */
+/*   Updated: 2020/05/06 13:37:56 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -198,5 +198,7 @@ void				set_terminal(char *id);
 int					ft_putschar(int c);
 
 void				save_cursor_position(void);
+
+void				restore_terminal_mode(void);
 
 #endif
