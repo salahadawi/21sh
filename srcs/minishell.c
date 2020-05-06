@@ -6,7 +6,7 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 14:23:12 by sadawi            #+#    #+#             */
-/*   Updated: 2020/05/06 14:56:53 by sadawi           ###   ########.fr       */
+/*   Updated: 2020/05/06 18:26:29 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,11 @@ int		read_key(void)
 	if (sequence[0] == ESCAPE)
 	{
 		if (sequence[1] == '[')
+		{
+			if (sequence[2] == '1')
+				return (sequence[5] - 110);
 			return (sequence[2] - 100);
+		}
 	}
 	return (sequence[0]);
 }
@@ -121,6 +125,56 @@ void	get_history_next(void)
 		}
 }
 
+void	move_word_left(void)
+{
+	int i;
+
+	i = ft_strlen(g_21sh->line);
+	i += g_21sh->cursor.x;
+	while (i > 0)
+	{
+		if (ft_strchr(" \t\n\v\f\r", g_21sh->line[i - 1]))
+			move_cursor_left();
+		else
+			break;
+		i--;
+	}
+	while (i > 0)
+	{
+		if (!ft_strchr(" \t\n\v\f\r", g_21sh->line[i - 1]))
+			move_cursor_left();
+		else
+			break;
+		i--;
+	}
+}
+
+void	move_word_right(void)
+{
+	int i;
+	int len;
+
+	len = ft_strlen(g_21sh->line);
+	i = len;
+	i += g_21sh->cursor.x;
+	while (i < len)
+	{
+		if (!ft_strchr(" \t\n\v\f\r", g_21sh->line[i]))
+			move_cursor_right();
+		else
+			break;
+		i++;
+	}
+	while (i < len)
+	{
+		if (ft_strchr(" \t\n\v\f\r", g_21sh->line[i]))
+			move_cursor_right();
+		else
+			break;
+		i++;
+	}
+}
+
 void	handle_control_sequence(char *c)
 {
 	*c += 100;
@@ -138,7 +192,11 @@ void	handle_control_sequence(char *c)
 	else if (*c == HOME)
 		g_21sh->cursor.x = -ft_strlen(g_21sh->line);
 	else if (*c == END)
-		g_21sh->cursor.x = 0;	
+		g_21sh->cursor.x = 0;
+	else if (*c + 10 == g_21sh->key_sequences.left_arrow)
+		move_word_left();
+	else if (*c + 10 == g_21sh->key_sequences.right_arrow)
+		move_word_right();
 }
 
 void	handle_backspace(void)
