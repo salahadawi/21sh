@@ -6,7 +6,7 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/15 12:28:40 by sadawi            #+#    #+#             */
-/*   Updated: 2020/05/05 14:45:02 by sadawi           ###   ########.fr       */
+/*   Updated: 2020/05/06 18:35:59 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,8 @@ void	init_termcaps(void)
 	char *terminal_name;
 
 	g_21sh = (t_21sh*)ft_memalloc(sizeof(t_21sh));
+	//set all variables to NULL in function?
+	g_21sh->copied_input = NULL;
 	if (!(isatty(0)))
 		handle_error("Not a terminal", 0);
 	if (!(terminal_name = getenv("TERM")))

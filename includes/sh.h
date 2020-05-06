@@ -6,7 +6,7 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/10 12:20:24 by sadawi            #+#    #+#             */
-/*   Updated: 2020/05/06 13:37:56 by sadawi           ###   ########.fr       */
+/*   Updated: 2020/05/06 18:35:48 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,7 @@ typedef struct			s_21sh
 	struct winsize		window;
 	int					history_fd;
 	t_history			*history;
+	char				*copied_input;
 }						t_21sh;
 
 t_21sh				*g_21sh;
