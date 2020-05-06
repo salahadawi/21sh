@@ -6,7 +6,7 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 14:23:12 by sadawi            #+#    #+#             */
-/*   Updated: 2020/05/06 13:38:47 by sadawi           ###   ########.fr       */
+/*   Updated: 2020/05/06 14:56:53 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,22 +101,24 @@ void	handle_delete(void)
 
 void	get_history_prev(void)
 {
-	if (g_21sh->history->prev)
-	{
-		free(g_21sh->line);
-		g_21sh->history = g_21sh->history->prev;
-		g_21sh->line = ft_strdup(g_21sh->history->cmd);
-	}
+	if (g_21sh->history)
+		if (g_21sh->history->prev)
+		{
+			free(g_21sh->line);
+			g_21sh->history = g_21sh->history->prev;
+			g_21sh->line = ft_strdup(g_21sh->history->cmd);
+		}
 }
 
 void	get_history_next(void)
 {
-	if (g_21sh->history->next)
-	{
-		free(g_21sh->line);
-		g_21sh->history = g_21sh->history->next;
-		g_21sh->line = ft_strdup(g_21sh->history->cmd);
-	}
+	if (g_21sh->history)
+		if (g_21sh->history->next)
+		{
+			free(g_21sh->line);
+			g_21sh->history = g_21sh->history->next;
+			g_21sh->line = ft_strdup(g_21sh->history->cmd);
+		}
 }
 
 void	handle_control_sequence(char *c)
@@ -325,6 +327,8 @@ void	open_history_file(void)
 
 	g_21sh->history = NULL;
 	g_21sh->history_fd = open(".21sh_history", O_RDWR | O_APPEND | O_CREAT, 0666);
+	if (g_21sh->history_fd == -1)
+		return ;
 	while (get_next_line(g_21sh->history_fd, &line) > 0)
 		add_to_history(line);
 	add_to_history(ft_strdup(""));
@@ -354,14 +358,16 @@ int		input_just_whitespace(void)
 
 void	save_command_history(void)
 {
-	
-	if (!same_as_previous_command() && !input_just_whitespace())
-		ft_putendl_fd(g_21sh->line, g_21sh->history_fd);
+	if (g_21sh->history_fd != -1)
+		if (!same_as_previous_command() && !input_just_whitespace())
+			ft_putendl_fd(g_21sh->line, g_21sh->history_fd);
 }
 
 void	free_history(void)
 {
 	t_history *tmp;
+	if (!g_21sh->history)
+		return ;
 	while (g_21sh->history->prev)
 		g_21sh->history = g_21sh->history->prev;
 	while (g_21sh->history)
