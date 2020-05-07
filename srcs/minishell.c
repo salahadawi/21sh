@@ -6,7 +6,7 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 14:23:12 by sadawi            #+#    #+#             */
-/*   Updated: 2020/05/07 13:18:50 by sadawi           ###   ########.fr       */
+/*   Updated: 2020/05/07 15:33:44 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -339,7 +339,11 @@ void	find_prompt_y(void)
 	i = g_21sh->cursor.prompt_y + (g_21sh->prompt_len + ft_strlen(g_21sh->line))
 	 / g_21sh->window.ws_col;
 	while (i-- > g_21sh->window.ws_row)
+	{
+		if (g_21sh->cursor.prompt_y < 1)
+			return ;
 		g_21sh->cursor.prompt_y--;
+	}
 }
 
 void	move_cursor(void)
@@ -374,6 +378,28 @@ void	save_cursor_position()
 	//ft_printf("%s", &sequence[i]);
 }
 
+void	print_input()
+{
+	int len;
+	int max_len;
+	int	index;
+
+	len = g_21sh->prompt_len + ft_strlen(g_21sh->line);
+	max_len = g_21sh->window.ws_col * g_21sh->window.ws_row;
+	if (len > max_len)
+	{
+		index = 0;
+		while (len - index > max_len)
+			index += g_21sh->window.ws_col;
+		index += g_21sh->window.ws_col;
+		//len -= max_len;
+		//len += g_21sh->window.ws_col;
+		ft_printf("...\n%s", &g_21sh->line[index]);
+	}
+	else
+		ft_printf("%s", g_21sh->line);
+}
+
 int		get_input()
 {
 	g_21sh->line = ft_strnew(0);
@@ -382,7 +408,7 @@ int		get_input()
 	{
 		move_cursor_start();
 		set_terminal("cd");
-		ft_printf("%s", g_21sh->line);
+		print_input();
 		move_cursor();
 	}
 	return (1);
@@ -480,6 +506,7 @@ void	loop_shell(void)
 	{
 		open_history_file();
 		g_21sh->cursor.x = 0;
+		//set_terminal(NORMAL_MODE);
 		print_shell_info();
 		if (get_input() < 1)
 			break ;
@@ -497,6 +524,7 @@ void	loop_shell(void)
 		free_history();
 		free(commands);
 		free(g_21sh->line);
+		//set_terminal(SPECIAL_MODE);
 	}
 }
 
