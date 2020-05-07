@@ -6,7 +6,7 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 14:23:12 by sadawi            #+#    #+#             */
-/*   Updated: 2020/05/07 16:02:04 by sadawi           ###   ########.fr       */
+/*   Updated: 2020/05/07 16:15:47 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -436,6 +436,16 @@ void	add_to_history(char *line)
 	}
 }
 
+int		file_is_empty(void)
+{
+	 struct stat stats;
+	 if (stat(".21sh_history", &stats))
+		return (1);
+	if(stats.st_size <= 1)
+		return (1);
+	return (0);
+}
+
 void	open_history_file(void)
 {
 	char *line;
@@ -444,8 +454,11 @@ void	open_history_file(void)
 	g_21sh->history_fd = open(".21sh_history", O_RDWR | O_APPEND | O_CREAT, 0666);
 	if (g_21sh->history_fd == -1)
 		return ;
-	while (get_next_line(g_21sh->history_fd, &line) > 0)
-		add_to_history(line);
+	if (!file_is_empty())
+	{
+		while (get_next_line(g_21sh->history_fd, &line) > 0)
+			add_to_history(line);
+	}
 	add_to_history(ft_strdup(""));
 }
 
@@ -453,8 +466,11 @@ int		same_as_previous_command()
 {
 	if (g_21sh->history->prev)
 		g_21sh->history = g_21sh->history->prev;
-	while (g_21sh->history->next->next)
-		g_21sh->history = g_21sh->history->next;
+	if (g_21sh->history->next)
+	{
+		while (g_21sh->history->next->next)
+			g_21sh->history = g_21sh->history->next;
+	}
 	if (ft_strequ(g_21sh->line, g_21sh->history->cmd))
 		return (1);
 	return (0);
