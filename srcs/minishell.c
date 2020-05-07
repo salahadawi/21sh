@@ -6,7 +6,7 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 14:23:12 by sadawi            #+#    #+#             */
-/*   Updated: 2020/05/07 15:33:44 by sadawi           ###   ########.fr       */
+/*   Updated: 2020/05/07 16:02:04 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -250,7 +250,7 @@ int		handle_keys(void)
 		restore_terminal_mode();
 		exit(0); //temporary, need to restore terminal and free memory here
 	}
-	else
+	else if (ft_isprint(c))
 		g_21sh->line = str_add_char(g_21sh->line, c);
 	return (1);
 }
