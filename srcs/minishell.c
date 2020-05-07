@@ -6,7 +6,7 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 14:23:12 by sadawi            #+#    #+#             */
-/*   Updated: 2020/05/06 18:39:19 by sadawi           ###   ########.fr       */
+/*   Updated: 2020/05/07 13:18:50 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -328,18 +328,28 @@ void	move_cursor_next_line(void)
 		< g_21sh->window.ws_col * g_21sh->window.ws_row)
 	{
 		set_terminal("do");
-		if (g_21sh->cursor.prompt_y + (ft_strlen(g_21sh->line) + g_21sh->prompt_len % g_21sh->window.ws_col - 1) / g_21sh->window.ws_col == g_21sh->window.ws_row)
-			g_21sh->cursor.prompt_y--;
 		set_terminal("cr");
 	}
+}
+
+void	find_prompt_y(void)
+{
+	int i;
+
+	i = g_21sh->cursor.prompt_y + (g_21sh->prompt_len + ft_strlen(g_21sh->line))
+	 / g_21sh->window.ws_col;
+	while (i-- > g_21sh->window.ws_row)
+		g_21sh->cursor.prompt_y--;
 }
 
 void	move_cursor(void)
 {
 	int len;
+
 	len = g_21sh->cursor.x;
 	if ((g_21sh->prompt_len + ft_strlen(g_21sh->line)) % g_21sh->window.ws_col == 0)
 		move_cursor_next_line();
+	find_prompt_y();
 	cursor_jump_up(&len);
 	while (len++ < 0)
 		set_terminal("le");
