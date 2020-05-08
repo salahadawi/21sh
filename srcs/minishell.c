@@ -6,7 +6,7 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 14:23:12 by sadawi            #+#    #+#             */
-/*   Updated: 2020/05/07 16:15:47 by sadawi           ###   ########.fr       */
+/*   Updated: 2020/05/08 12:45:29 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -439,7 +439,7 @@ void	add_to_history(char *line)
 int		file_is_empty(void)
 {
 	 struct stat stats;
-	 if (stat(".21sh_history", &stats))
+	 if (stat(g_21sh->history_file_path, &stats))
 		return (1);
 	if(stats.st_size <= 1)
 		return (1);
@@ -451,7 +451,8 @@ void	open_history_file(void)
 	char *line;
 
 	g_21sh->history = NULL;
-	g_21sh->history_fd = open(".21sh_history", O_RDWR | O_APPEND | O_CREAT, 0666);
+	g_21sh->history_fd = open(g_21sh->history_file_path,
+		O_RDWR | O_APPEND | O_CREAT, 0666);
 	if (g_21sh->history_fd == -1)
 		return ;
 	if (!file_is_empty())
@@ -489,6 +490,8 @@ int		input_just_whitespace(void)
 
 void	save_command_history(void)
 {
+	if (ft_strlen(g_21sh->line) > 100)
+		return ;
 	if (g_21sh->history_fd != -1)
 		if (!same_as_previous_command() && !input_just_whitespace())
 			ft_putendl_fd(g_21sh->line, g_21sh->history_fd);
@@ -510,6 +513,16 @@ void	free_history(void)
 	}
 }
 
+void	get_history_file_path(void)
+{
+	char *path;
+
+	path = (char*)ft_memalloc(PATH_MAX + 1);
+	getcwd(path, PATH_MAX);
+	path = ft_strjoinfree(path, ft_strdup("/.21sh_history"));
+	g_21sh->history_file_path = path;
+}
+
 void	loop_shell(void)
 {
 	char	**commands;
@@ -518,6 +531,7 @@ void	loop_shell(void)
 	int		i;
 
 	loop = 1;
+	get_history_file_path();
 	while (loop)
 	{
 		open_history_file();

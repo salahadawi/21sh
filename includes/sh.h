@@ -6,7 +6,7 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/10 12:20:24 by sadawi            #+#    #+#             */
-/*   Updated: 2020/05/06 18:35:48 by sadawi           ###   ########.fr       */
+/*   Updated: 2020/05/08 12:45:45 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,7 @@ typedef struct			s_21sh
 	int					prompt_len;
 	char				*line;
 	struct winsize		window;
+	char				*history_file_path;
 	int					history_fd;
 	t_history			*history;
 	char				*copied_input;
