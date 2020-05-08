@@ -6,7 +6,7 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 14:23:12 by sadawi            #+#    #+#             */
-/*   Updated: 2020/05/08 13:23:47 by sadawi           ###   ########.fr       */
+/*   Updated: 2020/05/08 14:31:00 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,7 @@ void	get_history_prev(void)
 			free(g_21sh->line);
 			g_21sh->history = g_21sh->history->prev;
 			g_21sh->line = ft_strdup(g_21sh->history->cmd);
+			g_21sh->cursor.x = 0;
 		}
 }
 
@@ -122,6 +123,7 @@ void	get_history_next(void)
 			free(g_21sh->line);
 			g_21sh->history = g_21sh->history->next;
 			g_21sh->line = ft_strdup(g_21sh->history->cmd);
+			g_21sh->cursor.x = 0;
 		}
 }
 
