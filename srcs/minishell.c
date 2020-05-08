@@ -6,7 +6,7 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 14:23:12 by sadawi            #+#    #+#             */
-/*   Updated: 2020/05/08 13:04:19 by sadawi           ###   ########.fr       */
+/*   Updated: 2020/05/08 13:23:47 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -180,6 +180,30 @@ void	copy_input()
 	g_21sh->copied_input = ft_strdup(g_21sh->line);
 }
 
+char	*str_add_str(char *str, char *str2)
+{
+	int		i;
+	int		index;
+	char	*newstr;
+
+	index = ft_strlen(g_21sh->line) + g_21sh->cursor.x;
+	newstr = (char*)ft_memalloc(ft_strlen(str) + ft_strlen(str2) + 1);
+	i = 0;
+	while (i < index)
+	{
+		newstr[i] = str[i];
+		i++;
+	}
+	ft_strcat(newstr, str2);
+	while (str[i])
+	{
+		newstr[i + ft_strlen(str2)] = str[i];
+		i++;
+	}
+	newstr[i + ft_strlen(str2)] = '\0';
+	return (newstr);
+}
+
 void	paste_input()
 {
 	char *tmp;
@@ -187,7 +211,7 @@ void	paste_input()
 	if (g_21sh->copied_input)
 	{
 		tmp = g_21sh->line;
-		g_21sh->line = ft_strjoin(g_21sh->line, g_21sh->copied_input);
+		g_21sh->line = str_add_str(g_21sh->line, g_21sh->copied_input);
 		free(tmp);
 	}
 }
