@@ -6,7 +6,7 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 14:23:12 by sadawi            #+#    #+#             */
-/*   Updated: 2020/05/08 12:45:29 by sadawi           ###   ########.fr       */
+/*   Updated: 2020/05/08 13:04:19 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -400,12 +400,26 @@ void	print_input()
 		ft_printf("%s", g_21sh->line);
 }
 
+int		input_too_large(void)
+{
+	if (ft_strlen(g_21sh->line) > 100000)
+	{
+		free(g_21sh->line);
+		ft_fprintf(2, "\nError: Input exceeds ARG_MAX.");
+		g_21sh->line = ft_strdup("");
+		return (1);
+	}
+	return (0);
+}
+
 int		get_input()
 {
 	g_21sh->line = ft_strnew(0);
 	save_cursor_position();
 	while (handle_keys())
 	{
+		if (input_too_large())
+			break;
 		move_cursor_start();
 		set_terminal("cd");
 		print_input();
