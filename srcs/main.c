@@ -6,7 +6,7 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/15 12:28:40 by sadawi            #+#    #+#             */
-/*   Updated: 2020/05/06 18:35:59 by sadawi           ###   ########.fr       */
+/*   Updated: 2020/05/08 14:41:12 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,12 @@ void	handle_signal_interrupt(void)
 void	handle_signal_resize(void)
 {
 	ioctl(STDOUT_FILENO, TIOCGWINSZ, &g_21sh->window);
+	if ((int)ft_strlen(g_21sh->line) >= g_21sh->window.ws_col * g_21sh->window.ws_row)
+	{
+		set_terminal("ho");
+		set_terminal("cr");
+		print_shell_info();
+	}
 }
 
 void	handle_signal(int sig)
