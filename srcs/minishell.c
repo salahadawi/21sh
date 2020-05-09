@@ -6,7 +6,7 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 14:23:12 by sadawi            #+#    #+#             */
-/*   Updated: 2020/05/08 14:31:00 by sadawi           ###   ########.fr       */
+/*   Updated: 2020/05/09 15:19:12 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -417,7 +417,7 @@ void	print_input()
 		index = 0;
 		while (len - index > max_len)
 			index += g_21sh->window.ws_col;
-		index += g_21sh->window.ws_col;
+		index += g_21sh->window.ws_col - g_21sh->prompt_len;
 		//len -= max_len;
 		//len += g_21sh->window.ws_col;
 		ft_printf("...\n%s", &g_21sh->line[index]);
