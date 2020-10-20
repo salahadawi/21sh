@@ -6,7 +6,7 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 14:23:12 by sadawi            #+#    #+#             */
-/*   Updated: 2020/05/09 15:19:12 by sadawi           ###   ########.fr       */
+/*   Updated: 2020/10/20 17:04:35 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,19 @@ char	*str_add_char(char *str, char c)
 	free(str);
 	return (newstr);
 }
+
+void	move_cursor_up(void)
+{
+	if ((int)ft_strlen(g_21sh->line) + g_21sh->cursor.x >= g_21sh->window.ws_col)
+		g_21sh->cursor.x -= g_21sh->window.ws_col;
+}
+
+void	move_cursor_down(void)
+{
+	if (-g_21sh->cursor.x >= g_21sh->window.ws_col)
+		g_21sh->cursor.x += g_21sh->window.ws_col;
+}
+
 
 void	move_cursor_left(void)
 {
@@ -241,9 +254,9 @@ void	handle_control_sequence(char *c)
 	else if (*c + 10 == g_21sh->key_sequences.right_arrow)
 		move_word_right();
 	else if (*c + 10 == g_21sh->key_sequences.up_arrow)
-		copy_input();
+		move_cursor_up();//copy_input();
 	else if (*c + 10 == g_21sh->key_sequences.down_arrow)
-		paste_input();
+		move_cursor_down();//paste_input();
 }
 
 void	handle_backspace(void)
