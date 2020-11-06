@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sh.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/10 12:20:24 by sadawi            #+#    #+#             */
-/*   Updated: 2020/05/08 12:45:45 by sadawi           ###   ########.fr       */
+/*   Updated: 2020/11/06 07:31:47 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,15 @@
 # include <termios.h>
 # include <termcap.h>
 # include <dirent.h>
-# include <linux/limits.h>
+# include <limits.h>
 # include <signal.h>
 # include <fcntl.h>
 
 # define BOLDBLUE "\033[1m\033[36m"
 # define RED "\033[1m\033[31m"
 # define RESET "\033[0m"
+
+# define SIGRTMAX 64
 
 # define CLEAR_SCREEN "cl"
 # define LEFT_SEQUENCE "kl"

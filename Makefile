@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+         #
+#    By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/04/10 19:27:20 by sadawi            #+#    #+#              #
-#    Updated: 2020/04/29 12:45:54 by sadawi           ###   ########.fr        #
+#    Updated: 2020/11/06 07:20:03 by jwilen           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,7 @@ OBJS = $(addprefix objs/, $(notdir $(SRCS:.c=.o)))
 
 INCLUDES = -I includes -I libft/includes
 
-FLAGS = -Wall -Wextra -Werror
+//FLAGS = -Wall -Wextra -Werror
 
 RUN_LIB = make --no-print-directory -C libft/
 

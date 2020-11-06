@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_flags.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/06 14:26:55 by sadawi            #+#    #+#             */
-/*   Updated: 2019/12/18 13:15:15 by sadawi           ###   ########.fr       */
+/*   Updated: 2020/11/06 07:21:51 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ int		handle_flags(const char **format, va_list *args, t_data *data)
 	int		amount;
 
 	i = 1;
+	amount = 0;
 	while (!ft_strchr("cspdiouxXf%", (*format)[i]) && (*format)[i] != '\0')
 		i++;
 	if (!(*format)[i])
