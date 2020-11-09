@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 14:23:12 by sadawi            #+#    #+#             */
-/*   Updated: 2020/10/20 17:04:35 by sadawi           ###   ########.fr       */
+/*   Updated: 2020/11/09 17:55:52 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -595,18 +595,20 @@ void	loop_shell(void)
 			break ;
 		save_command_history();
 		ft_printf("\n");
-		commands = split_line_commands(g_21sh->line);
-		i = 0;
-		while (commands[i])
-		{
-			args = split_line_args(commands[i]);
-			loop = check_cmd(args);
-			free_args(args);
-			free(commands[i++]);
-		}
-		free_history();
-		free(commands);
-		free(g_21sh->line);
+
+		
+		// commands = split_line_commands(g_21sh->line);
+		// i = 0;
+		// while (commands[i])
+		// {
+		// 	args = split_line_args(commands[i]);
+		// 	loop = check_cmd(args);
+		// 	free_args(args);
+		// 	free(commands[i++]);
+		// }
+		// free_history();
+		// free(commands);
+		// free(g_21sh->line);
 		//set_terminal(SPECIAL_MODE);
 	}
 }

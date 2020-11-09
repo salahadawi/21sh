@@ -6,7 +6,7 @@
 /*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/10 12:20:24 by sadawi            #+#    #+#             */
-/*   Updated: 2020/11/06 07:31:47 by jwilen           ###   ########.fr       */
+/*   Updated: 2020/11/09 17:49:08 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define SH_H
 
 # include "../libft/includes/libft.h"
+# include "./token.h"
 # include <sys/ioctl.h>
 # include <sys/types.h>
 # include <sys/stat.h>
@@ -46,6 +47,13 @@
 # define HOME 72
 # define END 70
 # define BACKSPACE 127
+// jwi
+# define TILDE 126
+# define MINUS 45
+# define SLASH 47
+# define DOLLAR 36
+# define DOT 46
+# define UNDERLINE 95
 
 typedef int				t_builtin_func (char **args);
 
@@ -82,6 +90,12 @@ typedef struct			s_history
 	struct s_history	*next;
 }						t_history;
 
+typedef struct		s_tok
+{
+	char			*tokens;
+	struct s_tok	*next;
+}					t_tok;
+
 typedef struct			s_21sh
 {
 	struct termios		old;
@@ -97,6 +111,8 @@ typedef struct			s_21sh
 	int					history_fd;
 	t_history			*history;
 	char				*copied_input;
+	t_tok				*token;
+	t_token				*tok;
 }						t_21sh;
 
 t_21sh				*g_21sh;

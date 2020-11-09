@@ -6,7 +6,7 @@
 #    By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/04/10 19:27:20 by sadawi            #+#    #+#              #
-#    Updated: 2020/11/06 07:20:03 by jwilen           ###   ########.fr        #
+#    Updated: 2020/11/09 17:42:18 by jwilen           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,10 +19,13 @@ minishell.c print.c split_input.c strsub_variations.c
 BUILTINS = builtin_cd.c builtin_echo.c builtin_env.c builtin_exit.c \
 builtin_setenv.c builtin_unsetenv.c
 
+JWILEN = 
+
 SHORTCUTS = shortcut_cd.c  shortcut_setenv.c
 
 SRCS = $(addprefix srcs/, $(CFILES)) $(addprefix srcs/builtins/, $(BUILTINS)) \
-$(addprefix srcs/shortcuts/, $(SHORTCUTS))
+$(addprefix srcs/shortcuts/, $(SHORTCUTS)) \
+$(addprefix srcs/jwilen/, $(JWILEN))
 
 OBJS = $(addprefix objs/, $(notdir $(SRCS:.c=.o)))
 
