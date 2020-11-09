@@ -6,7 +6,7 @@
 /*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 14:23:12 by sadawi            #+#    #+#             */
-/*   Updated: 2020/11/09 17:55:52 by jwilen           ###   ########.fr       */
+/*   Updated: 2020/11/09 18:21:33 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -594,7 +594,17 @@ void	loop_shell(void)
 		if (get_input() < 1)
 			break ;
 		save_command_history();
-		ft_printf("\n");
+		lexi();
+		ft_printf("jo");
+		while(g_21sh->token)
+		{
+			i = 0;
+			commands[i] = g_21sh->token->tokens;
+			ft_printf("\ntokens: %s\n", g_21sh->token->tokens);
+			g_21sh->token = g_21sh->token->next;
+			i++;
+		}
+		
 
 		
 		// commands = split_line_commands(g_21sh->line);
@@ -609,7 +619,7 @@ void	loop_shell(void)
 		// free_history();
 		// free(commands);
 		// free(g_21sh->line);
-		//set_terminal(SPECIAL_MODE);
+		set_terminal(SPECIAL_MODE);
 	}
 }
 

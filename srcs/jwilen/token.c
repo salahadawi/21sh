@@ -6,7 +6,7 @@
 /*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/17 09:54:12 by jwilen            #+#    #+#             */
-/*   Updated: 2020/11/09 17:50:57 by jwilen           ###   ########.fr       */
+/*   Updated: 2020/11/09 18:06:57 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static t_tok		*create_node_tok(char *str)
 	return (node);
 }
 
-void				create_input_tok(char *str, t_data *data)
+void				create_input_tok(char *str)
 {
 	t_tok *current;
 

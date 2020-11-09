@@ -6,7 +6,7 @@
 /*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/10 12:20:24 by sadawi            #+#    #+#             */
-/*   Updated: 2020/11/09 17:49:08 by jwilen           ###   ########.fr       */
+/*   Updated: 2020/11/09 18:08:50 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -220,5 +220,9 @@ int					ft_putschar(int c);
 void				save_cursor_position(void);
 
 void				restore_terminal_mode(void);
+
+void				lexi(void);
+
+void				create_input_tok(char *str);
 
 #endif
