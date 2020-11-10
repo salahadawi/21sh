@@ -6,7 +6,7 @@
 #    By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/04/10 19:27:20 by sadawi            #+#    #+#              #
-#    Updated: 2020/11/09 18:08:20 by jwilen           ###   ########.fr        #
+#    Updated: 2020/11/10 16:02:48 by jwilen           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ minishell.c print.c split_input.c strsub_variations.c
 BUILTINS = builtin_cd.c builtin_echo.c builtin_env.c builtin_exit.c \
 builtin_setenv.c builtin_unsetenv.c
 
-JWILEN =  lexi.c lexi2.c token.c \
+JWILEN =  lexi.c lexi2.c token.c convert_tokens.c \
 
 SHORTCUTS = shortcut_cd.c  shortcut_setenv.c
 

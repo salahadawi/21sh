@@ -6,7 +6,7 @@
 /*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/10 12:20:24 by sadawi            #+#    #+#             */
-/*   Updated: 2020/11/10 11:30:54 by jwilen           ###   ########.fr       */
+/*   Updated: 2020/11/10 15:59:42 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,8 @@ typedef struct			s_21sh
 	struct termios		raw;
 	t_key_sequences		key_sequences;
 	char				**envp;
+	char				**args;
+	char				**s_args;
 	t_builtins			builtins;
 	t_cursor			cursor;
 	int					prompt_len;
@@ -182,13 +184,13 @@ char				*expand_dollar(char *str, char *ptr);
 
 char				*find_dollar(const char *s);
 
-void				handle_expansion(char **args);
+void				handle_expansion(void);
 
 int					handle_shortcuts(char **args);
 
 int					handle_builtins(char **args);
 
-int					check_cmd(char **args);
+int					check_cmd(void);
 
 int					print_current_dir_basename(void);
 
@@ -225,5 +227,7 @@ void				restore_terminal_mode(void);
 void				lexi(void);
 
 void				create_input_tok(char *str);
+
+void				run_first(void);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 14:23:12 by sadawi            #+#    #+#             */
-/*   Updated: 2020/11/09 18:21:33 by jwilen           ###   ########.fr       */
+/*   Updated: 2020/11/10 16:08:23 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -582,6 +582,7 @@ void	loop_shell(void)
 	char	**args;
 	int		loop;
 	int		i;
+	t_tok	*current;
 
 	loop = 1;
 	get_history_file_path();
@@ -595,15 +596,26 @@ void	loop_shell(void)
 			break ;
 		save_command_history();
 		lexi();
-		ft_printf("jo");
-		while(g_21sh->token)
-		{
-			i = 0;
-			commands[i] = g_21sh->token->tokens;
-			ft_printf("\ntokens: %s\n", g_21sh->token->tokens);
-			g_21sh->token = g_21sh->token->next;
-			i++;
-		}
+		check_cmd();
+		// current = g_21sh->token;
+		// while(current)
+		// {
+		// 	ft_printf("\ntoken: %s\n", current->str);
+		// 	current = current->next;
+		// }
+		// 	i = 0;
+			
+		// 	ft_strcpy(commands[i], g_21sh->token->tokens);
+		// 	ft_printf("\ntokens: %s\n", g_21sh->token->tokens);
+		// 	g_21sh->token = g_21sh->token->next;
+		// 	i++;
+		// }
+		// i = 0;
+		// while(commands[i])
+		// {
+		// 	ft_printf("commands: %s\n", commands[i]);
+		// 	i++;
+		// }
 		
 
 		
@@ -611,8 +623,7 @@ void	loop_shell(void)
 		// i = 0;
 		// while (commands[i])
 		// {
-		// 	args = split_line_args(commands[i]);
-		// 	loop = check_cmd(args);
+			// args = split_line_args(commands[i]);
 		// 	free_args(args);
 		// 	free(commands[i++]);
 		// }
@@ -623,12 +634,11 @@ void	loop_shell(void)
 	}
 }
 
-int		check_cmd(char **args)
+int		check_cmd()
 {
-	if (!args[0])
+	if (!g_21sh->token)
 		return (1);
-	handle_expansion(args);
-	if (handle_builtins(args))
-		return (1);
-	return (exec_cmd(args));
+	handle_expansion();
+	run_first();
+	return (0);
 }
