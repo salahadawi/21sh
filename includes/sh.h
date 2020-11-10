@@ -6,7 +6,7 @@
 /*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/10 12:20:24 by sadawi            #+#    #+#             */
-/*   Updated: 2020/11/09 18:08:50 by jwilen           ###   ########.fr       */
+/*   Updated: 2020/11/10 11:30:54 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,9 +92,10 @@ typedef struct			s_history
 
 typedef struct		s_tok
 {
-	char			*tokens;
+	char			*str;
 	struct s_tok	*next;
 }					t_tok;
+
 
 typedef struct			s_21sh
 {
