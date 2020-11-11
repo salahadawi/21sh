@@ -6,7 +6,7 @@
 /*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 14:23:12 by sadawi            #+#    #+#             */
-/*   Updated: 2020/11/10 16:08:23 by jwilen           ###   ########.fr       */
+/*   Updated: 2020/11/11 08:27:13 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -597,39 +597,9 @@ void	loop_shell(void)
 		save_command_history();
 		lexi();
 		check_cmd();
-		// current = g_21sh->token;
-		// while(current)
-		// {
-		// 	ft_printf("\ntoken: %s\n", current->str);
-		// 	current = current->next;
-		// }
-		// 	i = 0;
-			
-		// 	ft_strcpy(commands[i], g_21sh->token->tokens);
-		// 	ft_printf("\ntokens: %s\n", g_21sh->token->tokens);
-		// 	g_21sh->token = g_21sh->token->next;
-		// 	i++;
-		// }
-		// i = 0;
-		// while(commands[i])
-		// {
-		// 	ft_printf("commands: %s\n", commands[i]);
-		// 	i++;
-		// }
-		
-
-		
-		// commands = split_line_commands(g_21sh->line);
-		// i = 0;
-		// while (commands[i])
-		// {
-			// args = split_line_args(commands[i]);
-		// 	free_args(args);
-		// 	free(commands[i++]);
-		// }
-		// free_history();
+		free_history();
 		// free(commands);
-		// free(g_21sh->line);
+		free(g_21sh->line);
 		set_terminal(SPECIAL_MODE);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/10 14:20:57 by jwilen            #+#    #+#             */
-/*   Updated: 2020/11/10 16:08:59 by jwilen           ###   ########.fr       */
+/*   Updated: 2020/11/11 08:34:56 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,10 +78,9 @@ void			convert_arr_tok_to_arr()
 		}
 		g_21sh->s_args[j] = NULL;
 		ft_printf("\n");
-		handle_builtins(g_21sh->s_args);
-		//run(data);
+	
 		if (handle_builtins(g_21sh->s_args))
-			continue ;
+			write(1, "", 0);
 		else 
 			exec_cmd(g_21sh->s_args);
 		ft_free_s_data();
