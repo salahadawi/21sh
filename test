@@ -1,0 +1,23 @@
+21sh.dSYM
+Makefile
+author
+includes
+libft
+srcs
+test
+total 24
+drwxr-xr-x   3 jwilen  2019   102 Nov 11 08:36 21sh.dSYM
+-rw-r--r--   1 jwilen  2019  2514 Nov 10 16:02 Makefile
+-rw-r--r--   1 jwilen  2019     7 Nov  6 07:18 author
+drwxr-xr-x   5 jwilen  2019   170 Nov  9 17:43 includes
+drwxr-xr-x   6 jwilen  2019   204 Nov 11 14:38 libft
+drwxr-xr-x  18 jwilen  2019   612 Nov  9 17:42 srcs
+-rw-r--r--   1 jwilen  2019    51 Nov 11 14:43 test
+total 24
+drwxr-xr-x   3 jwilen  2019   102 Nov 11 08:36 21sh.dSYM
+-rw-r--r--   1 jwilen  2019  2514 Nov 10 16:02 Makefile
+-rw-r--r--   1 jwilen  2019     7 Nov  6 07:18 author
+drwxr-xr-x   5 jwilen  2019   170 Nov  9 17:43 includes
+drwxr-xr-x   6 jwilen  2019   204 Nov 11 14:38 libft
+drwxr-xr-x  18 jwilen  2019   612 Nov  9 17:42 srcs
+-rw-r--r--   1 jwilen  2019   440 Nov 11 14:44 test

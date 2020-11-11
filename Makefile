@@ -6,7 +6,7 @@
 #    By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/04/10 19:27:20 by sadawi            #+#    #+#              #
-#    Updated: 2020/11/10 16:02:48 by jwilen           ###   ########.fr        #
+#    Updated: 2020/11/11 15:54:49 by jwilen           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,11 +21,18 @@ builtin_setenv.c builtin_unsetenv.c
 
 JWILEN =  lexi.c lexi2.c token.c convert_tokens.c \
 
+KEYINPUT = handle_keys.c move_cursor_direction.c move_cursor.c read_key.c \
+move_word.c
+
+HISTORY = get_history.c history_1.c history_2.c \
+
 SHORTCUTS = shortcut_cd.c  shortcut_setenv.c
 
 SRCS = $(addprefix srcs/, $(CFILES)) $(addprefix srcs/builtins/, $(BUILTINS)) \
 $(addprefix srcs/shortcuts/, $(SHORTCUTS)) \
-$(addprefix srcs/jwilen/, $(JWILEN))
+$(addprefix srcs/jwilen/, $(JWILEN)) \
+$(addprefix srcs/key_input/, $(KEYINPUT)) \
+$(addprefix srcs/history/, $(HISTORY))
 
 OBJS = $(addprefix objs/, $(notdir $(SRCS:.c=.o)))
 

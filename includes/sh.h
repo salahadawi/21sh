@@ -6,7 +6,7 @@
 /*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/10 12:20:24 by sadawi            #+#    #+#             */
-/*   Updated: 2020/11/11 12:35:38 by jwilen           ###   ########.fr       */
+/*   Updated: 2020/11/11 16:07:25 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -230,5 +230,34 @@ void				lexi(void);
 void				create_input_tok(char *str);
 
 void				run_first(void);
+
+void				move_cursor_right_edge(void);
+void				move_cursor_next_line(void);
+void				move_cursor_start(void);
+void				move_cursor_up(void);
+void				move_cursor_down(void);
+void				move_cursor_left(void);
+void				move_cursor_right(void);
+void				move_word_right(void);
+void				move_word_left(void);
+void				move_cursor(void);
+void				cursor_jump_up(int *left_len);
+
+int					handle_keys(void);
+int					read_key(void);
+char				*str_remove_char(char *str, int index);
+char				*str_add_char(char *str, char c);
+void				handle_delete(void);
+
+void				get_history_file_path(void);
+void				get_history_prev(void);
+void				get_history_next(void);
+void				open_history_file(void);
+void				add_to_history(char *line);
+void				save_command_history(void);
+int					same_as_previous_command();
+void				free_history(void);
+
+void				find_prompt_y(void);
 
 #endif
