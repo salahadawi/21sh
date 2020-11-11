@@ -6,7 +6,7 @@
 /*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/10 12:20:24 by sadawi            #+#    #+#             */
-/*   Updated: 2020/11/11 16:07:25 by jwilen           ###   ########.fr       */
+/*   Updated: 2020/11/11 17:17:31 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -258,6 +258,20 @@ void				save_command_history(void);
 int					same_as_previous_command();
 void				free_history(void);
 
+void				init_termcaps(void);
+
+void				create_terminal_raw_mode();
+void				set_terminal_raw_mode(void);
+
+void				handle_signal_suspend(void);
+void				handle_signal_continue(void);
+void				handle_signal_interrupt(void);
+void				handle_signal_resize(void);
+
+int					get_input();
+
 void				find_prompt_y(void);
+void				init_key_sequences();
+char				*str_add_str(char *str, char *str2);
 
 #endif

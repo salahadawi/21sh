@@ -6,33 +6,50 @@
 #    By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/04/10 19:27:20 by sadawi            #+#    #+#              #
-#    Updated: 2020/11/11 16:10:09 by jwilen           ###   ########.fr        #
+#    Updated: 2020/11/11 17:16:38 by jwilen           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = 21sh
 
 CFILES = compare_pointers.c execute_command.c expand_input.c free_memory.c \
-get_env_info.c handle_builtins.c handle_shortcuts.c init_shell.c main.c \
+get_env_info.c init_shell.c main.c \
 minishell.c print.c split_input.c strsub_variations.c
 
-BUILTINS = builtin_cd.c builtin_echo.c builtin_env.c builtin_exit.c \
-builtin_setenv.c builtin_unsetenv.c
+AUTOCOMPLETE =
 
-LEXER =  lexi.c lexi2.c token.c convert_tokens.c \
+BUILTINS = builtin_cd.c builtin_echo.c builtin_env.c builtin_exit.c \
+builtin_setenv.c builtin_unsetenv.c handle_builtins.c
+
+HISTORY = get_history.c history_1.c history_2.c \
+
+INPUT = input_str.c \
 
 KEYINPUT = handle_keys.c move_cursor_direction.c move_cursor.c read_key.c \
 move_word.c
 
-HISTORY = get_history.c history_1.c history_2.c \
+LEXER =  lexi.c lexi2.c token.c convert_tokens.c \
 
-SHORTCUTS = shortcut_cd.c  shortcut_setenv.c
+RAWMODE = rawmode.c \
 
-SRCS = $(addprefix srcs/, $(CFILES)) $(addprefix srcs/builtins/, $(BUILTINS)) \
-$(addprefix srcs/shortcuts/, $(SHORTCUTS)) \
-$(addprefix srcs/lexer/, $(LEXER)) \
+SHORTCUTS = shortcut_cd.c  shortcut_setenv.c handle_shortcuts.c \
+
+SIGNALS =  handle_signals.c signals.c \
+
+TERMCAPS = termcaps.c \
+
+
+SRCS = $(addprefix srcs/, $(CFILES)) \
+$(addprefix srcs/autocomplete/, $(AUTOCOMPLETE)) \
+$(addprefix srcs/builtins/, $(BUILTINS)) \
+$(addprefix srcs/input/, $(INPUT)) \
 $(addprefix srcs/key_input/, $(KEYINPUT)) \
-$(addprefix srcs/history/, $(HISTORY))
+$(addprefix srcs/history/, $(HISTORY)) \
+$(addprefix srcs/lexer/, $(LEXER)) \
+$(addprefix srcs/rawmode/, $(RAWMODE)) \
+$(addprefix srcs/shortcuts/, $(SHORTCUTS)) \
+$(addprefix srcs/signals/, $(SIGNALS)) \
+$(addprefix srcs/termcaps/, $(TERMCAPS)) \
 
 OBJS = $(addprefix objs/, $(notdir $(SRCS:.c=.o)))
 
