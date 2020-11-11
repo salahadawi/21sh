@@ -6,7 +6,7 @@
 /*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 14:23:12 by sadawi            #+#    #+#             */
-/*   Updated: 2020/11/11 08:27:13 by jwilen           ###   ########.fr       */
+/*   Updated: 2020/11/11 11:49:29 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,7 @@ int		read_key(void)
 				return (sequence[5] - 110);
 			return (sequence[2] - 100);
 		}
-	}
-	return (sequence[0]);
+	}	return (sequence[0]);
 }
 
 char	*str_remove_char(char *str, int index)
@@ -270,7 +269,7 @@ int		handle_keys(void)
 	char c;
 
 	c = read_key();
-	//ft_printf("%d", c);
+	// ft_printf("%d", c);
 	if (c == 0)
 		return (1);
 	if (c < 0)
@@ -606,6 +605,14 @@ void	loop_shell(void)
 
 int		check_cmd()
 {
+		t_tok	*current;
+		
+		current = g_21sh->token;
+		while (current)
+		{
+			ft_printf("\ntokens: %s\n", current->str);
+			current = current->next;
+		}
 	if (!g_21sh->token)
 		return (1);
 	handle_expansion();

@@ -6,7 +6,7 @@
 /*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/17 14:05:21 by jwilen            #+#    #+#             */
-/*   Updated: 2020/11/09 17:43:29 by jwilen           ###   ########.fr       */
+/*   Updated: 2020/11/11 11:27:11 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ typedef	struct	s_token
 		TOKEN_STRING,
 		TOKEN_SEMI,
 		TOKEN_COMMA,
+		TOKEN_PIPE,
 		TOKEN_EOF
 	}			type;
 

@@ -6,7 +6,7 @@
 /*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/10 14:20:57 by jwilen            #+#    #+#             */
-/*   Updated: 2020/11/11 08:34:56 by jwilen           ###   ########.fr       */
+/*   Updated: 2020/11/11 12:34:15 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,16 +29,12 @@ int			list_len_tok()
 {
 	t_tok		*current;
 	int			len;
-	// int			semi;
 
 	len = 0;
-	// semi = 0;
 	current = g_21sh->token;
 	while (current)
 	{
 		len++;
-		// if (ft_strchr(current->tokens, ';'))
-		// 	semi++;
 		current = current->next;
 	}
 	return (len);
