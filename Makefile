@@ -6,7 +6,7 @@
 #    By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/04/10 19:27:20 by sadawi            #+#    #+#              #
-#    Updated: 2020/11/11 17:16:38 by jwilen           ###   ########.fr        #
+#    Updated: 2020/11/11 17:30:31 by jwilen           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,6 +38,8 @@ SIGNALS =  handle_signals.c signals.c \
 
 TERMCAPS = termcaps.c \
 
+UTIL = error.c \
+
 
 SRCS = $(addprefix srcs/, $(CFILES)) \
 $(addprefix srcs/autocomplete/, $(AUTOCOMPLETE)) \
@@ -50,6 +52,7 @@ $(addprefix srcs/rawmode/, $(RAWMODE)) \
 $(addprefix srcs/shortcuts/, $(SHORTCUTS)) \
 $(addprefix srcs/signals/, $(SIGNALS)) \
 $(addprefix srcs/termcaps/, $(TERMCAPS)) \
+$(addprefix srcs/util/, $(UTIL)) \
 
 OBJS = $(addprefix objs/, $(notdir $(SRCS:.c=.o)))
 

@@ -6,20 +6,11 @@
 /*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/15 12:28:40 by sadawi            #+#    #+#             */
-/*   Updated: 2020/11/11 17:03:21 by jwilen           ###   ########.fr       */
+/*   Updated: 2020/11/11 17:31:14 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh.h"
-
-void	handle_error(char *message, int reset)
-{
-	ft_fprintf(STDOUT_FILENO, "Error: %s.\n", message);
-	if (reset)
-		restore_terminal_mode();
-	//free_memory();
-	exit(0);
-}
 
 void	init_key_sequences()
 {
