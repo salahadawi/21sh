@@ -6,7 +6,7 @@
 #    By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/04/10 19:27:20 by sadawi            #+#    #+#              #
-#    Updated: 2020/11/11 17:30:31 by jwilen           ###   ########.fr        #
+#    Updated: 2020/11/12 08:39:10 by jwilen           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,6 +15,8 @@ NAME = 21sh
 CFILES = compare_pointers.c execute_command.c expand_input.c free_memory.c \
 get_env_info.c init_shell.c main.c \
 minishell.c print.c split_input.c strsub_variations.c
+
+AST = \
 
 AUTOCOMPLETE =
 
@@ -42,6 +44,7 @@ UTIL = error.c \
 
 
 SRCS = $(addprefix srcs/, $(CFILES)) \
+$(addprefix srcs/ast/, $(AST)) \
 $(addprefix srcs/autocomplete/, $(AUTOCOMPLETE)) \
 $(addprefix srcs/builtins/, $(BUILTINS)) \
 $(addprefix srcs/input/, $(INPUT)) \

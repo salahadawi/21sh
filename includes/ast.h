@@ -1,44 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   token.h                                            :+:      :+:    :+:   */
+/*   ast.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/09/17 14:05:21 by jwilen            #+#    #+#             */
-/*   Updated: 2020/11/12 08:37:26 by jwilen           ###   ########.fr       */
+/*   Created: 2020/11/12 08:32:28 by jwilen            #+#    #+#             */
+/*   Updated: 2020/11/12 08:37:33 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef TOKEN_H
-# define TOKEN_H
+#ifndef AST_H
+# define AST_H
 
-#include "./sh.h"
+# include "./token.h"
 
-typedef	struct	s_token
+typedef struct 		s_ast
 {
-	enum
-	{
-		TOKEN_ID,
-		TOKEN_EQUALS,
-		TOKEN_STRING,
-		TOKEN_SEMI,
-		TOKEN_COMMA,
-		TOKEN_PIPE,
-		TOKEN_INSERTION,
-		TOKEN_EXTRACTION,
-		TOKEN_LRGER,
-		TOKEN_SMLER,
-		TOKEN_SMALER_ET,
-		TOKEN_LRGER_ET,
-		TOKEN_LRGER_PIPE,
-		TOKEN_SM_LR,
-		TOKEN_EOF
-	}			type;
-
-	char		*value;
-}				t_token;
-
-t_token			*init_token(int type, char *value);
+	t_token			*token;
+	struct s_ast	*parent;
+	struct s_ast	*left;
+	struct s_ast	*right;
+	int				type;
+	int				token_nbr;
+}					t_ast;
 
 #endif
