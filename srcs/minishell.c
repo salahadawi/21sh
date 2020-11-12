@@ -6,7 +6,7 @@
 /*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 14:23:12 by sadawi            #+#    #+#             */
-/*   Updated: 2020/11/12 13:55:29 by jwilen           ###   ########.fr       */
+/*   Updated: 2020/11/12 14:05:24 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,7 +148,6 @@ int		check_cmd()
 		t_tok	*current;
 		
 		current = g_21sh->token;
-		
 		while (current)
 		{
 			ft_printf("\ntokens: %d %s\n",current->type, current->str);
