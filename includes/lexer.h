@@ -6,7 +6,7 @@
 /*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/17 14:03:41 by jwilen            #+#    #+#             */
-/*   Updated: 2020/11/09 17:44:54 by jwilen           ###   ########.fr       */
+/*   Updated: 2020/11/12 06:53:43 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ void				lexer_advance(t_lexer *lexer);
 void				lexer_skip_whitespace(t_lexer *lexer);
 t_token				*lexer_get_next_token(t_lexer *lexer);
 t_token				*lexer_collect_string(t_lexer *lexer);
+t_token				*lexer_collect_lrg(t_lexer *lexer);
+t_token				*lexer_collect_smlr(t_lexer *lexer);
 t_token				*lexer_collect_id(t_lexer *lexer);
 t_token				*lexer_advance_with_token(t_lexer *lexer, t_token *token);
 char				*lexer_get_current_char_as_string(t_lexer *lexer);
