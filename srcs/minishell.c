@@ -6,7 +6,7 @@
 /*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 14:23:12 by sadawi            #+#    #+#             */
-/*   Updated: 2020/11/11 17:14:16 by jwilen           ###   ########.fr       */
+/*   Updated: 2020/11/12 13:55:29 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,7 @@ void	loop_shell(void)
 	char	**args;
 	int		loop;
 	int		i;
-	t_tok	*current;
+	t_token	*current;
 
 	loop = 1;
 	get_history_file_path();
@@ -148,9 +148,10 @@ int		check_cmd()
 		t_tok	*current;
 		
 		current = g_21sh->token;
+		
 		while (current)
 		{
-			ft_printf("\ntokens: %s\n", current->str);
+			ft_printf("\ntokens: %d %s\n",current->type, current->str);
 			current = current->next;
 		}
 	if (!g_21sh->token)

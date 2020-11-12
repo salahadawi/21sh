@@ -6,7 +6,7 @@
 /*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/17 14:05:21 by jwilen            #+#    #+#             */
-/*   Updated: 2020/11/12 08:37:26 by jwilen           ###   ########.fr       */
+/*   Updated: 2020/11/12 10:14:06 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 #include "./sh.h"
 
-typedef	struct	s_token
+typedef	struct		s_token
 {
 	enum
 	{
@@ -34,10 +34,10 @@ typedef	struct	s_token
 		TOKEN_LRGER_PIPE,
 		TOKEN_SM_LR,
 		TOKEN_EOF
-	}			type;
+	}				type;
 
-	char		*value;
-}				t_token;
+	char			*value;
+}					t_token;
 
 t_token			*init_token(int type, char *value);
 

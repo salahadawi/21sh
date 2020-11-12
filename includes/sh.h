@@ -6,7 +6,7 @@
 /*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/10 12:20:24 by sadawi            #+#    #+#             */
-/*   Updated: 2020/11/12 08:36:52 by jwilen           ###   ########.fr       */
+/*   Updated: 2020/11/12 12:58:51 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,8 @@ typedef struct			s_history
 typedef struct		s_tok
 {
 	char			*str;
+	int				type;
+	struct s_tok	*prev;
 	struct s_tok	*next;
 }					t_tok;
 
@@ -229,7 +231,7 @@ void				restore_terminal_mode(void);
 
 void				lexi(void);
 
-void				create_input_tok(char *str);
+void				create_input_tok(int type, char *str);
 
 void				run_first(void);
 
