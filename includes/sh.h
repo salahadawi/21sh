@@ -6,7 +6,7 @@
 /*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/10 12:20:24 by sadawi            #+#    #+#             */
-/*   Updated: 2020/11/12 12:58:51 by jwilen           ###   ########.fr       */
+/*   Updated: 2020/11/16 12:30:48 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,8 +119,8 @@ typedef struct			s_21sh
 	int					history_fd;
 	t_history			*history;
 	char				*copied_input;
-	t_tok				*token;
-	t_token				*tok;
+	t_token				*head;
+	t_token				*token;
 }						t_21sh;
 
 t_21sh				*g_21sh;
@@ -232,6 +232,8 @@ void				restore_terminal_mode(void);
 void				lexi(void);
 
 void				create_input_tok(int type, char *str);
+t_token				*create_input_token(int type, char *value);
+int			list_len_token();
 
 void				run_first(void);
 

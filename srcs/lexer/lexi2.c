@@ -6,7 +6,7 @@
 /*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/29 11:42:33 by jwilen            #+#    #+#             */
-/*   Updated: 2020/11/12 08:31:44 by jwilen           ###   ########.fr       */
+/*   Updated: 2020/11/16 08:21:13 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ t_token		*lexer_collect_id(t_lexer *lexer)
 		lexer_advance(lexer);
 		free(s);
 	}
-	return (init_token(TOKEN_ID, value));
+	return (create_input_token(TOKEN_ID, value));
 }
 
 t_token		*lexer_collect_string(t_lexer *lexer)
@@ -78,7 +78,7 @@ t_token		*lexer_collect_string(t_lexer *lexer)
 		free(s);
 	}
 	lexer_advance(lexer);
-	return (init_token(TOKEN_STRING, value));
+	return (create_input_token(TOKEN_STRING, value));
 }
 
 t_token		*lexer_collect_lrg(t_lexer *lexer)
@@ -99,7 +99,7 @@ t_token		*lexer_collect_lrg(t_lexer *lexer)
 		ft_strcat(value, s);
 		free(s);
 		lexer_advance(lexer);
-		return (init_token(TOKEN_EXTRACTION, value));
+		return (create_input_token(TOKEN_EXTRACTION, value));
 	}
 	else if (lexer->c == '&')
 	{
@@ -110,7 +110,7 @@ t_token		*lexer_collect_lrg(t_lexer *lexer)
 		ft_strcat(value, s);
 		free(s);
 		lexer_advance(lexer);
-		return (init_token(TOKEN_LRGER_ET, value));
+		return (create_input_token(TOKEN_LRGER_ET, value));
 	}
 	else if (lexer->c == '|')
 	{
@@ -121,11 +121,11 @@ t_token		*lexer_collect_lrg(t_lexer *lexer)
 		ft_strcat(value, s);
 		free(s);
 		lexer_advance(lexer);
-		return (init_token(TOKEN_LRGER_PIPE, value));
+		return (create_input_token(TOKEN_LRGER_PIPE, value));
 	}
 	ft_strcat(value, s);
 	free(s);
-	return (init_token(TOKEN_LRGER, value));
+	return (create_input_token(TOKEN_LRGER, value));
 }
 
 t_token		*lexer_collect_smlr(t_lexer *lexer)
@@ -146,7 +146,7 @@ t_token		*lexer_collect_smlr(t_lexer *lexer)
 		ft_strcat(value, s);
 		free(s);
 		lexer_advance(lexer);
-		return (init_token(TOKEN_INSERTION, value));
+		return (create_input_token(TOKEN_INSERTION, value));
 	}
 	else if (lexer->c == '&')
 	{
@@ -157,7 +157,7 @@ t_token		*lexer_collect_smlr(t_lexer *lexer)
 		ft_strcat(value, s);
 		free(s);
 		lexer_advance(lexer);
-		return (init_token(TOKEN_SMALER_ET, value));
+		return (create_input_token(TOKEN_SMALER_ET, value));
 	}
 	else if (lexer->c == '>')
 	{
@@ -168,9 +168,9 @@ t_token		*lexer_collect_smlr(t_lexer *lexer)
 		ft_strcat(value, s);
 		free(s);
 		lexer_advance(lexer);
-		return (init_token(TOKEN_SM_LR, value));
+		return (create_input_token(TOKEN_SM_LR, value));
 	}
 	ft_strcat(value, s);
 	free(s);
-	return (init_token(TOKEN_SMLER, value));
+	return (create_input_token(TOKEN_SMLER, value));
 }

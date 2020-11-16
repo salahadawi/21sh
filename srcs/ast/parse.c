@@ -6,13 +6,13 @@
 /*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/12 08:44:30 by jwilen            #+#    #+#             */
-/*   Updated: 2020/11/16 05:39:20 by jwilen           ###   ########.fr       */
+/*   Updated: 2020/11/16 14:16:04 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/sh.h"
 
-t_ast		*new_leaf(t_tok **token)
+t_ast		*new_leaf(t_token **token)
 {
 	int		enbr;
 	t_ast	*new;
@@ -21,8 +21,12 @@ t_ast		*new_leaf(t_tok **token)
 		 return (NULL);
 	new->token = *token;
 	new->token_nbr = 1;
+	new->right = NULL;
+	new->left = NULL;
+	new->parent = NULL;
 	new->type = (*token)->type;
 	enbr = TOKEN_STRING;
+	ft_printf("new: %s\n", new->token);
 	while((*token)->next)
 	{
 		new->token_nbr++;
@@ -43,7 +47,7 @@ t_ast		*new_node(t_ast *left, t_ast *parent, t_ast *right)
 	return (parent);
 }
 
-t_ast		*pipe_level(t_tok **token)
+t_ast		*pipe_level(t_token **token)
 {
 	t_ast	*root;
 	t_ast	*parent;
@@ -59,7 +63,7 @@ t_ast		*pipe_level(t_tok **token)
 	return (root);
 }
 
-t_ast		*scl_level(t_tok **token)
+t_ast		*scl_level(t_token **token)
 {
 	t_ast	*root;
 	t_ast	*parent;
@@ -75,7 +79,7 @@ t_ast		*scl_level(t_tok **token)
 	return (root);
 }
 
-t_ast		*create_ast(t_tok **token)
+t_ast		*create_ast(t_token **token)
 {
 	t_ast	*root;
 
@@ -83,18 +87,30 @@ t_ast		*create_ast(t_tok **token)
 	return (root);
 }
 
-void		run_ast(t_tok *token)
+void		print_ast(t_ast *ast)
+{
+	if (ast != NULL)
+	{
+		print_ast(ast->left);
+		ft_printf("\nast: %d %s",ast->type, ast->token);
+		print_ast(ast->right);
+		print_ast(ast->parent);
+		
+	}
+}
+void		run_ast(t_token **token)
 {
 	t_ast	*ast;
 
 	if ((ast = create_ast(&g_21sh->token)) != NULL)
 	{
-		// run;
+			print_ast(ast);
+			run_first();
 	}
 	//delete ast
 }
 
-void		parsing_check(t_tok **token)
+void		parsing_check(t_token **token)
 {
 	if (!token || !*token)
 		return (handle_error("No tokens", 0));

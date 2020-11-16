@@ -6,7 +6,7 @@
 /*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 14:16:04 by sadawi            #+#    #+#             */
-/*   Updated: 2020/11/10 14:10:32 by jwilen           ###   ########.fr       */
+/*   Updated: 2020/11/16 09:23:25 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,17 +18,17 @@ void	handle_expansion()
 {
 	char	*ptr;
 	int		i;
-	t_tok	*current;
+	t_token	*current;
 
 	i = 0;
 	current = g_21sh->token;
 	while (current)
 	{
-		if (current->str[0] == '~')
-			current->str = expand_tilde(current->str, &current->str[0]);
-		if ((ptr = find_dollar(current->str)) && ptr + 1)
-			current->str = expand_dollar(current->str, ptr);
-		current = current->next;
+		if (current->value[0] == '~')
+			current->value = expand_tilde(current->value, &current->value[0]);
+		if ((ptr = find_dollar(current->value)) && ptr + 1)
+			current->value = expand_dollar(current->value, ptr);
+		current = current->prev;
 	}
 }
 

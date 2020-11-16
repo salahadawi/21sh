@@ -6,7 +6,7 @@
 /*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 14:23:12 by sadawi            #+#    #+#             */
-/*   Updated: 2020/11/12 14:05:24 by jwilen           ###   ########.fr       */
+/*   Updated: 2020/11/16 13:27:11 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,7 +135,18 @@ void	loop_shell(void)
 			break ;
 		save_command_history();
 		lexi();
-		check_cmd();
+		
+		parsing_check(&g_21sh->token);
+		// current = g_21sh->token;
+		// while (current)
+		// {
+		// 	// ft_printf("\ntoken: %d %s\n", current->type,current->value);
+		// 	ft_printf("\ntoken: *token: %p *value: %p prev:%p next:%p type: %d value:%s\n",current, current->value, current->prev, current->next, current->type, current->value);
+		// 	current = current->next;
+		// }
+		ft_putendl("end");
+		
+		// check_cmd();
 		free_history();
 		// free(commands);
 		free(g_21sh->line);
@@ -145,14 +156,7 @@ void	loop_shell(void)
 
 int		check_cmd()
 {
-		t_tok	*current;
-		
-		current = g_21sh->token;
-		while (current)
-		{
-			ft_printf("\ntokens: %d %s\n",current->type, current->str);
-			current = current->next;
-		}
+
 	if (!g_21sh->token)
 		return (1);
 	handle_expansion();

@@ -6,7 +6,7 @@
 /*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/12 08:32:28 by jwilen            #+#    #+#             */
-/*   Updated: 2020/11/16 05:38:19 by jwilen           ###   ########.fr       */
+/*   Updated: 2020/11/16 10:46:36 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,7 @@ typedef struct 		s_ast
 	int				type;
 	int				token_nbr;
 }					t_ast;
+
+void		parsing_check(t_token **token);
 
 #endif

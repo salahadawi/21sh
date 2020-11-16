@@ -6,7 +6,7 @@
 /*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/10 14:20:57 by jwilen            #+#    #+#             */
-/*   Updated: 2020/11/11 12:34:15 by jwilen           ###   ########.fr       */
+/*   Updated: 2020/11/16 12:19:30 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,15 +25,16 @@ void		ft_free_s_data()
 	free(g_21sh->s_args);
 }
 
-int			list_len_tok()
+int			list_len_token()
 {
-	t_tok		*current;
+	t_token		*current;
 	int			len;
 
 	len = 0;
-	current = g_21sh->token;
+	current = g_21sh->head;
 	while (current)
 	{
+		// ft_printf("len: %s\n", current->value);
 		len++;
 		current = current->next;
 	}
@@ -74,7 +75,6 @@ void			convert_arr_tok_to_arr()
 		}
 		g_21sh->s_args[j] = NULL;
 		ft_printf("\n");
-	
 		if (handle_builtins(g_21sh->s_args))
 			write(1, "", 0);
 		else 
@@ -90,21 +90,21 @@ void			convert_arr_tok_to_arr()
 void			convert_ll_to_arr_tok()
 {
 	int		len;
-	t_tok	*current;
+	t_token	*current;
 	int		i;
 
-	len = list_len_tok();
+	len = list_len_token();
 	i = 0;
-	current = g_21sh->token;
 	g_21sh->args = malloc(sizeof(char *) * (len + 1));
 	if (!g_21sh->args)
 	{
 		ft_printf("Malloc failed\n");
 		exit(1);
 	}
+	current = g_21sh->head;
 	while (current)
 	{
-		g_21sh->args[i] = current->str;
+		g_21sh->args[i] = current->value;
 		current = current->next;
 		i++;
 	}
@@ -113,6 +113,7 @@ void			convert_ll_to_arr_tok()
 
 void			run_first()
 {
+
 	convert_ll_to_arr_tok();
 	convert_arr_tok_to_arr();
 }
