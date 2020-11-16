@@ -6,7 +6,7 @@
 /*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/12 08:44:30 by jwilen            #+#    #+#             */
-/*   Updated: 2020/11/12 14:43:30 by jwilen           ###   ########.fr       */
+/*   Updated: 2020/11/16 05:39:20 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ t_ast		*new_leaf(t_tok **token)
 		new->token_nbr++;
 		*token = (*token)->next;
 	}
+	new->cmd_end = !(*token)->next ? (*token)->next : *token;
 	return (new);
 }
 
@@ -49,7 +50,7 @@ t_ast		*pipe_level(t_tok **token)
 	t_ast	*right;
 
 	root = new_leaf(token);
-	while((*token)->type == TOKEN_PIPE)
+	while ((*token)->type == TOKEN_PIPE)
 	{
 		parent = new_leaf(token);
 		right = new_leaf(token);
@@ -88,8 +89,9 @@ void		run_ast(t_tok *token)
 
 	if ((ast = create_ast(&g_21sh->token)) != NULL)
 	{
-		
+		// run;
 	}
+	//delete ast
 }
 
 void		parsing_check(t_tok **token)
@@ -98,7 +100,7 @@ void		parsing_check(t_tok **token)
 		return (handle_error("No tokens", 0));
 	else
 	{
-		handle_expansions();
+		handle_expansion();
 		run_ast(token);
 	}
 	
