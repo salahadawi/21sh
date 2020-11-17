@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   termcaps.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/11 17:00:00 by jwilen            #+#    #+#             */
-/*   Updated: 2020/11/11 17:00:58 by jwilen           ###   ########.fr       */
+/*   Updated: 2020/11/17 11:49:11 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,6 @@ void	init_termcaps(void)
 {
 	char *terminal_name;
 
-	g_21sh = (t_21sh*)ft_memalloc(sizeof(t_21sh));
-	//set all variables to NULL in function?
-	g_21sh->copied_input = NULL;
 	if (!(isatty(0)))
 		handle_error("Not a terminal", 0);
 	if (!(terminal_name = getenv("TERM")))
