@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_key.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/11 15:38:22 by jwilen            #+#    #+#             */
-/*   Updated: 2020/11/11 15:39:09 by jwilen           ###   ########.fr       */
+/*   Updated: 2020/11/17 12:11:39 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ int		read_key(void)
 {
 	char sequence[10];
 
+	sequence[0] = 0;
 	if (read(STDOUT_FILENO, sequence, 10) == -1)
 		handle_error("Read failed", 1);
 	if (sequence[0] == ESCAPE)
@@ -26,7 +27,8 @@ int		read_key(void)
 				return (sequence[5] - 110);
 			return (sequence[2] - 100);
 		}
-	}	return (sequence[0]);
+	}
+	return (sequence[0]);
 }
 
 char	*str_remove_char(char *str, int index)
