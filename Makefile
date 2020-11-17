@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+         #
+#    By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/04/10 19:27:20 by sadawi            #+#    #+#              #
-#    Updated: 2020/11/17 10:06:11 by jwilen           ###   ########.fr        #
+#    Updated: 2020/11/17 11:48:14 by sadawi           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -61,11 +61,11 @@ OBJS = $(addprefix objs/, $(notdir $(SRCS:.c=.o)))
 
 INCLUDES = -I includes -I libft/includes
 
-//FLAGS = -Wall -Wextra -Werror
+FLAGS = -Wall -Wextra -Werror -g
 
 RUN_LIB = make --no-print-directory -C libft/
 
-all: 
+all:
 	@$(RUN_LIB)
 	@make --no-print-director $(NAME)
 
@@ -81,7 +81,7 @@ $(NAME): $(SRCS) libft/
 lib:
 	@$(RUN_LIB)
 
-noflags:
+noflags: $(SRCS) libft/
 	@rm -rf objs
 	@echo Compiling $(NAME) without flags...
 	@gcc $(INCLUDES) -c $(SRCS)
@@ -89,6 +89,15 @@ noflags:
 	@mv $(notdir $(SRCS:.c=.o)) objs
 	@gcc $(INCLUDES) -o $(NAME) $(OBJS) libft/libft.a -ltermcap
 	@echo $(NAME) compiled without flags succesfully!
+
+debug: $(SRCS) libft/
+	@rm -rf objs
+	@echo Compiling $(NAME) with debug flag...
+	@gcc -g $(INCLUDES) -c $(SRCS)
+	@mkdir objs
+	@mv $(notdir $(SRCS:.c=.o)) objs
+	@gcc -g $(INCLUDES) -o $(NAME) $(OBJS) libft/libft.a -ltermcap
+	@echo $(NAME) compiled with debug flag succesfully!
 
 clean:
 	@/bin/rm -f $(OBJS)

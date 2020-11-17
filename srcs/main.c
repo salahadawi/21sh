@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/15 12:28:40 by sadawi            #+#    #+#             */
-/*   Updated: 2020/11/11 17:31:14 by jwilen           ###   ########.fr       */
+/*   Updated: 2020/11/17 11:59:52 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,14 @@ void	init_key_sequences()
 int		main(int argc, char **argv, char *envp[])
 {
 	(void)(argc && argv);
-	init_termcaps();
+	g_debug = (argc > 1); // ENABLE DEBUGGING, DISABLES TERMCAPS
+	g_21sh = (t_21sh*)ft_memalloc(sizeof(t_21sh));
+	g_debug ? 0 : init_termcaps(); // DEBUGGING
 	init_signal_handling();
-	create_terminal_raw_mode();
-	set_terminal_raw_mode();
+	g_debug ? 0 : create_terminal_raw_mode(); // DEBUGGING
+	g_debug ? 0 : set_terminal_raw_mode(); // DEBUGGING
 	init_env(envp);
-	clear_screen();
+	g_debug ? 0 : clear_screen(); // DEBUGGING
 	loop_shell();
 	restore_terminal_mode();
 	return (0);

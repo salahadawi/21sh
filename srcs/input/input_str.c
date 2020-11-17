@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input_str.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/11 17:12:41 by jwilen            #+#    #+#             */
-/*   Updated: 2020/11/11 17:14:08 by jwilen           ###   ########.fr       */
+/*   Updated: 2020/11/17 11:57:50 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,16 +65,21 @@ int		input_too_large(void)
 
 int		get_input()
 {
-	g_21sh->line = ft_strnew(0);
-	save_cursor_position();
-	while (handle_keys())
+	if (g_debug)
+		get_next_line(0, &g_21sh->line);
+	else
 	{
-		if (input_too_large())
-			break;
-		move_cursor_start();
-		set_terminal("cd");
-		print_input();
-		move_cursor();
+		g_21sh->line = ft_strnew(0);
+		save_cursor_position();
+		while (handle_keys())
+		{
+			if (input_too_large())
+				break;
+			move_cursor_start();
+			set_terminal("cd");
+			print_input();
+			move_cursor();
+		}
 	}
 	return (1);
 }
