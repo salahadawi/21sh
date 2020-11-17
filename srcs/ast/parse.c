@@ -6,11 +6,11 @@
 /*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/12 08:44:30 by jwilen            #+#    #+#             */
-/*   Updated: 2020/11/16 14:16:04 by jwilen           ###   ########.fr       */
+/*   Updated: 2020/11/17 11:15:42 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/sh.h"
+#include "sh.h"
 
 t_ast		*new_leaf(t_token **token)
 {
@@ -26,7 +26,6 @@ t_ast		*new_leaf(t_token **token)
 	new->parent = NULL;
 	new->type = (*token)->type;
 	enbr = TOKEN_STRING;
-	ft_printf("new: %s\n", new->token);
 	while((*token)->next)
 	{
 		new->token_nbr++;
@@ -89,12 +88,13 @@ t_ast		*create_ast(t_token **token)
 
 void		print_ast(t_ast *ast)
 {
+
 	if (ast != NULL)
 	{
-		print_ast(ast->left);
-		ft_printf("\nast: %d %s",ast->type, ast->token);
 		print_ast(ast->right);
-		print_ast(ast->parent);
+		ft_printf("\n%s\n", ast->token->value);
+		print_ast(ast->left);
+		// print_ast(ast->parent);
 		
 	}
 }
@@ -104,6 +104,7 @@ void		run_ast(t_token **token)
 
 	if ((ast = create_ast(&g_21sh->token)) != NULL)
 	{
+			init_ast_execution(ast);
 			print_ast(ast);
 			run_first();
 	}
