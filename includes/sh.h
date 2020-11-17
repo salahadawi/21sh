@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sh.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/10 12:20:24 by sadawi            #+#    #+#             */
-/*   Updated: 2020/11/17 11:54:32 by sadawi           ###   ########.fr       */
+/*   Updated: 2020/11/17 17:21:13 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@
 # include <limits.h>
 # include <signal.h>
 # include <fcntl.h>
+# include <unistd.h>
 
 # define BOLDBLUE "\033[1m\033[36m"
 # define RED "\033[1m\033[31m"
@@ -282,5 +283,7 @@ void				init_key_sequences();
 char				*str_add_str(char *str, char *str2);
 
 int					init_ast_execution(t_ast *ast);
+
+int			check_syntax(t_token *token);
 
 #endif

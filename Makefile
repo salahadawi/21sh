@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+         #
+#    By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/04/10 19:27:20 by sadawi            #+#    #+#              #
-#    Updated: 2020/11/17 11:48:14 by sadawi           ###   ########.fr        #
+#    Updated: 2020/11/17 17:20:52 by jwilen           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ CFILES = compare_pointers.c execute_command.c expand_input.c free_memory.c \
 get_env_info.c init_shell.c main.c \
 minishell.c print.c split_input.c strsub_variations.c
 
-AST = parse.c recursive_build.c \
+AST = parse.c recursive_build.c syntax_check.c \
 
 AUTOCOMPLETE =
 

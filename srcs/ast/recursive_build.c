@@ -6,7 +6,7 @@
 /*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/17 08:43:34 by jwilen            #+#    #+#             */
-/*   Updated: 2020/11/17 10:06:57 by jwilen           ###   ########.fr       */
+/*   Updated: 2020/11/17 17:03:00 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,10 +59,9 @@ static int	recurse_semi(t_ast *ast)
 int		init_ast_execution(t_ast *ast)
 {
 	if (ast->token->type == TOKEN_SEMI)
-		return (0);
-		// return (recurse_semi(ast));
-	// else if (ast->token->type == TOKEN_PIPE)
-	// 	return (recurse_pipe(ast));
+		return (recurse_semi(ast));
+	else if (ast->token->type == TOKEN_PIPE)
+		return (recurse_pipe(ast));
 	else
 		return (0);
 }

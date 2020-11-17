@@ -6,7 +6,7 @@
 /*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/12 08:44:30 by jwilen            #+#    #+#             */
-/*   Updated: 2020/11/17 11:15:42 by jwilen           ###   ########.fr       */
+/*   Updated: 2020/11/17 17:28:58 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,10 +115,12 @@ void		parsing_check(t_token **token)
 {
 	if (!token || !*token)
 		return (handle_error("No tokens", 0));
+	if (check_syntax(*token) != 0)
+		return (handle_error("Syntax error", 0));
 	else
 	{
 		handle_expansion();
-		run_ast(token);
+		// run_ast(token);
 	}
 	
 	
