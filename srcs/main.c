@@ -6,7 +6,7 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/15 12:28:40 by sadawi            #+#    #+#             */
-/*   Updated: 2020/05/08 14:41:12 by sadawi           ###   ########.fr       */
+/*   Updated: 2020/10/23 14:43:38 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,7 +144,7 @@ void	init_signal_handling(void)
 	int i;
 
 	i = 0;
-	while (i <= SIGRTMAX)
+	while (i <= 30)
 		signal(i++, handle_signal);
 }
 
@@ -153,7 +153,7 @@ void	restore_signals(void)
 	int i;
 
 	i = 0;
-	while (i <= SIGRTMAX)
+	while (i <= 30)
 		signal(i++, SIG_DFL);
 }
 

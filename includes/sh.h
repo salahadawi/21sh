@@ -6,7 +6,7 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/10 12:20:24 by sadawi            #+#    #+#             */
-/*   Updated: 2020/05/08 12:45:45 by sadawi           ###   ########.fr       */
+/*   Updated: 2020/10/23 14:43:19 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # include <termios.h>
 # include <termcap.h>
 # include <dirent.h>
-# include <linux/limits.h>
+# include <limits.h>
 # include <signal.h>
 # include <fcntl.h>
 
