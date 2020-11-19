@@ -6,7 +6,7 @@
 /*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/29 11:42:33 by jwilen            #+#    #+#             */
-/*   Updated: 2020/11/16 08:21:13 by jwilen           ###   ########.fr       */
+/*   Updated: 2020/11/19 12:41:37 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,26 @@ t_token		*lexer_collect_string(t_lexer *lexer)
 	}
 	lexer_advance(lexer);
 	return (create_input_token(TOKEN_STRING, value));
+}
+
+t_token		*lexer_collect_qstring(t_lexer *lexer)
+{
+	char *value;
+	char *s;
+
+	lexer_advance(lexer);
+	value = (char *)ft_memalloc(sizeof(char));
+	!value ? exit(1) : 0;
+	while (lexer->c != QSTRING)
+	{
+		value = ft_relloc(&value);
+		s = lexer_get_current_char_as_string(lexer);
+		ft_strcat(value, s);
+		lexer_advance(lexer);
+		free(s);
+	}
+	lexer_advance(lexer);
+	return (create_input_token(TOKEN_QSTRING, value));
 }
 
 t_token		*lexer_collect_lrg(t_lexer *lexer)
@@ -173,4 +193,51 @@ t_token		*lexer_collect_smlr(t_lexer *lexer)
 	ft_strcat(value, s);
 	free(s);
 	return (create_input_token(TOKEN_SMLER, value));
+}
+
+t_token		*lexer_collect_et(t_lexer *lexer)
+{
+	char *value;
+	char *s;
+
+	s = lexer_get_current_char_as_string(lexer);
+	lexer_advance(lexer);
+	value = (char *)ft_memalloc(sizeof(char));
+	!value ? exit(1) : 0;
+	if (lexer->c == '<')
+	{
+		value = ft_relloc(&value);
+		ft_strcat(value, s);
+		free(s);
+		s = lexer_get_current_char_as_string(lexer);
+		ft_strcat(value, s);
+		free(s);
+		lexer_advance(lexer);
+		return (create_input_token(TOKEN_ET_SMLER, value));
+	}
+	else if (lexer->c == '&')
+	{
+		value = ft_relloc(&value);
+		ft_strcat(value, s);
+		free(s);
+		s = lexer_get_current_char_as_string(lexer);
+		ft_strcat(value, s);
+		free(s);
+		lexer_advance(lexer);
+		return (create_input_token(TOKEN_ET_ET, value));
+	}
+	else if (lexer->c == '>')
+	{
+		value = ft_relloc(&value);
+		ft_strcat(value, s);
+		free(s);
+		s = lexer_get_current_char_as_string(lexer);
+		ft_strcat(value, s);
+		free(s);
+		lexer_advance(lexer);
+		return (create_input_token(TOKEN_ET_LRGER, value));
+	}
+	ft_strcat(value, s);
+	free(s);
+	return (create_input_token(TOKEN_ET, value));
 }

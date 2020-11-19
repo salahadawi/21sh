@@ -6,7 +6,7 @@
 /*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/10 12:20:24 by sadawi            #+#    #+#             */
-/*   Updated: 2020/11/17 17:21:13 by jwilen           ###   ########.fr       */
+/*   Updated: 2020/11/19 12:54:02 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,10 @@
 # define DOT 46
 # define UNDERLINE 95
 # define PIPE 124
+# define QSTRING 39
+
+# define OPERATOR (TOKEN_SEMI, TOKEN_PIPE,TOKEN_LRGER, TOKEN_SMLER, TOKEN_ET)
+# define REDIRECTIONS (TOKEN_SMLER, TOKEN_LRGER, TOKEN_INSERTION, TOKEN_EXTRACTION)
 
 typedef int				t_builtin_func (char **args);
 

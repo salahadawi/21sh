@@ -6,7 +6,7 @@
 /*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/10 14:20:57 by jwilen            #+#    #+#             */
-/*   Updated: 2020/11/16 12:19:30 by jwilen           ###   ########.fr       */
+/*   Updated: 2020/11/19 15:06:05 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ void			convert_ll_to_arr_tok()
 		ft_printf("Malloc failed\n");
 		exit(1);
 	}
-	current = g_21sh->head;
+	current = g_21sh->token;
 	while (current)
 	{
 		g_21sh->args[i] = current->value;
@@ -113,7 +113,6 @@ void			convert_ll_to_arr_tok()
 
 void			run_first()
 {
-
 	convert_ll_to_arr_tok();
 	convert_arr_tok_to_arr();
 }

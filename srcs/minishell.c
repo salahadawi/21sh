@@ -6,7 +6,7 @@
 /*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 14:23:12 by sadawi            #+#    #+#             */
-/*   Updated: 2020/11/17 17:15:38 by jwilen           ###   ########.fr       */
+/*   Updated: 2020/11/19 14:58:55 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,9 +144,8 @@ void	loop_shell(void)
 		// 	ft_printf("\ntoken: *token: %p *value: %p prev:%p next:%p type: %d value:%s\n",current, current->value, current->prev, current->next, current->type, current->value);
 		// 	current = current->next;
 		// }
-		// ft_putendl("end");
 		
-		// check_cmd();
+		check_cmd();
 		free_history();
 		// free(commands);
 		free(g_21sh->line);
@@ -157,9 +156,9 @@ void	loop_shell(void)
 int		check_cmd()
 {
 
-	if (!g_21sh->token)
-		return (1);
-	handle_expansion();
+	// if (!g_21sh->token)
+	// 	return (1);
+	// handle_expansion();
 	run_first();
 	return (0);
 }

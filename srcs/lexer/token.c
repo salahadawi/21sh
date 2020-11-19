@@ -6,7 +6,7 @@
 /*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/17 09:54:12 by jwilen            #+#    #+#             */
-/*   Updated: 2020/11/16 09:29:27 by jwilen           ###   ########.fr       */
+/*   Updated: 2020/11/19 13:43:34 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ t_token				*init_token(int type, char *value, t_token *prev)
 {
 	t_token			*token;
 
-	token = (t_token*)malloc(sizeof(t_token));
+	token = (t_token*)ft_memalloc(sizeof(t_token));
 	!token ? exit(1) : 0;
 	token->type = type;
 	token->value = value;

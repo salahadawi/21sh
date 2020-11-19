@@ -6,7 +6,7 @@
 /*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/17 07:22:21 by jwilen            #+#    #+#             */
-/*   Updated: 2020/11/16 12:31:21 by jwilen           ###   ########.fr       */
+/*   Updated: 2020/11/19 14:37:01 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,8 @@ t_token		*lexer_get_next_token(t_lexer *lexer)
 			return (lexer_collect_id(lexer));
 		if (lexer->c == '"')
 			return (lexer_collect_string(lexer));
+		if (lexer->c == QSTRING)
+			return (lexer_collect_qstring(lexer));
 		if (lexer->c == ';')
 		{
 			return (lexer_advance_with_token(lexer, create_input_token(TOKEN_SEMI,
@@ -69,6 +71,10 @@ t_token		*lexer_get_next_token(t_lexer *lexer)
 			return (lexer_collect_lrg(lexer));
 		if (lexer->c == '<')
 			return (lexer_collect_smlr(lexer));
+		if (lexer->c == '&')
+		{
+			return (lexer_collect_et(lexer));
+		}
 	}
 	return (create_input_token(TOKEN_EOF, "\0"));
 }
@@ -109,13 +115,15 @@ void		lexi()
 		if (token->type == TOKEN_EOF)
 		{
 		
+			token->prev->next = NULL;
 			free(token);
 			break ;
 		}
 		// ft_printf("\nlex->token: *token: %p *value: %p prev:%p next:%p type: %d value:%s\n",&token, &token->value, &token->prev, &token->next, token->type, token->value);
 		token = token->next;
 		//create_input_tok(token->type, token->value);
-		//free(token);
+		// free(token);
 	}
+	token->next = NULL;
 	free(lexer);
 }

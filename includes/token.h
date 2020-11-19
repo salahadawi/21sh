@@ -6,7 +6,7 @@
 /*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/17 14:05:21 by jwilen            #+#    #+#             */
-/*   Updated: 2020/11/16 08:13:19 by jwilen           ###   ########.fr       */
+/*   Updated: 2020/11/19 11:58:14 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,16 @@ typedef	struct		s_token
 		TOKEN_ID,
 		TOKEN_EQUALS,
 		TOKEN_STRING,
+		TOKEN_QSTRING,
 		TOKEN_SEMI,
 		TOKEN_COMMA,
 		TOKEN_PIPE,
 		TOKEN_INSERTION,
 		TOKEN_EXTRACTION,
+		TOKEN_ET,
+		TOKEN_ET_SMLER,
+		TOKEN_ET_ET,
+		TOKEN_ET_LRGER,
 		TOKEN_LRGER,
 		TOKEN_SMLER,
 		TOKEN_SMALER_ET,
