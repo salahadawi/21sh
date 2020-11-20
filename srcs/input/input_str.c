@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input_str.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: jochumwilen <jochumwilen@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/11 17:12:41 by jwilen            #+#    #+#             */
-/*   Updated: 2020/11/17 11:57:50 by sadawi           ###   ########.fr       */
+/*   Updated: 2020/11/20 06:49:36 by jochumwilen      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ int		get_input()
 			print_input();
 			move_cursor();
 		}
+		check_str();
 	}
 	return (1);
 }

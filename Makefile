@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+         #
+#    By: jochumwilen <jochumwilen@student.42.fr>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/04/10 19:27:20 by sadawi            #+#    #+#              #
-#    Updated: 2020/11/17 17:20:52 by jwilen           ###   ########.fr        #
+#    Updated: 2020/11/20 06:52:09 by jochumwilen      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ builtin_setenv.c builtin_unsetenv.c handle_builtins.c
 
 HISTORY = get_history.c history_1.c history_2.c \
 
-INPUT = input_str.c \
+INPUT = input_str.c check_str.c \
 
 KEYINPUT = handle_keys.c move_cursor_direction.c move_cursor.c read_key.c \
 move_word.c
