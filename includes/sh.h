@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sh.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jochumwilen <jochumwilen@student.42.fr>    +#+  +:+       +#+        */
+/*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/10 12:20:24 by sadawi            #+#    #+#             */
-/*   Updated: 2020/11/20 06:49:29 by jochumwilen      ###   ########.fr       */
+/*   Updated: 2020/11/20 14:04:28 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,6 +119,7 @@ typedef struct			s_21sh
 	t_cursor			cursor;
 	int					prompt_len;
 	char				*line;
+	char				*read_more;
 	struct winsize		window;
 	char				*history_file_path;
 	int					history_fd;
@@ -282,6 +283,7 @@ void				handle_signal_resize(void);
 
 int					get_input();
 void				check_str(void);
+int					brackets(char *str);
 
 void				find_prompt_y(void);
 void				init_key_sequences();

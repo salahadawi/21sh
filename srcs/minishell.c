@@ -6,7 +6,7 @@
 /*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 14:23:12 by sadawi            #+#    #+#             */
-/*   Updated: 2020/11/19 14:58:55 by jwilen           ###   ########.fr       */
+/*   Updated: 2020/11/20 13:59:11 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,6 +133,7 @@ void	loop_shell(void)
 		print_shell_info();
 		if (get_input() < 1)
 			break ;
+		check_str();
 		save_command_history();
 		lexi();
 		

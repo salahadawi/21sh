@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input_str.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jochumwilen <jochumwilen@student.42.fr>    +#+  +:+       +#+        */
+/*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/11 17:12:41 by jwilen            #+#    #+#             */
-/*   Updated: 2020/11/20 06:49:36 by jochumwilen      ###   ########.fr       */
+/*   Updated: 2020/11/20 13:58:43 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,8 @@ int		get_input()
 			print_input();
 			move_cursor();
 		}
-		check_str();
+		// check_brackets();
+		// ft_printf("\n%d\n", brackets(g_21sh->line));
 	}
 	return (1);
 }
