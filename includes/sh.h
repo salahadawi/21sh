@@ -6,7 +6,11 @@
 /*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/10 12:20:24 by sadawi            #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2021/01/10 01:02:02 by jwilen           ###   ########.fr       */
+=======
+/*   Updated: 2020/11/20 14:04:28 by jwilen           ###   ########.fr       */
+>>>>>>> 1d4882127528ba6f8d2f066f9420b812c0ee40ad
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,6 +123,7 @@ typedef struct			s_21sh
 	t_cursor			cursor;
 	int					prompt_len;
 	char				*line;
+	char				*read_more;
 	struct winsize		window;
 	char				*history_file_path;
 	int					history_fd;
@@ -282,6 +287,7 @@ void				handle_signal_resize(void);
 
 int					get_input();
 void				check_str(void);
+int					brackets(char *str);
 
 void				find_prompt_y(void);
 void				init_key_sequences();

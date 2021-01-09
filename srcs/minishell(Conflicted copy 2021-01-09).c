@@ -6,11 +6,7 @@
 /*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 14:23:12 by sadawi            #+#    #+#             */
-<<<<<<< HEAD
 /*   Updated: 2021/01/09 20:20:19 by jwilen           ###   ########.fr       */
-=======
-/*   Updated: 2020/11/20 13:59:11 by jwilen           ###   ########.fr       */
->>>>>>> 1d4882127528ba6f8d2f066f9420b812c0ee40ad
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,11 +135,7 @@ void	loop_shell(void)
 		{
 			
 			break ;
-<<<<<<< HEAD
 		}
-=======
-		check_str();
->>>>>>> 1d4882127528ba6f8d2f066f9420b812c0ee40ad
 		save_command_history();
 		lexi();
 		current = g_21sh->token;

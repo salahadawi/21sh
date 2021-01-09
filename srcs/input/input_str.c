@@ -6,7 +6,11 @@
 /*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/11 17:12:41 by jwilen            #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2021/01/09 22:52:36 by jwilen           ###   ########.fr       */
+=======
+/*   Updated: 2020/11/20 13:58:43 by jwilen           ###   ########.fr       */
+>>>>>>> 1d4882127528ba6f8d2f066f9420b812c0ee40ad
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,8 +85,13 @@ int		get_input()
 			print_input();
 			move_cursor();
 		}
+<<<<<<< HEAD
 		check_str();
 		
+=======
+		// check_brackets();
+		// ft_printf("\n%d\n", brackets(g_21sh->line));
+>>>>>>> 1d4882127528ba6f8d2f066f9420b812c0ee40ad
 	}
 	return (1);
 }
