@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input_str.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jochumwilen <jochumwilen@student.42.fr>    +#+  +:+       +#+        */
+/*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/11 17:12:41 by jwilen            #+#    #+#             */
-/*   Updated: 2020/11/20 06:49:36 by jochumwilen      ###   ########.fr       */
+/*   Updated: 2021/01/09 22:52:36 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ int		get_input()
 		save_cursor_position();
 		while (handle_keys())
 		{
+			
 			if (input_too_large())
 				break;
 			move_cursor_start();
@@ -81,6 +82,7 @@ int		get_input()
 			move_cursor();
 		}
 		check_str();
+		
 	}
 	return (1);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sh.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jochumwilen <jochumwilen@student.42.fr>    +#+  +:+       +#+        */
+/*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/10 12:20:24 by sadawi            #+#    #+#             */
-/*   Updated: 2020/11/20 06:49:29 by jochumwilen      ###   ########.fr       */
+/*   Updated: 2021/01/10 01:02:02 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -290,5 +290,8 @@ char				*str_add_str(char *str, char *str2);
 int					init_ast_execution(t_ast *ast);
 
 int			check_syntax(t_token *token);
+
+void	print_input();
+int		input_too_large(void);
 
 #endif
