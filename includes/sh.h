@@ -6,7 +6,7 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/10 12:20:24 by sadawi            #+#    #+#             */
-/*   Updated: 2021/01/11 13:49:40 by sadawi           ###   ########.fr       */
+/*   Updated: 2021/01/11 16:55:41 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,6 +129,7 @@ typedef struct			s_21sh
 	char				*copied_input;
 	t_token				*head;
 	t_token				*token;
+	char				**autocomp_commands;
 }						t_21sh;
 
 t_21sh				*g_21sh;

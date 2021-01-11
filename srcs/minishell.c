@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 14:23:12 by sadawi            #+#    #+#             */
-/*   Updated: 2021/01/10 19:50:25 by jwilen           ###   ########.fr       */
+/*   Updated: 2021/01/11 17:33:48 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,6 +115,23 @@ void	save_cursor_position()
 	//ft_printf("%s", &sequence[i]);
 }
 
+void	free_2d_array(char ***arr)
+{
+	int i;
+
+	if (!*arr)
+		return ;
+	i = 0;
+	while ((*arr)[i])
+		free((*arr)[i++])
+	free(*arr);
+}
+
+void	get_autocomplete_commands(void)
+{
+	free_2d_array(&g_21sh->autocomp_commands)
+}
+
 void	loop_shell(void)
 {
 	char	**commands;
@@ -131,6 +148,7 @@ void	loop_shell(void)
 		g_21sh->cursor.x = 0;
 		//set_terminal(NORMAL_MODE);
 		print_shell_info();
+		get_autocomplete_commands();
 		if (get_input() < 1)
 		{
 			break ;

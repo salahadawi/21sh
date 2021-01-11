@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_keys.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/11 15:43:13 by jwilen            #+#    #+#             */
-/*   Updated: 2021/01/09 20:16:34 by jwilen           ###   ########.fr       */
+/*   Updated: 2021/01/11 15:31:29 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,8 @@ int		handle_keys(void)
 	}
 	else if (c == ENTER)
 		return (0);
+	else if (c == 9)
+		exit(2);//ft_printf("TAB");
 	else if (c == 4)
 	{
 		restore_terminal_mode();
