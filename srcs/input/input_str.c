@@ -6,7 +6,7 @@
 /*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/11 17:12:41 by jwilen            #+#    #+#             */
-/*   Updated: 2021/01/10 11:56:33 by jwilen           ###   ########.fr       */
+/*   Updated: 2021/01/10 19:43:15 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ int		get_input()
 			print_input();
 			move_cursor();
 		}
-		check_str();
+		// check_str();
 		
 	}
 	return (1);

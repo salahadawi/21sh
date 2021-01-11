@@ -6,7 +6,7 @@
 /*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/29 11:42:33 by jwilen            #+#    #+#             */
-/*   Updated: 2021/01/10 00:05:24 by jwilen           ###   ########.fr       */
+/*   Updated: 2021/01/11 12:02:34 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ t_token		*lexer_collect_string(t_lexer *lexer)
 {
 	char *value;
 	char *s;
+	char *new_str;
 
 	lexer_advance(lexer);
 	value = (char *)ft_memalloc(sizeof(char));
@@ -73,8 +74,21 @@ t_token		*lexer_collect_string(t_lexer *lexer)
 	{
 		value = ft_relloc(&value);
 		s = lexer_get_current_char_as_string(lexer);
+		
 		ft_strcat(value, s);
 		lexer_advance(lexer);
+		if (s[0] == '\0')
+		{
+			while (s[0] != '"')
+			{
+				ft_printf("\ndquote>");
+				get_input();
+				new_str = ft_strcat(g_21sh->line, "\n");
+				ft_printf(" %s ", new_str);
+				
+			}
+			break;
+		}
 		free(s);
 	}
 	lexer_advance(lexer);
@@ -89,6 +103,7 @@ t_token		*lexer_collect_qstring(t_lexer *lexer)
 	lexer_advance(lexer);
 	value = (char *)ft_memalloc(sizeof(char));
 	!value ? exit(1) : 0;
+
 	while (lexer->c != QSTRING)
 	{
 		value = ft_relloc(&value);

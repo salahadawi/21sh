@@ -6,7 +6,7 @@
 /*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/17 07:22:21 by jwilen            #+#    #+#             */
-/*   Updated: 2020/11/19 14:37:01 by jwilen           ###   ########.fr       */
+/*   Updated: 2021/01/11 08:36:54 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,10 +119,8 @@ void		lexi()
 			free(token);
 			break ;
 		}
-		// ft_printf("\nlex->token: *token: %p *value: %p prev:%p next:%p type: %d value:%s\n",&token, &token->value, &token->prev, &token->next, token->type, token->value);
+		
 		token = token->next;
-		//create_input_tok(token->type, token->value);
-		// free(token);
 	}
 	token->next = NULL;
 	free(lexer);
