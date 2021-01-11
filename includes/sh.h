@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sh.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/10 12:20:24 by sadawi            #+#    #+#             */
-/*   Updated: 2021/01/10 11:54:26 by jwilen           ###   ########.fr       */
+/*   Updated: 2021/01/11 13:49:40 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,9 @@
 # define RED "\033[1m\033[31m"
 # define RESET "\033[0m"
 
+# ifndef linux
 # define SIGRTMAX 64
+# endif
 
 # define CLEAR_SCREEN "cl"
 # define LEFT_SEQUENCE "kl"
@@ -60,8 +62,8 @@
 # define PIPE 124
 # define QSTRING 39
 
-# define OPERATOR (TOKEN_SEMI, TOKEN_PIPE,TOKEN_LRGER, TOKEN_SMLER, TOKEN_ET)
-# define REDIRECTIONS (TOKEN_SMLER, TOKEN_LRGER, TOKEN_INSERTION, TOKEN_EXTRACTION)
+# define OPERATOR (TOKEN_SEMI | TOKEN_PIPE | TOKEN_LRGER | TOKEN_SMLER | TOKEN_ET)
+# define REDIRECTIONS (TOKEN_SMLER | TOKEN_LRGER | TOKEN_INSERTION | TOKEN_EXTRACTION)
 
 typedef int				t_builtin_func (char **args);
 
