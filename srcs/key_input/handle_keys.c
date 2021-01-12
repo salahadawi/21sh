@@ -6,7 +6,7 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/11 15:43:13 by jwilen            #+#    #+#             */
-/*   Updated: 2021/01/11 15:31:29 by sadawi           ###   ########.fr       */
+/*   Updated: 2021/01/12 16:58:35 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,70 @@ void	handle_control_sequence(char *c)
 		move_cursor_down();//paste_input();
 }
 
+char	*get_partial_command(void)
+{
+	int i;
+	int len;
+
+	len = ft_strlen(g_21sh->line) - 1;
+	i = len;
+	while (i >= 0 && g_21sh->line[i] != ' ')
+		i--;
+	return (ft_strsub(g_21sh->line, i + 1, len - i));
+}
+
+char	**get_matching_commands(char *part_command)
+{
+	char		**matching_commands;
+	t_autocomp	*cur;
+	int			i;
+
+	i = 0;
+	cur = g_21sh->autocomp;
+	while (cur)
+	{
+		if (ft_strnequ(cur->command, part_command, ft_strlen(part_command)))
+			i++;
+		cur = cur->next;
+	}
+	if (!(matching_commands = ft_memalloc(sizeof(char*) * (i + 1))))
+		handle_error("Malloc failed", 1);
+	i = 0;
+	cur = g_21sh->autocomp;
+	while (cur)
+	{
+		if (ft_strnequ(cur->command, part_command, ft_strlen(part_command)))
+			matching_commands[i] = cur->command; 
+		cur = cur->next;
+	}
+	return (matching_commands);
+}
+
+void	complete_command(char **matching_commands)
+{
+	char	*final_string;
+	int		i;
+	int		len;
+
+	len = ft_strlen(g_21sh->line) - 1;
+	i = len;
+	while (i >= 0 && g_21sh->line[i] != ' ')
+		i--;
+	final_string = ft_strjoinfree(ft_strsub(g_21sh->line, 0, i + 1), ft_strdup(matching_commands[0]));
+	free(g_21sh->line);
+	g_21sh->line = final_string;
+}
+
+void	autocomplete(void)
+{
+	char	*partial_command;
+	char	**matching_commands;
+
+	partial_command = get_partial_command();
+	matching_commands = get_matching_commands(partial_command);
+	complete_command(matching_commands);
+}
+
 int		handle_keys(void)
 {
 	char c;
@@ -65,8 +129,10 @@ int		handle_keys(void)
 	}
 	else if (c == ENTER)
 		return (0);
-	else if (c == 9)
-		exit(2);//ft_printf("TAB");
+	else if (c == 9) //TAB;
+	{
+		autocomplete();
+	}
 	else if (c == 4)
 	{
 		restore_terminal_mode();
