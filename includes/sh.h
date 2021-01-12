@@ -6,7 +6,7 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/10 12:20:24 by sadawi            #+#    #+#             */
-/*   Updated: 2021/01/11 16:55:41 by sadawi           ###   ########.fr       */
+/*   Updated: 2021/01/12 13:46:51 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@
 # ifndef linux
 # define SIGRTMAX 64
 # endif
+
+# define FILENAME_MAX_SIZE 255
 
 # define CLEAR_SCREEN "cl"
 # define LEFT_SEQUENCE "kl"
@@ -108,6 +110,11 @@ typedef struct		s_tok
 	struct s_tok	*next;
 }					t_tok;
 
+typedef struct			s_autocomp
+{
+	char				command[FILENAME_MAX_SIZE + 1];
+	struct s_autocomp	*next;
+}						t_autocomp;
 
 typedef struct			s_21sh
 {
@@ -129,7 +136,8 @@ typedef struct			s_21sh
 	char				*copied_input;
 	t_token				*head;
 	t_token				*token;
-	char				**autocomp_commands;
+	t_autocomp			*autocomp;
+	t_autocomp			*autocomp_tail;
 }						t_21sh;
 
 t_21sh				*g_21sh;

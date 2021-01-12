@@ -6,7 +6,7 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 14:23:12 by sadawi            #+#    #+#             */
-/*   Updated: 2021/01/11 17:33:48 by sadawi           ###   ########.fr       */
+/*   Updated: 2021/01/12 13:55:16 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ char	*str_add_str(char *str, char *str2)
 	char	*newstr;
 
 	index = ft_strlen(g_21sh->line) + g_21sh->cursor.x;
-	newstr = (char*)ft_memalloc(ft_strlen(str) + ft_strlen(str2) + 1);
+	newstr = (char*)ft_memalloc(ft_strlen(str) + ft_strlen(str2) + 1); //protect
 	i = 0;
 	while (i < index)
 	{
@@ -115,21 +115,76 @@ void	save_cursor_position()
 	//ft_printf("%s", &sequence[i]);
 }
 
-void	free_2d_array(char ***arr)
+void	free_autocomp_commands()
 {
-	int i;
+	t_autocomp *cur;
+	t_autocomp *tmp;
 
-	if (!*arr)
+	cur = g_21sh->autocomp;
+	while (cur)
+	{
+		tmp = cur;
+		cur = tmp->next;
+		free(tmp);	
+	}
+	g_21sh->autocomp = NULL;
+	g_21sh->autocomp_tail = NULL;
+}
+
+t_autocomp	*autocomp_new_command(char *command)
+{
+	t_autocomp *autocomp;
+
+	if (!(autocomp = (t_autocomp*)ft_memalloc(sizeof(t_autocomp))))
+		handle_error("Malloc failed", 1);
+	ft_strcpy(autocomp->command, command);
+	return (autocomp);
+}
+
+void	autocomp_append_command(char *command)
+{
+	if (!g_21sh->autocomp)
+	{
+		g_21sh->autocomp = autocomp_new_command(command);
+		g_21sh->autocomp_tail = g_21sh->autocomp;
+	}
+	else
+	{
+		g_21sh->autocomp_tail->next = autocomp_new_command(command);
+		g_21sh->autocomp_tail = g_21sh->autocomp_tail->next;
+	}
+}
+
+void	autocomp_commands_append_dir(char *path)
+{
+	DIR				*p_dir;
+	struct dirent	*p_dirent;
+
+	if (!(p_dir = opendir(path)))
 		return ;
+	while ((p_dirent = readdir(p_dir)))
+		autocomp_append_command(p_dirent->d_name);
+}
+
+void	print_autocomp_commands(void)
+{
+	t_autocomp *cur;
+	int			i;
+
 	i = 0;
-	while ((*arr)[i])
-		free((*arr)[i++])
-	free(*arr);
+	cur = g_21sh->autocomp;
+	while (cur && i < 10)
+	{
+		ft_printf("%d: %s\n", i++, cur->command);
+		cur = cur->next;
+	}
 }
 
 void	get_autocomplete_commands(void)
 {
-	free_2d_array(&g_21sh->autocomp_commands)
+	free_autocomp_commands();
+	autocomp_commands_append_dir("/usr/bin");
+	print_autocomp_commands();
 }
 
 void	loop_shell(void)
