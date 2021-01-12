@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   syntax_check.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jochumwilen <jochumwilen@student.42.fr>    +#+  +:+       +#+        */
+/*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/17 17:17:40 by jwilen            #+#    #+#             */
-/*   Updated: 2020/11/20 06:43:45 by jochumwilen      ###   ########.fr       */
+/*   Updated: 2021/01/12 10:15:08 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,23 @@ int			check_syntax(t_token *token)
 	current = token;
 	while(current)
 	{
+		ft_printf("\ntoken type: %d\n", token->type);
 		if (token->type & OPERATOR)
+		{
+			write(1, "1", 1);
 			return (1);
+		}
 		else if ((current->prev) && (current->prev->type & REDIRECTIONS ||
 		current->type & OPERATOR) && (current->type & REDIRECTIONS || current->type & OPERATOR))
-			return (1);
+			{
+				write(1, "2", 1);
+				return (1);
+			}
 		else if ((current->type & REDIRECTIONS || current->type & TOKEN_SMLER) && current->next == NULL)
+			{
+				write(1, "3", 1);
 			return (1);
+			}
 		current = current->next;
 	}
 	return (0);
