@@ -6,7 +6,7 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 14:23:12 by sadawi            #+#    #+#             */
-/*   Updated: 2021/01/12 13:55:16 by sadawi           ###   ########.fr       */
+/*   Updated: 2021/01/12 15:05:04 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -173,7 +173,7 @@ void	print_autocomp_commands(void)
 
 	i = 0;
 	cur = g_21sh->autocomp;
-	while (cur && i < 10)
+	while (cur)
 	{
 		ft_printf("%d: %s\n", i++, cur->command);
 		cur = cur->next;
@@ -183,8 +183,8 @@ void	print_autocomp_commands(void)
 void	get_autocomplete_commands(void)
 {
 	free_autocomp_commands();
-	autocomp_commands_append_dir("/usr/bin");
-	print_autocomp_commands();
+	autocomp_commands_append_dir("/usr/bin"); //all folders from path??
+	//print_autocomp_commands();
 }
 
 void	loop_shell(void)
