@@ -6,7 +6,7 @@
 /*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/10 12:20:24 by sadawi            #+#    #+#             */
-/*   Updated: 2021/01/11 13:51:54 by jwilen           ###   ########.fr       */
+/*   Updated: 2021/01/13 09:43:52 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,8 @@
 # define UNDERLINE 95
 # define PIPE 124
 # define QSTRING 39
+# define STRING 34
+
 
 // # define OPERATOR (TOKEN_SEMI | TOKEN_PIPE | TOKEN_LRGER | TOKEN_SMLER | TOKEN_ET)
 

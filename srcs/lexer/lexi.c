@@ -6,7 +6,7 @@
 /*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/17 07:22:21 by jwilen            #+#    #+#             */
-/*   Updated: 2021/01/11 08:36:54 by jwilen           ###   ########.fr       */
+/*   Updated: 2021/01/13 09:44:11 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ t_token		*lexer_get_next_token(t_lexer *lexer)
 		(lexer->c == MINUS) || (lexer->c == DOLLAR) || (lexer->c == SLASH) ||
 		(lexer->c == UNDERLINE))
 			return (lexer_collect_id(lexer));
-		if (lexer->c == '"')
+		if (lexer->c == STRING)
 			return (lexer_collect_string(lexer));
 		if (lexer->c == QSTRING)
 			return (lexer_collect_qstring(lexer));
