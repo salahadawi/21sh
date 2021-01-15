@@ -6,7 +6,7 @@
 /*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/10 12:20:24 by sadawi            #+#    #+#             */
-/*   Updated: 2021/01/13 09:43:52 by jwilen           ###   ########.fr       */
+/*   Updated: 2021/01/15 11:28:02 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@
 # define TILDE 126
 # define MINUS 45
 # define SLASH 47
+# define BACKSLASH 92
 # define DOLLAR 36
 # define DOT 46
 # define UNDERLINE 95

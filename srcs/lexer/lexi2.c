@@ -6,7 +6,7 @@
 /*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/29 11:42:33 by jwilen            #+#    #+#             */
-/*   Updated: 2021/01/13 09:44:47 by jwilen           ###   ########.fr       */
+/*   Updated: 2021/01/15 11:25:10 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,6 +134,32 @@ t_token		*lexer_collect_qstring(t_lexer *lexer)
 	}
 	lexer_advance(lexer);
 	return (create_input_token(TOKEN_QSTRING, value));
+}
+
+t_token		*lexer_collect_backslash(t_lexer *lexer)
+{
+	char	*value;
+	char	*s;
+	int		len;
+	char	*tmp;
+
+	value = (char*)ft_memalloc(sizeof(char));
+	!value ? exit(1) : 0;
+	lexer_advance(lexer);
+	len = ft_strlen(lexer->contents);
+	while (lexer->i < len)
+	{
+		if (ft_strequ(&lexer->c, " "))
+			break;
+		value = ft_relloc(&value);
+		s = lexer_get_current_char_as_string(lexer);
+		ft_strcat(value, s);
+		lexer_advance(lexer);
+		free(s);
+		if (ft_strequ(&lexer->c, "\""))
+			break;
+	}
+	return (create_input_token(TOKEN_BACKSLASH,value));
 }
 
 t_token		*lexer_collect_lrg(t_lexer *lexer)
