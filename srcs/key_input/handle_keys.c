@@ -6,7 +6,7 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/11 15:43:13 by jwilen            #+#    #+#             */
-/*   Updated: 2021/01/18 17:29:02 by sadawi           ###   ########.fr       */
+/*   Updated: 2021/01/18 17:47:26 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,8 @@ void	complete_command(char **matching_commands)
 	int			len;
 	static int	j;
 
+	if (g_21sh->previous_pressed_key != TAB)
+		j = 0;
 	len = ft_strlen(g_21sh->line) - 1;
 	i = len;
 	while (i >= 0 && g_21sh->line[i] != ' ')
