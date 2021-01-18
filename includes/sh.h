@@ -139,6 +139,7 @@ typedef struct			s_21sh
 	t_token				*token;
 	t_autocomp			*autocomp;
 	t_autocomp			*autocomp_tail;
+	char				previous_pressed_key;
 }						t_21sh;
 
 t_21sh				*g_21sh;

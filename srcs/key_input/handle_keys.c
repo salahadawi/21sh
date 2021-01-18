@@ -6,7 +6,7 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/11 15:43:13 by jwilen            #+#    #+#             */
-/*   Updated: 2021/01/18 15:39:08 by sadawi           ###   ########.fr       */
+/*   Updated: 2021/01/18 16:59:27 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ char	**get_matching_commands(char *part_command)
 	while (cur)
 	{
 		if (ft_strnequ(cur->command, part_command, ft_strlen(part_command)))
-			matching_commands[i] = cur->command; 
+			matching_commands[i++] = cur->command;
 		cur = cur->next;
 	}
 	return (matching_commands);
@@ -87,26 +87,31 @@ char	**get_matching_commands(char *part_command)
 
 void	complete_command(char **matching_commands)
 {
-	char	*final_string;
-	int		i;
-	int		len;
+	char		*final_string;
+	int			i;
+	int			len;
+	static int	j;
 
 	len = ft_strlen(g_21sh->line) - 1;
 	i = len;
 	while (i >= 0 && g_21sh->line[i] != ' ')
 		i--;
-	final_string = ft_strjoinfree(ft_strsub(g_21sh->line, 0, i + 1), ft_strdup(matching_commands[0]));
+	final_string = ft_strjoinfree(ft_strsub(g_21sh->line, 0, i + 1), ft_strdup(matching_commands[j]));
+	j = (!matching_commands[j] || !matching_commands[j + 1]) ? 0 : j + 1;
 	free(g_21sh->line);
 	g_21sh->line = final_string;
 }
 
 void	autocomplete(void)
 {
-	char	*partial_command;
-	char	**matching_commands;
+	static char	*partial_command;
+	static char	**matching_commands;
 
-	partial_command = get_partial_command();
-	matching_commands = get_matching_commands(partial_command);
+	if (g_21sh->previous_pressed_key != TAB)
+	{
+		partial_command = get_partial_command();
+		matching_commands = get_matching_commands(partial_command);	
+	}
 	complete_command(matching_commands);
 }
 
@@ -140,5 +145,6 @@ int		handle_keys(void)
 	}
 	else if (ft_isprint(c))
 		g_21sh->line = str_add_char(g_21sh->line, c);
+	g_21sh->previous_pressed_key = c;
 	return (1);
 }
