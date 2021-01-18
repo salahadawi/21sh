@@ -6,7 +6,7 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/11 15:43:13 by jwilen            #+#    #+#             */
-/*   Updated: 2021/01/18 17:26:54 by sadawi           ###   ########.fr       */
+/*   Updated: 2021/01/18 17:29:02 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,6 +130,7 @@ char	**get_dir_commands(char *path)
 			size++;
 		}
 	}
+	closedir(p_dir);
 	return (commands);
 }
 
