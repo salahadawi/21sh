@@ -6,7 +6,7 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 14:23:12 by sadawi            #+#    #+#             */
-/*   Updated: 2021/01/12 15:05:04 by sadawi           ###   ########.fr       */
+/*   Updated: 2021/01/18 17:24:09 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -184,6 +184,7 @@ void	get_autocomplete_commands(void)
 {
 	free_autocomp_commands();
 	autocomp_commands_append_dir("/usr/bin"); //all folders from path??
+	autocomp_commands_append_dir(".");
 	//print_autocomp_commands();
 }
 
