@@ -6,7 +6,7 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/11 15:43:13 by jwilen            #+#    #+#             */
-/*   Updated: 2021/01/18 16:59:27 by sadawi           ###   ########.fr       */
+/*   Updated: 2021/01/18 17:26:54 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,37 @@ void	complete_command(char **matching_commands)
 	g_21sh->line = final_string;
 }
 
+char	**get_dir_commands(char *path)
+{
+	DIR				*p_dir;
+	struct dirent	*p_dirent;
+	char			**commands;
+	char			**tmp;
+	int				size;
+
+	if (!(p_dir = opendir(path)))
+		handle_error("Opening current directory failed", 1);
+	commands = NULL;
+	size = 1;
+	while ((p_dirent = readdir(p_dir)))
+	{
+		if (!commands)
+		{
+			commands = (char**)ft_memalloc(sizeof(char*) * (size++ + 1));
+			commands[0] = p_dirent->d_name;
+		}
+		else
+		{
+			tmp = commands;
+			commands = (char**)ft_memalloc(sizeof(char*) * (size + 1));
+			ft_memcpy(commands, tmp, size * sizeof(char*));
+			commands[size - 1] = p_dirent->d_name;
+			size++;
+		}
+	}
+	return (commands);
+}
+
 void	autocomplete(void)
 {
 	static char	*partial_command;
@@ -110,7 +141,10 @@ void	autocomplete(void)
 	if (g_21sh->previous_pressed_key != TAB)
 	{
 		partial_command = get_partial_command();
-		matching_commands = get_matching_commands(partial_command);	
+		if (partial_command[0] == '\0')
+			matching_commands = get_dir_commands(".");
+		else
+			matching_commands = get_matching_commands(partial_command);
 	}
 	complete_command(matching_commands);
 }
