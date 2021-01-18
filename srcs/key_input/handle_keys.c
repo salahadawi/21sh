@@ -6,7 +6,7 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/11 15:43:13 by jwilen            #+#    #+#             */
-/*   Updated: 2021/01/12 16:58:35 by sadawi           ###   ########.fr       */
+/*   Updated: 2021/01/18 15:39:08 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,7 +129,7 @@ int		handle_keys(void)
 	}
 	else if (c == ENTER)
 		return (0);
-	else if (c == 9) //TAB;
+	else if (c == TAB)
 	{
 		autocomplete();
 	}

@@ -6,7 +6,7 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/10 12:20:24 by sadawi            #+#    #+#             */
-/*   Updated: 2021/01/12 13:46:51 by sadawi           ###   ########.fr       */
+/*   Updated: 2021/01/18 13:56:48 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@
 # define HOME 72
 # define END 70
 # define BACKSPACE 127
+# define TAB 9
 // jwi
 # define TILDE 126
 # define MINUS 45
