@@ -6,7 +6,7 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/11 15:43:13 by jwilen            #+#    #+#             */
-/*   Updated: 2021/01/18 17:47:26 by sadawi           ###   ########.fr       */
+/*   Updated: 2021/01/19 14:56:55 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,48 @@ void	complete_command(char **matching_commands)
 	g_21sh->line = final_string;
 }
 
+DIR		*open_dir_until_last_slash(char *path)
+{
+	DIR *p_dir;
+	char *tmp;
+
+	if ((p_dir = opendir(path)))
+		return (p_dir);
+	if (ft_strrchr(path, '/'))
+	{
+		tmp = ft_strdup(path);
+		*ft_strrchr(tmp, '/') = '\0';
+	}
+	else
+		tmp = ft_strdup(path);
+	p_dir = opendir(tmp);
+	free(tmp);
+	return (p_dir);
+}
+
+char	*join_path_and_filename(char *path, char *filename)
+{
+	DIR		*p_dir;
+	char	*tmp;
+
+	tmp = ft_strdup(path);
+	if ((p_dir = opendir(path)))
+	{
+		closedir(p_dir);
+		if (ft_strrchr(path, '/'))
+			*ft_strrchr(tmp, '/') = '\0';
+	}
+	else
+	{
+		//take input after last slash
+		//check if input from path after slash matches filename, if not return NULL
+		*ft_strrchr(tmp, '/') = '\0';
+	}
+	tmp = ft_strjoinfree(tmp, ft_strdup("/"));
+	tmp = ft_strjoinfree(tmp, ft_strdup(filename));
+	return (tmp);
+}
+
 char	**get_dir_commands(char *path)
 {
 	DIR				*p_dir;
@@ -112,7 +154,7 @@ char	**get_dir_commands(char *path)
 	char			**tmp;
 	int				size;
 
-	if (!(p_dir = opendir(path)))
+	if (!(p_dir = open_dir_until_last_slash(path)))
 		handle_error("Opening current directory failed", 1);
 	commands = NULL;
 	size = 1;
@@ -121,19 +163,44 @@ char	**get_dir_commands(char *path)
 		if (!commands)
 		{
 			commands = (char**)ft_memalloc(sizeof(char*) * (size++ + 1));
-			commands[0] = p_dirent->d_name;
+			commands[0] = join_path_and_filename(path, p_dirent->d_name);
+			//commands[0] = ft_strjoin(path, p_dirent->d_name); // function to join start of dir with d_name
+			// should detect the last slash and add d_name after that
 		}
 		else
 		{
 			tmp = commands;
 			commands = (char**)ft_memalloc(sizeof(char*) * (size + 1));
 			ft_memcpy(commands, tmp, size * sizeof(char*));
-			commands[size - 1] = p_dirent->d_name;
+			commands[size - 1] = join_path_and_filename(path, p_dirent->d_name);
+			//commands[size - 1] = ft_strjoin(path, p_dirent->d_name);
 			size++;
 		}
 	}
 	closedir(p_dir);
 	return (commands);
+}
+
+int		check_command_valid_dir(char *command)
+{
+	DIR		*p_dir;
+	char	*tmp;
+
+	if (ft_strrchr(command, '/'))
+	{
+		tmp = ft_strdup(command);
+		*ft_strrchr(tmp, '/') = '\0';
+	}
+	else
+		tmp = ft_strdup(command);
+	if (!(p_dir = opendir(tmp))) // segfault ??
+	{
+		free(tmp);
+		return (0);
+	}
+	closedir(p_dir);
+	free(tmp);
+	return (1);
 }
 
 void	autocomplete(void)
@@ -145,7 +212,11 @@ void	autocomplete(void)
 	{
 		partial_command = get_partial_command();
 		if (partial_command[0] == '\0')
-			matching_commands = get_dir_commands(".");
+			matching_commands = get_dir_commands("./");
+		else if (check_command_valid_dir(partial_command)) //CLOSE DIR
+		{
+			matching_commands = get_dir_commands(partial_command);
+		}
 		else
 			matching_commands = get_matching_commands(partial_command);
 	}
