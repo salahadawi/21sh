@@ -6,7 +6,7 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/10 12:20:24 by sadawi            #+#    #+#             */
-/*   Updated: 2021/01/18 13:56:48 by sadawi           ###   ########.fr       */
+/*   Updated: 2021/01/22 14:33:49 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,7 @@ typedef struct		s_tok
 
 typedef struct			s_autocomp
 {
-	char				command[FILENAME_MAX_SIZE + 1];
+	char				command[FILENAME_MAX_SIZE * 2 + 1]; // Times 2 in case each character needs to be escaped
 	struct s_autocomp	*next;
 }						t_autocomp;
 

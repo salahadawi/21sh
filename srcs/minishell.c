@@ -6,7 +6,7 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 14:23:12 by sadawi            #+#    #+#             */
-/*   Updated: 2021/01/22 12:36:46 by sadawi           ###   ########.fr       */
+/*   Updated: 2021/01/22 18:16:54 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,13 +131,41 @@ void	free_autocomp_commands()
 	g_21sh->autocomp_tail = NULL;
 }
 
+int		filename_character_allowed(char c)
+{
+	if (!ft_isprint(c))
+		return (1);
+	if (ft_isalnum(c))
+		return (1);
+	return (c == '-' || c == '_' || c == '.');
+}
+
+void	copy_and_escape_characters(char *dst, char *src)
+{
+	int		i;
+	int		j;
+
+	i = 0;
+	j = 0;
+	while (src[i])
+	{
+		if (!filename_character_allowed(src[i]))
+		{
+			dst[i + j] = '\\';
+			j++;
+		}
+		dst[i + j] = src[i];
+		i++;
+	}
+}
+
 t_autocomp	*autocomp_new_command(char *command)
 {
 	t_autocomp *autocomp;
 
 	if (!(autocomp = (t_autocomp*)ft_memalloc(sizeof(t_autocomp))))
 		handle_error("Malloc failed", 1);
-	ft_strcpy(autocomp->command, command);
+	copy_and_escape_characters(autocomp->command, command);
 	return (autocomp);
 }
 
