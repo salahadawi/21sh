@@ -6,7 +6,7 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 14:23:12 by sadawi            #+#    #+#             */
-/*   Updated: 2021/01/18 17:29:10 by sadawi           ###   ########.fr       */
+/*   Updated: 2021/01/22 12:36:46 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -181,10 +181,25 @@ void	print_autocomp_commands(void)
 	}
 }
 
+void	autocomplete_from_path(void)
+{
+	char	**paths;
+	int		i;
+
+	if (!(paths = ft_strsplit(get_env_value("PATH"), ':')))
+		return ;
+	i = 0;
+	while (paths[i])
+		autocomp_commands_append_dir(paths[i++]);
+	while (i >= 0)
+		free(paths[i--]);
+	free(paths);
+}
+
 void	get_autocomplete_commands(void)
 {
 	free_autocomp_commands();
-	autocomp_commands_append_dir("/usr/bin"); //all folders from path??
+	autocomplete_from_path();
 	autocomp_commands_append_dir(".");
 	//print_autocomp_commands();
 }
