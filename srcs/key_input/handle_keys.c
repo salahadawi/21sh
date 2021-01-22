@@ -6,7 +6,7 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/11 15:43:13 by jwilen            #+#    #+#             */
-/*   Updated: 2021/01/22 11:41:36 by sadawi           ###   ########.fr       */
+/*   Updated: 2021/01/22 13:48:15 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,22 +162,11 @@ char	**get_dir_commands(char *path)
 	size = 1;
 	while ((p_dirent = readdir(p_dir)))
 	{
-		if (!commands)
-		{
-			commands = (char**)ft_memalloc(sizeof(char*) * (size++ + 1));
-			commands[0] = join_path_and_filename(path, p_dirent->d_name);
-			//commands[0] = ft_strjoin(path, p_dirent->d_name); // function to join start of dir with d_name
-			// should detect the last slash and add d_name after that
-		}
-		else
-		{
-			tmp = commands;
-			commands = (char**)ft_memalloc(sizeof(char*) * (size + 1));
+		tmp = commands;
+		commands = (char**)ft_memalloc(sizeof(char*) * (size + 1));
+		if (tmp)
 			ft_memcpy(commands, tmp, size * sizeof(char*));
-			commands[size - 1] = join_path_and_filename(path, p_dirent->d_name);
-			//commands[size - 1] = ft_strjoin(path, p_dirent->d_name);
-			size++;
-		}
+		commands[size++ - 1] = join_path_and_filename(path, p_dirent->d_name);
 	}
 	closedir(p_dir);
 	return (commands);
