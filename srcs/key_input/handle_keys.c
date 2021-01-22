@@ -6,7 +6,7 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/11 15:43:13 by jwilen            #+#    #+#             */
-/*   Updated: 2021/01/19 14:56:55 by sadawi           ###   ########.fr       */
+/*   Updated: 2021/01/22 11:41:36 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,8 @@ void	complete_command(char **matching_commands)
 	int			len;
 	static int	j;
 
+	if (!(*matching_commands))
+		return ;
 	if (g_21sh->previous_pressed_key != TAB)
 		j = 0;
 	len = ft_strlen(g_21sh->line) - 1;
@@ -221,6 +223,7 @@ void	autocomplete(void)
 			matching_commands = get_matching_commands(partial_command);
 	}
 	complete_command(matching_commands);
+	//free matching commands
 }
 
 int		handle_keys(void)
