@@ -6,7 +6,7 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/10 12:20:24 by sadawi            #+#    #+#             */
-/*   Updated: 2021/01/22 14:33:49 by sadawi           ###   ########.fr       */
+/*   Updated: 2021/01/25 15:56:10 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -308,5 +308,7 @@ int			check_syntax(t_token *token);
 
 void	print_input();
 int		input_too_large(void);
+
+int		filename_character_allowed(char c);
 
 #endif

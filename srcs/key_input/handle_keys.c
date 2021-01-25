@@ -6,7 +6,7 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/11 15:43:13 by jwilen            #+#    #+#             */
-/*   Updated: 2021/01/22 13:48:15 by sadawi           ###   ########.fr       */
+/*   Updated: 2021/01/25 16:32:50 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,6 +125,33 @@ DIR		*open_dir_until_last_slash(char *path)
 	return (p_dir);
 }
 
+char	*ft_strdup_and_escape_characters(char *str)
+{
+	char	*new_str;
+	int		i;
+	int		j;
+
+	i = 0;
+	j = 0;
+	while (str[i])
+		if (!filename_character_allowed(str[i++]))
+			j++;
+	new_str = (char*)ft_memalloc(i + j + 1);
+	i = 0;
+	j = 0;
+	while (str[i])
+	{
+		if (!filename_character_allowed(str[i]))
+		{
+			new_str[i + j] = '\\';
+			j++;
+		}
+		new_str[i + j] = str[i];
+		i++;
+	}
+	return (new_str);
+}
+
 char	*join_path_and_filename(char *path, char *filename)
 {
 	DIR		*p_dir;
@@ -144,7 +171,7 @@ char	*join_path_and_filename(char *path, char *filename)
 		*ft_strrchr(tmp, '/') = '\0';
 	}
 	tmp = ft_strjoinfree(tmp, ft_strdup("/"));
-	tmp = ft_strjoinfree(tmp, ft_strdup(filename));
+	tmp = ft_strjoinfree(tmp, ft_strdup_and_escape_characters(filename));
 	return (tmp);
 }
 
