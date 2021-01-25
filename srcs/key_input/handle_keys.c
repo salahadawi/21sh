@@ -6,7 +6,7 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/11 15:43:13 by jwilen            #+#    #+#             */
-/*   Updated: 2021/01/25 16:32:50 by sadawi           ###   ########.fr       */
+/*   Updated: 2021/01/25 16:41:39 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,18 @@ char	**get_matching_commands(char *part_command)
 	return (matching_commands);
 }
 
+int		find_start_of_command_index(char *str, int end_index)
+{
+	while (end_index >= 0)
+	{
+		if (str[end_index] == ' ')
+			if (end_index > 0 && str[end_index - 1] != '\\')
+				break ;
+		end_index--;
+	}
+	return (end_index);
+}
+
 void	complete_command(char **matching_commands)
 {
 	char		*final_string;
@@ -98,8 +110,7 @@ void	complete_command(char **matching_commands)
 		j = 0;
 	len = ft_strlen(g_21sh->line) - 1;
 	i = len;
-	while (i >= 0 && g_21sh->line[i] != ' ')
-		i--;
+	i = find_start_of_command_index(g_21sh->line, i);
 	final_string = ft_strjoinfree(ft_strsub(g_21sh->line, 0, i + 1), ft_strdup(matching_commands[j]));
 	j = (!matching_commands[j] || !matching_commands[j + 1]) ? 0 : j + 1;
 	free(g_21sh->line);
