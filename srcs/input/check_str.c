@@ -6,12 +6,14 @@
 /*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/20 06:49:18 by jochumwilen       #+#    #+#             */
-/*   Updated: 2021/01/10 20:10:33 by jwilen           ###   ########.fr       */
+/*   Updated: 2021/01/12 11:55:32 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/sh.h"
 
+
+// no need, fixed through lexer
 int				ask_for_more(char *str, int i, char mark)
 {
 	while (str[i] != mark)

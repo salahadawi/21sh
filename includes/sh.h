@@ -6,7 +6,7 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/10 12:20:24 by sadawi            #+#    #+#             */
-/*   Updated: 2021/01/28 16:59:16 by sadawi           ###   ########.fr       */
+/*   Updated: 2021/01/28 17:17:12 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,11 +59,16 @@
 # define TILDE 126
 # define MINUS 45
 # define SLASH 47
+# define BACKSLASH 92
 # define DOLLAR 36
 # define DOT 46
 # define UNDERLINE 95
 # define PIPE 124
 # define QSTRING 39
+# define STRING 34
+
+
+// # define OPERATOR (TOKEN_SEMI | TOKEN_PIPE | TOKEN_LRGER | TOKEN_SMLER | TOKEN_ET)
 
 # define OPERATOR (TOKEN_SEMI | TOKEN_PIPE | TOKEN_LRGER | TOKEN_SMLER | TOKEN_ET)
 # define REDIRECTIONS (TOKEN_SMLER | TOKEN_LRGER | TOKEN_INSERTION | TOKEN_EXTRACTION)

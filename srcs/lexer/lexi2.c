@@ -6,7 +6,7 @@
 /*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/29 11:42:33 by jwilen            #+#    #+#             */
-/*   Updated: 2021/01/11 12:02:34 by jwilen           ###   ########.fr       */
+/*   Updated: 2021/01/15 11:25:10 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,25 +70,29 @@ t_token		*lexer_collect_string(t_lexer *lexer)
 	lexer_advance(lexer);
 	value = (char *)ft_memalloc(sizeof(char));
 	!value ? exit(1) : 0;
-	while (lexer->c != '"')
+	while (lexer->c != STRING)
 	{
 		value = ft_relloc(&value);
 		s = lexer_get_current_char_as_string(lexer);
 		
 		ft_strcat(value, s);
 		lexer_advance(lexer);
+
 		if (s[0] == '\0')
-		{
-			while (s[0] != '"')
-			{
-				ft_printf("\ndquote>");
-				get_input();
-				new_str = ft_strcat(g_21sh->line, "\n");
-				ft_printf(" %s ", new_str);
-				
-			}
-			break;
-		}
+        {
+            if (new_str)
+				new_str = (char*)ft_memalloc(sizeof(char));
+            while (new_str && !ft_strchr(new_str, STRING))
+            {
+                ft_printf("\ndquote>");
+                get_input();
+				new_str = ft_relloc(&new_str);
+			    ft_strcat(ft_strcat(new_str, "\n"), g_21sh->line);
+            }
+            ft_strncat(value, new_str, ft_strlen(new_str) - 1);
+			free(new_str);
+            break;
+        }
 		free(s);
 	}
 	lexer_advance(lexer);
@@ -99,6 +103,7 @@ t_token		*lexer_collect_qstring(t_lexer *lexer)
 {
 	char *value;
 	char *s;
+	char	*new_str;
 
 	lexer_advance(lexer);
 	value = (char *)ft_memalloc(sizeof(char));
@@ -110,10 +115,51 @@ t_token		*lexer_collect_qstring(t_lexer *lexer)
 		s = lexer_get_current_char_as_string(lexer);
 		ft_strcat(value, s);
 		lexer_advance(lexer);
+		if (s[0] == '\0')
+        {
+            if (new_str)
+				new_str = (char*)ft_memalloc(sizeof(char));
+            while (new_str && !ft_strchr(new_str, QSTRING))
+            {
+                ft_printf("\nquote>");
+                get_input();
+				new_str = ft_relloc(&new_str);
+			    ft_strcat(ft_strcat(new_str, "\n"), g_21sh->line);
+            }
+            ft_strncat(value, new_str, ft_strlen(new_str) - 1);
+			free(new_str);
+            break;
+        }
 		free(s);
 	}
 	lexer_advance(lexer);
 	return (create_input_token(TOKEN_QSTRING, value));
+}
+
+t_token		*lexer_collect_backslash(t_lexer *lexer)
+{
+	char	*value;
+	char	*s;
+	int		len;
+	char	*tmp;
+
+	value = (char*)ft_memalloc(sizeof(char));
+	!value ? exit(1) : 0;
+	lexer_advance(lexer);
+	len = ft_strlen(lexer->contents);
+	while (lexer->i < len)
+	{
+		if (ft_strequ(&lexer->c, " "))
+			break;
+		value = ft_relloc(&value);
+		s = lexer_get_current_char_as_string(lexer);
+		ft_strcat(value, s);
+		lexer_advance(lexer);
+		free(s);
+		if (ft_strequ(&lexer->c, "\""))
+			break;
+	}
+	return (create_input_token(TOKEN_BACKSLASH,value));
 }
 
 t_token		*lexer_collect_lrg(t_lexer *lexer)

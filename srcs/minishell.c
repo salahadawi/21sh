@@ -6,7 +6,7 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 14:23:12 by sadawi            #+#    #+#             */
-/*   Updated: 2021/01/28 12:41:28 by sadawi           ###   ########.fr       */
+/*   Updated: 2021/01/28 17:17:26 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -260,14 +260,15 @@ void	loop_shell(void)
 		lexi();
 		current = g_21sh->token;
 		parsing_check(&g_21sh->token);
-		while (current)
-		{
-			ft_printf("\ntoken: %d %s\n", current->type,current->value);
-			// ft_printf("\ntoken: *token: %p *value: %p prev:%p next:%p type: %d value:%s\n",current, current->value, current->prev, current->next, current->type, current->value);
-			current = current->next;
-		}
-		
+		// while (current)
+		// {
+		// 	ft_printf("\ntoken: %d %s\n", current->type,current->value);
+		// 	// ft_printf("\ntoken: *token: %p *value: %p prev:%p next:%p type: %d value:%s\n",current, current->value, current->prev, current->next, current->type, current->value);
+		// 	current = current->next;
+		// }
+	
 		check_cmd();
+	
 		free_history();
 		// free(commands);
 		free(g_21sh->line);

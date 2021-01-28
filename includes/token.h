@@ -6,7 +6,7 @@
 /*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/17 14:05:21 by jwilen            #+#    #+#             */
-/*   Updated: 2020/11/19 11:58:14 by jwilen           ###   ########.fr       */
+/*   Updated: 2021/01/15 11:25:48 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ typedef	struct		s_token
 		TOKEN_LRGER_ET,
 		TOKEN_LRGER_PIPE,
 		TOKEN_SM_LR,
+		TOKEN_BACKSLASH,
 		TOKEN_EOF
 	}				type;
 
