@@ -6,7 +6,7 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/11 15:43:13 by jwilen            #+#    #+#             */
-/*   Updated: 2021/01/25 16:41:39 by sadawi           ###   ########.fr       */
+/*   Updated: 2021/01/28 12:12:42 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ void	complete_command(char **matching_commands)
 	int			len;
 	static int	j;
 
-	if (!(*matching_commands))
+	if (!matching_commands || !(*matching_commands))
 		return ;
 	if (g_21sh->previous_pressed_key != TAB)
 		j = 0;
@@ -186,6 +186,18 @@ char	*join_path_and_filename(char *path, char *filename)
 	return (tmp);
 }
 
+int		match_with_input_after_slash(char *path, char *command)
+{
+	char *tmp;
+
+	if ((tmp = ft_strrchr(path, '/')))
+	{
+		tmp++;
+		return (ft_strnequ(tmp, command, ft_strlen(tmp)));
+	}
+	return (1);
+}
+
 char	**get_dir_commands(char *path)
 {
 	DIR				*p_dir;
@@ -200,11 +212,14 @@ char	**get_dir_commands(char *path)
 	size = 1;
 	while ((p_dirent = readdir(p_dir)))
 	{
-		tmp = commands;
-		commands = (char**)ft_memalloc(sizeof(char*) * (size + 1));
-		if (tmp)
-			ft_memcpy(commands, tmp, size * sizeof(char*));
-		commands[size++ - 1] = join_path_and_filename(path, p_dirent->d_name);
+		if (match_with_input_after_slash(path, p_dirent->d_name))
+		{
+			tmp = commands;
+			commands = (char**)ft_memalloc(sizeof(char*) * (size + 1));
+			if (tmp)
+				ft_memcpy(commands, tmp, size * sizeof(char*));
+			commands[size++ - 1] = join_path_and_filename(path, p_dirent->d_name);
+		}
 	}
 	closedir(p_dir);
 	return (commands);
