@@ -6,7 +6,7 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/11 15:43:13 by jwilen            #+#    #+#             */
-/*   Updated: 2021/01/28 15:50:36 by sadawi           ###   ########.fr       */
+/*   Updated: 2021/01/28 16:49:32 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -165,7 +165,7 @@ char	*ft_strdup_and_escape_characters(char *str)
 	return (new_str);
 }
 
-char	*join_path_and_filename(char *path, char *filename)
+char	*join_path_and_filename(char *path, struct dirent *p_dirent)
 {
 	DIR		*p_dir;
 	char	*tmp;
@@ -179,7 +179,9 @@ char	*join_path_and_filename(char *path, char *filename)
 			*ft_strrchr(tmp, '/') = '\0';
 		tmp = ft_strjoinfree(tmp, ft_strdup("/"));
 	}
-	tmp = ft_strjoinfree(tmp, ft_strdup_and_escape_characters(filename));
+	tmp = ft_strjoinfree(tmp, ft_strdup_and_escape_characters(p_dirent->d_name));
+	if (p_dirent->d_type == DT_DIR)
+		tmp = ft_strjoinfree(tmp, ft_strdup("/"));
 	return (tmp);
 }
 
@@ -215,7 +217,7 @@ char	**get_dir_commands(char *path)
 			commands = (char**)ft_memalloc(sizeof(char*) * (size + 1));
 			if (tmp)
 				ft_memcpy(commands, tmp, size * sizeof(char*));
-			commands[size++ - 1] = join_path_and_filename(path, p_dirent->d_name);
+			commands[size++ - 1] = join_path_and_filename(path, p_dirent);
 		}
 	}
 	closedir(p_dir);
