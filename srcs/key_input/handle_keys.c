@@ -253,9 +253,11 @@ void	autocomplete(void)
 	{
 		partial_command = get_partial_command();
 		if (partial_command[0] == '\0')
-			matching_commands = get_dir_commands("./");
-		else if (check_command_valid_dir(partial_command)) //CLOSE DIR
+			matching_commands = get_dir_commands(".");
+		else if (check_command_valid_dir(partial_command)) //CLOSE DIR 
+		// some kind of check to make sure . and .. dirs are not immediately opened if files starting with . or .. exist
 		{
+			//check if command matches more than just valid dir
 			matching_commands = get_dir_commands(partial_command);
 		}
 		else
