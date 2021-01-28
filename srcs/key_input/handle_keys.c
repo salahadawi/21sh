@@ -211,7 +211,8 @@ char	**get_dir_commands(char *path)
 	size = 1;
 	while ((p_dirent = readdir(p_dir)))
 	{
-		if (match_with_input_after_slash(path, p_dirent->d_name))
+		if (match_with_input_after_slash(path, p_dirent->d_name) &&
+		!ft_strequ(p_dirent->d_name, ".") && !ft_strequ(p_dirent->d_name, ".."))
 		{
 			tmp = commands;
 			commands = (char**)ft_memalloc(sizeof(char*) * (size + 1));
