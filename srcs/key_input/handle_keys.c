@@ -6,7 +6,7 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/11 15:43:13 by jwilen            #+#    #+#             */
-/*   Updated: 2021/01/28 12:12:42 by sadawi           ###   ########.fr       */
+/*   Updated: 2021/01/28 12:34:39 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -177,11 +177,15 @@ char	*join_path_and_filename(char *path, char *filename)
 	}
 	else
 	{
-		//take input after last slash
-		//check if input from path after slash matches filename, if not return NULL
 		*ft_strrchr(tmp, '/') = '\0';
 	}
-	tmp = ft_strjoinfree(tmp, ft_strdup("/"));
+	if (ft_strequ(path, "."))
+	{
+		free(tmp);
+		tmp = NULL;
+	}
+	else
+		tmp = ft_strjoinfree(tmp, ft_strdup("/"));
 	tmp = ft_strjoinfree(tmp, ft_strdup_and_escape_characters(filename));
 	return (tmp);
 }
