@@ -6,7 +6,7 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/11 15:43:13 by jwilen            #+#    #+#             */
-/*   Updated: 2021/01/28 16:49:32 by sadawi           ###   ########.fr       */
+/*   Updated: 2021/01/28 16:56:36 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -233,7 +233,7 @@ int		check_command_valid_dir(char *command)
 	if (ft_strrchr(command, '/'))
 	{
 		tmp = ft_strdup(command);
-		*ft_strrchr(tmp, '/') = '\0';
+		*(ft_strrchr(tmp, '/') + 1) = '\0';
 	}
 	else
 		tmp = ft_strdup(command);
