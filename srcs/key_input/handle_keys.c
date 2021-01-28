@@ -6,7 +6,7 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/11 15:43:13 by jwilen            #+#    #+#             */
-/*   Updated: 2021/01/28 15:39:36 by sadawi           ###   ########.fr       */
+/*   Updated: 2021/01/28 15:50:36 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -170,24 +170,15 @@ char	*join_path_and_filename(char *path, char *filename)
 	DIR		*p_dir;
 	char	*tmp;
 
-	tmp = ft_strdup(path);
-	if ((p_dir = opendir(path)))
+	if (ft_strequ(path, "."))
+		tmp = NULL;
+	else
 	{
-		closedir(p_dir);
+		tmp = ft_strdup(path);
 		if (ft_strrchr(path, '/'))
 			*ft_strrchr(tmp, '/') = '\0';
-	}
-	else
-	{
-		*ft_strrchr(tmp, '/') = '\0';
-	}
-	if (ft_strequ(path, "."))
-	{
-		free(tmp);
-		tmp = NULL;
-	}
-	else
 		tmp = ft_strjoinfree(tmp, ft_strdup("/"));
+	}
 	tmp = ft_strjoinfree(tmp, ft_strdup_and_escape_characters(filename));
 	return (tmp);
 }
