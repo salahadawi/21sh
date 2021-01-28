@@ -6,7 +6,7 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/11 15:43:13 by jwilen            #+#    #+#             */
-/*   Updated: 2021/01/28 12:34:39 by sadawi           ###   ########.fr       */
+/*   Updated: 2021/01/28 15:39:36 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,8 @@ char	**get_matching_commands(char *part_command)
 			i++;
 		cur = cur->next;
 	}
+	if (!i)
+		return (NULL);
 	if (!(matching_commands = ft_memalloc(sizeof(char*) * (i + 1))))
 		handle_error("Malloc failed", 1);
 	i = 0;
