@@ -6,7 +6,7 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/06 14:26:55 by sadawi            #+#    #+#             */
-/*   Updated: 2020/10/23 14:42:54 by sadawi           ###   ########.fr       */
+/*   Updated: 2021/01/28 17:02:32 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ int		handle_flags(const char **format, va_list *args, t_data *data)
 
 	amount = 0;
 	i = 1;
+	amount = 0;
 	while (!ft_strchr("cspdiouxXf%", (*format)[i]) && (*format)[i] != '\0')
 		i++;
 	if (!(*format)[i])

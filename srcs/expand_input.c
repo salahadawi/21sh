@@ -3,36 +3,32 @@
 /*                                                        :::      ::::::::   */
 /*   expand_input.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 14:16:04 by sadawi            #+#    #+#             */
-/*   Updated: 2020/04/29 13:15:36 by sadawi           ###   ########.fr       */
+/*   Updated: 2020/11/16 09:23:25 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh.h"
 
-void	handle_expansion(char **args)
+
+
+void	handle_expansion()
 {
 	char	*ptr;
 	int		i;
+	t_token	*current;
 
 	i = 0;
-	while (args[i])
+	current = g_21sh->token;
+	while (current)
 	{
-		if (args[i][0] == '~')
-			args[i] = expand_tilde(args[i], &args[i][0]);
-		else if ((ptr = ft_strchr(args[i], '~')))
-			args[i] = expand_tilde(args[i], ptr);
-		i++;
-	}
-	i = 0;
-	while (args[i])
-	{
-		if ((ptr = find_dollar(args[i])) && ptr + 1)
-			args[i] = expand_dollar(args[i], ptr);
-		else
-			i++;
+		if (current->value[0] == '~')
+			current->value = expand_tilde(current->value, &current->value[0]);
+		if ((ptr = find_dollar(current->value)) && ptr + 1)
+			current->value = expand_dollar(current->value, ptr);
+		current = current->prev;
 	}
 }
 

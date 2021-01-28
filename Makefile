@@ -3,36 +3,69 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+         #
+#    By: jochumwilen <jochumwilen@student.42.fr>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/04/10 19:27:20 by sadawi            #+#    #+#              #
-#    Updated: 2020/04/29 12:45:54 by sadawi           ###   ########.fr        #
+#    Updated: 2020/11/20 06:52:09 by jochumwilen      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = 21sh
 
 CFILES = compare_pointers.c execute_command.c expand_input.c free_memory.c \
-get_env_info.c handle_builtins.c handle_shortcuts.c init_shell.c main.c \
+get_env_info.c init_shell.c main.c \
 minishell.c print.c split_input.c strsub_variations.c
 
+AST = parse.c recursive_build.c syntax_check.c \
+
+AUTOCOMPLETE =
+
 BUILTINS = builtin_cd.c builtin_echo.c builtin_env.c builtin_exit.c \
-builtin_setenv.c builtin_unsetenv.c
+builtin_setenv.c builtin_unsetenv.c handle_builtins.c
 
-SHORTCUTS = shortcut_cd.c  shortcut_setenv.c
+HISTORY = get_history.c history_1.c history_2.c \
 
-SRCS = $(addprefix srcs/, $(CFILES)) $(addprefix srcs/builtins/, $(BUILTINS)) \
-$(addprefix srcs/shortcuts/, $(SHORTCUTS))
+INPUT = input_str.c check_str.c \
+
+KEYINPUT = handle_keys.c move_cursor_direction.c move_cursor.c read_key.c \
+move_word.c
+
+LEXER =  lexi.c lexi2.c token.c convert_tokens.c \
+
+RAWMODE = rawmode.c \
+
+SHORTCUTS = shortcut_cd.c  shortcut_setenv.c handle_shortcuts.c \
+
+SIGNALS =  handle_signals.c signals.c \
+
+TERMCAPS = termcaps.c \
+
+UTIL = error.c \
+
+
+SRCS = $(addprefix srcs/, $(CFILES)) \
+$(addprefix srcs/ast/, $(AST)) \
+$(addprefix srcs/autocomplete/, $(AUTOCOMPLETE)) \
+$(addprefix srcs/builtins/, $(BUILTINS)) \
+$(addprefix srcs/input/, $(INPUT)) \
+$(addprefix srcs/key_input/, $(KEYINPUT)) \
+$(addprefix srcs/history/, $(HISTORY)) \
+$(addprefix srcs/lexer/, $(LEXER)) \
+$(addprefix srcs/rawmode/, $(RAWMODE)) \
+$(addprefix srcs/shortcuts/, $(SHORTCUTS)) \
+$(addprefix srcs/signals/, $(SIGNALS)) \
+$(addprefix srcs/termcaps/, $(TERMCAPS)) \
+$(addprefix srcs/util/, $(UTIL)) \
 
 OBJS = $(addprefix objs/, $(notdir $(SRCS:.c=.o)))
 
 INCLUDES = -I includes -I libft/includes
 
-FLAGS = -Wall -Wextra -Werror
+FLAGS = -Wall -Wextra -Werror -g
 
 RUN_LIB = make --no-print-directory -C libft/
 
-all: 
+all:
 	@$(RUN_LIB)
 	@make --no-print-director $(NAME)
 
@@ -48,7 +81,7 @@ $(NAME): $(SRCS) libft/
 lib:
 	@$(RUN_LIB)
 
-noflags:
+noflags: $(SRCS) libft/
 	@rm -rf objs
 	@echo Compiling $(NAME) without flags...
 	@gcc $(INCLUDES) -c $(SRCS)
@@ -56,6 +89,15 @@ noflags:
 	@mv $(notdir $(SRCS:.c=.o)) objs
 	@gcc $(INCLUDES) -o $(NAME) $(OBJS) libft/libft.a -ltermcap
 	@echo $(NAME) compiled without flags succesfully!
+
+debug: $(SRCS) libft/
+	@rm -rf objs
+	@echo Compiling $(NAME) with debug flag...
+	@gcc -g $(INCLUDES) -c $(SRCS)
+	@mkdir objs
+	@mv $(notdir $(SRCS:.c=.o)) objs
+	@gcc -g $(INCLUDES) -o $(NAME) $(OBJS) libft/libft.a -ltermcap
+	@echo $(NAME) compiled with debug flag succesfully!
 
 clean:
 	@/bin/rm -f $(OBJS)

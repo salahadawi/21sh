@@ -6,194 +6,11 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 14:23:12 by sadawi            #+#    #+#             */
-/*   Updated: 2020/10/20 17:04:35 by sadawi           ###   ########.fr       */
+/*   Updated: 2021/01/28 12:41:28 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh.h"
-
-int		read_key(void)
-{
-	char sequence[10];
-
-	if (read(STDOUT_FILENO, sequence, 10) == -1)
-		handle_error("Read failed", 1);
-	if (sequence[0] == ESCAPE)
-	{
-		if (sequence[1] == '[')
-		{
-			if (sequence[2] == '1')
-				return (sequence[5] - 110);
-			return (sequence[2] - 100);
-		}
-	}
-	return (sequence[0]);
-}
-
-char	*str_remove_char(char *str, int index)
-{
-	int		i;
-	char	*newstr;
-
-	if (index < 0 || index >= (int)ft_strlen(str))
-		return (str);
-	newstr = (char*)malloc(ft_strlen(str));
-	i = 0;
-	while (i < index)
-	{
-		newstr[i] = str[i];
-		i++;
-	}
-	if (!str[i])
-	{
-		free(str);
-		return (newstr);
-	}
-	while (str[i + 1])
-	{
-		newstr[i] = str[i + 1];
-		i++;
-	}
-	newstr[i] = '\0';
-	free(str);
-	return (newstr);
-}
-
-char	*str_add_char(char *str, char c)
-{
-	int		i;
-	int		index;
-	char	*newstr;
-
-	index = ft_strlen(g_21sh->line) + g_21sh->cursor.x;
-	newstr = (char*)malloc(ft_strlen(str) + 2);
-	i = 0;
-	while (i < index)
-	{
-		newstr[i] = str[i];
-		i++;
-	}
-	newstr[i] = c;
-	while (str[i])
-	{
-		newstr[i + 1] = str[i];
-		i++;
-	}
-	newstr[i + 1] = '\0';
-	free(str);
-	return (newstr);
-}
-
-void	move_cursor_up(void)
-{
-	if ((int)ft_strlen(g_21sh->line) + g_21sh->cursor.x >= g_21sh->window.ws_col)
-		g_21sh->cursor.x -= g_21sh->window.ws_col;
-}
-
-void	move_cursor_down(void)
-{
-	if (-g_21sh->cursor.x >= g_21sh->window.ws_col)
-		g_21sh->cursor.x += g_21sh->window.ws_col;
-}
-
-
-void	move_cursor_left(void)
-{
-	if ((int)ft_strlen(g_21sh->line) > -g_21sh->cursor.x)
-		g_21sh->cursor.x--;
-}
-
-void	move_cursor_right(void)
-{
-	if (g_21sh->cursor.x < 0)
-		g_21sh->cursor.x++;
-}
-
-void	handle_delete(void)
-{
-	g_21sh->line = str_remove_char(g_21sh->line, ft_strlen(g_21sh->line)
-	+ g_21sh->cursor.x);
-	move_cursor_right();
-}
-
-void	get_history_prev(void)
-{
-	if (g_21sh->history)
-		if (g_21sh->history->prev)
-		{
-			free(g_21sh->line);
-			g_21sh->history = g_21sh->history->prev;
-			g_21sh->line = ft_strdup(g_21sh->history->cmd);
-			g_21sh->cursor.x = 0;
-		}
-}
-
-void	get_history_next(void)
-{
-	if (g_21sh->history)
-		if (g_21sh->history->next)
-		{
-			free(g_21sh->line);
-			g_21sh->history = g_21sh->history->next;
-			g_21sh->line = ft_strdup(g_21sh->history->cmd);
-			g_21sh->cursor.x = 0;
-		}
-}
-
-void	move_word_left(void)
-{
-	int i;
-
-	i = ft_strlen(g_21sh->line);
-	i += g_21sh->cursor.x;
-	while (i > 0)
-	{
-		if (ft_strchr(" \t\n\v\f\r", g_21sh->line[i - 1]))
-			move_cursor_left();
-		else
-			break;
-		i--;
-	}
-	while (i > 0)
-	{
-		if (!ft_strchr(" \t\n\v\f\r", g_21sh->line[i - 1]))
-			move_cursor_left();
-		else
-			break;
-		i--;
-	}
-}
-
-void	move_word_right(void)
-{
-	int i;
-	int len;
-
-	len = ft_strlen(g_21sh->line);
-	i = len;
-	i += g_21sh->cursor.x;
-	while (i < len)
-	{
-		if (!ft_strchr(" \t\n\v\f\r", g_21sh->line[i]))
-			move_cursor_right();
-		else
-			break;
-		i++;
-	}
-	while (i < len)
-	{
-		if (ft_strchr(" \t\n\v\f\r", g_21sh->line[i]))
-			move_cursor_right();
-		else
-			break;
-		i++;
-	}
-}
-
-void	copy_input()
-{
-	g_21sh->copied_input = ft_strdup(g_21sh->line);
-}
 
 char	*str_add_str(char *str, char *str2)
 {
@@ -202,7 +19,7 @@ char	*str_add_str(char *str, char *str2)
 	char	*newstr;
 
 	index = ft_strlen(g_21sh->line) + g_21sh->cursor.x;
-	newstr = (char*)ft_memalloc(ft_strlen(str) + ft_strlen(str2) + 1);
+	newstr = (char*)ft_memalloc(ft_strlen(str) + ft_strlen(str2) + 1); //protect
 	i = 0;
 	while (i < index)
 	{
@@ -217,92 +34,6 @@ char	*str_add_str(char *str, char *str2)
 	}
 	newstr[i + ft_strlen(str2)] = '\0';
 	return (newstr);
-}
-
-void	paste_input()
-{
-	char *tmp;
-
-	if (g_21sh->copied_input)
-	{
-		tmp = g_21sh->line;
-		g_21sh->line = str_add_str(g_21sh->line, g_21sh->copied_input);
-		free(tmp);
-	}
-}
-
-void	handle_control_sequence(char *c)
-{
-	*c += 100;
-	
-	if (*c == g_21sh->key_sequences.delete_key)
-		handle_delete();
-	else if (*c == g_21sh->key_sequences.left_arrow)
-		move_cursor_left();
-	else if (*c == g_21sh->key_sequences.right_arrow)
-		move_cursor_right();
-	else if (*c == g_21sh->key_sequences.up_arrow)
-		get_history_prev();
-	else if (*c == g_21sh->key_sequences.down_arrow)
-		get_history_next();
-	else if (*c == HOME)
-		g_21sh->cursor.x = -ft_strlen(g_21sh->line);
-	else if (*c == END)
-		g_21sh->cursor.x = 0;
-	else if (*c + 10 == g_21sh->key_sequences.left_arrow)
-		move_word_left();
-	else if (*c + 10 == g_21sh->key_sequences.right_arrow)
-		move_word_right();
-	else if (*c + 10 == g_21sh->key_sequences.up_arrow)
-		move_cursor_up();//copy_input();
-	else if (*c + 10 == g_21sh->key_sequences.down_arrow)
-		move_cursor_down();//paste_input();
-}
-
-void	handle_backspace(void)
-{
-	g_21sh->line = str_remove_char(g_21sh->line, ft_strlen(g_21sh->line)
-	+ g_21sh->cursor.x - 1);
-}
-
-int		handle_keys(void)
-{
-	char c;
-
-	c = read_key();
-	//ft_printf("%d", c);
-	if (c == 0)
-		return (1);
-	if (c < 0)
-	{
-		handle_control_sequence(&c);
-		return (1);
-	}
-	if (c == BACKSPACE)
-	{
-		handle_backspace();
-	}
-	else if (c == ENTER)
-		return (0);
-	else if (c == 4)
-	{
-		restore_terminal_mode();
-		exit(0); //temporary, need to restore terminal and free memory here
-	}
-	else if (ft_isprint(c))
-		g_21sh->line = str_add_char(g_21sh->line, c);
-	return (1);
-}
-
-void	move_cursor_start(void)
-{
-	char *move_cursor;
-	char *tmp;
-
-	move_cursor = tgetstr("cm", NULL);
-	//ft_printf("%d, %d", g_21sh->cursor.prompt_y, g_21sh->cursor.prompt_x);
-	tmp = tgoto(move_cursor, g_21sh->cursor.prompt_x - 1, g_21sh->cursor.prompt_y - 1);
-	tputs(tmp, 1, ft_putschar);
 }
 
 int		ft_nbrlen(int nbr)
@@ -332,16 +63,6 @@ void	get_cursor_position(int *x, int *y)
 	*x = ft_atoi(&sequence[i + 2 + ft_nbrlen(*y)]);
 }
 
-void	move_cursor_right_edge(void)
-{
-	int	right_moves;
-
-	right_moves = g_21sh->window.ws_col - 1;
-	set_terminal("cr");
-	while (right_moves--)
-		set_terminal("nd");
-}
-
 void	cursor_jump_up(int *left_len)
 {
 	int	text_len;
@@ -361,16 +82,6 @@ void	cursor_jump_up(int *left_len)
 	}
 }
 
-void	move_cursor_next_line(void)
-{
-	if (g_21sh->prompt_len + (int)ft_strlen(g_21sh->line)
-		< g_21sh->window.ws_col * g_21sh->window.ws_row)
-	{
-		set_terminal("do");
-		set_terminal("cr");
-	}
-}
-
 void	find_prompt_y(void)
 {
 	int i;
@@ -383,19 +94,6 @@ void	find_prompt_y(void)
 			return ;
 		g_21sh->cursor.prompt_y--;
 	}
-}
-
-void	move_cursor(void)
-{
-	int len;
-
-	len = g_21sh->cursor.x;
-	if ((g_21sh->prompt_len + ft_strlen(g_21sh->line)) % g_21sh->window.ws_col == 0)
-		move_cursor_next_line();
-	find_prompt_y();
-	cursor_jump_up(&len);
-	while (len++ < 0)
-		set_terminal("le");
 }
 
 void	save_cursor_position()
@@ -417,163 +115,124 @@ void	save_cursor_position()
 	//ft_printf("%s", &sequence[i]);
 }
 
-void	print_input()
+void	free_autocomp_commands()
 {
-	int len;
-	int max_len;
-	int	index;
+	t_autocomp *cur;
+	t_autocomp *tmp;
 
-	len = g_21sh->prompt_len + ft_strlen(g_21sh->line);
-	max_len = g_21sh->window.ws_col * g_21sh->window.ws_row;
-	if (len > max_len)
+	cur = g_21sh->autocomp;
+	while (cur)
 	{
-		index = 0;
-		while (len - index > max_len)
-			index += g_21sh->window.ws_col;
-		index += g_21sh->window.ws_col - g_21sh->prompt_len;
-		//len -= max_len;
-		//len += g_21sh->window.ws_col;
-		ft_printf("...\n%s", &g_21sh->line[index]);
+		tmp = cur;
+		cur = tmp->next;
+		free(tmp);	
 	}
-	else
-		ft_printf("%s", g_21sh->line);
+	g_21sh->autocomp = NULL;
+	g_21sh->autocomp_tail = NULL;
 }
 
-int		input_too_large(void)
+int		filename_character_allowed(char c)
 {
-	if (ft_strlen(g_21sh->line) > 100000)
-	{
-		free(g_21sh->line);
-		ft_fprintf(2, "\nError: Input exceeds ARG_MAX.");
-		g_21sh->line = ft_strdup("");
+	if (!ft_isprint(c))
 		return (1);
-	}
-	return (0);
-}
-
-int		get_input()
-{
-	g_21sh->line = ft_strnew(0);
-	save_cursor_position();
-	while (handle_keys())
-	{
-		if (input_too_large())
-			break;
-		move_cursor_start();
-		set_terminal("cd");
-		print_input();
-		move_cursor();
-	}
-	return (1);
-}
-
-t_history	*new_history_node(char *line, t_history *prev)
-{
-	t_history *node;
-
-	node = (t_history*)ft_memalloc(sizeof(t_history));
-	node->cmd = line;
-	node->prev = prev;
-	node->next = NULL;
-	return (node);
-}
-
-void	add_to_history(char *line)
-{
-	if (!g_21sh->history)
-		g_21sh->history = new_history_node(line, NULL);
-	else
-	{
-		g_21sh->history->next = new_history_node(line, g_21sh->history);
-		g_21sh->history = g_21sh->history->next;
-	}
-}
-
-int		file_is_empty(void)
-{
-	 struct stat stats;
-	 if (stat(g_21sh->history_file_path, &stats))
+	if (ft_isalnum(c))
 		return (1);
-	if(stats.st_size <= 1)
-		return (1);
-	return (0);
+	return (c == '-' || c == '_' || c == '.');
 }
 
-void	open_history_file(void)
+void	copy_and_escape_characters(char *dst, char *src)
 {
-	char *line;
-
-	g_21sh->history = NULL;
-	g_21sh->history_fd = open(g_21sh->history_file_path,
-		O_RDWR | O_APPEND | O_CREAT, 0666);
-	if (g_21sh->history_fd == -1)
-		return ;
-	if (!file_is_empty())
-	{
-		while (get_next_line(g_21sh->history_fd, &line) > 0)
-			add_to_history(line);
-	}
-	add_to_history(ft_strdup(""));
-}
-
-int		same_as_previous_command()
-{
-	if (g_21sh->history->prev)
-		g_21sh->history = g_21sh->history->prev;
-	if (g_21sh->history->next)
-	{
-		while (g_21sh->history->next->next)
-			g_21sh->history = g_21sh->history->next;
-	}
-	if (ft_strequ(g_21sh->line, g_21sh->history->cmd))
-		return (1);
-	return (0);
-}
-
-int		input_just_whitespace(void)
-{
-	int i;
+	int		i;
+	int		j;
 
 	i = 0;
-	while (g_21sh->line[i])
-		if (!ft_strchr(" \t\n\v\f\r",g_21sh->line[i++]))
-			return (0);
-	return (1);
-}
-
-void	save_command_history(void)
-{
-	if (ft_strlen(g_21sh->line) > 100)
-		return ;
-	if (g_21sh->history_fd != -1)
-		if (!same_as_previous_command() && !input_just_whitespace())
-			ft_putendl_fd(g_21sh->line, g_21sh->history_fd);
-}
-
-void	free_history(void)
-{
-	t_history *tmp;
-	if (!g_21sh->history)
-		return ;
-	while (g_21sh->history->prev)
-		g_21sh->history = g_21sh->history->prev;
-	while (g_21sh->history)
+	j = 0;
+	while (src[i])
 	{
-		tmp = g_21sh->history->next;
-		free(g_21sh->history->cmd);
-		free(g_21sh->history);
-		g_21sh->history = tmp;
+		if (!filename_character_allowed(src[i]))
+		{
+			dst[i + j] = '\\';
+			j++;
+		}
+		dst[i + j] = src[i];
+		i++;
 	}
 }
 
-void	get_history_file_path(void)
+t_autocomp	*autocomp_new_command(char *command)
 {
-	char *path;
+	t_autocomp *autocomp;
 
-	path = (char*)ft_memalloc(PATH_MAX + 1);
-	getcwd(path, PATH_MAX);
-	path = ft_strjoinfree(path, ft_strdup("/.21sh_history"));
-	g_21sh->history_file_path = path;
+	if (!(autocomp = (t_autocomp*)ft_memalloc(sizeof(t_autocomp))))
+		handle_error("Malloc failed", 1);
+	copy_and_escape_characters(autocomp->command, command);
+	return (autocomp);
+}
+
+void	autocomp_append_command(char *command)
+{
+	if (!g_21sh->autocomp)
+	{
+		g_21sh->autocomp = autocomp_new_command(command);
+		g_21sh->autocomp_tail = g_21sh->autocomp;
+	}
+	else
+	{
+		g_21sh->autocomp_tail->next = autocomp_new_command(command);
+		g_21sh->autocomp_tail = g_21sh->autocomp_tail->next;
+	}
+}
+
+void	autocomp_commands_append_dir(char *path)
+{
+	DIR				*p_dir;
+	struct dirent	*p_dirent;
+
+	if (!(p_dir = opendir(path)))
+		return ;
+	while ((p_dirent = readdir(p_dir)))
+	{
+		if (!ft_strequ(p_dirent->d_name, ".") && !ft_strequ(p_dirent->d_name, ".."))
+			autocomp_append_command(p_dirent->d_name);
+	}
+	closedir(p_dir);
+}
+
+void	print_autocomp_commands(void)
+{
+	t_autocomp *cur;
+	int			i;
+
+	i = 0;
+	cur = g_21sh->autocomp;
+	while (cur)
+	{
+		ft_printf("%d: %s\n", i++, cur->command);
+		cur = cur->next;
+	}
+}
+
+void	autocomplete_from_path(void)
+{
+	char	**paths;
+	int		i;
+
+	if (!(paths = ft_strsplit(get_env_value("PATH"), ':')))
+		return ;
+	i = 0;
+	while (paths[i])
+		autocomp_commands_append_dir(paths[i++]);
+	while (i >= 0)
+		free(paths[i--]);
+	free(paths);
+}
+
+void	get_autocomplete_commands(void)
+{
+	free_autocomp_commands();
+	autocomplete_from_path();
+	autocomp_commands_append_dir(".");
+	//print_autocomp_commands();
 }
 
 void	loop_shell(void)
@@ -582,6 +241,7 @@ void	loop_shell(void)
 	char	**args;
 	int		loop;
 	int		i;
+	t_token	*current;
 
 	loop = 1;
 	get_history_file_path();
@@ -591,32 +251,36 @@ void	loop_shell(void)
 		g_21sh->cursor.x = 0;
 		//set_terminal(NORMAL_MODE);
 		print_shell_info();
+		get_autocomplete_commands();
 		if (get_input() < 1)
-			break ;
-		save_command_history();
-		ft_printf("\n");
-		commands = split_line_commands(g_21sh->line);
-		i = 0;
-		while (commands[i])
 		{
-			args = split_line_args(commands[i]);
-			loop = check_cmd(args);
-			free_args(args);
-			free(commands[i++]);
+			break ;
 		}
+		save_command_history();
+		lexi();
+		current = g_21sh->token;
+		parsing_check(&g_21sh->token);
+		while (current)
+		{
+			ft_printf("\ntoken: %d %s\n", current->type,current->value);
+			// ft_printf("\ntoken: *token: %p *value: %p prev:%p next:%p type: %d value:%s\n",current, current->value, current->prev, current->next, current->type, current->value);
+			current = current->next;
+		}
+		
+		check_cmd();
 		free_history();
-		free(commands);
+		// free(commands);
 		free(g_21sh->line);
-		//set_terminal(SPECIAL_MODE);
+		set_terminal(SPECIAL_MODE);
 	}
 }
 
-int		check_cmd(char **args)
+int		check_cmd()
 {
-	if (!args[0])
-		return (1);
-	handle_expansion(args);
-	if (handle_builtins(args))
-		return (1);
-	return (exec_cmd(args));
+
+	// if (!g_21sh->token)
+	// 	return (1);
+	// handle_expansion();
+	run_first();
+	return (0);
 }

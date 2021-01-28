@@ -6,7 +6,7 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 14:12:23 by sadawi            #+#    #+#             */
-/*   Updated: 2020/04/29 13:11:37 by sadawi           ###   ########.fr       */
+/*   Updated: 2021/01/12 13:41:37 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	init_env(char *envp[])
 	int i;
 
 	i = count_env_amount(envp);
-	g_21sh->envp = (char**)ft_memalloc(sizeof(char*) * (i + 1));
+	g_21sh->envp = (char**)ft_memalloc(sizeof(char*) * (i + 1)); //protect all mallocs
 	i = 0;
 	while (envp[i])
 	{
@@ -69,7 +69,7 @@ void	clear_screen(void)
 {
 	char **args;
 
-	args = (char**)ft_memalloc(sizeof(char*) * 2);
+	args = (char**)ft_memalloc(sizeof(char*) * 2); //protect
 	args[0] = ft_strdup("clear");
 	args[1] = NULL;
 	exec_cmd(args);
