@@ -6,7 +6,7 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 14:23:12 by sadawi            #+#    #+#             */
-/*   Updated: 2021/01/22 18:16:54 by sadawi           ###   ########.fr       */
+/*   Updated: 2021/01/28 12:41:28 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -191,7 +191,10 @@ void	autocomp_commands_append_dir(char *path)
 	if (!(p_dir = opendir(path)))
 		return ;
 	while ((p_dirent = readdir(p_dir)))
-		autocomp_append_command(p_dirent->d_name);
+	{
+		if (!ft_strequ(p_dirent->d_name, ".") && !ft_strequ(p_dirent->d_name, ".."))
+			autocomp_append_command(p_dirent->d_name);
+	}
 	closedir(p_dir);
 }
 
