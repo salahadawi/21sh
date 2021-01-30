@@ -6,7 +6,7 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 14:23:12 by sadawi            #+#    #+#             */
-/*   Updated: 2021/01/30 17:07:13 by sadawi           ###   ########.fr       */
+/*   Updated: 2021/01/30 17:34:55 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -305,25 +305,26 @@ void	loop_shell(void)
 		get_autocomplete_commands();
 		if (get_input() < 1)
 		{
-			break ;
+			break ; //never breaks???
 		}
 		save_command_history();
 		lexi();
-		current = g_21sh->token;
-		parsing_check(&g_21sh->token);
-		// while (current)
-		// {
-		// 	ft_printf("\ntoken: %d %s\n", current->type,current->value);
-		// 	// ft_printf("\ntoken: *token: %p *value: %p prev:%p next:%p type: %d value:%s\n",current, current->value, current->prev, current->next, current->type, current->value);
-		// 	current = current->next;
-		// }
+		current = g_21sh->token; // for debug printing, delete later
+		//parsing_check(&g_21sh->token); // Disabled for now, checks if line of tokens is valid
+		while (current)
+		{
+			ft_printf("\ntoken: %d %s\n", current->type,current->value);
+			//ft_printf("\ntoken: *token: %p *value: %p prev:%p next:%p type: %d value:%s\n",current, current->value, current->prev, current->next, current->type, current->value);
+			current = current->next;
+		}
 	
-		check_cmd();
-	
+		//run_commands();
+		//check_cmd(); // write somekind of ast tree or grammar, then execute commands
+		
 		free_history();
 		// free(commands);
 		free(g_21sh->line);
-		set_terminal(SPECIAL_MODE);
+		set_terminal(SPECIAL_MODE); //what is this for??
 	}
 }
 
@@ -331,7 +332,7 @@ int		check_cmd()
 {
 
 	// if (!g_21sh->token)
-	// 	return (1);
+	//	return (1);
 	// handle_expansion();
 	run_first();
 	return (0);
