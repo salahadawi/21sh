@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexi.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/17 07:22:21 by jwilen            #+#    #+#             */
-/*   Updated: 2021/01/15 11:27:18 by jwilen           ###   ########.fr       */
+/*   Updated: 2021/01/30 12:59:05 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ t_token		*lexer_get_next_token(t_lexer *lexer)
 			return (lexer_collect_et(lexer));
 		}
 	}
-	return (create_input_token(TOKEN_EOF, "\0"));
+	return (NULL);
 }
 
 t_token				*create_input_token(int type, char *value)
@@ -114,18 +114,6 @@ void		lexi()
 	g_21sh->token = NULL;
 	g_21sh->head = g_21sh->token;
 	while ((token = lexer_get_next_token(lexer)))
-	{
-		
-		if (token->type == TOKEN_EOF)
-		{
-		
-			token->prev->next = NULL;
-			free(token);
-			break ;
-		}
-		
 		token = token->next;
-	}
-	token->next = NULL;
 	free(lexer);
 }
