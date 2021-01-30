@@ -6,7 +6,7 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/12 08:32:28 by jwilen            #+#    #+#             */
-/*   Updated: 2021/01/30 16:36:11 by sadawi           ###   ########.fr       */
+/*   Updated: 2021/01/30 19:15:59 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,23 +15,23 @@
 
 # include "./token.h"
 
-typedef struct			s_args
+typedef struct			s_arg
 {
 	char				*word;
-	struct s_args		*next;
-}						t_args;
+	struct s_arg		*next;
+}						t_arg;
 
-typedef struct			s_redirs
+typedef struct			s_redir
 {
 	int					type;
 	char				*word;
-	struct s_redirs		*next;
-}						t_redirs;
+	struct s_redir		*next;
+}						t_redir;
 
 typedef struct			s_command
 {
-	t_args				*arguments;
-	t_redirs			*redirections;
+	t_arg				*arguments;
+	t_redir				*redirections;
 	struct s_command	*next;
 }						t_command;
 
