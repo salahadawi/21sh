@@ -6,7 +6,7 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 14:23:12 by sadawi            #+#    #+#             */
-/*   Updated: 2021/01/30 17:34:55 by sadawi           ###   ########.fr       */
+/*   Updated: 2021/01/30 19:11:37 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -236,12 +236,48 @@ void	get_autocomplete_commands(void)
 	//print_autocomp_commands();
 }
 
+int		advance_tokens(void)
+{
+	t_token *tmp;
+
+	if (!g_21sh->token)
+		return (0);
+	tmp = g_21sh->token->next;
+	free(g_21sh->token->value);
+	free(g_21sh->token->heredoc);
+	free(g_21sh->token);
+	g_21sh->token = tmp;
+	return ((tmp));
+}
+
+t_redir		*new_redir(void)
+{
+	t_redir *redir;
+
+	if (!(redir = (t_redir*)ft_memalloc(sizeof(t_redir))))
+		handle_error("Malloc failed", 1);
+	redir->type = token->type;
+	if (advance_tokens())
+		redir->word = g_21sh->token->value;
+	return (redir);
+}
+
+int		check_token_redir()
+{
+	if ()
+}
+
 t_command	*get_next_command(void)
 {
-	t_command *command;
+	t_command	*command;
+	t_redir		*cur_redir;
+	t_arg		*cur_arg;
+	
 
 	if (!g_21sh->token || g_21sh->token->type == TOKEN_SEMI)
 		return (NULL);
+	if (!(command = (t_command*)ft_memalloc(sizeof(t_command))))
+		handle_error("Malloc failed", 1);
 	while (g_21sh->token && g_21sh->token->type != TOKEN_PIPE && g_21sh->token->type != TOKEN_SEMI)
 	{
 		
@@ -249,6 +285,7 @@ t_command	*get_next_command(void)
 
 	if (g_21sh->token && g_21sh->token->type == TOKEN_PIPE)
 		g_21sh->token = g_21sh->token->next;
+	return (command);
 }
 
 t_command	*get_commands(void)
@@ -282,7 +319,7 @@ void	run_commands(void)
 	while (g_21sh->token) // handle set of tokens at a time, split by ;
 	{
 		commands = get_commands();
-		run_commands(commands);
+		//run_commands_set(commands);
 	}
 }
 
