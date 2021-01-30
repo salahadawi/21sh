@@ -6,7 +6,7 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 14:23:12 by sadawi            #+#    #+#             */
-/*   Updated: 2021/01/28 17:17:26 by sadawi           ###   ########.fr       */
+/*   Updated: 2021/01/29 15:47:31 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,12 +104,13 @@ void	save_cursor_position()
 	int		y;
 
 	ft_printf("%s", "\x1b[6n");
+	ft_bzero(sequence, 100);
 	read(0, sequence, 100);
 	i = 0;
-	while (sequence[i] != '[' && i < 100)
+	while (sequence[i] != '[' && i < 97)
 		i++;
 	y = ft_atoi(&sequence[i + 1]);
-	x = ft_atoi(&sequence[i + 2 + ft_nbrlen(y)]);
+	x = ft_atoi(&sequence[i + 2 + ft_nbrlen(y) < 100 ? i + 2 + ft_nbrlen(y) : 0]);
 	g_21sh->cursor.prompt_y = y ? y : g_21sh->cursor.prompt_y;
 	g_21sh->cursor.prompt_x = x ? x : g_21sh->cursor.prompt_x;// + g_21sh->prompt_len;
 	//ft_printf("%s", &sequence[i]);
