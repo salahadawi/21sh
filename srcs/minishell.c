@@ -6,7 +6,7 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 14:23:12 by sadawi            #+#    #+#             */
-/*   Updated: 2021/01/29 15:47:31 by sadawi           ###   ########.fr       */
+/*   Updated: 2021/01/30 17:07:13 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -234,6 +234,56 @@ void	get_autocomplete_commands(void)
 	autocomplete_from_path();
 	autocomp_commands_append_dir(".");
 	//print_autocomp_commands();
+}
+
+t_command	*get_next_command(void)
+{
+	t_command *command;
+
+	if (!g_21sh->token || g_21sh->token->type == TOKEN_SEMI)
+		return (NULL);
+	while (g_21sh->token && g_21sh->token->type != TOKEN_PIPE && g_21sh->token->type != TOKEN_SEMI)
+	{
+		
+	}
+
+	if (g_21sh->token && g_21sh->token->type == TOKEN_PIPE)
+		g_21sh->token = g_21sh->token->next;
+}
+
+t_command	*get_commands(void)
+{
+	t_command	*commands;
+	t_command	*tmp;
+
+	commands = NULL;
+	while (1)
+	{
+		if (!commands)
+		{
+			tmp = get_next_command();
+			commands = tmp;
+		}
+		else
+		{
+			tmp->next = get_next_command();
+			tmp = tmp->next;
+		}
+		if (!tmp)
+			break ;
+	}
+	return (commands);
+}
+
+void	run_commands(void)
+{
+	t_command	*commands;
+
+	while (g_21sh->token) // handle set of tokens at a time, split by ;
+	{
+		commands = get_commands();
+		run_commands(commands);
+	}
 }
 
 void	loop_shell(void)
