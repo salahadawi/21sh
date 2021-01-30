@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ast.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/12 08:32:28 by jwilen            #+#    #+#             */
-/*   Updated: 2020/11/16 10:46:36 by jwilen           ###   ########.fr       */
+/*   Updated: 2021/01/30 16:36:11 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,26 @@
 # define AST_H
 
 # include "./token.h"
+
+typedef struct			s_args
+{
+	char				*word;
+	struct s_args		*next;
+}						t_args;
+
+typedef struct			s_redirs
+{
+	int					type;
+	char				*word;
+	struct s_redirs		*next;
+}						t_redirs;
+
+typedef struct			s_command
+{
+	t_args				*arguments;
+	t_redirs			*redirections;
+	struct s_command	*next;
+}						t_command;
 
 typedef struct 		s_ast
 {
