@@ -6,7 +6,7 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 14:23:12 by sadawi            #+#    #+#             */
-/*   Updated: 2021/01/30 19:11:37 by sadawi           ###   ########.fr       */
+/*   Updated: 2021/01/31 20:00:15 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -236,18 +236,35 @@ void	get_autocomplete_commands(void)
 	//print_autocomp_commands();
 }
 
+void	free_token(t_token *token)
+{
+	free(token->value);
+	free(token->heredoc);
+	free(token);
+}
+
 int		advance_tokens(void)
 {
 	t_token *tmp;
 
 	if (!g_21sh->token)
 		return (0);
+	
 	tmp = g_21sh->token->next;
-	free(g_21sh->token->value);
-	free(g_21sh->token->heredoc);
-	free(g_21sh->token);
+	free_token(g_21sh->token);
 	g_21sh->token = tmp;
-	return ((tmp));
+	return (!!tmp);
+}
+
+t_arg		*new_arg(void)
+{
+	t_arg *arg;
+
+	if (!(arg = (t_arg*)ft_memalloc(sizeof(t_arg))))
+		handle_error("Malloc failed", 1);
+	arg->word = ft_strdup(g_21sh->token->value);
+	advance_tokens();
+	return (arg);
 }
 
 t_redir		*new_redir(void)
@@ -256,15 +273,53 @@ t_redir		*new_redir(void)
 
 	if (!(redir = (t_redir*)ft_memalloc(sizeof(t_redir))))
 		handle_error("Malloc failed", 1);
-	redir->type = token->type;
+	redir->type = g_21sh->token->type;
 	if (advance_tokens())
-		redir->word = g_21sh->token->value;
+	{
+		redir->word = ft_strdup(g_21sh->token->value);
+		advance_tokens();
+	}
 	return (redir);
 }
 
 int		check_token_redir()
 {
-	if ()
+	return (g_21sh->token->type == TOKEN_LRGER
+	|| g_21sh->token->type == TOKEN_SMLER
+	|| g_21sh->token->type == TOKEN_INSERTION
+	|| g_21sh->token->type == TOKEN_EXTRACTION);
+}
+
+void	add_arg(t_command *command)
+{
+	static t_arg *cur_arg;
+
+	if (!command->arguments)
+	{
+		cur_arg = new_arg();
+		command->arguments = cur_arg;
+	}
+	else
+	{
+		cur_arg->next = new_arg();
+		cur_arg = cur_arg->next;
+	}
+}
+
+void	add_redir(t_command *command)
+{
+	static t_redir *cur_redir;
+
+	if (!command->redirections)
+	{
+		cur_redir = new_redir();
+		command->redirections = cur_redir;
+	}
+	else
+	{
+		cur_redir->next = new_redir();
+		cur_redir = cur_redir->next;
+	}
 }
 
 t_command	*get_next_command(void)
@@ -280,9 +335,11 @@ t_command	*get_next_command(void)
 		handle_error("Malloc failed", 1);
 	while (g_21sh->token && g_21sh->token->type != TOKEN_PIPE && g_21sh->token->type != TOKEN_SEMI)
 	{
-		
+		if (check_token_redir())
+			add_redir(command);
+		else
+			add_arg(command);
 	}
-
 	if (g_21sh->token && g_21sh->token->type == TOKEN_PIPE)
 		g_21sh->token = g_21sh->token->next;
 	return (command);
@@ -312,6 +369,53 @@ t_command	*get_commands(void)
 	return (commands);
 }
 
+char	*token_type_to_char(int type) //causes leaks with print_commands, for debug purposes
+{
+	if (type == TOKEN_LRGER)
+		return (ft_strdup(">"));
+	if (type == TOKEN_SMLER)
+		return (ft_strdup("<"));
+	if (type == TOKEN_EXTRACTION)
+		return (ft_strdup(">>"));
+	if (type == TOKEN_INSERTION)
+		return (ft_strdup("<<"));
+	return ("ERROR");
+}
+
+void	print_commands(t_command *commands)
+{
+	t_command	*tmp_command;
+	t_arg		*tmp_arg;
+	t_redir		*tmp_redir;
+	int			i;
+
+	i = 1;
+	tmp_command = commands;
+	while (tmp_command)
+	{
+		tmp_arg = tmp_command->arguments;
+		tmp_redir = tmp_command->redirections;
+		ft_printf("Command %d:\n", i++);
+		if (tmp_arg)
+			ft_printf("Arguments: ");
+		while (tmp_arg)
+		{
+			ft_printf("%s ", tmp_arg->word);
+			tmp_arg = tmp_arg->next;
+		}
+		if (tmp_redir)
+			ft_printf("\nRedirections: ");
+		while (tmp_redir)
+		{
+			ft_printf("Type: %s, File: %s ", token_type_to_char(tmp_redir->type), tmp_redir->word);
+			tmp_redir = tmp_redir->next;
+		}
+		ft_printf("\n");
+		tmp_command = tmp_command->next;
+	}
+	ft_printf("\n");
+}
+
 void	run_commands(void)
 {
 	t_command	*commands;
@@ -319,7 +423,10 @@ void	run_commands(void)
 	while (g_21sh->token) // handle set of tokens at a time, split by ;
 	{
 		commands = get_commands();
-		//run_commands_set(commands);
+		print_commands(commands);
+		if (g_21sh->token)
+			g_21sh->token = g_21sh->token->next;
+		//run_commands_group(commands);
 	}
 }
 
@@ -355,7 +462,7 @@ void	loop_shell(void)
 			current = current->next;
 		}
 	
-		//run_commands();
+		run_commands();
 		//check_cmd(); // write somekind of ast tree or grammar, then execute commands
 		
 		free_history();
