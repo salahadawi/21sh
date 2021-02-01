@@ -6,7 +6,7 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 14:23:12 by sadawi            #+#    #+#             */
-/*   Updated: 2021/01/31 20:00:15 by sadawi           ###   ########.fr       */
+/*   Updated: 2021/02/01 19:49:18 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -416,6 +416,93 @@ void	print_commands(t_command *commands)
 	ft_printf("\n");
 }
 
+size_t	commands_amount(t_command *commands)
+{
+	t_command	*tmp;
+	size_t		i;
+
+	i = -1;
+	tmp = commands;
+	while (tmp)
+	{
+		tmp = tmp->next;
+		i++;
+	}
+	return (i);
+}
+
+int		*get_pipes(t_command *commands)
+{
+	int		*pipes;
+	size_t	pipe_amount;
+	size_t	i;
+
+	pipe_amount = commands_amount(commands) * 2;
+	if (!pipe_amount)
+		return (NULL);
+	pipes = (int*)ft_memalloc(sizeof(int) * pipe_amount);
+	i = 0;
+	while (i < pipe_amount)
+	{
+		pipe(&(pipes[i]));
+		i += 2;
+	}
+	return (pipes);
+}
+
+void	execute_command(t_command *command, int *pipes, int command_num)
+{
+	char	*filepath;
+	pid_t	pid;
+
+
+	tcsetattr(STDOUT_FILENO, TCSAFLUSH, &g_21sh->old); //set terminal to normal temporarily??
+
+	if ((pid = fork()) == -1)
+		handle_error("Error forking", 1);
+	if (pid == 0)
+	{
+		if (command_num > 0)
+			dup2(pipes[(command_num - 1) * 2], STDIN_FILENO);
+		if (command->next)
+			dup2(pipes[command_num * 2 + 1], STDOUT_FILENO);
+		// if (!(filepath = find_filepath(args[0])))
+		// {
+		// 	print_error(ft_sprintf("Command not found: '%s'", args[0]));
+		// 	free(filepath);
+		// 	exit(1);
+		// }
+		// else
+		// {
+		// 	if (execve(filepath, args, g_21sh->envp) == -1)
+		// 		print_error(ft_sprintf("%s: Permission denied.", filepath));
+		// }
+	}
+	else
+		wait_for_child(pid);
+	tcsetattr(STDOUT_FILENO, TCSAFLUSH, &g_21sh->raw); //set terminal back to raw mode??
+}
+
+void	run_commands_group(t_command *commands)
+{
+	int			*pipes;
+	int			command_num;
+	int			amount;
+	t_command	*tmp_command;
+
+	pipes = get_pipes(commands);
+
+	command_num = 0;
+	amount = commands_amount(commands);
+	tmp_command = commands;
+	while (command_num < amount)
+	{
+		execute_command(tmp_command, pipes, command_num);
+		command_num++;
+		tmp_command = tmp_command->next;
+	}
+}
+
 void	run_commands(void)
 {
 	t_command	*commands;
@@ -426,7 +513,7 @@ void	run_commands(void)
 		print_commands(commands);
 		if (g_21sh->token)
 			g_21sh->token = g_21sh->token->next;
-		//run_commands_group(commands);
+		run_commands_group(commands);
 	}
 }
 
