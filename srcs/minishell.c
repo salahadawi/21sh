@@ -6,7 +6,7 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 14:23:12 by sadawi            #+#    #+#             */
-/*   Updated: 2021/02/01 19:49:18 by sadawi           ###   ########.fr       */
+/*   Updated: 2021/02/01 22:06:23 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -421,7 +421,7 @@ size_t	commands_amount(t_command *commands)
 	t_command	*tmp;
 	size_t		i;
 
-	i = -1;
+	i = 0;
 	tmp = commands;
 	while (tmp)
 	{
@@ -437,7 +437,7 @@ int		*get_pipes(t_command *commands)
 	size_t	pipe_amount;
 	size_t	i;
 
-	pipe_amount = commands_amount(commands) * 2;
+	pipe_amount = (commands_amount(commands) - 1) * 2;
 	if (!pipe_amount)
 		return (NULL);
 	pipes = (int*)ft_memalloc(sizeof(int) * pipe_amount);
