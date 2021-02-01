@@ -450,6 +450,85 @@ int		*get_pipes(t_command *commands)
 	return (pipes);
 }
 
+void	handle_redirections(t_command *command)
+{
+	//open files for reading/writing, dup2 to change to appropriate fd
+}
+
+char	**command_arguments_to_arr(t_command *command)
+{
+	char	**args;
+	t_arg	*tmp;
+	size_t	i;
+	
+	i = 0;
+	tmp = command->arguments;
+	while (tmp)
+	{
+		tmp = tmp->next;
+		i++;
+	}
+	if (!(args = (char**)ft_memalloc(sizeof(char*) * (i + 1))))
+		handle_error("Malloc failed", 1);
+	i = 0;
+	tmp = command->arguments;
+	while (tmp)
+	{
+		args[i++] = tmp->word;
+		tmp = tmp->next;
+	}
+	return (args);
+}
+
+void	handle_binaries(char **args)
+{
+	char *filepath;
+
+	if (!(filepath = find_filepath(args[0])))
+	{
+		print_error(ft_sprintf("Command not found: '%s'", args[0]));
+		exit(1);
+	}
+	else
+	{
+		if (execve(filepath, args, g_21sh->envp) == -1)
+			print_error(ft_sprintf("%s: Permission denied.", filepath));
+	}
+}
+
+void	pipe_input(int *pipes, int command_num)
+{
+	dup2(pipes[(command_num - 1) * 2], STDIN_FILENO);
+}
+
+void	pipe_output(int *pipes, int command_num)
+{
+	dup2(pipes[command_num * 2 + 1], STDOUT_FILENO);
+}
+
+
+void	child_execute_command(t_command *command, int *pipes, int command_num)
+{
+	char **args;
+
+	if (pipes && command_num > 0)
+		pipe_input(pipes, command_num);
+	if (pipes && command->next)
+		pipe_output(pipes, command_num);
+	// if (pipes)
+	// 	close(pipes[command_num * 2 + 1]);
+	//handle_redirections(command);
+	
+	args = command_arguments_to_arr(command);
+	if (!handle_builtins(args)) // change to exit with proper builtin return values
+		handle_binaries(args);
+	if (pipes && command_num > 0)
+		close(STDIN_FILENO);
+	if (pipes && command->next)
+		close(STDOUT_FILENO);
+	exit(0);
+}
+
 void	execute_command(t_command *command, int *pipes, int command_num)
 {
 	char	*filepath;
@@ -461,25 +540,15 @@ void	execute_command(t_command *command, int *pipes, int command_num)
 	if ((pid = fork()) == -1)
 		handle_error("Error forking", 1);
 	if (pid == 0)
-	{
-		if (command_num > 0)
-			dup2(pipes[(command_num - 1) * 2], STDIN_FILENO);
-		if (command->next)
-			dup2(pipes[command_num * 2 + 1], STDOUT_FILENO);
-		// if (!(filepath = find_filepath(args[0])))
-		// {
-		// 	print_error(ft_sprintf("Command not found: '%s'", args[0]));
-		// 	free(filepath);
-		// 	exit(1);
-		// }
-		// else
-		// {
-		// 	if (execve(filepath, args, g_21sh->envp) == -1)
-		// 		print_error(ft_sprintf("%s: Permission denied.", filepath));
-		// }
-	}
+		child_execute_command(command, pipes, command_num);
 	else
+	{
+		if (pipes && command_num > 0)
+			close(pipes[(command_num - 1) * 2]);
+		if (pipes && command->next)
+			close(pipes[command_num * 2 + 1]);
 		wait_for_child(pid);
+	}
 	tcsetattr(STDOUT_FILENO, TCSAFLUSH, &g_21sh->raw); //set terminal back to raw mode??
 }
 
