@@ -6,7 +6,7 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 14:23:12 by sadawi            #+#    #+#             */
-/*   Updated: 2021/02/01 22:06:23 by sadawi           ###   ########.fr       */
+/*   Updated: 2021/02/01 22:24:56 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -529,7 +529,7 @@ void	child_execute_command(t_command *command, int *pipes, int command_num)
 	exit(0);
 }
 
-void	execute_command(t_command *command, int *pipes, int command_num)
+int	execute_command(t_command *command, int *pipes, int command_num)
 {
 	char	*filepath;
 	pid_t	pid;
@@ -547,9 +547,9 @@ void	execute_command(t_command *command, int *pipes, int command_num)
 			close(pipes[(command_num - 1) * 2]);
 		if (pipes && command->next)
 			close(pipes[command_num * 2 + 1]);
-		wait_for_child(pid);
 	}
 	tcsetattr(STDOUT_FILENO, TCSAFLUSH, &g_21sh->raw); //set terminal back to raw mode??
+	return (pid);
 }
 
 void	run_commands_group(t_command *commands)
@@ -558,18 +558,24 @@ void	run_commands_group(t_command *commands)
 	int			command_num;
 	int			amount;
 	t_command	*tmp_command;
+	int			*pids;
 
 	pipes = get_pipes(commands);
 
 	command_num = 0;
 	amount = commands_amount(commands);
+	if (!(pids = (int*)ft_memalloc(sizeof(int) * amount)))
+		handle_error("Malloc failed", 1);
 	tmp_command = commands;
 	while (command_num < amount)
 	{
-		execute_command(tmp_command, pipes, command_num);
+		pids[command_num] = execute_command(tmp_command, pipes, command_num);
 		command_num++;
 		tmp_command = tmp_command->next;
 	}
+	command_num = 0;
+	while (command_num < amount)
+		wait_for_child(pids[command_num++]);
 }
 
 void	run_commands(void)
