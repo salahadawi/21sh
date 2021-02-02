@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sh.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/10 12:20:24 by sadawi            #+#    #+#             */
-/*   Updated: 2021/01/28 17:17:12 by sadawi           ###   ########.fr       */
+/*   Updated: 2021/02/02 09:45:28 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,16 +56,17 @@
 # define BACKSPACE 127
 # define TAB 9
 // jwi
-# define TILDE 126
+# define STRING 34
+# define DOLLAR 36
+# define QSTRING 39
 # define MINUS 45
 # define SLASH 47
+# define EQUAL 61
 # define BACKSLASH 92
-# define DOLLAR 36
 # define DOT 46
 # define UNDERLINE 95
 # define PIPE 124
-# define QSTRING 39
-# define STRING 34
+# define TILDE 126
 
 
 // # define OPERATOR (TOKEN_SEMI | TOKEN_PIPE | TOKEN_LRGER | TOKEN_SMLER | TOKEN_ET)

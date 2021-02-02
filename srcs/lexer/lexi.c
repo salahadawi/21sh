@@ -6,7 +6,7 @@
 /*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/17 07:22:21 by jwilen            #+#    #+#             */
-/*   Updated: 2021/01/15 11:27:18 by jwilen           ###   ########.fr       */
+/*   Updated: 2021/02/02 09:46:41 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,10 +51,6 @@ t_token		*lexer_get_next_token(t_lexer *lexer)
 		}
 		if (lexer->c == ' ' || lexer->c == ENTER)
 				lexer_skip_whitespace(lexer);
-		if (ft_isalnum(lexer->c) || (lexer->c == TILDE) || (lexer->c == DOT) ||
-		(lexer->c == MINUS) || (lexer->c == DOLLAR) || (lexer->c == SLASH) ||
-		(lexer->c == UNDERLINE))
-			return (lexer_collect_id(lexer));
 		if (lexer->c == STRING)
 			return (lexer_collect_string(lexer));
 		if (lexer->c == QSTRING)
@@ -78,6 +74,12 @@ t_token		*lexer_get_next_token(t_lexer *lexer)
 		if (lexer->c == '&')
 		{
 			return (lexer_collect_et(lexer));
+		}
+		if (ft_isalnum(lexer->c) || (lexer->c == TILDE) || (lexer->c == DOT) ||
+		(lexer->c == MINUS) || (lexer->c == DOLLAR) || (lexer->c == SLASH) ||
+		(lexer->c == UNDERLINE)|| (lexer->c == EQUAL))
+		{
+			return (lexer_collect_id(lexer));
 		}
 	}
 	return (create_input_token(TOKEN_EOF, "\0"));

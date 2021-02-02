@@ -6,7 +6,7 @@
 /*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/29 11:42:33 by jwilen            #+#    #+#             */
-/*   Updated: 2021/01/15 11:25:10 by jwilen           ###   ########.fr       */
+/*   Updated: 2021/02/02 09:46:05 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,11 @@ t_token		*lexer_advance_with_token(t_lexer *lexer, t_token *token)
 	return (token);
 }
 
+static int	ft_check_c(int c)
+{
+	return ((60 < c && c < 123) || ('0' <= c && c <= '9'));
+}
+
 t_token		*lexer_collect_id(t_lexer *lexer)
 {
 	char	*value;
@@ -50,7 +55,7 @@ t_token		*lexer_collect_id(t_lexer *lexer)
 	!value ? exit(1) : 0;
 	while (ft_isalnum(lexer->c) || (lexer->c == MINUS) || (lexer->c == DOT) ||
 	(lexer->c == DOLLAR) || (lexer->c == TILDE) || (lexer->c == SLASH) ||
-	(lexer->c == UNDERLINE))
+	(lexer->c == UNDERLINE) || (lexer->c == EQUAL))
 	{
 		value = ft_relloc(&value);
 		s = lexer_get_current_char_as_string(lexer);
