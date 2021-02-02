@@ -6,7 +6,7 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 14:23:12 by sadawi            #+#    #+#             */
-/*   Updated: 2021/02/01 22:24:56 by sadawi           ###   ########.fr       */
+/*   Updated: 2021/02/02 15:22:05 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -534,7 +534,6 @@ int	execute_command(t_command *command, int *pipes, int command_num)
 	char	*filepath;
 	pid_t	pid;
 
-
 	tcsetattr(STDOUT_FILENO, TCSAFLUSH, &g_21sh->old); //set terminal to normal temporarily??
 
 	if ((pid = fork()) == -1)
@@ -548,7 +547,6 @@ int	execute_command(t_command *command, int *pipes, int command_num)
 		if (pipes && command->next)
 			close(pipes[command_num * 2 + 1]);
 	}
-	tcsetattr(STDOUT_FILENO, TCSAFLUSH, &g_21sh->raw); //set terminal back to raw mode??
 	return (pid);
 }
 
@@ -576,6 +574,7 @@ void	run_commands_group(t_command *commands)
 	command_num = 0;
 	while (command_num < amount)
 		wait_for_child(pids[command_num++]);
+	tcsetattr(STDOUT_FILENO, TCSAFLUSH, &g_21sh->raw); //set terminal back to raw mode??
 }
 
 void	run_commands(void)
