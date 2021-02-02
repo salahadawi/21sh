@@ -6,7 +6,7 @@
 /*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 14:16:04 by sadawi            #+#    #+#             */
-/*   Updated: 2020/11/16 09:23:25 by jwilen           ###   ########.fr       */
+/*   Updated: 2021/02/02 10:47:28 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	handle_expansion()
 			current->value = expand_tilde(current->value, &current->value[0]);
 		if ((ptr = find_dollar(current->value)) && ptr + 1)
 			current->value = expand_dollar(current->value, ptr);
-		current = current->prev;
+		current = current->next;
 	}
 }
 
