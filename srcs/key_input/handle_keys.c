@@ -6,7 +6,7 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/11 15:43:13 by jwilen            #+#    #+#             */
-/*   Updated: 2021/01/28 16:56:36 by sadawi           ###   ########.fr       */
+/*   Updated: 2021/02/02 14:37:03 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -293,7 +293,7 @@ int		handle_keys(void)
 	{
 		autocomplete();
 	}
-	else if (c == 4)
+	else if (c == 4 && !ft_strlen(g_21sh->line)) // CTRL + D
 	{
 		restore_terminal_mode();
 		exit(0); //temporary, need to restore terminal and free memory here
