@@ -450,9 +450,49 @@ int		*get_pipes(t_command *commands)
 	return (pipes);
 }
 
+void	redirect_output_to_file_truncate(char *file)
+{
+	int fd;
+
+	fd = open(file, O_TRUNC | O_WRONLY | O_CREAT);
+	close(STDOUT_FILENO);
+	dup2(fd, STDOUT_FILENO);
+}
+
+void	redirect_output_to_file_append(char *file)
+{
+	int fd;
+
+	fd = open(file, O_APPEND | O_WRONLY | O_CREAT);
+	close(STDOUT_FILENO);
+	dup2(fd, STDOUT_FILENO);
+}
+
+void	redirect_file_to_input(char *file)
+{
+	int fd;
+
+	fd = open(file, O_RDONLY);
+	close(STDIN_FILENO);
+	dup2(fd, STDIN_FILENO);
+}
+
 void	handle_redirections(t_command *command)
 {
 	//open files for reading/writing, dup2 to change to appropriate fd
+	t_redir *tmp;
+	
+	tmp = command->redirections;
+	while (tmp)
+	{
+		if (tmp->type == TOKEN_LRGER)
+			redirect_output_to_file_truncate(tmp->word);
+		if (tmp->type == TOKEN_EXTRACTION)
+			redirect_output_to_file_append(tmp->word);
+		if (tmp->type == TOKEN_SMLER)
+			redirect_file_to_input(tmp->word);
+		tmp = tmp->next;
+	}
 }
 
 char	**command_arguments_to_arr(t_command *command)
@@ -517,7 +557,7 @@ void	child_execute_command(t_command *command, int *pipes, int command_num)
 		pipe_output(pipes, command_num);
 	// if (pipes)
 	// 	close(pipes[command_num * 2 + 1]);
-	//handle_redirections(command);
+	handle_redirections(command);
 	
 	args = command_arguments_to_arr(command);
 	if (!handle_builtins(args)) // change to exit with proper builtin return values
