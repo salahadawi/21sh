@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/11 16:54:31 by jwilen            #+#    #+#             */
-/*   Updated: 2020/11/12 12:05:07 by jwilen           ###   ########.fr       */
+/*   Updated: 2021/02/02 12:49:42 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,6 @@ void	init_signal_handling(void)
 	int i;
 
 	i = 0;
-	// while (i <= SIGRTMAX)
-	// 	signal(i++, handle_signal);
+	while (i <= SIGRTMAX)
+		signal(i++, handle_signal);
 }
