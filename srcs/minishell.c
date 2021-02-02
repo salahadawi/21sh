@@ -6,7 +6,7 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 14:23:12 by sadawi            #+#    #+#             */
-/*   Updated: 2021/02/02 15:22:05 by sadawi           ###   ########.fr       */
+/*   Updated: 2021/02/02 16:21:40 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -584,7 +584,7 @@ void	run_commands(void)
 	while (g_21sh->token) // handle set of tokens at a time, split by ;
 	{
 		commands = get_commands();
-		print_commands(commands);
+		//print_commands(commands);
 		if (g_21sh->token)
 			g_21sh->token = g_21sh->token->next;
 		run_commands_group(commands);
@@ -616,13 +616,13 @@ void	loop_shell(void)
 		lexi();
 		current = g_21sh->token; // for debug printing, delete later
 		//parsing_check(&g_21sh->token); // Disabled for now, checks if line of tokens is valid
-		while (current)
-		{
-			ft_printf("\ntoken: %d %s\n", current->type,current->value);
-			//ft_printf("\ntoken: *token: %p *value: %p prev:%p next:%p type: %d value:%s\n",current, current->value, current->prev, current->next, current->type, current->value);
-			current = current->next;
-		}
-	
+		// while (current)
+		// {
+		// 	ft_printf("\ntoken: %d %s\n", current->type,current->value);
+		// 	//ft_printf("\ntoken: *token: %p *value: %p prev:%p next:%p type: %d value:%s\n",current, current->value, current->prev, current->next, current->type, current->value);
+		// 	current = current->next;
+		// }
+		ft_printf("\n");
 		run_commands();
 		//check_cmd(); // write somekind of ast tree or grammar, then execute commands
 		
