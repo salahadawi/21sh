@@ -454,7 +454,7 @@ void	redirect_output_to_file_truncate(char *file)
 {
 	int fd;
 
-	fd = open(file, O_TRUNC | O_WRONLY | O_CREAT);
+	fd = open(file, O_TRUNC | O_WRONLY | O_CREAT, 0666);
 	close(STDOUT_FILENO);
 	dup2(fd, STDOUT_FILENO);
 }
@@ -463,7 +463,7 @@ void	redirect_output_to_file_append(char *file)
 {
 	int fd;
 
-	fd = open(file, O_APPEND | O_WRONLY | O_CREAT);
+	fd = open(file, O_APPEND | O_WRONLY | O_CREAT, 0666);
 	close(STDOUT_FILENO);
 	dup2(fd, STDOUT_FILENO);
 }
