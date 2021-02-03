@@ -6,7 +6,7 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 14:23:12 by sadawi            #+#    #+#             */
-/*   Updated: 2021/02/02 16:21:40 by sadawi           ###   ########.fr       */
+/*   Updated: 2021/02/03 20:58:34 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -669,7 +669,7 @@ void	loop_shell(void)
 		free_history();
 		// free(commands);
 		free(g_21sh->line);
-		set_terminal(SPECIAL_MODE); //what is this for??
+		//set_terminal(SPECIAL_MODE); //what is this for??
 	}
 }
 
