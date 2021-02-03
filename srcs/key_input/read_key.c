@@ -6,7 +6,7 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/11 15:38:22 by jwilen            #+#    #+#             */
-/*   Updated: 2020/11/17 12:11:39 by sadawi           ###   ########.fr       */
+/*   Updated: 2021/02/03 21:00:51 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,8 @@ char	*str_remove_char(char *str, int index)
 
 	if (index < 0 || index >= (int)ft_strlen(str))
 		return (str);
-	newstr = (char*)malloc(ft_strlen(str));
+	if (!(newstr = (char*)ft_memalloc(ft_strlen(str))))
+		handle_error("Malloc failed", 1);
 	i = 0;
 	while (i < index)
 	{
@@ -67,7 +68,8 @@ char	*str_add_char(char *str, char c)
 	char	*newstr;
 
 	index = ft_strlen(g_21sh->line) + g_21sh->cursor.x;
-	newstr = (char*)malloc(ft_strlen(str) + 2);
+	if (!(newstr = (char*)ft_memalloc(ft_strlen(str) + 2)))
+		handle_error("Malloc failed", 1);
 	i = 0;
 	while (i < index)
 	{
