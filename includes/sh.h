@@ -6,7 +6,7 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/10 12:20:24 by sadawi            #+#    #+#             */
-/*   Updated: 2021/01/28 17:17:12 by sadawi           ###   ########.fr       */
+/*   Updated: 2021/02/03 20:24:54 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,6 +145,7 @@ typedef struct			s_21sh
 	t_autocomp			*autocomp;
 	t_autocomp			*autocomp_tail;
 	char				previous_pressed_key;
+	t_cursor			cursor_heredoc;
 }						t_21sh;
 
 t_21sh				*g_21sh;
@@ -315,5 +316,7 @@ void	print_input();
 int		input_too_large(void);
 
 int		filename_character_allowed(char c);
+
+void	autocomplete(char **line, char previous_pressed_key);
 
 #endif
