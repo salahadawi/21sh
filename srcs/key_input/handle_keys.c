@@ -6,7 +6,7 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/11 15:43:13 by jwilen            #+#    #+#             */
-/*   Updated: 2021/02/02 14:37:03 by sadawi           ###   ########.fr       */
+/*   Updated: 2021/02/03 20:25:34 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,16 +46,16 @@ void	handle_control_sequence(char *c)
 		move_cursor_down();//paste_input();
 }
 
-char	*get_partial_command(void)
+char	*get_partial_command(char *line)
 {
 	int i;
 	int len;
 
-	len = ft_strlen(g_21sh->line) - 1;
+	len = ft_strlen(line) - 1;
 	i = len;
-	while (i >= 0 && g_21sh->line[i] != ' ')
+	while (i >= 0 && line[i] != ' ')
 		i--;
-	return (ft_strsub(g_21sh->line, i + 1, len - i));
+	return (ft_strsub(line, i + 1, len - i));
 }
 
 char	**get_matching_commands(char *part_command)
@@ -99,7 +99,8 @@ int		find_start_of_command_index(char *str, int end_index)
 	return (end_index);
 }
 
-void	complete_command(char **matching_commands)
+void	complete_command(char **line, char previous_pressed_key,
+char **matching_commands)
 {
 	char		*final_string;
 	int			i;
@@ -108,15 +109,15 @@ void	complete_command(char **matching_commands)
 
 	if (!matching_commands || !(*matching_commands))
 		return ;
-	if (g_21sh->previous_pressed_key != TAB)
+	if (previous_pressed_key != TAB)
 		j = 0;
-	len = ft_strlen(g_21sh->line) - 1;
+	len = ft_strlen(*line) - 1;
 	i = len;
-	i = find_start_of_command_index(g_21sh->line, i);
-	final_string = ft_strjoinfree(ft_strsub(g_21sh->line, 0, i + 1), ft_strdup(matching_commands[j]));
+	i = find_start_of_command_index(*line, i);
+	final_string = ft_strjoinfree(ft_strsub(*line, 0, i + 1), ft_strdup(matching_commands[j]));
 	j = (!matching_commands[j] || !matching_commands[j + 1]) ? 0 : j + 1;
-	free(g_21sh->line);
-	g_21sh->line = final_string;
+	free(*line);
+	*line = final_string;
 }
 
 DIR		*open_dir_until_last_slash(char *path)
@@ -247,14 +248,14 @@ int		check_command_valid_dir(char *command)
 	return (1);
 }
 
-void	autocomplete(void)
+void	autocomplete(char **line, char previous_pressed_key)
 {
 	static char	*partial_command;
 	static char	**matching_commands;
 
-	if (g_21sh->previous_pressed_key != TAB)
+	if (previous_pressed_key != TAB)
 	{
-		partial_command = get_partial_command();
+		partial_command = get_partial_command(*line);
 		if (partial_command[0] == '\0')
 			matching_commands = get_dir_commands(".");
 		else if (check_command_valid_dir(partial_command)) //CLOSE DIR 
@@ -266,7 +267,7 @@ void	autocomplete(void)
 		else
 			matching_commands = get_matching_commands(partial_command);
 	}
-	complete_command(matching_commands);
+	complete_command(line, previous_pressed_key, matching_commands);
 	//free matching commands
 }
 
@@ -291,7 +292,7 @@ int		handle_keys(void)
 		return (0);
 	else if (c == TAB)
 	{
-		autocomplete();
+		autocomplete(&g_21sh->line, g_21sh->previous_pressed_key);
 	}
 	else if (c == 4 && !ft_strlen(g_21sh->line)) // CTRL + D
 	{
