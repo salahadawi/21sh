@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexi2.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/29 11:42:33 by jwilen            #+#    #+#             */
-/*   Updated: 2021/02/02 09:46:05 by jwilen           ###   ########.fr       */
+/*   Updated: 2021/02/04 21:31:13 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,10 @@ t_token		*lexer_collect_id(t_lexer *lexer)
 
 	value = (char*)ft_memalloc(sizeof(char));
 	!value ? exit(1) : 0;
-	while (ft_isalnum(lexer->c) || (lexer->c == MINUS) || (lexer->c == DOT) ||
-	(lexer->c == DOLLAR) || (lexer->c == TILDE) || (lexer->c == SLASH) ||
-	(lexer->c == UNDERLINE) || (lexer->c == EQUAL))
+	while (lexer->c != '\0' && lexer->c != BACKSLASH && lexer->c != ' ' &&
+	lexer->c != ENTER && lexer->c != STRING && lexer->c != QSTRING &&
+	lexer->c != ';' && lexer->c != '|' && lexer->c != '>' && lexer->c != '<' &&
+	lexer->c != '&')
 	{
 		value = ft_relloc(&value);
 		s = lexer_get_current_char_as_string(lexer);

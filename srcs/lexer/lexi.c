@@ -75,9 +75,7 @@ t_token		*lexer_get_next_token(t_lexer *lexer)
 		{
 			return (lexer_collect_et(lexer));
 		}
-		if (ft_isalnum(lexer->c) || (lexer->c == TILDE) || (lexer->c == DOT) ||
-		(lexer->c == MINUS) || (lexer->c == DOLLAR) || (lexer->c == SLASH) ||
-		(lexer->c == UNDERLINE)|| (lexer->c == EQUAL))
+		else
 		{
 			return (lexer_collect_id(lexer));
 		}
