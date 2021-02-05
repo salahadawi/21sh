@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexi.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/17 07:22:21 by jwilen            #+#    #+#             */
-/*   Updated: 2021/02/05 08:45:45 by jwilen           ###   ########.fr       */
+/*   Updated: 2021/02/04 21:28:47 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ t_token		*lexer_get_next_token(t_lexer *lexer)
 		{
 			return (lexer_collect_et(lexer));
 		}
-		if (ft_isalnum(lexer->c) || ft_issign(lexer->c))
+		else
 		{
 			return (lexer_collect_id(lexer));
 		}
