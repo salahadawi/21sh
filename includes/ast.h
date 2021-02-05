@@ -6,7 +6,7 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/12 08:32:28 by jwilen            #+#    #+#             */
-/*   Updated: 2021/01/30 19:15:59 by sadawi           ###   ########.fr       */
+/*   Updated: 2021/02/05 15:44:35 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,9 @@
 # define AST_H
 
 # include "./token.h"
+
+# define AGGREGATION 1
+# define NO_AGGREGATION 0
 
 typedef struct			s_arg
 {
@@ -25,6 +28,7 @@ typedef struct			s_redir
 {
 	int					type;
 	char				*word;
+	char				*word2;
 	struct s_redir		*next;
 }						t_redir;
 

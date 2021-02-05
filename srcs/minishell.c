@@ -6,7 +6,7 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 14:23:12 by sadawi            #+#    #+#             */
-/*   Updated: 2021/02/05 14:13:53 by sadawi           ###   ########.fr       */
+/*   Updated: 2021/02/05 15:55:10 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -282,6 +282,21 @@ t_redir		*new_redir(void)
 	return (redir);
 }
 
+t_redir		*new_redir_aggregation(void)
+{
+	t_redir *redir;
+
+	if (!(redir = (t_redir*)ft_memalloc(sizeof(t_redir))))
+		handle_error("Malloc failed", 1);
+	redir->word = ft_strdup(g_21sh->token->value);
+	if (advance_tokens())
+		redir->type = g_21sh->token->type;
+	if (advance_tokens())
+		redir->word2 = ft_strdup(g_21sh->token->value);
+	advance_tokens();
+	return (redir);
+}
+
 int		check_token_redir()
 {
 	return (g_21sh->token->type == TOKEN_LRGER
@@ -306,20 +321,36 @@ void	add_arg(t_command *command)
 	}
 }
 
-void	add_redir(t_command *command)
+void	add_redir(t_command *command, int aggregation)
 {
 	static t_redir *cur_redir;
 
 	if (!command->redirections)
 	{
-		cur_redir = new_redir();
+		if (aggregation)
+			cur_redir = new_redir_aggregation();
+		else
+			cur_redir = new_redir();
 		command->redirections = cur_redir;
 	}
 	else
 	{
-		cur_redir->next = new_redir();
+		if (aggregation)
+			cur_redir->next = new_redir_aggregation();
+		else
+			cur_redir->next = new_redir();
 		cur_redir = cur_redir->next;
 	}
+}
+
+int		check_token_fd_aggregation()
+{
+	t_token *tmp;
+
+	if (!(tmp = g_21sh->token->next))
+		return (0);
+	return (tmp->type == TOKEN_SMALER_ET
+	|| tmp->type == TOKEN_LRGER_ET);
 }
 
 t_command	*get_next_command(void)
@@ -335,8 +366,10 @@ t_command	*get_next_command(void)
 		handle_error("Malloc failed", 1);
 	while (g_21sh->token && g_21sh->token->type != TOKEN_PIPE && g_21sh->token->type != TOKEN_SEMI)
 	{
+		if (check_token_fd_aggregation())
+			add_redir(command, AGGREGATION);
 		if (check_token_redir())
-			add_redir(command);
+			add_redir(command, NO_AGGREGATION);
 		else
 			add_arg(command);
 	}
