@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/17 16:27:35 by sadawi            #+#    #+#             */
-/*   Updated: 2020/04/15 21:57:56 by sadawi           ###   ########.fr       */
+/*   Updated: 2021/02/04 07:50:47 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,13 @@ typedef struct		s_list
 
 size_t				ft_strlen(const char *s);
 
+int					ft_isascii(int c);
+
 int					ft_isalpha(int c);
 
 int					ft_isdigit(int c);
+
+int					ft_issign(int c);
 
 int					ft_strncmp(const char *s1, const char *s2, size_t n);
 
