@@ -3,14 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexi.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/17 07:22:21 by jwilen            #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2021/02/04 21:28:47 by sadawi           ###   ########.fr       */
-=======
-/*   Updated: 2021/02/04 07:46:20 by jwilen           ###   ########.fr       */
->>>>>>> 51ae6ad (fixed the freez by adding ft_issign to libft)
+/*   Updated: 2021/02/05 08:45:45 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,14 +75,7 @@ t_token		*lexer_get_next_token(t_lexer *lexer)
 		{
 			return (lexer_collect_et(lexer));
 		}
-<<<<<<< HEAD
-		else
-=======
-		//if (ft_isalnum(lexer->c) || (lexer->c == TILDE) || (lexer->c == DOT) ||
-		//(lexer->c == MINUS) || (lexer->c == DOLLAR) || (lexer->c == SLASH) ||
-		//(lexer->c == UNDERLINE)|| (lexer->c == EQUAL))
 		if (ft_isalnum(lexer->c) || ft_issign(lexer->c))
->>>>>>> 51ae6ad (fixed the freez by adding ft_issign to libft)
 		{
 			return (lexer_collect_id(lexer));
 		}
