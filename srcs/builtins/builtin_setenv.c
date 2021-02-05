@@ -6,7 +6,7 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 14:08:24 by sadawi            #+#    #+#             */
-/*   Updated: 2020/04/29 13:19:58 by sadawi           ###   ########.fr       */
+/*   Updated: 2021/02/05 14:12:28 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int		builtin_setenv(char **args)
 		if (ft_strchr(args[i], '='))
 		{
 			add_env(args[i]);
-			print_error(ft_sprintf("%s added to enviroment!", args[i]));
+			ft_sprintf("%s added to enviroment!\n", args[i]);
 		}
 		else
 		{
