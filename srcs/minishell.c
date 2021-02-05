@@ -6,7 +6,7 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 14:23:12 by sadawi            #+#    #+#             */
-/*   Updated: 2021/02/04 21:28:36 by sadawi           ###   ########.fr       */
+/*   Updated: 2021/02/05 14:13:53 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -977,6 +977,24 @@ void	child_execute_command(t_command *command, int *pipes, int command_num)
 	exit(0);
 }
 
+void	execute_builtin_in_parent(t_command *command)
+{
+	char	**args;
+	int		output_fd;
+	int		error_fd;
+
+	args = command_arguments_to_arr(command);
+	output_fd = dup(STDOUT_FILENO);
+	error_fd = dup(STDERR_FILENO);
+	close(STDOUT_FILENO);
+	close(STDERR_FILENO);
+	handle_builtins(args);
+	dup2(output_fd, STDOUT_FILENO);
+	dup2(error_fd, STDERR_FILENO);
+	close(output_fd);
+	close(error_fd);
+}
+
 int	execute_command(t_command *command, int *pipes, int command_num)
 {
 	char	*filepath;
@@ -990,6 +1008,7 @@ int	execute_command(t_command *command, int *pipes, int command_num)
 		child_execute_command(command, pipes, command_num);
 	else
 	{
+		execute_builtin_in_parent(command);
 		if (pipes && command_num > 0)
 			close(pipes[(command_num - 1) * 2]);
 		if (pipes && command->next)
