@@ -6,7 +6,7 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/11 15:38:22 by jwilen            #+#    #+#             */
-/*   Updated: 2021/02/03 21:00:51 by sadawi           ###   ########.fr       */
+/*   Updated: 2021/02/06 16:00:43 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int		read_key(void)
 	char sequence[10];
 
 	sequence[0] = 0;
-	if (read(STDOUT_FILENO, sequence, 10) == -1)
+	if (read(g_21sh->stdout, sequence, 10) == -1)
 		handle_error("Read failed", 1);
 	if (sequence[0] == ESCAPE)
 	{

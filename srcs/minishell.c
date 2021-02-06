@@ -6,7 +6,7 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 14:23:12 by sadawi            #+#    #+#             */
-/*   Updated: 2021/02/05 15:55:10 by sadawi           ###   ########.fr       */
+/*   Updated: 2021/02/06 16:16:51 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -745,9 +745,9 @@ void	save_cursor_position_heredoc()
 	int		x;
 	int		y;
 
-	ft_printf("%s", "\x1b[6n");
+	ft_fprintf(g_21sh->stdout, "%s", "\x1b[6n");
 	ft_bzero(sequence, 100);
-	read(0, sequence, 100);
+	read(g_21sh->stdin, sequence, 100);
 	i = 0;
 	while (sequence[i] != '[' && i < 97)
 		i++;
@@ -797,10 +797,10 @@ void	print_input_heredoc(char *line)
 		index += g_21sh->window.ws_col - ft_strlen("heredoc> ");
 		//len -= max_len;
 		//len += g_21sh->window.ws_col;
-		ft_printf("...\n%s", &line[index]);
+		ft_fprintf(g_21sh->stdout, "...\n%s", &line[index]);
 	}
 	else
-		ft_printf("%s", line);
+		ft_fprintf(g_21sh->stdout, "%s", line);
 }
 
 void	move_cursor_next_line_heredoc(char *line)
@@ -866,7 +866,7 @@ int		get_heredoc_input(char **line)
 
 	*line = ft_strnew(0);
 	save_cursor_position_heredoc();
-	while ((value =handle_keys_heredoc(line, &previous_pressed_key)) > 0)
+	while ((value = handle_keys_heredoc(line, &previous_pressed_key)) > 0)
 	{
 		//should not exit from child process, instead find some way to return 0 here
 		if (input_too_large_heredoc(line))
@@ -887,7 +887,8 @@ void	redirect_heredoc_to_input(char *eof)
 	int		fd;
 
 
-	tcsetattr(STDOUT_FILENO, TCSAFLUSH, &g_21sh->raw);
+	//tcsetattr(STDOUT_FILENO, TCSAFLUSH, &g_21sh->raw);
+	tcsetattr(g_21sh->stdout, TCSAFLUSH, &g_21sh->raw);
 
 	g_21sh->cursor_heredoc.prompt_x = g_21sh->cursor_heredoc.prompt_x + 1;
 	g_21sh->cursor_heredoc.prompt_y = g_21sh->cursor_heredoc.prompt_y + 1;
@@ -898,17 +899,17 @@ void	redirect_heredoc_to_input(char *eof)
 	if ((fd = open(".heredoc.tmp", O_WRONLY | O_CREAT | O_TRUNC, 0666)) == -1)
 		handle_error("Open failed", 1);
 	
-	ft_printf("heredoc> ");
+	ft_fprintf(g_21sh->stdout ,"heredoc> ");
 	while (get_heredoc_input(&line))
 	{
 		if (ft_strequ(line, eof))
 			break ;
 		ft_putendl_fd(line, fd); // write to tmp file
 		free(line);
-		ft_printf("\nheredoc> ");
+		ft_fprintf(g_21sh->stdout, "\nheredoc> ");
 	}
 	free(line);
-	ft_printf("\n");
+	ft_fprintf(g_21sh->stdout, "\n");
 
 	close(fd);
 	fd = open(".heredoc.tmp", O_RDONLY);

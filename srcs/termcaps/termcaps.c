@@ -6,7 +6,7 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/11 17:00:00 by jwilen            #+#    #+#             */
-/*   Updated: 2021/01/21 22:23:05 by sadawi           ###   ########.fr       */
+/*   Updated: 2021/02/06 16:04:55 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int		ft_putschar(int c)
 {
-	if (write(STDOUT_FILENO, &c, 1) == -1)
+	if (write(g_21sh->stdout, &c, 1) == -1)
 		return (-1);
 	return (0);
 }
