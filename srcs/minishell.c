@@ -487,7 +487,7 @@ void	redirect_output_to_file_truncate(char *file)
 {
 	int fd;
 
-	fd = open(file, O_TRUNC | O_WRONLY | O_CREAT, 0666);
+	fd = open(file, O_TRUNC | O_RDWR | O_CREAT, 0666);
 	close(STDOUT_FILENO);
 	dup2(fd, STDOUT_FILENO);
 }
@@ -496,7 +496,7 @@ void	redirect_output_to_file_append(char *file)
 {
 	int fd;
 
-	fd = open(file, O_APPEND | O_WRONLY | O_CREAT, 0666);
+	fd = open(file, O_APPEND | O_RDWR | O_CREAT, 0666);
 	close(STDOUT_FILENO);
 	dup2(fd, STDOUT_FILENO);
 }
@@ -505,7 +505,7 @@ void	redirect_file_to_input(char *file)
 {
 	int fd;
 
-	if ((fd = open(file, O_RDONLY)) == -1)
+	if ((fd = open(file, O_RDWR)) == -1)
 	{
 		ft_printf("No such file or directory: %s\n", file);
 		exit(1);
