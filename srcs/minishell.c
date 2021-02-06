@@ -6,7 +6,7 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 14:23:12 by sadawi            #+#    #+#             */
-/*   Updated: 2021/02/06 16:16:51 by sadawi           ###   ########.fr       */
+/*   Updated: 2021/02/06 17:20:38 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -368,7 +368,7 @@ t_command	*get_next_command(void)
 	{
 		if (check_token_fd_aggregation())
 			add_redir(command, AGGREGATION);
-		if (check_token_redir())
+		else if (check_token_redir())
 			add_redir(command, NO_AGGREGATION);
 		else
 			add_arg(command);
