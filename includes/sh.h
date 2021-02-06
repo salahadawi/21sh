@@ -6,7 +6,7 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/10 12:20:24 by sadawi            #+#    #+#             */
-/*   Updated: 2021/02/04 21:28:06 by sadawi           ###   ########.fr       */
+/*   Updated: 2021/02/06 15:19:32 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,6 +147,8 @@ typedef struct			s_21sh
 	t_autocomp			*autocomp_tail;
 	char				previous_pressed_key;
 	t_cursor			cursor_heredoc;
+	int					stdin;
+	int					stdout;
 }						t_21sh;
 
 t_21sh				*g_21sh;
