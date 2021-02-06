@@ -505,7 +505,11 @@ void	redirect_file_to_input(char *file)
 {
 	int fd;
 
-	fd = open(file, O_RDONLY);
+	if ((fd = open(file, O_RDONLY)) == -1)
+	{
+		ft_printf("No such file or directory: %s\n", file);
+		exit(1);
+	}
 	close(STDIN_FILENO);
 	dup2(fd, STDIN_FILENO);
 }
