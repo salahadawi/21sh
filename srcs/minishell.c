@@ -997,14 +997,14 @@ void	child_execute_command(t_command *command, int *pipes, int command_num)
 {
 	char **args;
 
-	handle_redirections(command);
 	if (pipes && command_num > 0)
 		pipe_input(pipes, command_num);
 	if (pipes && command->next)
 		pipe_output(pipes, command_num);
+	handle_redirections(command);
 	// if (pipes)
 	// 	close(pipes[command_num * 2 + 1]);
-	
+
 	args = command_arguments_to_arr(command);
 	if (!handle_builtins(args)) // change to exit with proper builtin return values
 		handle_binaries(args);
