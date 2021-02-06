@@ -921,6 +921,57 @@ void	redirect_heredoc_to_input(char *eof)
 	dup2(fd, STDIN_FILENO);
 }
 
+int		string_is_number(char *str)
+{
+	int i;
+
+	if (!str)
+		return (0);
+	while (str[i])
+	{
+		if (!ft_isdigit(str[i++]))
+			return (0);
+	}
+	return (1);
+}
+
+void	check_file_descriptors_valid(char *word1, char *word2)
+{
+	if (!string_is_number(word1))
+	{
+		ft_fprintf(STDERR_FILENO, "No such file or directory: %s\n", word1);
+		exit(1);
+	}
+	if (!string_is_number(word2))
+	{
+		ft_fprintf(STDERR_FILENO, "No such file or directory: %s\n", word2);
+		exit(1);
+	}
+	if (read(ft_atoi(word2), 0, 0) == -1)
+	{
+		ft_fprintf(STDERR_FILENO, "%s: Bad file descriptor\n", word2);
+		exit(1);
+	}
+	if (read(ft_atoi(word1), 0, 0) == -1)
+	{
+		ft_fprintf(STDERR_FILENO, "%s: Bad file descriptor\n", word1);
+		exit(1);
+	}
+}
+
+void	redirect_fd_to_fd(char *word1, char *word2, int type)
+{
+	int fd1;
+	int	fd2;
+
+	//add defaults for >& and <&
+	check_file_descriptors_valid(word1, word2);
+	fd1 = ft_atoi(word1);
+	fd2 = ft_atoi(word2);
+	close(fd1);
+	dup2(fd2, fd1);
+}
+
 void	handle_redirections(t_command *command)
 {
 	//open files for reading/writing, dup2 to change to appropriate fd
@@ -937,6 +988,8 @@ void	handle_redirections(t_command *command)
 			redirect_file_to_input(tmp->word);
 		if (tmp->type == TOKEN_INSERTION)
 			redirect_heredoc_to_input(tmp->word);
+		if (tmp->type == TOKEN_SMALER_ET || tmp->type == TOKEN_LRGER_ET) // <&, >&
+			redirect_fd_to_fd(tmp->word, tmp->word2, tmp->type);	
 		tmp = tmp->next;
 	}
 }
