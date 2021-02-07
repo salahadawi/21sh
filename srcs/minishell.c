@@ -6,7 +6,7 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 14:23:12 by sadawi            #+#    #+#             */
-/*   Updated: 2021/02/07 13:45:18 by sadawi           ###   ########.fr       */
+/*   Updated: 2021/02/07 13:51:56 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -1185,6 +1185,7 @@ void	loop_shell(void)
 		// 	current = current->next;
 		// }
 		ft_printf("\n");
+		handle_expansion();
 		run_commands();
 		//check_cmd(); // write somekind of ast tree or grammar, then execute commands
 		
