@@ -6,7 +6,7 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 14:23:12 by sadawi            #+#    #+#             */
-/*   Updated: 2021/02/06 17:20:38 by sadawi           ###   ########.fr       */
+/*   Updated: 2021/02/07 13:45:18 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -282,15 +282,19 @@ t_redir		*new_redir(void)
 	return (redir);
 }
 
+
+
 t_redir		*new_redir_aggregation(void)
 {
 	t_redir *redir;
 
 	if (!(redir = (t_redir*)ft_memalloc(sizeof(t_redir))))
 		handle_error("Malloc failed", 1);
-	redir->word = ft_strdup(g_21sh->token->value);
-	if (advance_tokens())
-		redir->type = g_21sh->token->type;
+	if (ft_isdigit(g_21sh->token->value[0]))
+		redir->word = ft_itoa(ft_atoi(g_21sh->token->value));
+	else
+		redir->word = NULL;
+	redir->type = g_21sh->token->type;
 	if (advance_tokens())
 		redir->word2 = ft_strdup(g_21sh->token->value);
 	advance_tokens();
@@ -345,12 +349,8 @@ void	add_redir(t_command *command, int aggregation)
 
 int		check_token_fd_aggregation()
 {
-	t_token *tmp;
-
-	if (!(tmp = g_21sh->token->next))
-		return (0);
-	return (tmp->type == TOKEN_SMALER_ET
-	|| tmp->type == TOKEN_LRGER_ET);
+	return (g_21sh->token->type == TOKEN_SMALER_ET
+	|| g_21sh->token->type == TOKEN_LRGER_ET);
 }
 
 t_command	*get_next_command(void)
@@ -937,22 +937,22 @@ int		string_is_number(char *str)
 
 void	check_file_descriptors_valid(char *word1, char *word2)
 {
-	if (!string_is_number(word1))
+	if (word1 && !string_is_number(word1))
 	{
-		ft_fprintf(STDERR_FILENO, "No such file or directory: %s\n", word1);
+		ft_fprintf(STDERR_FILENO, "%s: Bad file descriptor\n", word1);
 		exit(1);
 	}
-	if (!string_is_number(word2))
+	if (!string_is_number(word2) && !ft_strequ(word2, "-"))
 	{
-		ft_fprintf(STDERR_FILENO, "No such file or directory: %s\n", word2);
+		ft_fprintf(STDERR_FILENO, "%s: Bad file descriptor\n", word1);
 		exit(1);
 	}
-	if (read(ft_atoi(word2), 0, 0) == -1)
+	if (((read(ft_atoi(word2), 0, 0) == -1) && (write(ft_atoi(word2), 0, 0))) && !ft_strequ(word2, "-"))
 	{
 		ft_fprintf(STDERR_FILENO, "%s: Bad file descriptor\n", word2);
 		exit(1);
 	}
-	if (read(ft_atoi(word1), 0, 0) == -1)
+	if (word1 && ((read(ft_atoi(word1), 0, 0) == -1) && (write(ft_atoi(word1), 0, 0))))
 	{
 		ft_fprintf(STDERR_FILENO, "%s: Bad file descriptor\n", word1);
 		exit(1);
@@ -966,10 +966,14 @@ void	redirect_fd_to_fd(char *word1, char *word2, int type)
 
 	//add defaults for >& and <&
 	check_file_descriptors_valid(word1, word2);
-	fd1 = ft_atoi(word1);
+	if (word1)
+		fd1 = ft_atoi(word1);
+	else
+		fd1 = type == TOKEN_SMALER_ET ? STDIN_FILENO : STDOUT_FILENO;
 	fd2 = ft_atoi(word2);
 	close(fd1);
-	dup2(fd2, fd1);
+	if (!ft_strequ(word2, "-"))
+		dup2(fd2, fd1);
 }
 
 void	handle_redirections(t_command *command)
