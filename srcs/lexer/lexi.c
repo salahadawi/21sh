@@ -6,7 +6,7 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/17 07:22:21 by jwilen            #+#    #+#             */
-/*   Updated: 2021/02/04 21:28:47 by sadawi           ###   ########.fr       */
+/*   Updated: 2021/02/07 14:13:40 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ t_token		*lexer_get_next_token(t_lexer *lexer)
 		{
 			return (lexer_collect_et(lexer));
 		}
-		else
+		else if (lexer->c)
 		{
 			return (lexer_collect_id(lexer));
 		}
