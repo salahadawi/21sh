@@ -6,7 +6,7 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/29 11:42:33 by jwilen            #+#    #+#             */
-/*   Updated: 2021/02/04 21:31:13 by sadawi           ###   ########.fr       */
+/*   Updated: 2021/02/07 12:17:27 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,33 @@ static int	ft_check_c(int c)
 	return ((60 < c && c < 123) || ('0' <= c && c <= '9'));
 }
 
+int			lexer_collect_file_aggregation(t_lexer *lexer, char **value, char **s)
+{
+	int	token_type;
+
+	if (lexer->c &&
+		(lexer->c == '<' || lexer->c == '>') &&
+		lexer->contents[lexer->i + 1] == '&')
+	{
+		token_type = lexer->c == '<' ? TOKEN_SMALER_ET : TOKEN_LRGER_ET;
+		while (lexer->contents[lexer->i - 1] != '&')
+		{
+			*value = ft_relloc(value);
+			*s = lexer_get_current_char_as_string(lexer);
+			ft_strcat(*value, *s);
+			lexer_advance(lexer);
+			free(*s);
+		}
+		return (token_type);
+	}
+	return (0);
+}
+
 t_token		*lexer_collect_id(t_lexer *lexer)
 {
 	char	*value;
 	char	*s;
+	int		token_type;
 
 	value = (char*)ft_memalloc(sizeof(char));
 	!value ? exit(1) : 0;
@@ -64,6 +87,8 @@ t_token		*lexer_collect_id(t_lexer *lexer)
 		lexer_advance(lexer);
 		free(s);
 	}
+	if ((token_type = lexer_collect_file_aggregation(lexer, &value, &s)))
+		return (create_input_token(token_type, value));
 	return (create_input_token(TOKEN_ID, value));
 }
 
