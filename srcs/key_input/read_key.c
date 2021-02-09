@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_key.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/11 15:38:22 by jwilen            #+#    #+#             */
-/*   Updated: 2021/02/06 16:00:43 by sadawi           ###   ########.fr       */
+/*   Updated: 2021/02/09 14:36:11 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,44 @@ char	*str_remove_char(char *str, int index)
 	newstr[i] = '\0';
 	free(str);
 	return (newstr);
+}
+
+
+char	*str_add_paste(char *str, char *paste)
+{
+	int		i;
+	int 	j;
+	int		index;
+	char	*newstr;
+	index = ft_strlen(g_21sh->line) + g_21sh->cursor.x;
+	// ft_printf("%d\n", ft_strlen(str) + ft_strlen(g_21sh->copy_part) + 1);
+	// ft_printf("%d\n", ft_strlen(paste));
+	// while(1)
+	// 	i =1;
+	if (!(newstr = (char*)ft_memalloc(ft_strlen(str) + ft_strlen(paste) + 2)))
+		handle_error("Malloc failed", 1);
+	i = 0;
+	while (i < index)
+	{
+		newstr[i] = str[i];
+		i++;
+	}
+	j = 0;
+	while (paste[j])
+	{
+		newstr[i] = paste[j];
+		i++;
+		j++;
+	}
+	while (str[i-j])
+	{
+		newstr[i] = str[i-j];
+		i++;
+	}
+	newstr[i] = '\0';
+	free(str);
+	return (newstr);
+
 }
 
 char	*str_add_char(char *str, char c)
