@@ -6,7 +6,7 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/10 12:20:24 by sadawi            #+#    #+#             */
-/*   Updated: 2021/02/06 15:19:32 by sadawi           ###   ########.fr       */
+/*   Updated: 2021/02/09 12:56:44 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,9 @@
 # define PIPE 124
 # define TILDE 126
 
+# define TEXT_INVERSE_VIDEO "mr"
+# define TEXT_UNDERLINE "us"
+# define TEXT_NORMAL "me"
 
 // # define OPERATOR (TOKEN_SEMI | TOKEN_PIPE | TOKEN_LRGER | TOKEN_SMLER | TOKEN_ET)
 

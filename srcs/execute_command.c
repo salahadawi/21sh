@@ -6,7 +6,7 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 14:18:58 by sadawi            #+#    #+#             */
-/*   Updated: 2020/05/05 14:38:59 by sadawi           ###   ########.fr       */
+/*   Updated: 2021/02/09 13:02:06 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,11 +88,6 @@ void	wait_for_child(pid_t pid)
 	waitpid(pid, &status, WUNTRACED);
 	while (!WIFEXITED(status))
 	{
-		if (WIFSIGNALED(status))
-		{
-			ft_printf("\n");
-			break;	
-		}
 		waitpid(pid, &status, WUNTRACED);
 	}
 	init_signal_handling();

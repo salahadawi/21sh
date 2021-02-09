@@ -6,7 +6,7 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 14:23:12 by sadawi            #+#    #+#             */
-/*   Updated: 2021/02/07 13:51:56 by sadawi           ###   ########.fr       */
+/*   Updated: 2021/02/09 12:59:52 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -1153,6 +1153,30 @@ void	run_commands(void)
 	}
 }
 
+void	move_cursor_newline()
+{
+	char	sequence[100];
+	int		i;
+	int		x;
+	int		y;
+
+	ft_printf("%s", "\x1b[6n");
+	ft_bzero(sequence, 100);
+	read(0, sequence, 100);
+	i = 0;
+	while (sequence[i] != '[' && i < 97)
+		i++;
+	y = ft_atoi(&sequence[i + 1]);
+	x = ft_atoi(&sequence[i + 2 + ft_nbrlen(y) < 100 ? i + 2 + ft_nbrlen(y) : 0]);
+	if (x > 1)
+	{
+		set_terminal(TEXT_INVERSE_VIDEO);
+		ft_printf("%%");
+		set_terminal(TEXT_NORMAL);
+		ft_printf("\n");
+	}
+}
+
 void	loop_shell(void)
 {
 	char	**commands;
@@ -1187,6 +1211,7 @@ void	loop_shell(void)
 		ft_printf("\n");
 		handle_expansion();
 		run_commands();
+		move_cursor_newline(); //if output didn't end with newline
 		//check_cmd(); // write somekind of ast tree or grammar, then execute commands
 		
 		free_history();
