@@ -6,7 +6,7 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/15 12:28:40 by sadawi            #+#    #+#             */
-/*   Updated: 2021/02/06 16:08:55 by sadawi           ###   ########.fr       */
+/*   Updated: 2021/02/09 15:12:18 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ int		main(int argc, char **argv, char *envp[])
 	g_21sh = (t_21sh*)ft_memalloc(sizeof(t_21sh));
 	g_21sh->stdin = dup(STDIN_FILENO);
 	g_21sh->stdout = dup(STDOUT_FILENO);
+	g_21sh->copy_start = -1;
 	g_debug ? 0 : init_termcaps(); // DEBUGGING
 	init_signal_handling();
 	g_debug ? 0 : create_terminal_raw_mode(); // DEBUGGING

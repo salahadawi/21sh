@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   copy.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/09 10:38:52 by jwilen            #+#    #+#             */
-/*   Updated: 2021/02/09 12:01:09 by jwilen           ###   ########.fr       */
+/*   Updated: 2021/02/09 15:12:54 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void        copy_start()
     int		i;
 	
 	i = 0;
-    if (!g_21sh->copy_start)
+    if (g_21sh->copy_start == -1)
         g_21sh->copy_start =  ft_strlen(g_21sh->line) + g_21sh->cursor.x;
     else
 	{
@@ -29,5 +29,6 @@ void        copy_start()
 			i++;
 			g_21sh->copy_start++;
 		}
+		g_21sh->copy_start = -1;
 	}
 }
