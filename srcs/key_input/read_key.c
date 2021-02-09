@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_key.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/11 15:38:22 by jwilen            #+#    #+#             */
-/*   Updated: 2021/02/09 14:36:11 by jwilen           ###   ########.fr       */
+/*   Updated: 2021/02/09 15:10:33 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,9 @@ char	*str_add_paste(char *str, char *paste)
 	int 	j;
 	int		index;
 	char	*newstr;
+
+	if (!paste)
+		return (str);
 	index = ft_strlen(g_21sh->line) + g_21sh->cursor.x;
 	// ft_printf("%d\n", ft_strlen(str) + ft_strlen(g_21sh->copy_part) + 1);
 	// ft_printf("%d\n", ft_strlen(paste));
