@@ -6,7 +6,7 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/11 15:43:13 by jwilen            #+#    #+#             */
-/*   Updated: 2021/02/10 16:08:42 by sadawi           ###   ########.fr       */
+/*   Updated: 2021/02/10 18:14:26 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -277,6 +277,7 @@ int		handle_keys(void)
 
 	c = read_key();
 	// ft_printf("%d", c);
+	// while (1)
 	if (c == 0)
 		return (1);
 	if (c < 0)
@@ -290,6 +291,14 @@ int		handle_keys(void)
 	}
 	else if (c == ENTER)
 		return (0);
+	else if (c == 11 && ft_strlen(g_21sh->line) > 0)  // Ctrl + k
+	{
+		copy_start();
+	}
+	else if (c == 16)
+	{
+		paste();
+	}
 	else if (c == TAB)
 	{
 		autocomplete(&g_21sh->line, g_21sh->previous_pressed_key);
