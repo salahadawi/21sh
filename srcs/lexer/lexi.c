@@ -6,7 +6,7 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/17 07:22:21 by jwilen            #+#    #+#             */
-/*   Updated: 2021/02/07 14:13:40 by sadawi           ###   ########.fr       */
+/*   Updated: 2021/02/10 17:33:48 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void		lexer_advance(t_lexer *lexer)
 
 void		lexer_skip_whitespace(t_lexer *lexer)
 {
-	while (lexer->c == ' ' || lexer->c == 10)
+	while (lexer->c == ' ' || lexer->c == ENTER || lexer->c == TAB)
 		lexer_advance(lexer);
 }
 
@@ -49,7 +49,7 @@ t_token		*lexer_get_next_token(t_lexer *lexer)
 		{
 			return (lexer_collect_backslash(lexer));
 		}
-		if (lexer->c == ' ' || lexer->c == ENTER)
+		if (lexer->c == ' ' || lexer->c == ENTER || lexer->c == TAB)
 				lexer_skip_whitespace(lexer);
 		if (lexer->c == STRING)
 			return (lexer_collect_string(lexer));
