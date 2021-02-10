@@ -6,7 +6,7 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 14:23:12 by sadawi            #+#    #+#             */
-/*   Updated: 2021/02/09 12:59:52 by sadawi           ###   ########.fr       */
+/*   Updated: 2021/02/10 14:53:58 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -473,13 +473,14 @@ int		*get_pipes(t_command *commands)
 	pipe_amount = (commands_amount(commands) - 1) * 2;
 	if (!pipe_amount)
 		return (NULL);
-	pipes = (int*)ft_memalloc(sizeof(int) * pipe_amount);
+	pipes = (int*)ft_memalloc(sizeof(int) * (pipe_amount + 1));
 	i = 0;
 	while (i < pipe_amount)
 	{
 		pipe(&(pipes[i]));
 		i += 2;
 	}
+	pipes[i] = -1;
 	return (pipes);
 }
 
@@ -1049,6 +1050,16 @@ void	pipe_output(int *pipes, int command_num)
 	dup2(pipes[command_num * 2 + 1], STDOUT_FILENO);
 }
 
+void	close_pipes(int *pipes)
+{
+	int i;
+
+	i = 0;
+	if (!pipes)
+		return ;
+	while (pipes[i] != -1)
+		close(pipes[i++]);
+}
 
 void	child_execute_command(t_command *command, int *pipes, int command_num)
 {
@@ -1058,6 +1069,7 @@ void	child_execute_command(t_command *command, int *pipes, int command_num)
 		pipe_input(pipes, command_num);
 	if (pipes && command->next)
 		pipe_output(pipes, command_num);
+	close_pipes(pipes);
 	handle_redirections(command);
 	// if (pipes)
 	// 	close(pipes[command_num * 2 + 1]);
