@@ -6,7 +6,7 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/29 11:42:33 by jwilen            #+#    #+#             */
-/*   Updated: 2021/02/07 12:17:27 by sadawi           ###   ########.fr       */
+/*   Updated: 2021/02/10 17:25:51 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,23 +105,22 @@ t_token		*lexer_collect_string(t_lexer *lexer)
 	{
 		value = ft_relloc(&value);
 		s = lexer_get_current_char_as_string(lexer);
-		
 		ft_strcat(value, s);
 		lexer_advance(lexer);
-
 		if (s[0] == '\0')
         {
-            if (new_str)
-				new_str = (char*)ft_memalloc(sizeof(char));
+			new_str = (char*)ft_memalloc(sizeof(char));
             while (new_str && !ft_strchr(new_str, STRING))
             {
                 ft_printf("\ndquote>");
                 get_input();
 				new_str = ft_relloc(&new_str);
-			    ft_strcat(ft_strcat(new_str, "\n"), g_21sh->line);
+			    ft_strcat(new_str, "\n");
+				new_str = ft_strjoinfree(new_str, g_21sh->line);
+				g_21sh->line = NULL;
             }
-            ft_strncat(value, new_str, ft_strlen(new_str) - 1);
-			free(new_str);
+			new_str[ft_strlen(new_str) -1] = '\0';
+            value = ft_strjoinfree(value, new_str);
             break;
         }
 		free(s);
@@ -139,7 +138,6 @@ t_token		*lexer_collect_qstring(t_lexer *lexer)
 	lexer_advance(lexer);
 	value = (char *)ft_memalloc(sizeof(char));
 	!value ? exit(1) : 0;
-
 	while (lexer->c != QSTRING)
 	{
 		value = ft_relloc(&value);
@@ -148,17 +146,18 @@ t_token		*lexer_collect_qstring(t_lexer *lexer)
 		lexer_advance(lexer);
 		if (s[0] == '\0')
         {
-            if (new_str)
-				new_str = (char*)ft_memalloc(sizeof(char));
+			new_str = (char*)ft_memalloc(sizeof(char));
             while (new_str && !ft_strchr(new_str, QSTRING))
             {
                 ft_printf("\nquote>");
                 get_input();
 				new_str = ft_relloc(&new_str);
-			    ft_strcat(ft_strcat(new_str, "\n"), g_21sh->line);
+			    ft_strcat(new_str, "\n");
+				new_str = ft_strjoinfree(new_str, g_21sh->line);
+				g_21sh->line = NULL;
             }
-            ft_strncat(value, new_str, ft_strlen(new_str) - 1);
-			free(new_str);
+            new_str[ft_strlen(new_str) -1] = '\0';
+            value = ft_strjoinfree(value, new_str);
             break;
         }
 		free(s);
