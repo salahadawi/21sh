@@ -6,7 +6,7 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/11 15:43:13 by jwilen            #+#    #+#             */
-/*   Updated: 2021/02/03 20:25:34 by sadawi           ###   ########.fr       */
+/*   Updated: 2021/02/10 16:08:42 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,7 +130,7 @@ DIR		*open_dir_until_last_slash(char *path)
 	if (ft_strrchr(path, '/'))
 	{
 		tmp = ft_strdup(path);
-		*ft_strrchr(tmp, '/') = '\0';
+		*(ft_strrchr(tmp, '/') + 1) = '\0';
 	}
 	else
 		tmp = ft_strdup(path);
