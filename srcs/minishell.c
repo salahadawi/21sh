@@ -6,7 +6,7 @@
 /*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 14:23:12 by sadawi            #+#    #+#             */
-/*   Updated: 2021/02/12 09:31:02 by jwilen           ###   ########.fr       */
+/*   Updated: 2021/02/12 16:09:47 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,51 +114,6 @@ void	save_cursor_position()
 	g_21sh->cursor.prompt_y = y ? y : g_21sh->cursor.prompt_y;
 	g_21sh->cursor.prompt_x = x ? x : g_21sh->cursor.prompt_x;// + g_21sh->prompt_len;
 	//ft_printf("%s", &sequence[i]);
-}
-
-void	free_autocomp_commands()
-{
-	t_autocomp *cur;
-	t_autocomp *tmp;
-
-	cur = g_21sh->autocomp;
-	while (cur)
-	{
-		tmp = cur;
-		cur = tmp->next;
-		free(tmp);	
-	}
-	g_21sh->autocomp = NULL;
-	g_21sh->autocomp_tail = NULL;
-}
-
-void	print_autocomp_commands(void)
-{
-	t_autocomp *cur;
-	int			i;
-
-	i = 0;
-	cur = g_21sh->autocomp;
-	while (cur)
-	{
-		ft_printf("%d: %s\n", i++, cur->command);
-		cur = cur->next;
-	}
-}
-
-void	autocomplete_from_path(void)
-{
-	char	**paths;
-	int		i;
-
-	if (!(paths = ft_strsplit(get_env_value("PATH"), ':')))
-		return ;
-	i = 0;
-	while (paths[i])
-		autocomp_commands_append_dir(paths[i++]);
-	while (i >= 0)
-		free(paths[i--]);
-	free(paths);
 }
 
 void	free_token(t_token *token)
@@ -276,55 +231,6 @@ int		check_token_fd_aggregation()
 {
 	return (g_21sh->token->type == TOKEN_SMALER_ET
 	|| g_21sh->token->type == TOKEN_LRGER_ET);
-}
-
-t_command	*get_next_command(void)
-{
-	t_command	*command;
-	t_redir		*cur_redir;
-	t_arg		*cur_arg;
-	
-
-	if (!g_21sh->token || g_21sh->token->type == TOKEN_SEMI)
-		return (NULL);
-	if (!(command = (t_command*)ft_memalloc(sizeof(t_command))))
-		handle_error("Malloc failed", 1);
-	while (g_21sh->token && g_21sh->token->type != TOKEN_PIPE && g_21sh->token->type != TOKEN_SEMI)
-	{
-		if (check_token_fd_aggregation())
-			add_redir(command, AGGREGATION);
-		else if (check_token_redir())
-			add_redir(command, NO_AGGREGATION);
-		else
-			add_arg(command);
-	}
-	if (g_21sh->token && g_21sh->token->type == TOKEN_PIPE)
-		g_21sh->token = g_21sh->token->next;
-	return (command);
-}
-
-t_command	*get_commands(void)
-{
-	t_command	*commands;
-	t_command	*tmp;
-
-	commands = NULL;
-	while (1)
-	{
-		if (!commands)
-		{
-			tmp = get_next_command();
-			commands = tmp;
-		}
-		else
-		{
-			tmp->next = get_next_command();
-			tmp = tmp->next;
-		}
-		if (!tmp)
-			break ;
-	}
-	return (commands);
 }
 
 char	*token_type_to_char(int type) //causes leaks with print_commands, for debug purposes
@@ -626,7 +532,6 @@ char	*str_remove_char_heredoc(char **str, int index)
 	free(*str);
 	return (newstr);
 }
-
 
 void	handle_backspace_heredoc(char **line)
 {
@@ -1045,46 +950,6 @@ int	execute_command(t_command *command, int *pipes, int command_num)
 	return (pid);
 }
 
-void	run_commands_group(t_command *commands)
-{
-	int			*pipes;
-	int			command_num;
-	int			amount;
-	t_command	*tmp_command;
-	int			*pids;
-
-	pipes = get_pipes(commands);
-	command_num = 0;
-	amount = commands_amount(commands);
-	if (!(pids = (int*)ft_memalloc(sizeof(int) * amount)))
-		handle_error("Malloc failed", 1);
-	tmp_command = commands;
-	while (command_num < amount)
-	{
-		pids[command_num] = execute_command(tmp_command, pipes, command_num);
-		command_num++;
-		tmp_command = tmp_command->next;
-	}
-	command_num = 0;
-	while (command_num < amount)
-		wait_for_child(pids[command_num++]);
-	tcsetattr(STDOUT_FILENO, TCSAFLUSH, &g_21sh->raw); //set terminal back to raw mode??
-}
-
-void	run_commands(void)
-{
-	t_command	*commands;
-
-	while (g_21sh->token) // handle set of tokens at a time, split by ;
-	{
-		commands = get_commands();
-		//print_commands(commands);
-		if (g_21sh->token)
-			g_21sh->token = g_21sh->token->next;
-		run_commands_group(commands);
-	}
-}
-
 void	move_cursor_newline()
 {
 	char	sequence[100];
@@ -1155,10 +1020,6 @@ void	loop_shell(void)
 
 int		check_cmd()
 {
-
-	// if (!g_21sh->token)
-	//	return (1);
-	// handle_expansion();
 	run_first();
 	return (0);
 }

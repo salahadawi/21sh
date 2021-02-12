@@ -6,7 +6,7 @@
 /*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/10 12:20:24 by sadawi            #+#    #+#             */
-/*   Updated: 2021/02/12 09:35:56 by jwilen           ###   ########.fr       */
+/*   Updated: 2021/02/12 17:07:43 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -344,6 +344,25 @@ void			autocomp_append_command(char *command);
 void			autocomp_commands_append_dir(char *path);
 void			autocomplete_from_path(void);
 void			free_autocomp_commands();
+void			autocomplete_from_path(void);
+void			print_autocomp_commands(void);
+
+/*
+** Commands & reddirections
+*/
+
+void			run_commands(void);
+void			run_commands_group(t_command *commands);
+t_command		*get_commands(void);
+t_command		*get_next_command(void);
+
+int				check_token_fd_aggregation();
+void	add_redir(t_command *command, int aggregation);
+int		check_token_redir();
+void	add_arg(t_command *command);
+int		*get_pipes(t_command *commands);
+size_t	commands_amount(t_command *commands);
+int	execute_command(t_command *command, int *pipes, int command_num);
 
 
 

@@ -6,13 +6,13 @@
 /*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/12 09:25:45 by jwilen            #+#    #+#             */
-/*   Updated: 2021/02/12 09:30:56 by jwilen           ###   ########.fr       */
+/*   Updated: 2021/02/12 13:54:55 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh.h"
 
-int		filename_character_allowed(char c)
+int				filename_character_allowed(char c)
 {
 	if (!ft_isprint(c))
 		return (1);
@@ -21,7 +21,7 @@ int		filename_character_allowed(char c)
 	return (c == '-' || c == '_' || c == '.');
 }
 
-void	copy_and_escape_characters(char *dst, char *src)
+void			copy_and_escape_characters(char *dst, char *src)
 {
 	int		i;
 	int		j;
@@ -40,7 +40,7 @@ void	copy_and_escape_characters(char *dst, char *src)
 	}
 }
 
-t_autocomp	*autocomp_new_command(char *command)
+t_autocomp		*autocomp_new_command(char *command)
 {
 	t_autocomp *autocomp;
 
@@ -50,7 +50,7 @@ t_autocomp	*autocomp_new_command(char *command)
 	return (autocomp);
 }
 
-void	autocomp_append_command(char *command)
+void			autocomp_append_command(char *command)
 {
 	if (!g_21sh->autocomp)
 	{
@@ -64,7 +64,7 @@ void	autocomp_append_command(char *command)
 	}
 }
 
-void	autocomp_commands_append_dir(char *path)
+void			autocomp_commands_append_dir(char *path)
 {
 	DIR				*p_dir;
 	struct dirent	*p_dirent;
@@ -73,7 +73,8 @@ void	autocomp_commands_append_dir(char *path)
 		return ;
 	while ((p_dirent = readdir(p_dir)))
 	{
-		if (!ft_strequ(p_dirent->d_name, ".") && !ft_strequ(p_dirent->d_name, ".."))
+		if (!ft_strequ(p_dirent->d_name, ".") &&
+		!ft_strequ(p_dirent->d_name, ".."))
 			autocomp_append_command(p_dirent->d_name);
 	}
 	closedir(p_dir);
