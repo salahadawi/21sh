@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/15 12:28:40 by sadawi            #+#    #+#             */
-/*   Updated: 2021/02/09 15:12:18 by sadawi           ###   ########.fr       */
+/*   Updated: 2021/02/12 09:19:29 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh.h"
 
-void	init_key_sequences()
+void	init_key_sequences(void)
 {
 	char *sequence;
 

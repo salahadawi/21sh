@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sh.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/10 12:20:24 by sadawi            #+#    #+#             */
-/*   Updated: 2021/02/10 18:14:09 by sadawi           ###   ########.fr       */
+/*   Updated: 2021/02/12 09:35:56 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -331,6 +331,20 @@ void	autocomplete(char **line, char previous_pressed_key);
 void        copy_start();
 void            paste();
 char	*str_add_paste(char *str, char *paste);
+
+/*
+** Autocomplete functions
+*/
+
+void			get_autocomplete_commands(void);
+int				filename_character_allowed(char c);
+void			copy_and_escape_characters(char *dst, char *src);
+t_autocomp		*autocomp_new_command(char *command);
+void			autocomp_append_command(char *command);
+void			autocomp_commands_append_dir(char *path);
+void			autocomplete_from_path(void);
+void			free_autocomp_commands();
+
 
 
 #endif

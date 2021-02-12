@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_shell.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 14:12:23 by sadawi            #+#    #+#             */
-/*   Updated: 2021/01/12 13:41:37 by sadawi           ###   ########.fr       */
+/*   Updated: 2021/02/12 09:20:48 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ void	init_env(char *envp[])
 	int i;
 
 	i = count_env_amount(envp);
-	g_21sh->envp = (char**)ft_memalloc(sizeof(char*) * (i + 1)); //protect all mallocs
+	g_21sh->envp = (char**)ft_memalloc(sizeof(char*)
+	* (i + 1)); //protect all mallocs
 	i = 0;
 	while (envp[i])
 	{
@@ -39,7 +40,8 @@ void	init_builtins(void)
 	count = 0;
 	while (g_21sh->builtins.names[count])
 		count++;
-	g_21sh->builtins.funcs = (t_builtin_func**)ft_memalloc(sizeof(t_builtin_func*)
+	g_21sh->builtins.funcs = (t_builtin_func**)
+	ft_memalloc(sizeof(t_builtin_func*)
 	* count);
 	g_21sh->builtins.funcs[0] = &builtin_echo;
 	g_21sh->builtins.funcs[1] = &builtin_exit;

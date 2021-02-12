@@ -6,7 +6,7 @@
 #    By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/04/10 19:27:20 by sadawi            #+#    #+#              #
-#    Updated: 2021/02/09 12:04:44 by jwilen           ###   ########.fr        #
+#    Updated: 2021/02/12 09:38:44 by jwilen           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ minishell.c print.c split_input.c strsub_variations.c
 
 AST = parse.c recursive_build.c syntax_check.c \
 
-AUTOCOMPLETE =
+AUTOCOMPLETE = autocomplete_commands.c autocomplete_commands_alfa.c \
 
 BUILTINS = builtin_cd.c builtin_echo.c builtin_env.c builtin_exit.c \
 builtin_setenv.c builtin_unsetenv.c handle_builtins.c

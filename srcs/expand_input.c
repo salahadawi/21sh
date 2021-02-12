@@ -3,18 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   expand_input.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 14:16:04 by sadawi            #+#    #+#             */
-/*   Updated: 2021/02/07 14:06:05 by sadawi           ###   ########.fr       */
+/*   Updated: 2021/02/12 09:23:14 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh.h"
 
-
-
-void	handle_expansion()
+void	handle_expansion(void)
 {
 	char	*ptr;
 	int		i;
@@ -26,7 +24,8 @@ void	handle_expansion()
 	{
 		if (current->type == TOKEN_ID && current->value[0] == '~')
 			current->value = expand_tilde(current->value, &current->value[0]);
-		if (current->type == TOKEN_ID && (ptr = find_dollar(current->value)) && ptr + 1)
+		if (current->type == TOKEN_ID &&
+		(ptr = find_dollar(current->value)) && ptr + 1)
 			current->value = expand_dollar(current->value, ptr);
 		current = current->next;
 	}

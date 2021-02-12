@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_env_info.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 14:20:38 by sadawi            #+#    #+#             */
-/*   Updated: 2020/04/29 13:13:31 by sadawi           ###   ########.fr       */
+/*   Updated: 2021/02/12 09:21:14 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ char	*get_env_value(char *name)
 	i = 0;
 	while (g_21sh->envp[i])
 	{
-		if (ft_strnequ(g_21sh->envp[i], name, len) && g_21sh->envp[i][len] == '=')
+		if (ft_strnequ(g_21sh->envp[i], name, len) &&
+		g_21sh->envp[i][len] == '=')
 		{
 			free(name);
 			return (ft_strchr(g_21sh->envp[i], '=') + 1);
