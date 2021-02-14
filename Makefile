@@ -6,7 +6,7 @@
 #    By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/04/10 19:27:20 by sadawi            #+#    #+#              #
-#    Updated: 2021/02/12 16:07:40 by jwilen           ###   ########.fr        #
+#    Updated: 2021/02/14 21:09:38 by jwilen           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ autocomplete_commands_beta.c
 BUILTINS = builtin_cd.c builtin_echo.c builtin_env.c builtin_exit.c \
 builtin_setenv.c builtin_unsetenv.c handle_builtins.c
 
-COMMANDS = commands.c \
+COMMANDS = commands.c commands_alfa.c commands_beta.c commands_gamma.c \
 
 HISTORY = get_history.c history_1.c history_2.c \
 

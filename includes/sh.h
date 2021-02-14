@@ -6,7 +6,7 @@
 /*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/10 12:20:24 by sadawi            #+#    #+#             */
-/*   Updated: 2021/02/12 17:07:43 by jwilen           ###   ########.fr       */
+/*   Updated: 2021/02/14 21:16:15 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -357,12 +357,35 @@ t_command		*get_commands(void);
 t_command		*get_next_command(void);
 
 int				check_token_fd_aggregation();
-void	add_redir(t_command *command, int aggregation);
-int		check_token_redir();
-void	add_arg(t_command *command);
-int		*get_pipes(t_command *commands);
-size_t	commands_amount(t_command *commands);
-int	execute_command(t_command *command, int *pipes, int command_num);
+void			add_redir(t_command *command, int aggregation);
+int				check_token_redir();
+void			add_arg(t_command *command);
+int				*get_pipes(t_command *commands);
+size_t			commands_amount(t_command *commands);
+int				execute_command(t_command *command, int *pipes, int command_num);
+void			execute_builtin_in_parent(t_command *command);
+void			child_execute_command(t_command *command, int *pipes, int command_num);
+char			**command_arguments_to_arr(t_command *command);
+void	handle_redirections(t_command *command);
+void	handle_binaries(char **args);
+void	pipe_input(int *pipes, int command_num);
+void	pipe_output(int *pipes, int command_num);
+void	close_pipes(int *pipes);
+void	check_file_descriptors_valid(char *word1, char *word2);
+int		string_is_number(char *str);
+
+/*
+** Redirect functions
+*/
+void	redirect_output_to_file_truncate(char *file);
+void	redirect_fd_to_fd(char *word1, char *word2, int type);
+void	redirect_output_to_file_append(char *file);
+void	redirect_file_to_input(char *file);
+void	redirect_heredoc_to_input(char *eof);
+
+
+
+
 
 
 

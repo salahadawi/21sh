@@ -6,7 +6,7 @@
 /*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/12 16:07:17 by jwilen            #+#    #+#             */
-/*   Updated: 2021/02/12 16:13:48 by jwilen           ###   ########.fr       */
+/*   Updated: 2021/02/14 20:51:41 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,8 @@ void			run_commands(void)
 {
 	t_command	*commands;
 
-	while (g_21sh->token) // handle set of tokens at a time, split by ;
+// handle set of tokens at a time, split by ;
+	while (g_21sh->token)
 	{
 		commands = get_commands();
 		//print_commands(commands);
