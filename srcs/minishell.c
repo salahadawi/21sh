@@ -6,7 +6,7 @@
 /*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 14:23:12 by sadawi            #+#    #+#             */
-/*   Updated: 2021/02/15 14:31:25 by jwilen           ###   ########.fr       */
+/*   Updated: 2021/02/15 15:11:20 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,19 +34,6 @@ char	*str_add_str(char *str, char *str2)
 	}
 	newstr[i + ft_strlen(str2)] = '\0';
 	return (newstr);
-}
-
-int		ft_nbrlen(int nbr)
-{
-	int i;
-
-	i = 0;
-	while (nbr || !i)
-	{
-		nbr /= 10;
-		i++;
-	}
-	return (i);
 }
 
 void	get_cursor_position(int *x, int *y)
@@ -161,8 +148,6 @@ t_redir		*new_redir(void)
 	}
 	return (redir);
 }
-
-
 
 t_redir		*new_redir_aggregation(void)
 {
@@ -344,73 +329,6 @@ void	redirect_file_to_input(char *file)
 	}
 	close(STDIN_FILENO);
 	dup2(fd, STDIN_FILENO);
-}
-
-void	move_word_right_heredoc(char **line)
-{
-	int i;
-	int len;
-
-	len = ft_strlen(*line);
-	i = len;
-	i += g_21sh->cursor_heredoc.x;
-	while (i < len)
-	{
-		if (!ft_strchr(" \t\n\v\f\r", (*line)[i]))
-			move_cursor_right_heredoc(line);
-		else
-			break;
-		i++;
-	}
-	while (i < len)
-	{
-		if (ft_strchr(" \t\n\v\f\r", (*line)[i]))
-			move_cursor_right_heredoc(line);
-		else
-			break;
-		i++;
-	}
-}
-
-void	move_cursor_up_heredoc(char **line)
-{
-	if ((int)ft_strlen(*line) + g_21sh->cursor_heredoc.x >= g_21sh->window.ws_col)
-		g_21sh->cursor_heredoc.x -= g_21sh->window.ws_col;
-}
-
-void	move_cursor_down_heredoc(void)
-{
-	if (-g_21sh->cursor_heredoc.x >= g_21sh->window.ws_col)
-		g_21sh->cursor_heredoc.x += g_21sh->window.ws_col;
-}
-
-char	*str_remove_char_heredoc(char **str, int index)
-{
-	int		i;
-	char	*newstr;
-
-	if (index < 0 || index >= (int)ft_strlen(*str))
-		return (*str);
-	newstr = (char*)ft_memalloc(ft_strlen(*str));
-	i = 0;
-	while (i < index)
-	{
-		newstr[i] = (*str)[i];
-		i++;
-	}
-	if (!(*str)[i])
-	{
-		free(*str);
-		return (newstr);
-	}
-	while ((*str)[i + 1])
-	{
-		newstr[i] = (*str)[i + 1];
-		i++;
-	}
-	newstr[i] = '\0';
-	free(*str);
-	return (newstr);
 }
 
 void	move_cursor_newline()
