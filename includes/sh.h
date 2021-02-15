@@ -6,7 +6,7 @@
 /*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/10 12:20:24 by sadawi            #+#    #+#             */
-/*   Updated: 2021/02/14 21:16:15 by jwilen           ###   ########.fr       */
+/*   Updated: 2021/02/15 14:19:28 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -360,6 +360,7 @@ int				check_token_fd_aggregation();
 void			add_redir(t_command *command, int aggregation);
 int				check_token_redir();
 void			add_arg(t_command *command);
+int		ft_nbrlen(int nbr);
 int				*get_pipes(t_command *commands);
 size_t			commands_amount(t_command *commands);
 int				execute_command(t_command *command, int *pipes, int command_num);
@@ -382,6 +383,40 @@ void	redirect_fd_to_fd(char *word1, char *word2, int type);
 void	redirect_output_to_file_append(char *file);
 void	redirect_file_to_input(char *file);
 void	redirect_heredoc_to_input(char *eof);
+
+/*
+** Heredoc functions
+*/
+int		get_heredoc_input(char **line);
+void	save_cursor_position_heredoc();
+int		handle_keys_heredoc(char **line, char *previous_pressed_key);
+int		input_too_large_heredoc(char **line);
+void	move_cursor_start_heredoc(void);
+void	print_input_heredoc(char *line);
+void	move_cursor_heredoc(char *line);
+void	handle_control_sequence_heredoc(char **line, char *c);
+void	handle_backspace_heredoc(char **line);
+
+void	cursor_jump_up_heredoc(char *line, int *left_len);
+void	find_prompt_y_heredoc(char *line);
+void	move_cursor_next_line_heredoc(char *line);
+void	move_cursor_down_heredoc(void);
+void	move_cursor_up_heredoc(char **line);
+void	move_word_right_heredoc(char **line);
+void	move_word_left_heredoc(char **line);
+void	get_history_next_heredoc(char **line);
+void	get_history_prev_heredoc(char **line);
+void	move_cursor_right_heredoc(char **line);
+void	move_cursor_left_heredoc(char **line);
+void	handle_delete_heredoc(char **line);
+char	*str_remove_char_heredoc(char **str, int index);
+char	*str_add_char_heredoc(char **str, char c);
+
+
+
+
+
+
 
 
 

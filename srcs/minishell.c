@@ -6,7 +6,7 @@
 /*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 14:23:12 by sadawi            #+#    #+#             */
-/*   Updated: 2021/02/14 21:13:15 by jwilen           ###   ########.fr       */
+/*   Updated: 2021/02/15 14:20:41 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -451,34 +451,6 @@ void	move_cursor_down_heredoc(void)
 		g_21sh->cursor_heredoc.x += g_21sh->window.ws_col;
 }
 
-void	handle_control_sequence_heredoc(char **line, char *c)
-{
-	*c += 100;
-	
-	if (*c == g_21sh->key_sequences.delete_key)
-		handle_delete_heredoc(line);
-	else if (*c == g_21sh->key_sequences.left_arrow)
-		move_cursor_left_heredoc(line);
-	else if (*c == g_21sh->key_sequences.right_arrow)
-		move_cursor_right_heredoc(line);
-	else if (*c == g_21sh->key_sequences.up_arrow)
-		get_history_prev_heredoc(line);
-	else if (*c == g_21sh->key_sequences.down_arrow)
-		get_history_next_heredoc(line);
-	else if (*c == HOME)
-		g_21sh->cursor_heredoc.x = -ft_strlen(*line);
-	else if (*c == END)
-		g_21sh->cursor_heredoc.x = 0;
-	else if (*c + 10 == g_21sh->key_sequences.left_arrow)
-		move_word_left_heredoc(line);
-	else if (*c + 10 == g_21sh->key_sequences.right_arrow)
-		move_word_right_heredoc(line);
-	else if (*c + 10 == g_21sh->key_sequences.up_arrow)
-		move_cursor_up_heredoc(line);//copy_input();
-	else if (*c + 10 == g_21sh->key_sequences.down_arrow)
-		move_cursor_down_heredoc();//paste_input();
-}
-
 char	*str_add_char_heredoc(char **str, char c)
 {
 	int		i;
@@ -533,111 +505,6 @@ char	*str_remove_char_heredoc(char **str, int index)
 	return (newstr);
 }
 
-void	handle_backspace_heredoc(char **line)
-{
-	*line = str_remove_char_heredoc(line, ft_strlen(*line)
-	+ g_21sh->cursor_heredoc.x - 1);
-}
-
-int		handle_keys_heredoc(char **line, char *previous_pressed_key)
-{
-	char c;
-
-	c = read_key();
-	// ft_printf("%d", c);
-	if (c == 0)
-		return (1);
-	if (c < 0)
-	{
-		handle_control_sequence_heredoc(line, &c);
-		return (1);
-	}
-	if (c == BACKSPACE)
-	{
-		handle_backspace_heredoc(line);
-	}
-	else if (c == ENTER)
-		return (0);
-	else if (c == TAB)
-	{
-		autocomplete(line, *previous_pressed_key);
-	}
-	else if (c == 4) // CTRL + D
-	{
-		//restore_terminal_mode();
-		return (-1); //temporary, need to restore terminal and free memory here
-	}
-	else if (ft_isprint(c))
-		*line = str_add_char_heredoc(line, c);
-	*previous_pressed_key = c;
-	return (1);
-}
-
-void	save_cursor_position_heredoc()
-{
-	char	sequence[100];
-	int		i;
-	int		x;
-	int		y;
-
-	ft_fprintf(g_21sh->stdout, "%s", "\x1b[6n");
-	ft_bzero(sequence, 100);
-	read(g_21sh->stdin, sequence, 100);
-	i = 0;
-	while (sequence[i] != '[' && i < 97)
-		i++;
-	y = ft_atoi(&sequence[i + 1]);
-	x = ft_atoi(&sequence[i + 2 + ft_nbrlen(y) < 100 ? i + 2 + ft_nbrlen(y) : 0]);
-	g_21sh->cursor_heredoc.prompt_y = y ? y : g_21sh->cursor_heredoc.prompt_y;
-	g_21sh->cursor_heredoc.prompt_x = x ? x : g_21sh->cursor_heredoc.prompt_x;// + g_21sh->prompt_len;
-	//ft_printf("%s", &sequence[i]);
-}
-
-int		input_too_large_heredoc(char **line)
-{
-	if (ft_strlen(*line) > 100000)
-	{
-		free(*line);
-		ft_fprintf(2, "\nError: Input exceeds ARG_MAX.");
-		*line = ft_strdup("");
-		return (1);
-	}
-	return (0);
-}
-
-void	move_cursor_start_heredoc(void)
-{
-	char *move_cursor;
-	char *tmp;
-
-	move_cursor = tgetstr("cm", NULL);
-	//ft_printf("%d, %d", g_21sh->cursor.prompt_y, g_21sh->cursor.prompt_x);
-	tmp = tgoto(move_cursor, g_21sh->cursor_heredoc.prompt_x - 1, g_21sh->cursor_heredoc.prompt_y - 1);
-	tputs(tmp, 1, ft_putschar);
-}
-
-void	print_input_heredoc(char *line)
-{
-	int len;
-	int max_len;
-	int	index;
-
-	len = ft_strlen("heredoc> ") + ft_strlen(line);
-	max_len = g_21sh->window.ws_col * g_21sh->window.ws_row;
-	if (len > max_len)
-	{
-		index = 0;
-		while (len - index > max_len)
-			index += g_21sh->window.ws_col;
-		index += g_21sh->window.ws_col - ft_strlen("heredoc> ");
-		//len -= max_len;
-		//len += g_21sh->window.ws_col;
-		ft_fprintf(g_21sh->stdout, "...\n%s", &line[index]);
-	}
-	else
-		ft_fprintf(g_21sh->stdout, "%s", line);
-}
-
 void	move_cursor_next_line_heredoc(char *line)
 {
 	if (ft_strlen("heredoc> ") + (int)ft_strlen(line)
@@ -679,77 +546,6 @@ void	cursor_jump_up_heredoc(char *line, int *left_len)
 		}
 		move_cursor_right_edge();
 	}
-}
-
-void	move_cursor_heredoc(char *line)
-{
-	int len;
-
-	len = g_21sh->cursor_heredoc.x;
-	if ((ft_strlen("heredoc> ") + ft_strlen(line)) % g_21sh->window.ws_col == 0)
-		move_cursor_next_line_heredoc(line);
-	find_prompt_y_heredoc(line);
-	cursor_jump_up_heredoc(line, &len);
-	while (len++ < 0)
-		set_terminal("le");
-}
-
-int		get_heredoc_input(char **line)
-{
-	char	previous_pressed_key;
-	int		value;
-
-	*line = ft_strnew(0);
-	save_cursor_position_heredoc();
-	while ((value = handle_keys_heredoc(line, &previous_pressed_key)) > 0)
-	{
-		//should not exit from child process, instead find some way to return 0 here
-		if (input_too_large_heredoc(line))
-			break;
-		move_cursor_start_heredoc();
-		set_terminal("cd");
-		print_input_heredoc(*line);
-		move_cursor_heredoc(*line);
-	}
-	if (value == -1)
-		return (0);
-	return (1);
-}
-
-void	redirect_heredoc_to_input(char *eof)
-{
-	char	*line;
-	int		fd;
-
-
-	//tcsetattr(STDOUT_FILENO, TCSAFLUSH, &g_21sh->raw);
-	tcsetattr(g_21sh->stdout, TCSAFLUSH, &g_21sh->raw);
-
-	g_21sh->cursor_heredoc.prompt_x = g_21sh->cursor_heredoc.prompt_x + 1;
-	g_21sh->cursor_heredoc.prompt_y = g_21sh->cursor_heredoc.prompt_y + 1;
-	//g_21sh->cursor_heredoc.x = ft_strlen("heredoc> ");
-	//g_21sh->cursor_heredoc.y = g_21sh->cursor_heredoc.prompt_x;
-	
-	// open tmp file
-	if ((fd = open(".heredoc.tmp", O_WRONLY | O_CREAT | O_TRUNC, 0666)) == -1)
-		handle_error("Open failed", 1);
-	
-	ft_fprintf(g_21sh->stdout ,"heredoc> ");
-	while (get_heredoc_input(&line))
-	{
-		if (ft_strequ(line, eof))
-			break ;
-		ft_putendl_fd(line, fd); // write to tmp file
-		free(line);
-		ft_fprintf(g_21sh->stdout, "\nheredoc> ");
-	}
-	free(line);
-	ft_fprintf(g_21sh->stdout, "\n");
-
-	close(fd);
-	fd = open(".heredoc.tmp", O_RDONLY);
-	close(STDIN_FILENO);
-	dup2(fd, STDIN_FILENO);
 }
 
 void	move_cursor_newline()
