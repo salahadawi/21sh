@@ -6,7 +6,7 @@
 #    By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/04/10 19:27:20 by sadawi            #+#    #+#              #
-#    Updated: 2021/02/15 14:05:14 by jwilen           ###   ########.fr        #
+#    Updated: 2021/02/15 14:29:16 by jwilen           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ builtin_setenv.c builtin_unsetenv.c handle_builtins.c
 
 COMMANDS = commands.c commands_alfa.c commands_beta.c commands_gamma.c \
 
-HEREDOC = heredoc.c heredoc_alfa.c \
+HEREDOC = heredoc.c heredoc_alfa.c heredoc_beta.c heredoc_gamma.c \
 
 HISTORY = get_history.c history_1.c history_2.c \
 
