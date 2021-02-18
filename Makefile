@@ -6,15 +6,14 @@
 #    By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/04/10 19:27:20 by sadawi            #+#    #+#              #
-#    Updated: 2021/02/18 10:44:45 by jwilen           ###   ########.fr        #
+#    Updated: 2021/02/18 10:53:31 by jwilen           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = 21sh
 
-CFILES = compare_pointers.c execute_command.c expand_input.c free_memory.c \
-get_env_info.c init_shell.c main.c \
-minishell.c print.c split_input.c strsub_variations.c
+CFILES =  get_env_info.c init_shell.c main.c \
+minishell.c 
 
 AST = parse.c recursive_build.c syntax_check.c \
 
@@ -25,13 +24,14 @@ BUILTINS = builtin_cd.c builtin_echo.c builtin_env.c builtin_exit.c \
 builtin_setenv.c builtin_unsetenv.c handle_builtins.c
 
 COMMANDS = commands.c commands_alfa.c commands_beta.c commands_gamma.c \
+execute_command.c
 
 HEREDOC = heredoc.c heredoc_alfa.c heredoc_beta.c heredoc_gamma.c \
 heredoc_delta.c
 
 HISTORY = get_history.c history_1.c history_2.c \
 
-INPUT = input_str.c copy.c paste.c \
+INPUT = input_str.c copy.c paste.c expand_input.c \
 
 KEYINPUT = handle_keys.c move_cursor_direction.c move_cursor.c read_key.c \
 move_word.c
@@ -48,7 +48,8 @@ SIGNALS =  handle_signals.c signals.c \
 
 TERMCAPS = termcaps.c \
 
-UTIL = error.c redirect.c cursor.c functions.c \
+UTIL = error.c redirect.c cursor.c functions.c strsub_variations.c \
+free_memory.c print.c compare_pointers.c
 
 
 SRCS = $(addprefix srcs/, $(CFILES)) \
