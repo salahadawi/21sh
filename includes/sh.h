@@ -6,7 +6,7 @@
 /*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/10 12:20:24 by sadawi            #+#    #+#             */
-/*   Updated: 2021/02/15 14:19:28 by jwilen           ###   ########.fr       */
+/*   Updated: 2021/02/18 09:33:43 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,50 +161,32 @@ t_21sh				*g_21sh;
 int					g_debug;
 
 void				print_error(char *message);
-
+/*
+** built in functions
+*/
 int					count_env_amount(char *envp[]);
-
 char				*ft_strsubchar(char const *s, size_t start, char c);
-
 int					builtin_echo(char **args);
-
 int					builtin_exit(char **args);
-
 int					builtin_env(char **args);
-
 int					check_names_match(char *var1, char *var2);
-
 void				add_env(char *arg);
-
 int					builtin_setenv(char **args);
-
 int					shortcut_setenv(char **args);
-
 int					update_env(char **new_envp, int deleted, int i);
-
 int					delete_env(char *arg);
-
 int					builtin_unsetenv(char **args);
-
 char				*strsub_alphanumeric_underscore(char *str);
-
 char				*get_env_value(char *name);
-
 char				*store_oldpwd(void);
-
 void				update_oldpwd(char *path);
-
 void				update_pwd(void);
-
 int					shortcut_cd(char **args);
-
 int					builtin_cd(char **args);
-
 void				init_builtins(void);
-
 void				init_env(char *envp[]);
-
 void				print_envs(void);
+int					handle_builtins(char **args);
 
 char				**split_line_args(char *line);
 
@@ -217,18 +199,15 @@ int					exec_cmd(char **args);
 int					find_size_pointers(char *str, char *ptr);
 
 int					get_env_name_len(char *str);
-
-char				*expand_tilde(char *str, char *ptr);
-
+/*
+** Expand tilde & dollar functions
+*/
+char				*expand_tilde(char *str, char *ptr);	
 char				*expand_dollar(char *str, char *ptr);
-
 char				*find_dollar(const char *s);
-
 void				handle_expansion(void);
-
 int					handle_shortcuts(char **args);
 
-int					handle_builtins(char **args);
 
 int					check_cmd(void);
 
@@ -248,11 +227,6 @@ char				*create_filepath(char *path, char *filename, int len);
 
 void				init_shortcuts(void);
 
-void				handle_signal(int sig);
-
-void				restore_signals(void);
-
-void				init_signal_handling(void);
 
 void				handle_error(char *message, int reset);
 
@@ -271,7 +245,9 @@ t_token				*create_input_token(int type, char *value);
 int					list_len_token();
 
 void				run_first(void);
-
+/*
+** Move cursor functions
+*/
 void				move_cursor_right_edge(void);
 void				move_cursor_next_line(void);
 void				move_cursor_start(void);
@@ -284,12 +260,18 @@ void				move_word_left(void);
 void				move_cursor(void);
 void				cursor_jump_up(int *left_len);
 
+/*
+** Handle keys functions
+*/
 int					handle_keys(void);
 int					read_key(void);
 char				*str_remove_char(char *str, int index);
 char				*str_add_char(char *str, char c);
 void				handle_delete(void);
 
+/*
+** History functions
+*/
 void				get_history_file_path(void);
 void				get_history_prev(void);
 void				get_history_next(void);
@@ -299,19 +281,27 @@ void				save_command_history(void);
 int					same_as_previous_command();
 void				free_history(void);
 
+/*
+** Termcaps functions
+*/
 void				init_termcaps(void);
-
 void				create_terminal_raw_mode();
 void				set_terminal_raw_mode(void);
 
+/*
+** Signal functions
+*/
 void				handle_signal_suspend(void);
 void				handle_signal_continue(void);
 void				handle_signal_interrupt(void);
 void				handle_signal_resize(void);
+void				handle_signal(int sig);
+void				restore_signals(void);
+void				init_signal_handling(void);
 
 int					get_input();
 void				check_str(void);
-int					brackets(char *str);
+int					brackets(char *str); //any need??
 
 void				find_prompt_y(void);
 void				init_key_sequences();
@@ -319,109 +309,105 @@ char				*str_add_str(char *str, char *str2);
 
 int					init_ast_execution(t_ast *ast);
 
-int			check_syntax(t_token *token);
+int					check_syntax(t_token *token);
 
-void	print_input();
-int		input_too_large(void);
+void				print_input();
+int					input_too_large(void);
 
-int		filename_character_allowed(char c);
+int					filename_character_allowed(char c);
 
-void	autocomplete(char **line, char previous_pressed_key);
-
-void        copy_start();
-void            paste();
-char	*str_add_paste(char *str, char *paste);
+/*
+** Copy paste functions
+*/
+void				copy_start();
+void				paste();
+char				*str_add_paste(char *str, char *paste);
 
 /*
 ** Autocomplete functions
 */
-
-void			get_autocomplete_commands(void);
-int				filename_character_allowed(char c);
-void			copy_and_escape_characters(char *dst, char *src);
-t_autocomp		*autocomp_new_command(char *command);
-void			autocomp_append_command(char *command);
-void			autocomp_commands_append_dir(char *path);
-void			autocomplete_from_path(void);
-void			free_autocomp_commands();
-void			autocomplete_from_path(void);
-void			print_autocomp_commands(void);
+void				autocomplete(char **line, char previous_pressed_key);
+void				get_autocomplete_commands(void);
+int					filename_character_allowed(char c);
+void				copy_and_escape_characters(char *dst, char *src);
+t_autocomp			*autocomp_new_command(char *command);
+void				autocomp_append_command(char *command);
+void				autocomp_commands_append_dir(char *path);
+void				autocomplete_from_path(void);
+void				free_autocomp_commands();
+void				autocomplete_from_path(void);
+void				print_autocomp_commands(void);
 
 /*
 ** Commands & reddirections
 */
+void				run_commands(void);
+void				run_commands_group(t_command *commands);
+t_command			*get_commands(void);
+t_command			*get_next_command(void);
+void				print_commands(t_command *commands);
+size_t				commands_amount(t_command *commands);
 
-void			run_commands(void);
-void			run_commands_group(t_command *commands);
-t_command		*get_commands(void);
-t_command		*get_next_command(void);
-
-int				check_token_fd_aggregation();
-void			add_redir(t_command *command, int aggregation);
-int				check_token_redir();
-void			add_arg(t_command *command);
-int		ft_nbrlen(int nbr);
-int				*get_pipes(t_command *commands);
-size_t			commands_amount(t_command *commands);
-int				execute_command(t_command *command, int *pipes, int command_num);
-void			execute_builtin_in_parent(t_command *command);
-void			child_execute_command(t_command *command, int *pipes, int command_num);
-char			**command_arguments_to_arr(t_command *command);
-void	handle_redirections(t_command *command);
-void	handle_binaries(char **args);
-void	pipe_input(int *pipes, int command_num);
-void	pipe_output(int *pipes, int command_num);
-void	close_pipes(int *pipes);
-void	check_file_descriptors_valid(char *word1, char *word2);
-int		string_is_number(char *str);
+int					check_token_fd_aggregation();
+void				add_redir(t_command *command, int aggregation);
+int					check_token_redir();
+void				add_arg(t_command *command);
+int					ft_nbrlen(int nbr);
+int					*get_pipes(t_command *commands);
+size_t				commands_amount(t_command *commands);
+int					execute_command(t_command *command, int *pipes, int command_num);
+void				execute_builtin_in_parent(t_command *command);
+void				child_execute_command(t_command *command, int *pipes, int command_num);
+char				**command_arguments_to_arr(t_command *command);
+void				handle_redirections(t_command *command);
+void				handle_binaries(char **args);
+void				pipe_input(int *pipes, int command_num);
+void				pipe_output(int *pipes, int command_num);
+void				close_pipes(int *pipes);
+void				check_file_descriptors_valid(char *word1, char *word2);
+int					string_is_number(char *str);
 
 /*
 ** Redirect functions
 */
-void	redirect_output_to_file_truncate(char *file);
-void	redirect_fd_to_fd(char *word1, char *word2, int type);
-void	redirect_output_to_file_append(char *file);
-void	redirect_file_to_input(char *file);
-void	redirect_heredoc_to_input(char *eof);
+void				redirect_output_to_file_truncate(char *file);
+void				redirect_fd_to_fd(char *word1, char *word2, int type);
+void				redirect_output_to_file_append(char *file);
+void				redirect_file_to_input(char *file);
+void				redirect_heredoc_to_input(char *eof);
 
 /*
 ** Heredoc functions
 */
-int		get_heredoc_input(char **line);
-void	save_cursor_position_heredoc();
-int		handle_keys_heredoc(char **line, char *previous_pressed_key);
-int		input_too_large_heredoc(char **line);
-void	move_cursor_start_heredoc(void);
-void	print_input_heredoc(char *line);
-void	move_cursor_heredoc(char *line);
-void	handle_control_sequence_heredoc(char **line, char *c);
-void	handle_backspace_heredoc(char **line);
-
-void	cursor_jump_up_heredoc(char *line, int *left_len);
-void	find_prompt_y_heredoc(char *line);
-void	move_cursor_next_line_heredoc(char *line);
-void	move_cursor_down_heredoc(void);
-void	move_cursor_up_heredoc(char **line);
-void	move_word_right_heredoc(char **line);
-void	move_word_left_heredoc(char **line);
-void	get_history_next_heredoc(char **line);
-void	get_history_prev_heredoc(char **line);
-void	move_cursor_right_heredoc(char **line);
-void	move_cursor_left_heredoc(char **line);
-void	handle_delete_heredoc(char **line);
-char	*str_remove_char_heredoc(char **str, int index);
-char	*str_add_char_heredoc(char **str, char c);
-
+int					get_heredoc_input(char **line);
+void				save_cursor_position_heredoc();
+int					handle_keys_heredoc(char **line, char *previous_pressed_key);
+int					input_too_large_heredoc(char **line);
+void				move_cursor_start_heredoc(void);
+void				print_input_heredoc(char *line);
+void				move_cursor_heredoc(char *line);
+void				handle_control_sequence_heredoc(char **line, char *c);
+void				handle_backspace_heredoc(char **line);
+void				cursor_jump_up_heredoc(char *line, int *left_len);
+void				find_prompt_y_heredoc(char *line);
+void				move_cursor_next_line_heredoc(char *line);
+void				move_cursor_down_heredoc(void);
+void				move_cursor_up_heredoc(char **line);
+void				move_word_right_heredoc(char **line);
+void				move_word_left_heredoc(char **line);
+void				get_history_next_heredoc(char **line);
+void				get_history_prev_heredoc(char **line);
+void				move_cursor_right_heredoc(char **line);
+void				move_cursor_left_heredoc(char **line);
+void				handle_delete_heredoc(char **line);
+char				*str_remove_char_heredoc(char **str, int index);
+char				*str_add_char_heredoc(char **str, char c);
 
 
+char	*token_type_to_char(int type);
+void	move_cursor_newline();
 
-
-
-
-
-
-
-
-
+int		advance_tokens(void);
+void	free_token(t_token *token);
 
 #endif

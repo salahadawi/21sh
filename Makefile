@@ -6,7 +6,7 @@
 #    By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/04/10 19:27:20 by sadawi            #+#    #+#              #
-#    Updated: 2021/02/15 14:36:23 by jwilen           ###   ########.fr        #
+#    Updated: 2021/02/18 10:44:45 by jwilen           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,9 +36,11 @@ INPUT = input_str.c copy.c paste.c \
 KEYINPUT = handle_keys.c move_cursor_direction.c move_cursor.c read_key.c \
 move_word.c
 
-LEXER =  lexi.c lexi2.c token.c convert_tokens.c \
+LEXER =  lexi.c lexi2.c token.c convert_tokens.c token_functions.c \
 
 RAWMODE = rawmode.c \
+
+REDIRECTION = redirection.c arg.c \
 
 SHORTCUTS = shortcut_cd.c  shortcut_setenv.c handle_shortcuts.c \
 
@@ -46,7 +48,7 @@ SIGNALS =  handle_signals.c signals.c \
 
 TERMCAPS = termcaps.c \
 
-UTIL = error.c \
+UTIL = error.c redirect.c cursor.c functions.c \
 
 
 SRCS = $(addprefix srcs/, $(CFILES)) \
@@ -60,6 +62,7 @@ $(addprefix srcs/input/, $(INPUT)) \
 $(addprefix srcs/key_input/, $(KEYINPUT)) \
 $(addprefix srcs/lexer/, $(LEXER)) \
 $(addprefix srcs/rawmode/, $(RAWMODE)) \
+$(addprefix srcs/redirection/, $(REDIRECTION)) \
 $(addprefix srcs/shortcuts/, $(SHORTCUTS)) \
 $(addprefix srcs/signals/, $(SIGNALS)) \
 $(addprefix srcs/termcaps/, $(TERMCAPS)) \

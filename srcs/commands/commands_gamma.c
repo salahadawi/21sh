@@ -6,11 +6,62 @@
 /*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/14 21:05:32 by jwilen            #+#    #+#             */
-/*   Updated: 2021/02/14 21:13:10 by jwilen           ###   ########.fr       */
+/*   Updated: 2021/02/18 08:55:38 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh.h"
+
+// is this a need function or just for debug???
+void	print_commands(t_command *commands)
+{
+	t_command	*tmp_command;
+	t_arg		*tmp_arg;
+	t_redir		*tmp_redir;
+	int			i;
+
+	i = 1;
+	tmp_command = commands;
+	while (tmp_command)
+	{
+		tmp_arg = tmp_command->arguments;
+		tmp_redir = tmp_command->redirections;
+		ft_printf("Command %d:\n", i++);
+		if (tmp_arg)
+			ft_printf("Arguments: ");
+		while (tmp_arg)
+		{
+			ft_printf("%s ", tmp_arg->word);
+			tmp_arg = tmp_arg->next;
+		}
+		if (tmp_redir)
+			ft_printf("\nRedirections: ");
+		while (tmp_redir)
+		{
+			ft_printf("Type: %s, File: %s ",
+			token_type_to_char(tmp_redir->type), tmp_redir->word);
+			tmp_redir = tmp_redir->next;
+		}
+		ft_printf("\n");
+		tmp_command = tmp_command->next;
+	}
+	ft_printf("\n");
+}
+
+size_t	commands_amount(t_command *commands)
+{
+	t_command	*tmp;
+	size_t		i;
+
+	i = 0;
+	tmp = commands;
+	while (tmp)
+	{
+		tmp = tmp->next;
+		i++;
+	}
+	return (i);
+}
 
 int		string_is_number(char *str)
 {
