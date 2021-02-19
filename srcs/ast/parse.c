@@ -6,7 +6,7 @@
 /*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/12 08:44:30 by jwilen            #+#    #+#             */
-/*   Updated: 2021/01/12 11:59:45 by jwilen           ###   ########.fr       */
+/*   Updated: 2021/02/19 09:55:28 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@ t_ast		*new_leaf(t_token **token)
 {
 	int		enbr;
 	t_ast	*new;
-	
+
 	if (!(new = ft_memalloc(sizeof(t_ast))))
-		 return (NULL);
+		return (NULL);
 	new->token = *token;
 	new->token_nbr = 1;
 	new->right = NULL;
@@ -26,7 +26,7 @@ t_ast		*new_leaf(t_token **token)
 	new->parent = NULL;
 	new->type = (*token)->type;
 	enbr = TOKEN_STRING;
-	while((*token)->next)
+	while ((*token)->next)
 	{
 		new->token_nbr++;
 		*token = (*token)->next;
@@ -69,7 +69,7 @@ t_ast		*scl_level(t_token **token)
 	t_ast	*right;
 
 	root = pipe_level(token);
-	while((*token)->type == TOKEN_SEMI)
+	while ((*token)->type == TOKEN_SEMI)
 	{
 		parent = new_leaf(token);
 		right = pipe_level(token);
@@ -88,25 +88,24 @@ t_ast		*create_ast(t_token **token)
 
 void		print_ast(t_ast *ast)
 {
-
 	if (ast != NULL)
 	{
 		print_ast(ast->right);
 		ft_printf("\n%s\n", ast->token->value);
 		print_ast(ast->left);
 		// print_ast(ast->parent);
-		
 	}
 }
+
 void		run_ast(t_token **token)
 {
 	t_ast	*ast;
 
 	if ((ast = create_ast(&g_21sh->token)) != NULL)
 	{
-			init_ast_execution(ast);
-			print_ast(ast);
-			run_first();
+		init_ast_execution(ast);
+		print_ast(ast);
+		run_first();
 	}
 	//delete ast
 }
@@ -116,13 +115,11 @@ void		parsing_check(t_token **token)
 	if (!token || !*token)
 		return (handle_error("No tokens", 0));
 		// commented out to work on other parts of the code
-	// if (check_syntax(*token) != 0)
-	// 	return (handle_error("Syntax error", 0));
+		// if (check_syntax(*token) != 0)
+		// 	return (handle_error("Syntax error", 0));
 	else
 	{
 		handle_expansion();
 		// run_ast(token);
 	}
-	
-	
 }
