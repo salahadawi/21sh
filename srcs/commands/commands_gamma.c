@@ -6,13 +6,13 @@
 /*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/14 21:05:32 by jwilen            #+#    #+#             */
-/*   Updated: 2021/02/18 08:55:38 by jwilen           ###   ########.fr       */
+/*   Updated: 2021/02/19 10:27:43 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh.h"
 
-// is this a need function or just for debug???
+// is this a need function or just for debug??? - JWI
 void	print_commands(t_command *commands)
 {
 	t_command	*tmp_command;

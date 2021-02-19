@@ -6,7 +6,7 @@
 /*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/14 21:01:26 by jwilen            #+#    #+#             */
-/*   Updated: 2021/02/14 21:10:27 by jwilen           ###   ########.fr       */
+/*   Updated: 2021/02/19 10:26:57 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	handle_redirections(t_command *command)
 			redirect_file_to_input(tmp->word);
 		if (tmp->type == TOKEN_INSERTION)
 			redirect_heredoc_to_input(tmp->word);
-		if (tmp->type == TOKEN_SMALER_ET || tmp->type == TOKEN_LRGER_ET) // <&, >&
+		if (tmp->type == TOKEN_SMALER_ET || tmp->type == TOKEN_LRGER_ET)
 			redirect_fd_to_fd(tmp->word, tmp->word2, tmp->type);
 		tmp = tmp->next;
 	}
