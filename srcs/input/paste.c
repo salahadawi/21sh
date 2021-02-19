@@ -6,13 +6,13 @@
 /*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/09 12:02:11 by jwilen            #+#    #+#             */
-/*   Updated: 2021/02/09 14:36:12 by jwilen           ###   ########.fr       */
+/*   Updated: 2021/02/19 11:04:26 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh.h"
 
-void			paste()
+void			paste(void)
 {
 	g_21sh->line = str_add_paste(g_21sh->line, g_21sh->copy_part);
 }

@@ -6,18 +6,18 @@
 /*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/11 17:12:41 by jwilen            #+#    #+#             */
-/*   Updated: 2021/02/02 09:49:47 by jwilen           ###   ########.fr       */
+/*   Updated: 2021/02/19 11:04:04 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh.h"
 
-void	copy_input()
+void	copy_input(void)
 {
 	g_21sh->copied_input = ft_strdup(g_21sh->line);
 }
 
-void	paste_input()
+void	paste_input(void)
 {
 	char *tmp;
 
@@ -29,7 +29,7 @@ void	paste_input()
 	}
 }
 
-void	print_input()
+void	print_input(void)
 {
 	int len;
 	int max_len;
@@ -43,8 +43,6 @@ void	print_input()
 		while (len - index > max_len)
 			index += g_21sh->window.ws_col;
 		index += g_21sh->window.ws_col - g_21sh->prompt_len;
-		//len -= max_len;
-		//len += g_21sh->window.ws_col;
 		ft_printf("...\n%s", &g_21sh->line[index]);
 	}
 	else
@@ -63,7 +61,7 @@ int		input_too_large(void)
 	return (0);
 }
 
-int		get_input()
+int		get_input(void)
 {
 	if (g_debug)
 		get_next_line(0, &g_21sh->line);
@@ -73,15 +71,13 @@ int		get_input()
 		save_cursor_position();
 		while (handle_keys())
 		{
-			
 			if (input_too_large())
-				break;
+				break ;
 			move_cursor_start();
 			set_terminal("cd");
 			print_input();
 			move_cursor();
 		}
-		
 	}
 	return (1);
 }
