@@ -6,7 +6,7 @@
 /*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/11 15:52:20 by jwilen            #+#    #+#             */
-/*   Updated: 2020/11/11 15:53:13 by jwilen           ###   ########.fr       */
+/*   Updated: 2021/02/19 10:34:17 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ t_history	*new_history_node(char *line, t_history *prev)
 	return (node);
 }
 
-void	add_to_history(char *line)
+void		add_to_history(char *line)
 {
 	if (!g_21sh->history)
 		g_21sh->history = new_history_node(line, NULL);
@@ -34,7 +34,7 @@ void	add_to_history(char *line)
 	}
 }
 
-int		same_as_previous_command()
+int			same_as_previous_command(void)
 {
 	if (g_21sh->history->prev)
 		g_21sh->history = g_21sh->history->prev;
@@ -48,9 +48,10 @@ int		same_as_previous_command()
 	return (0);
 }
 
-void	free_history(void)
+void		free_history(void)
 {
 	t_history *tmp;
+
 	if (!g_21sh->history)
 		return ;
 	while (g_21sh->history->prev)

@@ -6,7 +6,7 @@
 /*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/11 15:50:27 by jwilen            #+#    #+#             */
-/*   Updated: 2020/11/11 15:51:58 by jwilen           ###   ########.fr       */
+/*   Updated: 2021/02/19 10:33:07 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,11 @@
 
 int		file_is_empty(void)
 {
-	 struct stat stats;
-	 if (stat(g_21sh->history_file_path, &stats))
+	struct stat stats;
+
+	if (stat(g_21sh->history_file_path, &stats))
 		return (1);
-	if(stats.st_size <= 1)
+	if (stats.st_size <= 1)
 		return (1);
 	return (0);
 }
@@ -45,7 +46,7 @@ int		input_just_whitespace(void)
 
 	i = 0;
 	while (g_21sh->line[i])
-		if (!ft_strchr(" \t\n\v\f\r",g_21sh->line[i++]))
+		if (!ft_strchr(" \t\n\v\f\r", g_21sh->line[i++]))
 			return (0);
 	return (1);
 }
