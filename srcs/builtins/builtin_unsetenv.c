@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_unsetenv.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 14:09:30 by sadawi            #+#    #+#             */
-/*   Updated: 2020/04/29 13:20:51 by sadawi           ###   ########.fr       */
+/*   Updated: 2021/02/19 10:22:15 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,8 @@ int		delete_env(char *arg)
 	i = 0;
 	while (g_21sh->envp[i])
 	{
-		if (ft_strnequ(g_21sh->envp[i], arg, len) && g_21sh->envp[i][len] == '=')
+		if (ft_strnequ(g_21sh->envp[i], arg, len) &&
+		g_21sh->envp[i][len] == '=')
 		{
 			free(g_21sh->envp[i]);
 			deleted = 1;
