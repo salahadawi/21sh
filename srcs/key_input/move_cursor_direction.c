@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   move_cursor_direction.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/11 15:40:24 by jwilen            #+#    #+#             */
-/*   Updated: 2021/02/03 16:48:28 by sadawi           ###   ########.fr       */
+/*   Updated: 2021/02/22 12:01:41 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 void	move_cursor_up(void)
 {
-	if ((int)ft_strlen(g_21sh->line) + g_21sh->cursor.x >= g_21sh->window.ws_col)
+	if ((int)ft_strlen(g_21sh->line) + g_21sh->cursor.x >=
+	g_21sh->window.ws_col)
 		g_21sh->cursor.x -= g_21sh->window.ws_col;
 }
 

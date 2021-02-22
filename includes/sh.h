@@ -6,7 +6,7 @@
 /*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/10 12:20:24 by sadawi            #+#    #+#             */
-/*   Updated: 2021/02/18 09:33:43 by jwilen           ###   ########.fr       */
+/*   Updated: 2021/02/22 11:46:46 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -268,6 +268,8 @@ int					read_key(void);
 char				*str_remove_char(char *str, int index);
 char				*str_add_char(char *str, char c);
 void				handle_delete(void);
+void				handle_backspace(void);
+void				handle_control_sequence(char *c);
 
 /*
 ** History functions
@@ -366,6 +368,13 @@ void				pipe_output(int *pipes, int command_num);
 void				close_pipes(int *pipes);
 void				check_file_descriptors_valid(char *word1, char *word2);
 int					string_is_number(char *str);
+char				*get_partial_command(char *line);
+char				**get_matching_commands(char *part_command);
+int					find_start_of_command_index(char *str, int end_index);
+void				complete_command(char **line, char previous_pressed_key, char **matching_commands);
+DIR					*open_dir_until_last_slash(char *path);
+char				**get_dir_commands(char *path);
+int					check_command_valid_dir(char *command);
 
 /*
 ** Redirect functions

@@ -6,7 +6,7 @@
 /*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/11 15:45:55 by jwilen            #+#    #+#             */
-/*   Updated: 2020/11/11 15:47:11 by jwilen           ###   ########.fr       */
+/*   Updated: 2021/02/22 12:02:32 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ void	move_cursor_start(void)
 	char *tmp;
 
 	move_cursor = tgetstr("cm", NULL);
-	//ft_printf("%d, %d", g_21sh->cursor.prompt_y, g_21sh->cursor.prompt_x);
-	tmp = tgoto(move_cursor, g_21sh->cursor.prompt_x - 1, g_21sh->cursor.prompt_y - 1);
+	tmp = tgoto(move_cursor, g_21sh->cursor.prompt_x - 1,
+	g_21sh->cursor.prompt_y - 1);
 	tputs(tmp, 1, ft_putschar);
 }
 
@@ -48,7 +48,8 @@ void	move_cursor(void)
 	int len;
 
 	len = g_21sh->cursor.x;
-	if ((g_21sh->prompt_len + ft_strlen(g_21sh->line)) % g_21sh->window.ws_col == 0)
+	if ((g_21sh->prompt_len + ft_strlen(g_21sh->line)) %
+	g_21sh->window.ws_col == 0)
 		move_cursor_next_line();
 	find_prompt_y();
 	cursor_jump_up(&len);

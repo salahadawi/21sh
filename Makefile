@@ -6,7 +6,7 @@
 #    By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/04/10 19:27:20 by sadawi            #+#    #+#              #
-#    Updated: 2021/02/18 10:53:31 by jwilen           ###   ########.fr        #
+#    Updated: 2021/02/22 11:42:36 by jwilen           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ BUILTINS = builtin_cd.c builtin_echo.c builtin_env.c builtin_exit.c \
 builtin_setenv.c builtin_unsetenv.c handle_builtins.c
 
 COMMANDS = commands.c commands_alfa.c commands_beta.c commands_gamma.c \
-execute_command.c
+execute_command.c commands_delta.c commands_epsilon.c
 
 HEREDOC = heredoc.c heredoc_alfa.c heredoc_beta.c heredoc_gamma.c \
 heredoc_delta.c
@@ -34,7 +34,7 @@ HISTORY = get_history.c history_1.c history_2.c \
 INPUT = input_str.c copy.c paste.c expand_input.c \
 
 KEYINPUT = handle_keys.c move_cursor_direction.c move_cursor.c read_key.c \
-move_word.c
+move_word.c handle_keys_alfa.c
 
 LEXER =  lexi.c lexi2.c token.c convert_tokens.c token_functions.c \
 

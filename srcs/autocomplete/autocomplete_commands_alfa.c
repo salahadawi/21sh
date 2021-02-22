@@ -6,11 +6,20 @@
 /*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/12 09:29:55 by jwilen            #+#    #+#             */
-/*   Updated: 2021/02/19 10:18:55 by jwilen           ###   ########.fr       */
+/*   Updated: 2021/02/22 11:22:28 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh.h"
+
+int				filename_character_allowed(char c)
+{
+	if (!ft_isprint(c))
+		return (1);
+	if (ft_isalnum(c))
+		return (1);
+	return (c == '-' || c == '_' || c == '.');
+}
 
 void	get_autocomplete_commands(void)
 {
