@@ -6,7 +6,7 @@
 /*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/11 16:56:16 by jwilen            #+#    #+#             */
-/*   Updated: 2020/11/11 16:56:50 by jwilen           ###   ########.fr       */
+/*   Updated: 2021/02/23 11:45:01 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,8 @@ void	handle_signal_interrupt(void)
 void	handle_signal_resize(void)
 {
 	ioctl(STDOUT_FILENO, TIOCGWINSZ, &g_21sh->window);
-	if ((int)ft_strlen(g_21sh->line) >= g_21sh->window.ws_col * g_21sh->window.ws_row)
+	if ((int)ft_strlen(g_21sh->line) >= g_21sh->window.ws_col *
+	g_21sh->window.ws_row)
 	{
 		set_terminal("ho");
 		set_terminal("cr");
