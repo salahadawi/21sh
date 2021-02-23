@@ -6,7 +6,7 @@
 /*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/11 17:02:40 by jwilen            #+#    #+#             */
-/*   Updated: 2020/11/11 17:03:28 by jwilen           ###   ########.fr       */
+/*   Updated: 2021/02/23 11:41:39 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	set_terminal_raw_mode(void)
 	set_terminal(SPECIAL_MODE);
 }
 
-void	create_terminal_raw_mode()
+void	create_terminal_raw_mode(void)
 {
 	tcgetattr(STDOUT_FILENO, &g_21sh->raw);
 }
