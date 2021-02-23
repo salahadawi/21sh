@@ -6,13 +6,13 @@
 /*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/18 09:15:16 by jwilen            #+#    #+#             */
-/*   Updated: 2021/02/18 09:16:55 by jwilen           ###   ########.fr       */
+/*   Updated: 2021/02/23 11:50:22 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh.h"
 
-void	save_cursor_position()
+void	save_cursor_position(void)
 {
 	char	sequence[100];
 	int		i;
@@ -26,10 +26,10 @@ void	save_cursor_position()
 	while (sequence[i] != '[' && i < 97)
 		i++;
 	y = ft_atoi(&sequence[i + 1]);
-	x = ft_atoi(&sequence[i + 2 + ft_nbrlen(y) < 100 ? i + 2 + ft_nbrlen(y) : 0]);
+	x = ft_atoi(&sequence[i + 2 +
+	ft_nbrlen(y) < 100 ? i + 2 + ft_nbrlen(y) : 0]);
 	g_21sh->cursor.prompt_y = y ? y : g_21sh->cursor.prompt_y;
-	g_21sh->cursor.prompt_x = x ? x : g_21sh->cursor.prompt_x;// + g_21sh->prompt_len;
-	//ft_printf("%s", &sequence[i]);
+	g_21sh->cursor.prompt_x = x ? x : g_21sh->cursor.prompt_x;
 }
 
 void	get_cursor_position(int *x, int *y)
@@ -65,7 +65,7 @@ void	cursor_jump_up(int *left_len)
 	}
 }
 
-void	move_cursor_newline()
+void	move_cursor_newline(void)
 {
 	char	sequence[100];
 	int		i;
@@ -79,7 +79,8 @@ void	move_cursor_newline()
 	while (sequence[i] != '[' && i < 97)
 		i++;
 	y = ft_atoi(&sequence[i + 1]);
-	x = ft_atoi(&sequence[i + 2 + ft_nbrlen(y) < 100 ? i + 2 + ft_nbrlen(y) : 0]);
+	x = ft_atoi(&sequence[i + 2 + ft_nbrlen(y) < 100 ?
+	i + 2 + ft_nbrlen(y) : 0]);
 	if (x > 1)
 	{
 		set_terminal(TEXT_INVERSE_VIDEO);

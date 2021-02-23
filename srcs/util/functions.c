@@ -6,7 +6,7 @@
 /*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/18 10:44:21 by jwilen            #+#    #+#             */
-/*   Updated: 2021/02/18 10:45:57 by jwilen           ###   ########.fr       */
+/*   Updated: 2021/02/23 11:52:10 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ char	*str_add_str(char *str, char *str2)
 	char	*newstr;
 
 	index = ft_strlen(g_21sh->line) + g_21sh->cursor.x;
-	newstr = (char*)ft_memalloc(ft_strlen(str) + ft_strlen(str2) + 1); //protect
+	newstr = (char*)ft_memalloc(ft_strlen(str) + ft_strlen(str2) + 1);
+	!newstr ? exit(1) : 0;
 	i = 0;
 	while (i < index)
 	{
@@ -41,7 +42,7 @@ void	find_prompt_y(void)
 	int i;
 
 	i = g_21sh->cursor.prompt_y + (g_21sh->prompt_len + ft_strlen(g_21sh->line))
-	 / g_21sh->window.ws_col;
+	/ g_21sh->window.ws_col;
 	while (i-- > g_21sh->window.ws_row)
 	{
 		if (g_21sh->cursor.prompt_y < 1)
