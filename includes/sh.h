@@ -6,7 +6,7 @@
 /*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/10 12:20:24 by sadawi            #+#    #+#             */
-/*   Updated: 2021/02/23 12:13:06 by jwilen           ###   ########.fr       */
+/*   Updated: 2021/02/23 13:22:14 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -369,27 +369,27 @@ void					save_cursor_position_heredoc();
 int						handle_keys_heredoc(char **line,
 						char *previous_pressed_key);
 int						input_too_large_heredoc(char **line);
-void					move_cursor_start_heredoc(void);
 void					print_input_heredoc(char *line);
-void					move_cursor_heredoc(char *line);
 void					handle_control_sequence_heredoc(char **line, char *c);
 void					handle_backspace_heredoc(char **line);
 void					cursor_jump_up_heredoc(char *line, int *left_len);
 void					find_prompt_y_heredoc(char *line);
+void					move_cursor_heredoc(char *line);
+void					move_cursor_start_heredoc(void);
 void					move_cursor_next_line_heredoc(char *line);
 void					move_cursor_down_heredoc(void);
 void					move_cursor_up_heredoc(char **line);
 void					move_word_right_heredoc(char **line);
 void					move_word_left_heredoc(char **line);
+void					move_cursor_right_heredoc(void);
+void					move_cursor_left_heredoc(char **line);
+void					move_cursor_newline();
 void					get_history_next_heredoc(char **line);
 void					get_history_prev_heredoc(char **line);
-void					move_cursor_right_heredoc(char **line);
-void					move_cursor_left_heredoc(char **line);
 void					handle_delete_heredoc(char **line);
 char					*str_remove_char_heredoc(char **str, int index);
 char					*str_add_char_heredoc(char **str, char c);
 char					*token_type_to_char(int type);
-void					move_cursor_newline();
 int						advance_tokens(void);
 void					free_token(t_token *token);
 

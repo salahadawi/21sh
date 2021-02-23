@@ -6,7 +6,7 @@
 /*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/15 14:29:00 by jwilen            #+#    #+#             */
-/*   Updated: 2021/02/15 14:31:43 by jwilen           ###   ########.fr       */
+/*   Updated: 2021/02/23 13:20:53 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void	get_history_prev_heredoc(char **line)
 		}
 }
 
-void	move_cursor_right_heredoc(char **line)
+void	move_cursor_right_heredoc(void)
 {
 	if (g_21sh->cursor_heredoc.x < 0)
 		g_21sh->cursor_heredoc.x++;

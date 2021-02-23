@@ -6,7 +6,7 @@
 /*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/29 11:42:33 by jwilen            #+#    #+#             */
-/*   Updated: 2021/02/23 11:32:45 by jwilen           ###   ########.fr       */
+/*   Updated: 2021/02/23 13:19:18 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,10 @@ char		*lexer_get_current_char_as_string(t_lexer *lexer)
 	return (str);
 }
 
-static int	ft_check_c(int c)
-{
-	return ((60 < c && c < 123) || ('0' <= c && c <= '9'));
-}
+// static int	ft_check_c(int c)
+// {
+// 	return ((60 < c && c < 123) || ('0' <= c && c <= '9'));
+// }
 
 int			lexer_collect_file_aggregation(t_lexer *lexer,
 char **value, char **s)

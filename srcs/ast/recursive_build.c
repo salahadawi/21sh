@@ -6,7 +6,7 @@
 /*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/17 08:43:34 by jwilen            #+#    #+#             */
-/*   Updated: 2021/02/19 10:11:42 by jwilen           ###   ########.fr       */
+/*   Updated: 2021/02/23 13:28:32 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ static int			execute_pipeline(t_ast *left, t_ast *right)
 	pid_t	pid_left;
 
 	status = 0;
+	right = left;
+	left = right;
 	if (pipe(fd) == -1)
 	{
 		print_error("pipe error");

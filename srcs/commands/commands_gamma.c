@@ -6,7 +6,7 @@
 /*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/14 21:05:32 by jwilen            #+#    #+#             */
-/*   Updated: 2021/02/19 10:27:43 by jwilen           ###   ########.fr       */
+/*   Updated: 2021/02/23 13:23:34 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ int		string_is_number(char *str)
 {
 	int i;
 
+	i = 0;
 	if (!str)
 		return (0);
 	while (str[i])

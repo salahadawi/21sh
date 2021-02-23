@@ -6,7 +6,7 @@
 /*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/17 07:22:21 by jwilen            #+#    #+#             */
-/*   Updated: 2021/02/22 22:09:32 by jwilen           ###   ########.fr       */
+/*   Updated: 2021/02/23 13:19:47 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,6 @@ void			lexi(void)
 {
 	t_lexer *lexer;
 	t_token *token;
-	t_token *tmp;
 
 	lexer = init_lexer(g_21sh->line);
 	g_21sh->token = NULL;

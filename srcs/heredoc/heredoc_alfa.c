@@ -6,7 +6,7 @@
 /*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/15 14:04:41 by jwilen            #+#    #+#             */
-/*   Updated: 2021/02/15 14:12:16 by jwilen           ###   ########.fr       */
+/*   Updated: 2021/02/23 13:25:05 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	handle_control_sequence_heredoc(char **line, char *c)
 	else if (*c == g_21sh->key_sequences.left_arrow)
 		move_cursor_left_heredoc(line);
 	else if (*c == g_21sh->key_sequences.right_arrow)
-		move_cursor_right_heredoc(line);
+		move_cursor_right_heredoc();
 	else if (*c == g_21sh->key_sequences.up_arrow)
 		get_history_prev_heredoc(line);
 	else if (*c == g_21sh->key_sequences.down_arrow)

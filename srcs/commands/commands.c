@@ -6,7 +6,7 @@
 /*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/12 16:07:17 by jwilen            #+#    #+#             */
-/*   Updated: 2021/02/14 20:51:41 by jwilen           ###   ########.fr       */
+/*   Updated: 2021/02/23 13:26:36 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 t_command		*get_next_command(void)
 {
 	t_command	*command;
-	t_redir		*cur_redir;
-	t_arg		*cur_arg;
+	// t_redir		*cur_redir;
+	// t_arg		*cur_arg;
 
 	if (!g_21sh->token || g_21sh->token->type == TOKEN_SEMI)
 		return (NULL);

@@ -6,7 +6,7 @@
 /*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/15 15:04:58 by jwilen            #+#    #+#             */
-/*   Updated: 2021/02/15 15:11:07 by jwilen           ###   ########.fr       */
+/*   Updated: 2021/02/23 13:24:46 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ void	move_word_right_heredoc(char **line)
 	while (i < len)
 	{
 		if (!ft_strchr(" \t\n\v\f\r", (*line)[i]))
-			move_cursor_right_heredoc(line);
+			move_cursor_right_heredoc();
 		else
 			break ;
 		i++;
@@ -86,7 +86,7 @@ void	move_word_right_heredoc(char **line)
 	while (i < len)
 	{
 		if (ft_strchr(" \t\n\v\f\r", (*line)[i]))
-			move_cursor_right_heredoc(line);
+			move_cursor_right_heredoc();
 		else
 			break ;
 		i++;

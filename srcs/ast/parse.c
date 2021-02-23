@@ -6,7 +6,7 @@
 /*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/12 08:44:30 by jwilen            #+#    #+#             */
-/*   Updated: 2021/02/19 09:55:28 by jwilen           ###   ########.fr       */
+/*   Updated: 2021/02/23 13:30:59 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,9 @@ t_ast		*new_leaf(t_token **token)
 {
 	int		enbr;
 	t_ast	*new;
+	t_token	*tmp;
 
+	tmp = *token;
 	if (!(new = ft_memalloc(sizeof(t_ast))))
 		return (NULL);
 	new->token = *token;
@@ -100,7 +102,9 @@ void		print_ast(t_ast *ast)
 void		run_ast(t_token **token)
 {
 	t_ast	*ast;
+	t_token	*tmp;
 
+	tmp = *token;
 	if ((ast = create_ast(&g_21sh->token)) != NULL)
 	{
 		init_ast_execution(ast);

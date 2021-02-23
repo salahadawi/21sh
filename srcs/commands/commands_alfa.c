@@ -6,7 +6,7 @@
 /*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/14 20:52:48 by jwilen            #+#    #+#             */
-/*   Updated: 2021/02/14 21:00:06 by jwilen           ###   ########.fr       */
+/*   Updated: 2021/02/23 13:25:43 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ void	child_execute_command(t_command *command, int *pipes, int command_num)
 
 int		execute_command(t_command *command, int *pipes, int command_num)
 {
-	char	*filepath;
+	// char	*filepath;
 	pid_t	pid;
 
 	tcsetattr(STDOUT_FILENO, TCSAFLUSH, &g_21sh->old); //set terminal to normal temporarily??
