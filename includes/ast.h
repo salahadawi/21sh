@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ast.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/12 08:32:28 by jwilen            #+#    #+#             */
-/*   Updated: 2021/02/05 15:44:35 by sadawi           ###   ########.fr       */
+/*   Updated: 2021/02/23 11:58:52 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,17 +39,17 @@ typedef struct			s_command
 	struct s_command	*next;
 }						t_command;
 
-typedef struct 		s_ast
+typedef struct			s_ast
 {
-	t_token			*token;
-	t_token			*cmd_end;
-	struct s_ast	*parent;
-	struct s_ast	*left;
-	struct s_ast	*right;
-	int				type;
-	int				token_nbr;
-}					t_ast;
+	t_token				*token;
+	t_token				*cmd_end;
+	struct s_ast		*parent;
+	struct s_ast		*left;
+	struct s_ast		*right;
+	int					type;
+	int					token_nbr;
+}						t_ast;
 
-void		parsing_check(t_token **token);
+void					parsing_check(t_token **token);
 
 #endif

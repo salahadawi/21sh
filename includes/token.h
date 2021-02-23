@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   token.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/17 14:05:21 by jwilen            #+#    #+#             */
-/*   Updated: 2021/02/09 15:00:58 by sadawi           ###   ########.fr       */
+/*   Updated: 2021/02/23 11:57:51 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef TOKEN_H
 # define TOKEN_H
 
-#include "./sh.h"
+# include "./sh.h"
 
 typedef	struct		s_token
 {
@@ -48,7 +48,6 @@ typedef	struct		s_token
 	struct s_token	*prev;
 }					t_token;
 
-t_token		*init_token(int type, char *value, t_token *prev);
-
+t_token				*init_token(int type, char *value, t_token *prev);
 
 #endif
