@@ -6,19 +6,18 @@
 /*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/18 09:25:16 by jwilen            #+#    #+#             */
-/*   Updated: 2021/02/18 09:33:20 by jwilen           ###   ########.fr       */
+/*   Updated: 2021/02/23 11:43:21 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh.h"
 
-int		advance_tokens(void)
+int			advance_tokens(void)
 {
 	t_token *tmp;
 
 	if (!g_21sh->token)
 		return (0);
-	
 	tmp = g_21sh->token->next;
 	free_token(g_21sh->token);
 	g_21sh->token = tmp;
@@ -57,7 +56,7 @@ t_redir		*new_redir_aggregation(void)
 	return (redir);
 }
 
-int		check_token_redir()
+int			check_token_redir(void)
 {
 	return (g_21sh->token->type == TOKEN_LRGER
 	|| g_21sh->token->type == TOKEN_SMLER
@@ -65,7 +64,7 @@ int		check_token_redir()
 	|| g_21sh->token->type == TOKEN_EXTRACTION);
 }
 
-void	add_redir(t_command *command, int aggregation)
+void		add_redir(t_command *command, int aggregation)
 {
 	static t_redir *cur_redir;
 

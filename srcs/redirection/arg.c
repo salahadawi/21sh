@@ -6,7 +6,7 @@
 /*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/18 10:40:24 by jwilen            #+#    #+#             */
-/*   Updated: 2021/02/18 10:41:25 by jwilen           ###   ########.fr       */
+/*   Updated: 2021/02/23 11:42:38 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ t_arg		*new_arg(void)
 	return (arg);
 }
 
-void	add_arg(t_command *command)
+void		add_arg(t_command *command)
 {
 	static t_arg *cur_arg;
 
