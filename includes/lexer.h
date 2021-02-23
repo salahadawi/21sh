@@ -6,7 +6,7 @@
 /*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/17 14:03:41 by jwilen            #+#    #+#             */
-/*   Updated: 2021/01/15 11:28:38 by jwilen           ###   ########.fr       */
+/*   Updated: 2021/02/23 11:34:27 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ typedef struct		s_lexer
 	char			*contents;
 }					t_lexer;
 
+char				*ft_relloc(char **str);
 t_lexer				*init_lexer(char *contents);
 void				lexer_advance(t_lexer *lexer);
 void				lexer_skip_whitespace(t_lexer *lexer);

@@ -6,7 +6,7 @@
 /*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/11 15:38:22 by jwilen            #+#    #+#             */
-/*   Updated: 2021/02/22 12:04:30 by jwilen           ###   ########.fr       */
+/*   Updated: 2021/02/22 12:25:46 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ char	*str_remove_char(char *str, int index)
 char	*str_add_paste(char *str, char *paste)
 {
 	int		i;
-	int 	j;
+	int		j;
 	int		index;
 	char	*newstr;
 

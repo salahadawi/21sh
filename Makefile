@@ -6,7 +6,7 @@
 #    By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/04/10 19:27:20 by sadawi            #+#    #+#              #
-#    Updated: 2021/02/22 11:42:36 by jwilen           ###   ########.fr        #
+#    Updated: 2021/02/23 11:30:52 by jwilen           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,6 +37,7 @@ KEYINPUT = handle_keys.c move_cursor_direction.c move_cursor.c read_key.c \
 move_word.c handle_keys_alfa.c
 
 LEXER =  lexi.c lexi2.c token.c convert_tokens.c token_functions.c \
+lexer_alfa.c lexer_collect.c lexer_collect_strings.c
 
 RAWMODE = rawmode.c \
 

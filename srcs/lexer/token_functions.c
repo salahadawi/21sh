@@ -6,7 +6,7 @@
 /*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/18 08:56:15 by jwilen            #+#    #+#             */
-/*   Updated: 2021/02/18 10:39:26 by jwilen           ###   ########.fr       */
+/*   Updated: 2021/02/23 11:38:06 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	free_token(t_token *token)
 	free(token);
 }
 
-int		check_token_fd_aggregation()
+int		check_token_fd_aggregation(void)
 {
 	return (g_21sh->token->type == TOKEN_SMALER_ET
 	|| g_21sh->token->type == TOKEN_LRGER_ET);

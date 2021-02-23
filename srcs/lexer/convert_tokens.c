@@ -6,13 +6,14 @@
 /*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/10 14:20:57 by jwilen            #+#    #+#             */
-/*   Updated: 2020/11/19 15:06:05 by jwilen           ###   ########.fr       */
+/*   Updated: 2021/02/22 12:29:31 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/sh.h"
 
-void		ft_free_s_data()
+// are theese functions used at all ?
+void		ft_free_s_data(void)
 {
 	int		i;
 
@@ -25,7 +26,7 @@ void		ft_free_s_data()
 	free(g_21sh->s_args);
 }
 
-int			list_len_token()
+int			list_len_token(void)
 {
 	t_token		*current;
 	int			len;
@@ -34,14 +35,13 @@ int			list_len_token()
 	current = g_21sh->head;
 	while (current)
 	{
-		// ft_printf("len: %s\n", current->value);
 		len++;
 		current = current->next;
 	}
 	return (len);
 }
 
-int				array_len_arr(int i)
+int			array_len_arr(int i)
 {
 	int		len;
 
@@ -54,7 +54,7 @@ int				array_len_arr(int i)
 	return (len);
 }
 
-void			convert_arr_tok_to_arr()
+void		convert_arr_tok_to_arr(void)
 {
 	int		len;
 	int		i;
@@ -77,7 +77,7 @@ void			convert_arr_tok_to_arr()
 		ft_printf("\n");
 		if (handle_builtins(g_21sh->s_args))
 			write(1, "", 0);
-		else 
+		else
 			exec_cmd(g_21sh->s_args);
 		ft_free_s_data();
 		if (g_21sh->args[i] != NULL)
@@ -87,7 +87,7 @@ void			convert_arr_tok_to_arr()
 	}
 }
 
-void			convert_ll_to_arr_tok()
+void		convert_ll_to_arr_tok(void)
 {
 	int		len;
 	t_token	*current;
@@ -111,7 +111,7 @@ void			convert_ll_to_arr_tok()
 	g_21sh->args[i] = NULL;
 }
 
-void			run_first()
+void		run_first(void)
 {
 	convert_ll_to_arr_tok();
 	convert_arr_tok_to_arr();
