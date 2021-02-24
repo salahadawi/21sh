@@ -6,7 +6,7 @@
 /*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 14:23:12 by sadawi            #+#    #+#             */
-/*   Updated: 2021/02/23 13:31:54 by jwilen           ###   ########.fr       */
+/*   Updated: 2021/02/23 18:11:23 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 
 void	loop_shell(void)
 {
-	//char	**commands;
-	//char	**args;
 	int		loop;
 
 	loop = 1;

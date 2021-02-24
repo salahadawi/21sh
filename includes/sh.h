@@ -6,7 +6,7 @@
 /*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/10 12:20:24 by sadawi            #+#    #+#             */
-/*   Updated: 2021/02/23 13:22:14 by jwilen           ###   ########.fr       */
+/*   Updated: 2021/02/23 18:11:31 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -217,7 +217,7 @@ void					lexi(void);
 void					create_input_tok(int type, char *str);
 t_token					*create_input_token(int type, char *value);
 int						list_len_token();
-void					run_first(void);
+// void					run_first(void);
 
 /*
 ** Move cursor functions
