@@ -6,7 +6,7 @@
 /*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/12 16:07:17 by jwilen            #+#    #+#             */
-/*   Updated: 2021/02/23 13:26:36 by jwilen           ###   ########.fr       */
+/*   Updated: 2021/02/24 10:34:53 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,6 @@
 t_command		*get_next_command(void)
 {
 	t_command	*command;
-	// t_redir		*cur_redir;
-	// t_arg		*cur_arg;
 
 	if (!g_21sh->token || g_21sh->token->type == TOKEN_SEMI)
 		return (NULL);
@@ -91,11 +89,12 @@ void			run_commands(void)
 {
 	t_command	*commands;
 
-// handle set of tokens at a time, split by ;
+/*
+** handle set of tokens at a time, split by ;
+*/
 	while (g_21sh->token)
 	{
 		commands = get_commands();
-		//print_commands(commands);
 		if (g_21sh->token)
 			g_21sh->token = g_21sh->token->next;
 		run_commands_group(commands);

@@ -6,7 +6,7 @@
 /*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/14 21:05:32 by jwilen            #+#    #+#             */
-/*   Updated: 2021/02/23 13:23:34 by jwilen           ###   ########.fr       */
+/*   Updated: 2021/02/24 10:40:43 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,9 @@ void	redirect_fd_to_fd(char *word1, char *word2, int type)
 	int fd1;
 	int	fd2;
 
-	//add defaults for >& and <&
+	/*
+	** add defaults for >& and <&
+	*/
 	check_file_descriptors_valid(word1, word2);
 	if (word1)
 		fd1 = ft_atoi(word1);

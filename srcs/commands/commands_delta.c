@@ -6,7 +6,7 @@
 /*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/22 11:25:13 by jwilen            #+#    #+#             */
-/*   Updated: 2021/02/24 08:57:16 by jwilen           ###   ########.fr       */
+/*   Updated: 2021/02/24 10:39:05 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ char	*ft_strdup_and_escape_characters(char *str)
 
 char	*join_path_and_filename(char *path, struct dirent *p_dirent)
 {
-	// DIR		*p_dir;
 	char	*tmp;
 
 	if (ft_strequ(path, "."))

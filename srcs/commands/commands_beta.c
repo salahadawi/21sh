@@ -6,7 +6,7 @@
 /*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/14 21:01:26 by jwilen            #+#    #+#             */
-/*   Updated: 2021/02/19 10:26:57 by jwilen           ###   ########.fr       */
+/*   Updated: 2021/02/24 10:37:56 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,9 @@
 
 void	handle_redirections(t_command *command)
 {
-	//open files for reading/writing, dup2 to change to appropriate fd
+	/*
+	** open files for reading/writing, dup2 to change to appropriate fd
+	*/
 	t_redir *tmp;
 
 	tmp = command->redirections;

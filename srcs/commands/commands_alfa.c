@@ -6,7 +6,7 @@
 /*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/14 20:52:48 by jwilen            #+#    #+#             */
-/*   Updated: 2021/02/23 13:25:43 by jwilen           ###   ########.fr       */
+/*   Updated: 2021/02/24 10:37:00 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,6 @@ void	child_execute_command(t_command *command, int *pipes, int command_num)
 		pipe_output(pipes, command_num);
 	close_pipes(pipes);
 	handle_redirections(command);
-	// if (pipes)
-	// 	close(pipes[command_num * 2 + 1]);
 	args = command_arguments_to_arr(command);
 	if (!handle_builtins(args)) // change to exit with proper builtin return values // could get exit value from waitpid?
 		handle_binaries(args);
@@ -75,7 +73,6 @@ void	child_execute_command(t_command *command, int *pipes, int command_num)
 
 int		execute_command(t_command *command, int *pipes, int command_num)
 {
-	// char	*filepath;
 	pid_t	pid;
 
 	tcsetattr(STDOUT_FILENO, TCSAFLUSH, &g_21sh->old); //set terminal to normal temporarily??
