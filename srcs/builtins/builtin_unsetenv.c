@@ -6,7 +6,7 @@
 /*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 14:09:30 by sadawi            #+#    #+#             */
-/*   Updated: 2021/02/19 10:22:15 by jwilen           ###   ########.fr       */
+/*   Updated: 2021/02/24 08:56:54 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,9 @@ int		delete_env(char *arg)
 	int		i;
 	int		deleted;
 
-	new_envp = (char**)ft_memalloc(sizeof(char*)
-	* (count_env_amount(g_21sh->envp)));
+	if (!(new_envp = (char**)ft_memalloc(sizeof(char*)
+	* (count_env_amount(g_21sh->envp)))))
+		handle_error("Malloc failed", 1);
 	len = ft_strlen(arg);
 	deleted = 0;
 	i = 0;

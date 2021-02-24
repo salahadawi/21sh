@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_cd.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 14:10:22 by sadawi            #+#    #+#             */
-/*   Updated: 2020/04/29 13:18:37 by sadawi           ###   ########.fr       */
+/*   Updated: 2021/02/24 08:55:50 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,8 @@ char	*store_oldpwd(void)
 {
 	char *path;
 
-	path = (char*)ft_memalloc(PATH_MAX + 1);
+	if (!(path = (char*)ft_memalloc(PATH_MAX + 1)))
+		handle_error("Malloc failed", 1);
 	getcwd(path, PATH_MAX);
 	return (path);
 }
@@ -58,7 +59,8 @@ void	update_pwd(void)
 	char *path;
 	char *env_var;
 
-	path = (char*)ft_memalloc(PATH_MAX + 1);
+	if (!(path = (char*)ft_memalloc(PATH_MAX + 1)))
+		handle_error("Malloc failed", 1);
 	getcwd(path, PATH_MAX);
 	env_var = ft_strjoin("PWD=", path);
 	add_env(env_var);

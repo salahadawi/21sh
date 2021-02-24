@@ -6,7 +6,7 @@
 /*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 14:23:12 by sadawi            #+#    #+#             */
-/*   Updated: 2021/02/24 08:19:55 by jwilen           ###   ########.fr       */
+/*   Updated: 2021/02/24 09:10:59 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ void	loop_shell(void)
 	}
 }
 
-int		check_cmd(void)
-{
-	run_first();
-	return (0);
-}
+// int		check_cmd(void)
+// {
+// 	run_first();
+// 	return (0);
+// }

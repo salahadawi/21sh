@@ -6,7 +6,7 @@
 /*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 14:12:23 by sadawi            #+#    #+#             */
-/*   Updated: 2021/02/12 09:20:48 by jwilen           ###   ########.fr       */
+/*   Updated: 2021/02/24 08:54:02 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,9 @@ void	init_env(char *envp[])
 	int i;
 
 	i = count_env_amount(envp);
-	g_21sh->envp = (char**)ft_memalloc(sizeof(char*)
-	* (i + 1)); //protect all mallocs
+	if (!(g_21sh->envp = (char**)ft_memalloc(sizeof(char*)
+	* (i + 1))))
+		handle_error("Malloc failed", 1);
 	i = 0;
 	while (envp[i])
 	{
@@ -40,9 +41,9 @@ void	init_builtins(void)
 	count = 0;
 	while (g_21sh->builtins.names[count])
 		count++;
-	g_21sh->builtins.funcs = (t_builtin_func**)
-	ft_memalloc(sizeof(t_builtin_func*)
-	* count);
+	if (!(g_21sh->builtins.funcs = (t_builtin_func**)
+	ft_memalloc(sizeof(t_builtin_func*) * count)))
+		handle_error("Malloc failed", 1);
 	g_21sh->builtins.funcs[0] = &builtin_echo;
 	g_21sh->builtins.funcs[1] = &builtin_exit;
 	g_21sh->builtins.funcs[2] = &builtin_env;
@@ -71,7 +72,8 @@ void	clear_screen(void)
 {
 	char **args;
 
-	args = (char**)ft_memalloc(sizeof(char*) * 2); //protect
+	if (!(args = (char**)ft_memalloc(sizeof(char*) * 2)))
+		handle_error("Malloc failed", 1);
 	args[0] = ft_strdup("clear");
 	args[1] = NULL;
 	exec_cmd(args);

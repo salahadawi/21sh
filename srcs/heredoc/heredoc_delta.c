@@ -6,7 +6,7 @@
 /*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/15 15:04:58 by jwilen            #+#    #+#             */
-/*   Updated: 2021/02/23 13:24:46 by jwilen           ###   ########.fr       */
+/*   Updated: 2021/02/24 08:58:27 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,8 @@ char	*str_remove_char_heredoc(char **str, int index)
 
 	if (index < 0 || index >= (int)ft_strlen(*str))
 		return (*str);
-	newstr = (char*)ft_memalloc(ft_strlen(*str));
+	if (!(newstr = (char*)ft_memalloc(ft_strlen(*str))))
+		handle_error("Malloc failed", 1);
 	i = 0;
 	while (i < index)
 	{

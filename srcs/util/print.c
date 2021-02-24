@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 13:59:48 by sadawi            #+#    #+#             */
-/*   Updated: 2020/04/30 13:32:11 by sadawi           ###   ########.fr       */
+/*   Updated: 2021/02/24 09:06:17 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,8 @@ int		print_current_dir_basename(void)
 	char	*basename;
 	int		len;
 
-	path = (char*)ft_memalloc(PATH_MAX + 1);
+	if (!(path = (char*)ft_memalloc(PATH_MAX + 1)))
+		handle_error("Malloc failed", 1);
 	getcwd(path, PATH_MAX);
 	basename = ft_strrchr(path, '/') + 1;
 	len = ft_strlen(basename);

@@ -6,7 +6,7 @@
 /*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/12 08:44:30 by jwilen            #+#    #+#             */
-/*   Updated: 2021/02/23 13:30:59 by jwilen           ###   ########.fr       */
+/*   Updated: 2021/02/24 09:12:01 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ void		run_ast(t_token **token)
 	{
 		init_ast_execution(ast);
 		print_ast(ast);
-		run_first();
+		// run_first();
 	}
 	//delete ast
 }

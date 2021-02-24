@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_command.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 14:18:58 by sadawi            #+#    #+#             */
-/*   Updated: 2021/02/09 16:40:13 by sadawi           ###   ########.fr       */
+/*   Updated: 2021/02/24 08:57:44 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,8 @@ char	*create_filepath(char *path, char *filename, int len)
 {
 	char *filepath;
 
-	filepath = (char*)ft_memalloc(ft_strlen(path) + len + 2);
+	if (!(filepath = (char*)ft_memalloc(ft_strlen(path) + len + 2)))
+		handle_error("Malloc failed", 1);
 	ft_strcpy(filepath, path);
 	ft_strcat(filepath, "/");
 	ft_strcat(filepath, filename);

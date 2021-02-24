@@ -6,7 +6,7 @@
 /*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/15 14:23:56 by jwilen            #+#    #+#             */
-/*   Updated: 2021/02/15 14:28:27 by jwilen           ###   ########.fr       */
+/*   Updated: 2021/02/24 08:58:02 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,8 @@ char	*str_add_char_heredoc(char **str, char c)
 	char	*newstr;
 
 	index = ft_strlen(*str) + g_21sh->cursor_heredoc.x;
-	newstr = (char*)ft_memalloc(ft_strlen(*str) + 2); //protect
+	if (!(newstr = (char*)ft_memalloc(ft_strlen(*str) + 2)))
+		handle_error("Malloc failed", 1);
 	i = 0;
 	while (i < index)
 	{

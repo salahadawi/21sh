@@ -6,7 +6,7 @@
 /*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/11 15:50:27 by jwilen            #+#    #+#             */
-/*   Updated: 2021/02/19 10:33:07 by jwilen           ###   ########.fr       */
+/*   Updated: 2021/02/24 09:06:34 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,8 @@ void	get_history_file_path(void)
 {
 	char *path;
 
-	path = (char*)ft_memalloc(PATH_MAX + 1);
+	if (!(path = (char*)ft_memalloc(PATH_MAX + 1)))
+		handle_error("Malloc failed", 1);
 	getcwd(path, PATH_MAX);
 	path = ft_strjoinfree(path, ft_strdup("/.21sh_history"));
 	g_21sh->history_file_path = path;

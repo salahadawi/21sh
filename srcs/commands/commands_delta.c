@@ -6,7 +6,7 @@
 /*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/22 11:25:13 by jwilen            #+#    #+#             */
-/*   Updated: 2021/02/23 13:22:51 by jwilen           ###   ########.fr       */
+/*   Updated: 2021/02/24 08:57:16 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ char	*ft_strdup_and_escape_characters(char *str)
 	while (str[i])
 		if (!filename_character_allowed(str[i++]))
 			j++;
-	new_str = (char*)ft_memalloc(i + j + 1);
+	if (!(new_str = (char*)ft_memalloc(i + j + 1)))
+		handle_error("Malloc failed", 1);
 	i = 0;
 	j = 0;
 	while (str[i])

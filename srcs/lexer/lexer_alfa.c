@@ -6,7 +6,7 @@
 /*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/22 12:39:13 by jwilen            #+#    #+#             */
-/*   Updated: 2021/02/23 13:18:39 by jwilen           ###   ########.fr       */
+/*   Updated: 2021/02/24 09:00:14 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ t_token		*lexer_collect_backslash(t_lexer *lexer)
 	char	*s;
 	int		len;
 
-	value = (char*)ft_memalloc(sizeof(char));
-	!value ? exit(1) : 0;
+	if (!(value = (char*)ft_memalloc(sizeof(char))))
+		handle_error("Malloc failed", 1);
 	lexer_advance(lexer);
 	len = ft_strlen(lexer->contents);
 	while ((int)lexer->i < len)

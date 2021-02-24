@@ -6,7 +6,7 @@
 /*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/29 11:42:33 by jwilen            #+#    #+#             */
-/*   Updated: 2021/02/23 13:19:18 by jwilen           ###   ########.fr       */
+/*   Updated: 2021/02/24 09:03:41 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,17 +28,12 @@ char		*lexer_get_current_char_as_string(t_lexer *lexer)
 {
 	char	*str;
 
-	str = (char*)malloc(sizeof(char) + 1);
-	!str ? exit(1) : 0;
+	if (!(str = (char*)malloc(sizeof(char) + 1)))
+		handle_error("Malloc failed", 1);
 	str[0] = lexer->c;
 	str[1] = '\0';
 	return (str);
 }
-
-// static int	ft_check_c(int c)
-// {
-// 	return ((60 < c && c < 123) || ('0' <= c && c <= '9'));
-// }
 
 int			lexer_collect_file_aggregation(t_lexer *lexer,
 char **value, char **s)
@@ -69,8 +64,8 @@ t_token		*lexer_collect_id(t_lexer *lexer)
 	char	*s;
 	int		token_type;
 
-	value = (char*)ft_memalloc(sizeof(char));
-	!value ? exit(1) : 0;
+	if (!(value = (char*)ft_memalloc(sizeof(char))))
+		handle_error("Malloc failed", 1);
 	while (lexer->c != '\0' && lexer->c != BACKSLASH && lexer->c != ' ' &&
 	lexer->c != ENTER && lexer->c != STRING && lexer->c != QSTRING &&
 	lexer->c != ';' && lexer->c != '|' && lexer->c != '>' && lexer->c != '<' &&

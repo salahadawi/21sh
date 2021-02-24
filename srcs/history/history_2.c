@@ -6,7 +6,7 @@
 /*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/11 15:52:20 by jwilen            #+#    #+#             */
-/*   Updated: 2021/02/19 10:34:17 by jwilen           ###   ########.fr       */
+/*   Updated: 2021/02/24 08:58:59 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@ t_history	*new_history_node(char *line, t_history *prev)
 {
 	t_history *node;
 
-	node = (t_history*)ft_memalloc(sizeof(t_history));
+	if (!(node = (t_history*)ft_memalloc(sizeof(t_history))))
+		handle_error("Malloc failed", 1);
 	node->cmd = line;
 	node->prev = prev;
 	node->next = NULL;

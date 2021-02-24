@@ -6,7 +6,7 @@
 /*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/09 10:38:52 by jwilen            #+#    #+#             */
-/*   Updated: 2021/02/19 11:02:04 by jwilen           ###   ########.fr       */
+/*   Updated: 2021/02/24 08:59:19 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,9 @@ void		copy_start(void)
 	else
 	{
 		g_21sh->copy_end = ft_strlen(g_21sh->line) + g_21sh->cursor.x;
-		g_21sh->copy_part = ft_memalloc(g_21sh->copy_end -
-		g_21sh->copy_start + 1);
+		if (!(g_21sh->copy_part = ft_memalloc(g_21sh->copy_end -
+		g_21sh->copy_start + 1)))
+			handle_error("Malloc failed", 1);
 		while (g_21sh->copy_start <= g_21sh->copy_end)
 		{
 			g_21sh->copy_part[i] = g_21sh->line[g_21sh->copy_start];

@@ -6,7 +6,7 @@
 /*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/17 07:22:21 by jwilen            #+#    #+#             */
-/*   Updated: 2021/02/23 13:19:47 by jwilen           ###   ########.fr       */
+/*   Updated: 2021/02/24 09:02:50 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,8 @@ t_lexer			*init_lexer(char *contents)
 {
 	t_lexer		*lexer;
 
-	lexer = (t_lexer*)malloc(sizeof(t_lexer));
-	!lexer ? exit(1) : 0;
+	if (!(lexer = (t_lexer*)malloc(sizeof(t_lexer))))
+		handle_error("Malloc failed", 1);
 	lexer->contents = contents;
 	lexer->i = 0;
 	lexer->c = contents[lexer->i];

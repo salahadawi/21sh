@@ -6,7 +6,7 @@
 /*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/18 10:44:21 by jwilen            #+#    #+#             */
-/*   Updated: 2021/02/23 11:52:10 by jwilen           ###   ########.fr       */
+/*   Updated: 2021/02/24 09:05:43 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ char	*str_add_str(char *str, char *str2)
 	char	*newstr;
 
 	index = ft_strlen(g_21sh->line) + g_21sh->cursor.x;
-	newstr = (char*)ft_memalloc(ft_strlen(str) + ft_strlen(str2) + 1);
-	!newstr ? exit(1) : 0;
+	if (!(newstr = (char*)ft_memalloc(ft_strlen(str) + ft_strlen(str2) + 1)))
+		handle_error("Malloc failed", 1);
 	i = 0;
 	while (i < index)
 	{
@@ -60,7 +60,8 @@ int		*get_pipes(t_command *commands)
 	pipe_amount = (commands_amount(commands) - 1) * 2;
 	if (!pipe_amount)
 		return (NULL);
-	pipes = (int*)ft_memalloc(sizeof(int) * (pipe_amount + 1));
+	if (!(pipes = (int*)ft_memalloc(sizeof(int) * (pipe_amount + 1))))
+		handle_error("Malloc failed", 1);
 	i = 0;
 	while (i < pipe_amount)
 	{

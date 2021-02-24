@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_setenv.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 14:08:24 by sadawi            #+#    #+#             */
-/*   Updated: 2021/02/05 14:12:28 by sadawi           ###   ########.fr       */
+/*   Updated: 2021/02/24 08:56:21 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,9 @@ void	add_env(char *arg)
 	char	**new_envp;
 	int		i;
 
-	new_envp = (char**)ft_memalloc(sizeof(char*)
-	* (count_env_amount(g_21sh->envp) + 2));
+	if (!(new_envp = (char**)ft_memalloc(sizeof(char*)
+	* (count_env_amount(g_21sh->envp) + 2))))
+		handle_error("Malloc failed", 1);
 	i = 0;
 	while (g_21sh->envp[i])
 	{

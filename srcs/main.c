@@ -6,7 +6,7 @@
 /*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/15 12:28:40 by sadawi            #+#    #+#             */
-/*   Updated: 2021/02/12 09:19:29 by jwilen           ###   ########.fr       */
+/*   Updated: 2021/02/24 08:54:34 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,8 @@ int		main(int argc, char **argv, char *envp[])
 {
 	(void)(argc && argv);
 	g_debug = (argc > 1); // ENABLE DEBUGGING, DISABLES TERMCAPS
-	g_21sh = (t_21sh*)ft_memalloc(sizeof(t_21sh));
+	if (!(g_21sh = (t_21sh*)ft_memalloc(sizeof(t_21sh))))
+		handle_error("Malloc failed", 1);
 	g_21sh->stdin = dup(STDIN_FILENO);
 	g_21sh->stdout = dup(STDOUT_FILENO);
 	g_21sh->copy_start = -1;
