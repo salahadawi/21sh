@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strsplit.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/22 17:38:13 by sadawi            #+#    #+#             */
-/*   Updated: 2020/04/16 22:56:42 by sadawi           ###   ########.fr       */
+/*   Updated: 2021/02/25 20:18:52 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ char		**ft_strsplit(const char *s, char c)
 	if (!s)
 		return (NULL);
 	if (!(arr = (char**)ft_memalloc(sizeof(arr) *
-		count_strings((char*)s, c) + 1)))
+		(count_strings((char*)s, c) + 1))))
 		return (NULL);
 	while ((arr[i] = string((char*)s, c, i)))
 		i++;

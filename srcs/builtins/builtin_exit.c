@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_exit.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 14:07:38 by sadawi            #+#    #+#             */
-/*   Updated: 2020/04/29 13:19:15 by sadawi           ###   ########.fr       */
+/*   Updated: 2021/02/26 10:32:45 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,5 +15,6 @@
 int		builtin_exit(char **args)
 {
 	(void)(args);
+	free(g_21sh->line); //jwi
 	exit(0);
 }

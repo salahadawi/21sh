@@ -6,7 +6,7 @@
 /*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/10 12:20:24 by sadawi            #+#    #+#             */
-/*   Updated: 2021/02/23 18:11:31 by jwilen           ###   ########.fr       */
+/*   Updated: 2021/02/27 20:15:56 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,6 +157,8 @@ typedef struct			s_21sh
 t_21sh					*g_21sh;
 int						g_debug;
 
+void free_command(t_command *commands);
+void free_arg(t_arg *arg);
 void					print_error(char *message);
 /*
 ** built in functions

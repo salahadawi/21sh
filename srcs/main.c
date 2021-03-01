@@ -6,11 +6,42 @@
 /*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/15 12:28:40 by sadawi            #+#    #+#             */
-/*   Updated: 2021/02/24 08:54:34 by jwilen           ###   ########.fr       */
+/*   Updated: 2021/03/01 13:53:28 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh.h"
+
+
+void free_command(t_command *commands)
+{
+   t_command *tmp;
+
+   while (commands)
+    {
+	   tmp = commands;
+       commands = commands->next;
+       free(tmp->arguments);
+	   free(tmp);
+    }
+
+}
+
+// void free_arg(t_arg *arg)
+// {
+//    t_arg *tmp;
+
+//    while (arg)
+//     {
+       
+// 	   tmp = arg;
+//        arg = arg->next;
+//     //    free(tmp->word);
+// 	free(tmp);
+	   
+//     }
+
+// }
 
 void	init_key_sequences(void)
 {

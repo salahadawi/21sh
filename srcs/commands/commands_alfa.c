@@ -6,7 +6,7 @@
 /*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/14 20:52:48 by jwilen            #+#    #+#             */
-/*   Updated: 2021/02/24 10:37:00 by jwilen           ###   ########.fr       */
+/*   Updated: 2021/02/26 10:38:31 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ void	execute_builtin_in_parent(t_command *command)
 	close(STDOUT_FILENO);
 	close(STDERR_FILENO);
 	handle_builtins(args);
+	free(args); // jwi
 	dup2(output_fd, STDOUT_FILENO);
 	dup2(error_fd, STDERR_FILENO);
 	close(output_fd);

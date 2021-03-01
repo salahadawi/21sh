@@ -6,7 +6,7 @@
 /*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/12 16:07:17 by jwilen            #+#    #+#             */
-/*   Updated: 2021/02/24 10:34:53 by jwilen           ###   ########.fr       */
+/*   Updated: 2021/03/01 13:52:46 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ t_command		*get_commands(void)
 		if (!commands)
 		{
 			tmp = get_next_command();
-			commands = tmp;
+			commands = tmp;		
 		}
 		else
 		{
@@ -83,7 +83,10 @@ void			run_commands_group(t_command *commands)
 	while (command_num < amount)
 		wait_for_child(pids[command_num++]);
 	tcsetattr(STDOUT_FILENO, TCSAFLUSH, &g_21sh->raw); //set terminal back to raw mode??
+	//jwi
+	free (pids);
 }
+
 
 void			run_commands(void)
 {
@@ -99,4 +102,6 @@ void			run_commands(void)
 			g_21sh->token = g_21sh->token->next;
 		run_commands_group(commands);
 	}
+	free_command(commands); 	// jwi
+	
 }
