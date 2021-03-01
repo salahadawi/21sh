@@ -6,7 +6,7 @@
 /*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 14:23:12 by sadawi            #+#    #+#             */
-/*   Updated: 2021/02/27 19:43:08 by jwilen           ###   ########.fr       */
+/*   Updated: 2021/03/01 14:28:57 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ void	loop_shell(void)
 		move_cursor_newline(); //if output didn't end with newline
 		free_history();
 		free(g_21sh->line); //jwi
+
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/15 12:28:40 by sadawi            #+#    #+#             */
-/*   Updated: 2021/03/01 13:53:28 by jwilen           ###   ########.fr       */
+/*   Updated: 2021/03/01 14:29:29 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,21 +27,22 @@ void free_command(t_command *commands)
 
 }
 
-// void free_arg(t_arg *arg)
-// {
-//    t_arg *tmp;
+void free_arg(t_arg *arg)
+{
+   t_arg *tmp;
 
-//    while (arg)
-//     {
+   while (arg)
+    {
        
-// 	   tmp = arg;
-//        arg = arg->next;
-//     //    free(tmp->word);
-// 	free(tmp);
+	   tmp = arg;
+       arg = arg->next;
+	   free(tmp->word);
+	// tmp = tmp->next;
+		free(tmp);
 	   
-//     }
+    }
 
-// }
+}
 
 void	init_key_sequences(void)
 {
