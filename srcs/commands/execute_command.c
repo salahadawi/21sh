@@ -6,7 +6,7 @@
 /*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 14:18:58 by sadawi            #+#    #+#             */
-/*   Updated: 2021/02/24 08:57:44 by jwilen           ###   ########.fr       */
+/*   Updated: 2021/03/02 20:11:44 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,15 @@ char	*find_filepath(char *filename)
 	filename_len = ft_strlen(filename);
 	i = 0;
 	if (access(filename, F_OK) != -1)
+	{
+		while(paths[i])
+		{
+			free(paths[i]);
+			i++;
+		}
+		free(paths);
 		return (filename);
+	}
 	if (!paths)
 		return (NULL);
 	while (paths[i])

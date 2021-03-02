@@ -6,7 +6,7 @@
 /*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/14 21:01:26 by jwilen            #+#    #+#             */
-/*   Updated: 2021/02/24 10:37:56 by jwilen           ###   ########.fr       */
+/*   Updated: 2021/03/02 20:12:41 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	handle_binaries(char **args)
 {
 	char *filepath;
 
-	if (!(filepath = find_filepath(args[0])))
+	if (!(filepath = find_filepath(args[0])) || (access(filepath, X_OK) != 0))
 	{
 		print_error(ft_sprintf("Command not found: '%s'", args[0]));
 		exit(1);

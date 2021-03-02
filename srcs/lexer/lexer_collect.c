@@ -6,7 +6,7 @@
 /*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 11:28:37 by jwilen            #+#    #+#             */
-/*   Updated: 2021/03/02 14:06:50 by jwilen           ###   ########.fr       */
+/*   Updated: 2021/03/02 14:55:55 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@
 
 static char	*lexer_collect(char *value, char *s, t_lexer *lexer)
 {
-	value = ft_relloc(&value);
 	ft_strcat(value, s);
+	value = ft_relloc(&value);
 	free(s);
 	s = lexer_get_current_char_as_string(lexer);
 	ft_strcat(value, s);

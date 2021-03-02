@@ -6,7 +6,7 @@
 /*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 14:23:12 by sadawi            #+#    #+#             */
-/*   Updated: 2021/03/02 09:38:36 by jwilen           ###   ########.fr       */
+/*   Updated: 2021/03/02 19:55:45 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,21 +25,14 @@ void	loop_shell(void)
 		print_shell_info();
 		get_autocomplete_commands();
 		if (get_input() < 1)
-			break ; //never breaks???
+			break ;
 		save_command_history();
 		lexi();
 		ft_printf("\n");
 		handle_expansion();
 		run_commands();
-		move_cursor_newline(); //if output didn't end with newline
+		move_cursor_newline();
 		free_history();
-		free(g_21sh->line); //jwi
-
+		free(g_21sh->line);
 	}
 }
-
-// int		check_cmd(void)
-// {
-// 	run_first();
-// 	return (0);
-// }
