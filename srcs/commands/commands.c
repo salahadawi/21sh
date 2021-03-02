@@ -6,7 +6,7 @@
 /*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/12 16:07:17 by jwilen            #+#    #+#             */
-/*   Updated: 2021/03/01 13:52:46 by jwilen           ###   ########.fr       */
+/*   Updated: 2021/03/02 13:51:18 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,11 @@ t_command		*get_next_command(void)
 			add_redir(command, NO_AGGREGATION);
 		else
 			add_arg(command);
+	
+		
 	}
 	if (g_21sh->token && g_21sh->token->type == TOKEN_PIPE)
-		g_21sh->token = g_21sh->token->next;
+		advance_tokens();
 	return (command);
 }
 
@@ -85,8 +87,8 @@ void			run_commands_group(t_command *commands)
 	tcsetattr(STDOUT_FILENO, TCSAFLUSH, &g_21sh->raw); //set terminal back to raw mode??
 	//jwi
 	free (pids);
+	free(pipes);
 }
-
 
 void			run_commands(void)
 {
@@ -99,9 +101,9 @@ void			run_commands(void)
 	{
 		commands = get_commands();
 		if (g_21sh->token)
-			g_21sh->token = g_21sh->token->next;
+			advance_tokens();
 		run_commands_group(commands);
+		free_command(commands); 	// jwi
 	}
-	free_command(commands); 	// jwi
 	
 }

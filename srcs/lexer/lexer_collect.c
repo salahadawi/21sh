@@ -6,7 +6,7 @@
 /*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 11:28:37 by jwilen            #+#    #+#             */
-/*   Updated: 2021/02/24 09:02:23 by jwilen           ###   ########.fr       */
+/*   Updated: 2021/03/02 14:06:50 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ t_token		*lexer_collect_lrg(t_lexer *lexer)
 
 	s = lexer_get_current_char_as_string(lexer);
 	lexer_advance(lexer);
-	if (!(value = (char *)ft_memalloc(sizeof(char))))
+	if (!(value = (char *)ft_memalloc(sizeof(char) + 1)))
 		handle_error("Malloc failed", 1);
 	if (lexer->c == '>')
 	{
@@ -62,7 +62,7 @@ t_token		*lexer_collect_smlr(t_lexer *lexer)
 
 	s = lexer_get_current_char_as_string(lexer);
 	lexer_advance(lexer);
-	if (!(value = (char *)ft_memalloc(sizeof(char))))
+	if (!(value = (char *)ft_memalloc(sizeof(char) + 1)))
 		handle_error("Malloc failed", 1);
 	if (lexer->c == '<')
 	{
@@ -91,7 +91,7 @@ t_token		*lexer_collect_et(t_lexer *lexer)
 
 	s = lexer_get_current_char_as_string(lexer);
 	lexer_advance(lexer);
-	if (!(value = (char *)ft_memalloc(sizeof(char))))
+	if (!(value = (char *)ft_memalloc(sizeof(char) + 1)))
 		handle_error("Malloc failed", 1);
 	if (lexer->c == '<')
 	{

@@ -6,26 +6,11 @@
 /*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/15 12:28:40 by sadawi            #+#    #+#             */
-/*   Updated: 2021/03/01 14:29:29 by jwilen           ###   ########.fr       */
+/*   Updated: 2021/03/02 13:14:00 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh.h"
-
-
-void free_command(t_command *commands)
-{
-   t_command *tmp;
-
-   while (commands)
-    {
-	   tmp = commands;
-       commands = commands->next;
-       free(tmp->arguments);
-	   free(tmp);
-    }
-
-}
 
 void free_arg(t_arg *arg)
 {
@@ -37,12 +22,41 @@ void free_arg(t_arg *arg)
 	   tmp = arg;
        arg = arg->next;
 	   free(tmp->word);
-	// tmp = tmp->next;
 		free(tmp);
 	   
     }
+}
+
+void free_redir(t_redir *redir)
+{
+   t_redir *tmp;
+
+   while (redir)
+    {
+       
+	   tmp = redir;
+    	redir = redir->next;
+	   free(tmp->word);
+	   free(tmp->word2);
+		free(tmp);
+    }
+}
+
+void free_command(t_command *commands)
+{
+   t_command *tmp;
+
+   while (commands)
+    {
+	   tmp = commands;
+       commands = commands->next;
+	   free_arg(tmp->arguments);
+	   free_redir(tmp->redirections);
+	   free(tmp);
+    }
 
 }
+
 
 void	init_key_sequences(void)
 {

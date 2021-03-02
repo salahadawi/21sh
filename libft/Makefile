@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+         #
+#    By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/16 18:05:28 by sadawi            #+#    #+#              #
-#    Updated: 2020/04/28 19:35:12 by sadawi           ###   ########.fr        #
+#    Updated: 2021/03/02 14:21:34 by jwilen           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,7 +42,7 @@ CGET_NEXT_LINE = get_next_line/get_next_line.c
 SRCS= $(addprefix srcs/, $(CLIBFT)) $(addprefix srcs/, $(CFT_PRINTF)) \
 $(addprefix srcs/, $(CGET_NEXT_LINE))
 OBJS=$(addprefix objs/, $(notdir $(SRCS:.c=.o)))
-FLAGS=-Wall -Wextra -Werror
+FLAGS=-Wall -Wextra -Werror -g
 
 all: $(NAME)
 

@@ -6,7 +6,7 @@
 /*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 11:30:06 by jwilen            #+#    #+#             */
-/*   Updated: 2021/02/24 09:01:20 by jwilen           ###   ########.fr       */
+/*   Updated: 2021/03/02 14:08:01 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 static char	*lexer_string_1(char *new_str, char chr)
 {
-	if (!(new_str = (char*)ft_memalloc(sizeof(char))))
+	if (!(new_str = (char*)ft_memalloc(sizeof(char) + 1)))
 		handle_error("Malloc failed", 1);
 	while (new_str && !ft_strchr(new_str, chr))
 	{
@@ -40,7 +40,7 @@ t_token		*lexer_collect_string(t_lexer *lexer)
 
 	chr = lexer->c;
 	lexer_advance(lexer);
-	if (!(value = (char *)ft_memalloc(sizeof(char))))
+	if (!(value = (char *)ft_memalloc(sizeof(char) + 1)))
 		handle_error("Malloc failed", 1);
 	new_str = NULL;
 	while (lexer->c != chr)
@@ -70,7 +70,7 @@ t_token		*lexer_collect_qstring(t_lexer *lexer)
 
 	chr = lexer->c;
 	lexer_advance(lexer);
-	if (!(value = (char *)ft_memalloc(sizeof(char))))
+	if (!(value = (char *)ft_memalloc(sizeof(char) + 1)))
 		handle_error("Malloc failed", 1);
 	new_str = NULL;
 	while (lexer->c != chr)

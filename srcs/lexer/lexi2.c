@@ -6,7 +6,7 @@
 /*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/29 11:42:33 by jwilen            #+#    #+#             */
-/*   Updated: 2021/02/24 09:03:41 by jwilen           ###   ########.fr       */
+/*   Updated: 2021/03/02 14:07:57 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ t_token		*lexer_collect_id(t_lexer *lexer)
 	char	*s;
 	int		token_type;
 
-	if (!(value = (char*)ft_memalloc(sizeof(char))))
+	if (!(value = (char*)ft_memalloc(sizeof(char) + 1)))
 		handle_error("Malloc failed", 1);
 	while (lexer->c != '\0' && lexer->c != BACKSLASH && lexer->c != ' ' &&
 	lexer->c != ENTER && lexer->c != STRING && lexer->c != QSTRING &&
