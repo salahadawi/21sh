@@ -6,7 +6,7 @@
 /*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/12 09:25:45 by jwilen            #+#    #+#             */
-/*   Updated: 2021/02/22 11:22:25 by jwilen           ###   ########.fr       */
+/*   Updated: 2021/03/03 09:00:17 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ void	autocomplete(char **line, char previous_pressed_key)
 {
 	static char	*partial_command;
 	static char	**matching_commands;
+	int i;
 
 	if (previous_pressed_key != TAB)
 	{
@@ -91,5 +92,12 @@ void	autocomplete(char **line, char previous_pressed_key)
 			matching_commands = get_matching_commands(partial_command);
 	}
 	complete_command(line, previous_pressed_key, matching_commands);
-	//free matching commands
+	i = 0;
+	while (matching_commands[i])
+	{
+		free (matching_commands[i]); // jwi
+		i++;
+	}
+	free(matching_commands);
+	free (partial_command); //jwi
 }
