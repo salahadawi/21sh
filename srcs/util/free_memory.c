@@ -3,21 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   free_memory.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 14:03:34 by sadawi            #+#    #+#             */
-/*   Updated: 2020/04/29 12:49:10 by sadawi           ###   ########.fr       */
+/*   Updated: 2021/03/04 15:38:18 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh.h"
 
-void	free_args(char **args)
+void    free_args(char **args)
 {
-	int i;
+    int i;
 
-	i = 0;
-	while (args[i])
-		free(args[i++]);
-	free(args);
+    i = 0;
+    if (!args)
+        return ;
+    while (args[i])
+        free(args[i++]);
+    free(args);
 }
