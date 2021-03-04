@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_command.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 14:18:58 by sadawi            #+#    #+#             */
-/*   Updated: 2021/02/24 08:57:44 by jwilen           ###   ########.fr       */
+/*   Updated: 2021/03/04 21:13:58 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ void	wait_for_child(pid_t pid)
 {
 	int status;
 
-	restore_signals();
+	//restore_signals();
 	signal(SIGINT, SIG_IGN);
 	waitpid(pid, &status, WUNTRACED);
 	// while (!WIFEXITED(status))

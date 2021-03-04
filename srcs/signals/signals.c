@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/11 16:54:31 by jwilen            #+#    #+#             */
-/*   Updated: 2021/02/23 11:46:14 by jwilen           ###   ########.fr       */
+/*   Updated: 2021/03/04 21:10:37 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	restore_signals(void)
 void	handle_signal(int sig)
 {
 	if (sig == SIGTSTP)
-		handle_signal_suspend();
+		;//handle_signal_suspend();
 	else if (sig == SIGCONT)
 		handle_signal_continue();
 	else if (sig == SIGINT)
