@@ -6,7 +6,7 @@
 /*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/12 09:25:45 by jwilen            #+#    #+#             */
-/*   Updated: 2021/03/04 16:13:15 by jwilen           ###   ########.fr       */
+/*   Updated: 2021/03/04 16:36:12 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,5 +93,4 @@ void    autocomplete(char **line, char previous_pressed_key)
             matching_commands = get_matching_commands(partial_command);
     }
     complete_command(line, previous_pressed_key, matching_commands);
-    //free matching commands
 }
