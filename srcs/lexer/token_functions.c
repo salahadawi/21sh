@@ -6,7 +6,7 @@
 /*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/18 08:56:15 by jwilen            #+#    #+#             */
-/*   Updated: 2021/02/23 11:38:06 by jwilen           ###   ########.fr       */
+/*   Updated: 2021/03/05 12:36:07 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int		check_token_fd_aggregation(void)
 	|| g_21sh->token->type == TOKEN_LRGER_ET);
 }
 
-char	*token_type_to_char(int type) //causes leaks with print_commands, for debug purposes
+char	*token_type_to_char(int type)
 {
 	if (type == TOKEN_LRGER)
 		return (ft_strdup(">"));

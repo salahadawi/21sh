@@ -6,7 +6,7 @@
 /*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 14:18:58 by sadawi            #+#    #+#             */
-/*   Updated: 2021/03/03 18:53:13 by jwilen           ###   ########.fr       */
+/*   Updated: 2021/03/05 11:55:30 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,35 +41,35 @@ int		exec_cmd(char **args)
 	return (1);
 }
 
-char    *find_filepath(char *filename)
+char	*find_filepath(char *filename)
 {
-    char    *filepath;
-    char    **paths;
-    int        filename_len;
-    int        i;
+	char	*filepath;
+	char	**paths;
+	int		filename_len;
+	int		i;
 
-    filename_len = ft_strlen(filename);
-    i = 0;
-    if (access(filename, F_OK) != -1)
-        return (filename);
-    paths = ft_strsplit(get_env_value("PATH"), ':');
-    if (!paths)
-        return (NULL);
-    while (paths[i])
-    {
-        filepath = create_filepath(paths[i], filename, filename_len);
-        if (access(filepath, F_OK) != -1)
-        {
-            while (paths[i])
-                free(paths[i++]);
-            return (filepath);
-        }
-        free(paths[i]);
-        free(filepath);
-        i++;
-    }
-    free(paths);
-    return (NULL);
+	filename_len = ft_strlen(filename);
+	i = 0;
+	if (access(filename, F_OK) != -1)
+		return (filename);
+	paths = ft_strsplit(get_env_value("PATH"), ':');
+	if (!paths)
+		return (NULL);
+	while (paths[i])
+	{
+		filepath = create_filepath(paths[i], filename, filename_len);
+		if (access(filepath, F_OK) != -1)
+		{
+			while (paths[i])
+				free(paths[i++]);
+			return (filepath);
+		}
+		free(paths[i]);
+		free(filepath);
+		i++;
+	}
+	free(paths);
+	return (NULL);
 }
 
 char	*create_filepath(char *path, char *filename, int len)

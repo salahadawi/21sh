@@ -6,7 +6,7 @@
 /*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/12 16:07:17 by jwilen            #+#    #+#             */
-/*   Updated: 2021/03/02 13:51:18 by jwilen           ###   ########.fr       */
+/*   Updated: 2021/03/05 11:50:44 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,6 @@ t_command		*get_next_command(void)
 			add_redir(command, NO_AGGREGATION);
 		else
 			add_arg(command);
-	
-		
 	}
 	if (g_21sh->token && g_21sh->token->type == TOKEN_PIPE)
 		advance_tokens();
@@ -48,7 +46,7 @@ t_command		*get_commands(void)
 		if (!commands)
 		{
 			tmp = get_next_command();
-			commands = tmp;		
+			commands = tmp;
 		}
 		else
 		{
@@ -84,9 +82,8 @@ void			run_commands_group(t_command *commands)
 	command_num = 0;
 	while (command_num < amount)
 		wait_for_child(pids[command_num++]);
-	tcsetattr(STDOUT_FILENO, TCSAFLUSH, &g_21sh->raw); //set terminal back to raw mode??
-	//jwi
-	free (pids);
+	tcsetattr(STDOUT_FILENO, TCSAFLUSH, &g_21sh->raw);
+	free(pids);
 	free(pipes);
 }
 
@@ -94,16 +91,12 @@ void			run_commands(void)
 {
 	t_command	*commands;
 
-/*
-** handle set of tokens at a time, split by ;
-*/
 	while (g_21sh->token)
 	{
 		commands = get_commands();
 		if (g_21sh->token)
 			advance_tokens();
 		run_commands_group(commands);
-		free_command(commands); 	// jwi
+		free_command(commands);
 	}
-	
 }

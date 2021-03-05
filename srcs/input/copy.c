@@ -6,7 +6,7 @@
 /*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/09 10:38:52 by jwilen            #+#    #+#             */
-/*   Updated: 2021/03/04 00:28:42 by jwilen           ###   ########.fr       */
+/*   Updated: 2021/03/05 12:24:42 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void		copy_start(void)
 		free(g_21sh->copy_part);
 		g_21sh->copy_start = ft_strlen(g_21sh->line) + g_21sh->cursor.x;
 	}
-	else 
+	else
 	{
 		if (g_21sh->copy_start >= g_21sh->cursor.x)
 		{
@@ -40,10 +40,9 @@ void		copy_start(void)
 		}
 		else
 		{
-			g_21sh->copy_start = 0;
-			g_21sh->copy_end = 0;
+			g_21sh->copy_start = -1;
+			g_21sh->copy_end = -1;
 			free(g_21sh->copy_part);
 		}
-			
 	}
 }

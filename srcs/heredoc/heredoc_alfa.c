@@ -6,7 +6,7 @@
 /*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/15 14:04:41 by jwilen            #+#    #+#             */
-/*   Updated: 2021/02/23 13:25:05 by jwilen           ###   ########.fr       */
+/*   Updated: 2021/03/05 12:15:02 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,9 @@ void	handle_control_sequence_heredoc(char **line, char *c)
 	else if (*c + 10 == g_21sh->key_sequences.right_arrow)
 		move_word_right_heredoc(line);
 	else if (*c + 10 == g_21sh->key_sequences.up_arrow)
-		move_cursor_up_heredoc(line);//copy_input();
+		move_cursor_up_heredoc(line);
 	else if (*c + 10 == g_21sh->key_sequences.down_arrow)
-		move_cursor_down_heredoc();//paste_input();
+		move_cursor_down_heredoc();
 }
 
 void	move_cursor_heredoc(char *line)
@@ -72,8 +72,6 @@ void	print_input_heredoc(char *line)
 		while (len - index > max_len)
 			index += g_21sh->window.ws_col;
 		index += g_21sh->window.ws_col - ft_strlen("heredoc> ");
-		//len -= max_len;
-		//len += g_21sh->window.ws_col;
 		ft_fprintf(g_21sh->stdout, "...\n%s", &line[index]);
 	}
 	else
@@ -86,7 +84,6 @@ void	move_cursor_start_heredoc(void)
 	char *tmp;
 
 	move_cursor = tgetstr("cm", NULL);
-	//ft_printf("%d, %d", g_21sh->cursor.prompt_y, g_21sh->cursor.prompt_x);
 	tmp = tgoto(move_cursor, g_21sh->cursor_heredoc.prompt_x - 1,
 	g_21sh->cursor_heredoc.prompt_y - 1);
 	tputs(tmp, 1, ft_putschar);

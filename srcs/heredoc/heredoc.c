@@ -6,7 +6,7 @@
 /*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/14 21:20:43 by jwilen            #+#    #+#             */
-/*   Updated: 2021/02/19 10:30:31 by jwilen           ###   ########.fr       */
+/*   Updated: 2021/03/05 12:20:34 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,9 @@ int		handle_keys_heredoc(char **line, char *previous_pressed_key)
 		return (0);
 	else if (c == TAB)
 		autocomplete(line, *previous_pressed_key);
-	else if (c == 4) // CTRL + D
+	else if (c == CTRL_D)
 	{
-		//restore_terminal_mode();
+	//restore_terminal_mode();
 		return (-1); //temporary, need to restore terminal and free memory here
 	}
 	else if (ft_isprint(c))
@@ -70,8 +70,7 @@ void	save_cursor_position_heredoc(void)
 	x = ft_atoi(&sequence[i + 2 + ft_nbrlen(y) < 100 ?
 	i + 2 + ft_nbrlen(y) : 0]);
 	g_21sh->cursor_heredoc.prompt_y = y ? y : g_21sh->cursor_heredoc.prompt_y;
-	g_21sh->cursor_heredoc.prompt_x = x ? x : g_21sh->cursor_heredoc.prompt_x;// + g_21sh->prompt_len;
-	//ft_printf("%s", &sequence[i]);
+	g_21sh->cursor_heredoc.prompt_x = x ? x : g_21sh->cursor_heredoc.prompt_x;
 }
 
 int		get_heredoc_input(char **line)

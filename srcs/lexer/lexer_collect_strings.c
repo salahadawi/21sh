@@ -6,7 +6,7 @@
 /*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 11:30:06 by jwilen            #+#    #+#             */
-/*   Updated: 2021/03/04 22:24:24 by jwilen           ###   ########.fr       */
+/*   Updated: 2021/03/05 12:48:38 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ t_token		*lexer_collect_string(t_lexer *lexer)
 		{
 			new_str = lexer_string_1(new_str, chr);
 			value = ft_strjoinfree(value, new_str);
-			free (s);
+			free(s);
 			break ;
 		}
 		free(s);
@@ -84,6 +84,7 @@ t_token		*lexer_collect_qstring(t_lexer *lexer)
 		{
 			new_str = lexer_string_1(new_str, chr);
 			value = ft_strjoinfree(value, new_str);
+			free(s);
 			break ;
 		}
 		free(s);

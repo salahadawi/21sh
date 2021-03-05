@@ -6,13 +6,13 @@
 /*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/12 09:25:45 by jwilen            #+#    #+#             */
-/*   Updated: 2021/03/04 16:36:12 by jwilen           ###   ########.fr       */
+/*   Updated: 2021/03/05 12:10:42 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh.h"
 
-void			copy_and_escape_characters(char *dst, char *src)
+void		copy_and_escape_characters(char *dst, char *src)
 {
 	int		i;
 	int		j;
@@ -31,7 +31,7 @@ void			copy_and_escape_characters(char *dst, char *src)
 	}
 }
 
-t_autocomp		*autocomp_new_command(char *command)
+t_autocomp	*autocomp_new_command(char *command)
 {
 	t_autocomp *autocomp;
 
@@ -41,7 +41,7 @@ t_autocomp		*autocomp_new_command(char *command)
 	return (autocomp);
 }
 
-void			autocomp_append_command(char *command)
+void		autocomp_append_command(char *command)
 {
 	if (!g_21sh->autocomp)
 	{
@@ -55,7 +55,7 @@ void			autocomp_append_command(char *command)
 	}
 }
 
-void			autocomp_commands_append_dir(char *path)
+void		autocomp_commands_append_dir(char *path)
 {
 	DIR				*p_dir;
 	struct dirent	*p_dirent;
@@ -71,26 +71,37 @@ void			autocomp_commands_append_dir(char *path)
 	closedir(p_dir);
 }
 
-void    autocomplete(char **line, char previous_pressed_key)
+void		autocomplete(char **line, char previous_pressed_key)
 {
-    static char    *partial_command = NULL;
-    static char    **matching_commands = NULL;
+	static char    *partial_command = NULL;
+	static char    **matching_commands = NULL;
 
-    if (previous_pressed_key != TAB)
-    {
-        free(partial_command);
-        free(matching_commands);
-        partial_command = get_partial_command(*line);
-        if (partial_command[0] == '\0')
-            matching_commands = get_dir_commands(".");
-        else if (check_command_valid_dir(partial_command)) //CLOSE DIR 
-        // some kind of check to make sure . and .. dirs are not immediately opened if files starting with . or .. exist
-        {
-            //check if command matches more than just valid dir
-            matching_commands = get_dir_commands(partial_command);
-        }
-        else
-            matching_commands = get_matching_commands(partial_command);
-    }
-    complete_command(line, previous_pressed_key, matching_commands);
+	if (previous_pressed_key != TAB)
+	{
+		free(partial_command);
+		free(matching_commands);
+		partial_command = get_partial_command(*line);
+		if (partial_command[0] == '\0')
+			matching_commands = get_dir_commands(".");
+		else if (check_command_valid_dir(partial_command)) //CLOSE DIR 
+		// some kind of check to make sure . and .. dirs are not immediately opened if files starting with . or .. exist
+		{
+			//check if command matches more than just valid dir
+			matching_commands = get_dir_commands(partial_command);
+		}
+		else
+			matching_commands = get_matching_commands(partial_command);
+	}
+	complete_command(line, previous_pressed_key, matching_commands);
+	if (matching_commands)
+	{
+		int i;
+		i = 0;
+		while (matching_commands[i])
+		{
+			free(matching_commands[i]);
+			i++;
+		}
+		free(matching_commands);
+	}
 }

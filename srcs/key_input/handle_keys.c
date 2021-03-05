@@ -6,7 +6,7 @@
 /*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/11 15:43:13 by jwilen            #+#    #+#             */
-/*   Updated: 2021/03/04 22:05:55 by jwilen           ###   ########.fr       */
+/*   Updated: 2021/03/05 12:30:11 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,16 @@ static void	handle_keys_c(char c)
 {
 	if (c == BACKSPACE)
 		handle_backspace();
-	else if (c == 11 && ft_strlen(g_21sh->line) > 0)  // Ctrl + k
+	else if (c == CTRL_K && ft_strlen(g_21sh->line) > 0)
 		copy_start();
-	else if (c == 16)
+	else if (c == CTRL_P)
 		paste();
 	else if (c == TAB)
 		autocomplete(&g_21sh->line, g_21sh->previous_pressed_key);
-	else if (c == 4 && !ft_strlen(g_21sh->line)) // CTRL + D
+	else if (c == CTRL_D && !ft_strlen(g_21sh->line))
 	{
 		restore_terminal_mode();
-		exit(0); //temporary, need to restore terminal and free memory here
+		builtin_exit(&g_21sh->line);
 	}
 	else if (ft_isprint(c))
 		g_21sh->line = str_add_char(g_21sh->line, c);
@@ -46,6 +46,6 @@ int			handle_keys(void)
 	}
 	else if (c == ENTER)
 		return (0);
-	handle_keys_c(c); 
+	handle_keys_c(c);
 	return (1);
 }

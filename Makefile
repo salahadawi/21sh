@@ -6,7 +6,7 @@
 #    By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/04/10 19:27:20 by sadawi            #+#    #+#              #
-#    Updated: 2021/02/23 11:30:52 by jwilen           ###   ########.fr        #
+#    Updated: 2021/03/05 13:03:26 by jwilen           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,8 +14,6 @@ NAME = 21sh
 
 CFILES =  get_env_info.c init_shell.c main.c \
 minishell.c 
-
-AST = parse.c recursive_build.c syntax_check.c \
 
 AUTOCOMPLETE = autocomplete_commands.c autocomplete_commands_alfa.c \
 autocomplete_commands_beta.c
@@ -36,7 +34,7 @@ INPUT = input_str.c copy.c paste.c expand_input.c \
 KEYINPUT = handle_keys.c move_cursor_direction.c move_cursor.c read_key.c \
 move_word.c handle_keys_alfa.c
 
-LEXER =  lexi.c lexi2.c token.c convert_tokens.c token_functions.c \
+LEXER =  lexi.c lexi2.c token.c token_functions.c \
 lexer_alfa.c lexer_collect.c lexer_collect_strings.c
 
 RAWMODE = rawmode.c \
@@ -54,7 +52,6 @@ free_memory.c print.c compare_pointers.c
 
 
 SRCS = $(addprefix srcs/, $(CFILES)) \
-$(addprefix srcs/ast/, $(AST)) \
 $(addprefix srcs/autocomplete/, $(AUTOCOMPLETE)) \
 $(addprefix srcs/builtins/, $(BUILTINS)) \
 $(addprefix srcs/commands/, $(COMMANDS)) \

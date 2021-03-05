@@ -6,7 +6,7 @@
 /*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/18 10:40:24 by jwilen            #+#    #+#             */
-/*   Updated: 2021/03/02 13:07:55 by jwilen           ###   ########.fr       */
+/*   Updated: 2021/03/05 12:52:06 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ void		add_arg(t_command *command)
 	{
 		cur_arg = new_arg();
 		command->arguments = cur_arg;
-		
 	}
 	else
 	{

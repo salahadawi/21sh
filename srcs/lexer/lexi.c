@@ -6,7 +6,7 @@
 /*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/17 07:22:21 by jwilen            #+#    #+#             */
-/*   Updated: 2021/03/05 09:20:17 by jwilen           ###   ########.fr       */
+/*   Updated: 2021/03/05 12:35:36 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static t_token	*lexer_what(t_lexer *lexer)
 		return (lexer_collect_string(lexer));
 	if (lexer->c == QSTRING)
 		return (lexer_collect_qstring(lexer));
-	if (lexer->c == LRG) //define
+	if (lexer->c == LRG)
 		return (lexer_collect_lrg(lexer));
 	if (lexer->c == SML)
 		return (lexer_collect_smlr(lexer));

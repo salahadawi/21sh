@@ -6,7 +6,7 @@
 /*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/22 11:20:20 by jwilen            #+#    #+#             */
-/*   Updated: 2021/03/04 10:12:42 by jwilen           ###   ########.fr       */
+/*   Updated: 2021/03/05 10:30:53 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,8 @@
 
 void	handle_backspace(void)
 {
-	// char *tmp;
 	g_21sh->line = str_remove_char(g_21sh->line, ft_strlen(g_21sh->line)
 	+ g_21sh->cursor.x - 1);
-	// tmp = g_21sh->line;
-	// free(g_21sh->line);
-	// g_21sh->line = tmp;
 }
 
 void	handle_control_sequence(char *c)
@@ -44,7 +40,7 @@ void	handle_control_sequence(char *c)
 	else if (*c + 10 == g_21sh->key_sequences.right_arrow)
 		move_word_right();
 	else if (*c + 10 == g_21sh->key_sequences.up_arrow)
-		move_cursor_up();//copy_input();
+		move_cursor_up();
 	else if (*c + 10 == g_21sh->key_sequences.down_arrow)
-		move_cursor_down();//paste_input();
+		move_cursor_down();
 }

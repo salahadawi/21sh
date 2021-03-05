@@ -6,57 +6,52 @@
 /*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/15 12:28:40 by sadawi            #+#    #+#             */
-/*   Updated: 2021/03/03 22:41:43 by jwilen           ###   ########.fr       */
+/*   Updated: 2021/03/05 13:00:29 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh.h"
 
-void free_arg(t_arg *arg)
+void	free_arg(t_arg *arg)
 {
-   t_arg *tmp;
+	t_arg *tmp;
 
-   while (arg)
-    {
-       
-	   tmp = arg;
-       arg = arg->next;
-	   free(tmp->word);
+	while (arg)
+	{
+		tmp = arg;
+		arg = arg->next;
+		free(tmp->word);
 		free(tmp);
-	   
-    }
+	}
 }
 
-void free_redir(t_redir *redir)
+void	free_redir(t_redir *redir)
 {
-   t_redir *tmp;
+	t_redir *tmp;
 
-   while (redir)
-    {
-       
-	   tmp = redir;
-    	redir = redir->next;
-	   free(tmp->word);
-	   free(tmp->word2);
+	while (redir)
+	{
+		tmp = redir;
+		redir = redir->next;
+		free(tmp->word);
+		free(tmp->word2);
 		free(tmp);
-    }
+	}
 }
 
-void free_command(t_command *commands)
+void	free_command(t_command *commands)
 {
-   t_command *tmp;
+	t_command *tmp;
 
-   while (commands)
-    {
-	   tmp = commands;
-       commands = commands->next;
-	   free_arg(tmp->arguments);
-	   free_redir(tmp->redirections);
-	   free(tmp);
-    }
-
+	while (commands)
+	{
+		tmp = commands;
+		commands = commands->next;
+		free_arg(tmp->arguments);
+		free_redir(tmp->redirections);
+		free(tmp);
+	}
 }
-
 
 void	init_key_sequences(void)
 {
@@ -97,6 +92,5 @@ int		main(int argc, char **argv, char *envp[])
 	loop_shell();
 	restore_terminal_mode();
 	free(g_21sh);
-	
 	return (0);
 }

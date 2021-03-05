@@ -6,7 +6,7 @@
 /*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/11 15:50:27 by jwilen            #+#    #+#             */
-/*   Updated: 2021/03/03 08:57:31 by jwilen           ###   ########.fr       */
+/*   Updated: 2021/03/05 12:22:25 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ void	open_history_file(void)
 	{
 		while (get_next_line(g_21sh->history_fd, &line) > 0)
 			add_to_history(line);
-		
 	}
 	add_to_history(ft_strdup(""));
 }

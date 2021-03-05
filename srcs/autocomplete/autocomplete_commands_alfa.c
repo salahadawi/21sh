@@ -6,13 +6,13 @@
 /*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/12 09:29:55 by jwilen            #+#    #+#             */
-/*   Updated: 2021/02/22 11:22:28 by jwilen           ###   ########.fr       */
+/*   Updated: 2021/03/05 12:12:04 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh.h"
 
-int				filename_character_allowed(char c)
+int		filename_character_allowed(char c)
 {
 	if (!ft_isprint(c))
 		return (1);

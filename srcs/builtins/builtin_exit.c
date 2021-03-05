@@ -6,7 +6,7 @@
 /*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 14:07:38 by sadawi            #+#    #+#             */
-/*   Updated: 2021/02/26 10:32:45 by jwilen           ###   ########.fr       */
+/*   Updated: 2021/03/05 12:13:10 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,6 @@
 int		builtin_exit(char **args)
 {
 	(void)(args);
-	free(g_21sh->line); //jwi
+	free(g_21sh->line);
 	exit(0);
 }

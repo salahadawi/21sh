@@ -6,7 +6,7 @@
 /*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/22 11:25:13 by jwilen            #+#    #+#             */
-/*   Updated: 2021/03/03 08:07:10 by jwilen           ###   ########.fr       */
+/*   Updated: 2021/03/05 11:56:08 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ int		check_command_valid_dir(char *command)
 	}
 	else
 		tmp = ft_strdup(command);
-	if (!(p_dir = opendir(tmp))) // segfault ??
+	if (!(p_dir = opendir(tmp)))
 	{
 		free(tmp);
 		return (0);
