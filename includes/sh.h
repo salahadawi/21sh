@@ -6,7 +6,7 @@
 /*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/10 12:20:24 by sadawi            #+#    #+#             */
-/*   Updated: 2021/03/01 14:29:02 by jwilen           ###   ########.fr       */
+/*   Updated: 2021/03/05 09:19:26 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,10 +57,13 @@
 # define TAB 9
 # define STRING 34
 # define DOLLAR 36
+# define ET 38
 # define QSTRING 39
 # define MINUS 45
 # define SLASH 47
+# define SML 60
 # define EQUAL 61
+# define LRG 62
 # define BACKSLASH 92
 # define DOT 46
 # define UNDERLINE 95

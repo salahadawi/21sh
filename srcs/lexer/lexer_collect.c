@@ -6,7 +6,7 @@
 /*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 11:28:37 by jwilen            #+#    #+#             */
-/*   Updated: 2021/03/02 14:55:55 by jwilen           ###   ########.fr       */
+/*   Updated: 2021/03/05 09:22:10 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,17 +35,17 @@ t_token		*lexer_collect_lrg(t_lexer *lexer)
 	lexer_advance(lexer);
 	if (!(value = (char *)ft_memalloc(sizeof(char) + 1)))
 		handle_error("Malloc failed", 1);
-	if (lexer->c == '>')
+	if (lexer->c == LRG)
 	{
 		value = lexer_collect(value, s, lexer);
 		return (create_input_token(TOKEN_EXTRACTION, value));
 	}
-	else if (lexer->c == '&')
+	else if (lexer->c == ET)
 	{
 		value = lexer_collect(value, s, lexer);
 		return (create_input_token(TOKEN_LRGER_ET, value));
 	}
-	else if (lexer->c == '|')
+	else if (lexer->c == PIPE)
 	{
 		value = lexer_collect(value, s, lexer);
 		return (create_input_token(TOKEN_LRGER_PIPE, value));
@@ -64,17 +64,17 @@ t_token		*lexer_collect_smlr(t_lexer *lexer)
 	lexer_advance(lexer);
 	if (!(value = (char *)ft_memalloc(sizeof(char) + 1)))
 		handle_error("Malloc failed", 1);
-	if (lexer->c == '<')
+	if (lexer->c == SML)
 	{
 		value = lexer_collect(value, s, lexer);
 		return (create_input_token(TOKEN_INSERTION, value));
 	}
-	else if (lexer->c == '&')
+	else if (lexer->c == ET)
 	{
 		value = lexer_collect(value, s, lexer);
 		return (create_input_token(TOKEN_SMALER_ET, value));
 	}
-	else if (lexer->c == '>')
+	else if (lexer->c == LRG)
 	{
 		value = lexer_collect(value, s, lexer);
 		return (create_input_token(TOKEN_SM_LR, value));
@@ -93,17 +93,17 @@ t_token		*lexer_collect_et(t_lexer *lexer)
 	lexer_advance(lexer);
 	if (!(value = (char *)ft_memalloc(sizeof(char) + 1)))
 		handle_error("Malloc failed", 1);
-	if (lexer->c == '<')
+	if (lexer->c == SML)
 	{
 		value = lexer_collect(value, s, lexer);
 		return (create_input_token(TOKEN_ET_SMLER, value));
 	}
-	else if (lexer->c == '&')
+	else if (lexer->c == ET)
 	{
 		value = lexer_collect(value, s, lexer);
 		return (create_input_token(TOKEN_ET_ET, value));
 	}
-	else if (lexer->c == '>')
+	else if (lexer->c == LRG)
 	{
 		value = lexer_collect(value, s, lexer);
 		return (create_input_token(TOKEN_ET_LRGER, value));

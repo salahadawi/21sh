@@ -6,7 +6,7 @@
 /*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/11 15:43:13 by jwilen            #+#    #+#             */
-/*   Updated: 2021/03/04 10:01:45 by jwilen           ###   ########.fr       */
+/*   Updated: 2021/03/04 22:05:55 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,6 @@ int			handle_keys(void)
 	}
 	else if (c == ENTER)
 		return (0);
-	handle_keys_c(c);
+	handle_keys_c(c); 
 	return (1);
 }

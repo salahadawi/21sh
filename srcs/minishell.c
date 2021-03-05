@@ -6,7 +6,7 @@
 /*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 14:23:12 by sadawi            #+#    #+#             */
-/*   Updated: 2021/03/03 21:59:18 by jwilen           ###   ########.fr       */
+/*   Updated: 2021/03/04 22:17:40 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	loop_shell(void)
 		handle_expansion();
 		run_commands();
 		move_cursor_newline();
+		// free(g_21sh->line);
 		free_history();
-		free(g_21sh->line);
 	}
 }
