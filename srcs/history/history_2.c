@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   history_2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/11 15:52:20 by jwilen            #+#    #+#             */
-/*   Updated: 2021/02/24 08:58:59 by jwilen           ###   ########.fr       */
+/*   Updated: 2021/03/05 13:40:46 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,4 +64,5 @@ void		free_history(void)
 		free(g_21sh->history);
 		g_21sh->history = tmp;
 	}
+	close(g_21sh->history_fd);
 }
