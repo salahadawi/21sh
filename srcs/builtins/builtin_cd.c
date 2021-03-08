@@ -6,7 +6,7 @@
 /*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 14:10:22 by sadawi            #+#    #+#             */
-/*   Updated: 2021/02/24 08:55:50 by jwilen           ###   ########.fr       */
+/*   Updated: 2021/03/08 09:19:41 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int		builtin_cd(char **args)
 {
-	char *oldpwd;
+	char 	*oldpwd;
 
 	oldpwd = store_oldpwd();
 	if (!args[1])
@@ -26,6 +26,8 @@ int		builtin_cd(char **args)
 		if (chdir(args[1]) == -1)
 			print_error(ft_sprintf("cd: no such file or directory: %s",
 			args[1]));
+		// else if (access(args[1], X_OK) != 0)
+		// 	print_error(ft_sprintf("cd: permission denied: %s", args[1]));
 	}
 	update_pwd();
 	update_oldpwd(oldpwd);

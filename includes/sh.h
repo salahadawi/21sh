@@ -6,7 +6,7 @@
 /*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/10 12:20:24 by sadawi            #+#    #+#             */
-/*   Updated: 2021/03/05 10:33:32 by jwilen           ###   ########.fr       */
+/*   Updated: 2021/03/05 14:13:19 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -163,8 +163,8 @@ typedef struct			s_21sh
 t_21sh					*g_21sh;
 int						g_debug;
 
-void free_command(t_command *commands);
-void free_arg(t_arg *arg);
+void					free_command(t_command *commands);
+void					free_arg(t_arg *arg);
 void					print_error(char *message);
 /*
 ** built in functions
@@ -225,7 +225,6 @@ void					lexi(void);
 void					create_input_tok(int type, char *str);
 t_token					*create_input_token(int type, char *value);
 int						list_len_token();
-// void					run_first(void);
 
 /*
 ** Move cursor functions
