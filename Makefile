@@ -6,7 +6,7 @@
 #    By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/04/10 19:27:20 by sadawi            #+#    #+#              #
-#    Updated: 2021/03/05 13:03:26 by jwilen           ###   ########.fr        #
+#    Updated: 2021/03/08 11:22:32 by jwilen           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,7 +48,7 @@ SIGNALS =  handle_signals.c signals.c \
 TERMCAPS = termcaps.c \
 
 UTIL = error.c redirect.c cursor.c functions.c strsub_variations.c \
-free_memory.c print.c compare_pointers.c
+free_memory.c print.c compare_pointers.c extra_functions.c
 
 
 SRCS = $(addprefix srcs/, $(CFILES)) \

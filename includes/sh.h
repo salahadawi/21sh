@@ -6,7 +6,7 @@
 /*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/10 12:20:24 by sadawi            #+#    #+#             */
-/*   Updated: 2021/03/05 14:13:19 by jwilen           ###   ########.fr       */
+/*   Updated: 2021/03/08 15:17:20 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -399,5 +399,10 @@ char					*str_add_char_heredoc(char **str, char c);
 char					*token_type_to_char(int type);
 int						advance_tokens(void);
 void					free_token(t_token *token);
+char					*adding_str_to_newstr(char *newstr, char *str,
+						int index);
+char					*adding_str_to_paste(int index, char *newstr,
+						char *str, char *paste);
+void					free_paths(char **paths, int i);
 
 #endif

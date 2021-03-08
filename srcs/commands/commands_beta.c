@@ -6,7 +6,7 @@
 /*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/14 21:01:26 by jwilen            #+#    #+#             */
-/*   Updated: 2021/03/07 08:51:53 by jwilen           ###   ########.fr       */
+/*   Updated: 2021/03/08 14:18:56 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	handle_redirections(t_command *command)
 void	handle_binaries(char **args)
 {
 	char *filepath;
-	// fix access
+
 	if (!(filepath = find_filepath(args[0])) || (access(filepath, X_OK) != 0))
 	{
 		print_error(ft_sprintf("Command not found: '%s'", args[0]));

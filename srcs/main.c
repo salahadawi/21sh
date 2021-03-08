@@ -6,7 +6,7 @@
 /*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/15 12:28:40 by sadawi            #+#    #+#             */
-/*   Updated: 2021/03/08 10:24:46 by jwilen           ###   ########.fr       */
+/*   Updated: 2021/03/08 14:20:38 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,6 @@ void	free_command(t_command *commands)
 		free(tmp);
 	}
 }
-
-
 
 void	init_key_sequences(void)
 {

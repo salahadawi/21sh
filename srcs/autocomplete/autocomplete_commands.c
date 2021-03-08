@@ -6,7 +6,7 @@
 /*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/12 09:25:45 by jwilen            #+#    #+#             */
-/*   Updated: 2021/03/08 10:35:42 by jwilen           ###   ########.fr       */
+/*   Updated: 2021/03/08 15:12:29 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +73,8 @@ void		autocomp_commands_append_dir(char *path)
 
 void		autocomplete(char **line, char previous_pressed_key)
 {
-	static char    *partial_command = NULL;
-	static char    **matching_commands = NULL;
+	static char		*partial_command = NULL;
+	static char		**matching_commands = NULL;
 
 	if (previous_pressed_key != TAB)
 	{
@@ -83,7 +83,7 @@ void		autocomplete(char **line, char previous_pressed_key)
 		partial_command = get_partial_command(*line);
 		if (partial_command[0] == '\0')
 			matching_commands = get_dir_commands(".");
-		else if (check_command_valid_dir(partial_command)) //CLOSE DIR 
+		else if (check_command_valid_dir(partial_command)) //CLOSE DIR
 		// some kind of check to make sure . and .. dirs are not immediately opened if files starting with . or .. exist
 		{
 			//check if command matches more than just valid dir

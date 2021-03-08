@@ -6,7 +6,7 @@
 /*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/14 20:52:48 by jwilen            #+#    #+#             */
-/*   Updated: 2021/03/05 12:11:41 by jwilen           ###   ########.fr       */
+/*   Updated: 2021/03/08 14:17:19 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void	child_execute_command(t_command *command, int *pipes, int command_num)
 	close_pipes(pipes);
 	handle_redirections(command);
 	args = command_arguments_to_arr(command);
-	if (!handle_builtins(args)) // change to exit with proper builtin return values // could get exit value from waitpid?
+	if (!handle_builtins(args))
 		handle_binaries(args);
 	exit(0);
 }

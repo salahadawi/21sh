@@ -6,7 +6,7 @@
 /*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/11 15:38:22 by jwilen            #+#    #+#             */
-/*   Updated: 2021/03/05 10:39:42 by jwilen           ###   ########.fr       */
+/*   Updated: 2021/03/08 11:30:55 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,38 +33,19 @@ int		read_key(void)
 
 char	*str_remove_char(char *str, int index)
 {
-	int		i;
 	char	*newstr;
 
 	if (index < 0 || index >= (int)ft_strlen(str))
 		return (str);
 	if (!(newstr = (char*)ft_memalloc(ft_strlen(str))))
 		handle_error("Malloc failed", 1);
-	i = 0;
-	while (i < index)
-	{
-		newstr[i] = str[i];
-		i++;
-	}
-	if (!str[i])
-	{
-		free(str);
-		return (newstr);
-	}
-	while (str[i + 1])
-	{
-		newstr[i] = str[i + 1];
-		i++;
-	}
-	newstr[i] = '\0';
+	adding_str_to_newstr(newstr, str, index);
 	free(str);
 	return (newstr);
 }
 
 char	*str_add_paste(char *str, char *paste)
 {
-	int		i;
-	int		j;
 	int		index;
 	char	*newstr;
 
@@ -73,25 +54,7 @@ char	*str_add_paste(char *str, char *paste)
 	index = ft_strlen(g_21sh->line) + g_21sh->cursor.x;
 	if (!(newstr = (char*)ft_memalloc(ft_strlen(str) + ft_strlen(paste) + 2)))
 		handle_error("Malloc failed", 1);
-	i = 0;
-	while (i < index)
-	{
-		newstr[i] = str[i];
-		i++;
-	}
-	j = 0;
-	while (paste[j])
-	{
-		newstr[i] = paste[j];
-		i++;
-		j++;
-	}
-	while (str[i - j])
-	{
-		newstr[i] = str[i - j];
-		i++;
-	}
-	newstr[i] = '\0';
+	newstr = adding_str_to_paste(index, newstr, str, paste);
 	free(str);
 	return (newstr);
 }

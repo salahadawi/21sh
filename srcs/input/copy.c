@@ -6,17 +6,32 @@
 /*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/09 10:38:52 by jwilen            #+#    #+#             */
-/*   Updated: 2021/03/05 12:24:42 by jwilen           ###   ########.fr       */
+/*   Updated: 2021/03/08 15:11:10 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh.h"
 
-void		copy_start(void)
+static void	copy_start_alfa(void)
 {
 	int		i;
 
 	i = 0;
+	g_21sh->copy_end = ft_strlen(g_21sh->line) + g_21sh->cursor.x;
+	if (!(g_21sh->copy_part = ft_memalloc(g_21sh->copy_end -
+	g_21sh->copy_start + 1)))
+		handle_error("Malloc failed", 1);
+	while (g_21sh->copy_start <= g_21sh->copy_end)
+	{
+		g_21sh->copy_part[i] = g_21sh->line[g_21sh->copy_start];
+		i++;
+		g_21sh->copy_start++;
+	}
+	g_21sh->copy_start = -1;
+}
+
+void		copy_start(void)
+{
 	if (g_21sh->copy_start == -1)
 	{
 		free(g_21sh->copy_part);
@@ -25,19 +40,7 @@ void		copy_start(void)
 	else
 	{
 		if (g_21sh->copy_start >= g_21sh->cursor.x)
-		{
-			g_21sh->copy_end = ft_strlen(g_21sh->line) + g_21sh->cursor.x;
-			if (!(g_21sh->copy_part = ft_memalloc(g_21sh->copy_end -
-			g_21sh->copy_start + 1)))
-				handle_error("Malloc failed", 1);
-			while (g_21sh->copy_start <= g_21sh->copy_end)
-			{
-				g_21sh->copy_part[i] = g_21sh->line[g_21sh->copy_start];
-				i++;
-				g_21sh->copy_start++;
-			}
-			g_21sh->copy_start = -1;
-		}
+			copy_start_alfa();
 		else
 		{
 			g_21sh->copy_start = -1;
