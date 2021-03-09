@@ -6,7 +6,7 @@
 /*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/10 12:20:24 by sadawi            #+#    #+#             */
-/*   Updated: 2021/03/08 15:17:20 by jwilen           ###   ########.fr       */
+/*   Updated: 2021/03/09 07:03:31 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@
 
 # define OPERATOR (TOKEN_SEMI|TOKEN_PIPE|TOKEN_LRGER|TOKEN_SMLER|TOKEN_ET)
 # define REDIRECTIONS (TOKEN_SMLER|TOKEN_LRGER|TOKEN_INSERTION|TOKEN_EXTRACTION)
+//# define TOKEN_END_ERROR (//)
 
 typedef int				t_builtin_func (char **args);
 
@@ -404,5 +405,6 @@ char					*adding_str_to_newstr(char *newstr, char *str,
 char					*adding_str_to_paste(int index, char *newstr,
 						char *str, char *paste);
 void					free_paths(char **paths, int i);
+void        check_ast(void);
 
 #endif
