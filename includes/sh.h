@@ -3,20 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   sh.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/10 12:20:24 by sadawi            #+#    #+#             */
-/*   Updated: 2021/03/01 14:29:02 by jwilen           ###   ########.fr       */
+/*   Updated: 2021/03/08 21:06:55 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SH_H
 # define SH_H
-
-# include "../libft/includes/libft.h"
-# include "./token.h"
-# include "./ast.h"
-
+	
 # include <sys/ioctl.h>
 # include <sys/types.h>
 # include <sys/stat.h>
@@ -28,6 +24,11 @@
 # include <signal.h>
 # include <fcntl.h>
 # include <unistd.h>
+
+# include "../libft/includes/libft.h"
+# include "./token.h"
+# include "./ast.h"
+# include "job_control.h"
 
 # define BOLDBLUE "\033[1m\033[36m"
 # define RED "\033[1m\033[31m"
@@ -152,6 +153,8 @@ typedef struct			s_21sh
 	char				*copy_part;
 	int					copy_start;
 	int					copy_end;
+	pid_t				shell_pgid;
+	t_job				*jobs;
 }						t_21sh;
 
 t_21sh					*g_21sh;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ast.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/12 08:32:28 by jwilen            #+#    #+#             */
-/*   Updated: 2021/02/23 11:58:52 by jwilen           ###   ########.fr       */
+/*   Updated: 2021/03/08 19:11:33 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ typedef struct			s_command
 {
 	t_arg				*arguments;
 	t_redir				*redirections;
+	int					num;
 	struct s_command	*next;
 }						t_command;
 

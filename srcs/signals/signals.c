@@ -6,7 +6,7 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/11 16:54:31 by jwilen            #+#    #+#             */
-/*   Updated: 2021/03/04 21:10:37 by sadawi           ###   ########.fr       */
+/*   Updated: 2021/03/09 19:59:48 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,4 +46,7 @@ void	init_signal_handling(void)
 	signal(SIGCONT, handle_signal);
 	signal(SIGINT, handle_signal);
 	signal(SIGWINCH, handle_signal);
+	signal(SIGTTIN, SIG_IGN);
+	signal(SIGTTOU, SIG_IGN);
+	signal(SIGCHLD, handle_signal);
 }

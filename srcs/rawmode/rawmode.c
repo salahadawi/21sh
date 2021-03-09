@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rawmode.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/11 17:02:40 by jwilen            #+#    #+#             */
-/*   Updated: 2021/02/23 11:41:39 by jwilen           ###   ########.fr       */
+/*   Updated: 2021/03/08 21:07:48 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,5 +34,5 @@ void	set_terminal_raw_mode(void)
 
 void	create_terminal_raw_mode(void)
 {
-	tcgetattr(STDOUT_FILENO, &g_21sh->raw);
+	tcgetattr(STDIN_FILENO, &g_21sh->raw);
 }
