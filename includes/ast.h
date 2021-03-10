@@ -6,7 +6,7 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/12 08:32:28 by jwilen            #+#    #+#             */
-/*   Updated: 2021/03/08 19:11:33 by sadawi           ###   ########.fr       */
+/*   Updated: 2021/03/09 20:47:51 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ typedef struct			s_command
 	t_arg				*arguments;
 	t_redir				*redirections;
 	int					num;
+	int					background;
 	struct s_command	*next;
 }						t_command;
 

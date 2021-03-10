@@ -6,7 +6,7 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/12 16:07:17 by jwilen            #+#    #+#             */
-/*   Updated: 2021/03/09 19:11:18 by sadawi           ###   ########.fr       */
+/*   Updated: 2021/03/10 15:36:21 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@ t_command		*get_next_command(void)
 {
 	t_command	*command;
 
-	if (!g_21sh->token || g_21sh->token->type == TOKEN_SEMI)
+	if (!g_21sh->token || g_21sh->token->type == TOKEN_SEMI
+	|| g_21sh->token->type == TOKEN_BACKGROUND)
 		return (NULL);
 	if (!(command = (t_command*)ft_memalloc(sizeof(t_command))))
 		handle_error("Malloc failed", 1);
@@ -27,9 +28,13 @@ t_command		*get_next_command(void)
 			add_redir(command, AGGREGATION);
 		else if (check_token_redir())
 			add_redir(command, NO_AGGREGATION);
+		else if (g_21sh->token->type == TOKEN_BACKGROUND)
+		{
+			command->background = 1;
+			break ;
+		}
 		else
 			add_arg(command);
-	
 		
 	}
 	if (g_21sh->token && g_21sh->token->type == TOKEN_PIPE)
@@ -135,7 +140,7 @@ void			format_job_info(t_job *job, char *status)
 	ft_fprintf(STDERR_FILENO, "%ld (%s)\n", (long)job->pgid, status);
 }
 
-void launch_process(t_job *job, t_process *process, int foreground)
+void launch_process(t_job *job, t_process *process)
 {
 	pid_t	pid;
 	char	**args;
@@ -148,7 +153,7 @@ void launch_process(t_job *job, t_process *process, int foreground)
 	if (job->pgid == 0)
 		job->pgid = pid;
 	setpgid(pid, job->pgid);
-	if (foreground)
+	if (job->ground)
 		ft_tcsetpgrp(STDIN_FILENO, job->pgid);
 
 	/* Set the handling for job control signals back to the default.  */
@@ -169,6 +174,7 @@ void launch_process(t_job *job, t_process *process, int foreground)
 	args = command_arguments_to_arr(process->command);
 	if (!handle_builtins(args)) // change to exit with proper builtin return values // could get exit value from waitpid?
 		handle_binaries(args);
+	tcsetattr(STDOUT_FILENO, TCSAFLUSH, &g_21sh->raw);
 	exit(1);
 }
 
@@ -292,9 +298,10 @@ void put_job_in_background(t_job *job, int cont)
 	// if (cont)
 	// 	if (kill(-j->pgid, SIGCONT) < 0)
 	// 		perror("kill (SIGCONT)");
+	tcsetattr(STDIN_FILENO, TCSADRAIN, &g_21sh->raw);
 }
 
-void 			launch_job(t_job *job, int foreground)
+void 			launch_job(t_job *job)
 {
 	t_process *tmp;
 	pid_t pid;
@@ -306,7 +313,7 @@ void 			launch_job(t_job *job, int foreground)
 		if ((pid = fork()) == -1)
 			handle_error("Error forking", 1);
 		if (pid == 0)
-			launch_process(job, tmp, foreground);
+			launch_process(job, tmp);
 		else
 		{
 			tmp->pid = pid;
@@ -324,10 +331,21 @@ void 			launch_job(t_job *job, int foreground)
 		tmp = tmp->next;
 	}
 	format_job_info(job, "launched");
-	if (foreground)
+	if (job->ground)
 		put_job_in_foreground(job, 0);
 	else
 		put_job_in_background(job, 0);
+}
+
+int		get_job_ground(t_command *commands)
+{
+	while (commands)
+	{
+		if (commands->background)
+			return (BACKGROUND);
+		commands = commands->next;
+	}
+	return (FOREGROUND);
 }
 
 void			handle_job(t_command *commands)
@@ -336,6 +354,7 @@ void			handle_job(t_command *commands)
 	t_process	*process;
 
 	job = create_job(commands);
+	job->ground = get_job_ground(commands);
 	while (commands)
 	{
 		if (!job->first_process)
@@ -351,7 +370,7 @@ void			handle_job(t_command *commands)
 		commands = commands->next;
 	}
 	save_job(job);
-	launch_job(job, 1);
+	launch_job(job);
 }
 
 void			run_commands(void)
@@ -366,6 +385,7 @@ void			run_commands(void)
 		commands = get_commands();
 		if (g_21sh->token)
 			advance_tokens();
+		//print_commands(commands);
 		//run_commands_group(commands);
 		handle_job(commands);
 		//free_command(commands); 	// jwi //should not free before a job is done

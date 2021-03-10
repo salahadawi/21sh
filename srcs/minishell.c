@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 14:23:12 by sadawi            #+#    #+#             */
-/*   Updated: 2021/03/02 09:38:36 by jwilen           ###   ########.fr       */
+/*   Updated: 2021/03/10 15:36:25 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,16 @@ void	loop_shell(void)
 			break ; //never breaks???
 		save_command_history();
 		lexi();
+
+		//for (t_token *cur = g_21sh->token; cur; cur = cur->next)
+			//ft_printf("\ntoken: %d %s\n", cur->type, cur->value);
+
 		ft_printf("\n");
 		handle_expansion();
 		run_commands();
 		move_cursor_newline(); //if output didn't end with newline
 		free_history();
 		free(g_21sh->line); //jwi
-
 	}
 }
 

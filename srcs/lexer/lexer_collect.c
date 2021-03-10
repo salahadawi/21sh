@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_collect.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 11:28:37 by jwilen            #+#    #+#             */
-/*   Updated: 2021/03/02 14:06:50 by jwilen           ###   ########.fr       */
+/*   Updated: 2021/03/10 15:03:27 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,10 @@ t_token		*lexer_collect_et(t_lexer *lexer)
 	{
 		value = lexer_collect(value, s, lexer);
 		return (create_input_token(TOKEN_ET_LRGER, value));
+	}
+	else if (!lexer->c || lexer->c == ' ')
+	{
+		return (create_input_token(TOKEN_BACKGROUND, value));
 	}
 	ft_strcat(value, s);
 	free(s);

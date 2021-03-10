@@ -6,7 +6,7 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/08 16:39:07 by sadawi            #+#    #+#             */
-/*   Updated: 2021/03/08 20:23:06 by sadawi           ###   ########.fr       */
+/*   Updated: 2021/03/09 20:47:45 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,9 @@
 # define JOB_CONTROL_H
 
 # include "sh.h"
+
+# define BACKGROUND 0
+# define FOREGROUND 1
 
 typedef struct			s_process
 {
@@ -33,6 +36,7 @@ typedef struct		s_job
 	char			notified;              /* true if user told about stopped job */
 	struct termios	tmodes;      /* saved terminal modes */
 	int				*pipes;
+	int				ground;
 }					t_job;
 
 pid_t		ft_tcgetpgrp(int fd);

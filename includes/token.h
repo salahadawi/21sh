@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/17 14:05:21 by jwilen            #+#    #+#             */
-/*   Updated: 2021/02/23 11:57:51 by jwilen           ###   ########.fr       */
+/*   Updated: 2021/03/09 20:21:35 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ typedef	struct		s_token
 		TOKEN_LRGER_PIPE,
 		TOKEN_SM_LR,
 		TOKEN_BACKSLASH,
+		TOKEN_BACKGROUND,
 	}				type;
 
 	int				fd;
