@@ -6,7 +6,7 @@
 /*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/08 16:48:18 by jwilen            #+#    #+#             */
-/*   Updated: 2021/03/09 11:43:40 by jwilen           ###   ########.fr       */
+/*   Updated: 2021/03/09 14:43:06 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,8 @@ void		check_ast()
 	tmp = g_21sh->token;
 	while (tmp)
 	{
-		print_error(ft_sprintf("%d ", tmp->type));
+		print_error(ft_sprintf("%s ", tmp->value));
+		// print_error(ft_sprintf("%d ", tmp->type));
 		if (tmp->type == TOKEN_EQUALS && (tmp->next == NULL || tmp->prev == NULL))
 		{
 			print_error(ft_sprintf("command not found: %s", tmp->value));
