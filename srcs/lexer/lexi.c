@@ -6,7 +6,7 @@
 /*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/17 07:22:21 by jwilen            #+#    #+#             */
-/*   Updated: 2021/03/10 08:23:05 by jwilen           ###   ########.fr       */
+/*   Updated: 2021/03/11 15:07:33 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ t_lexer			*init_lexer(char *contents)
 	return (lexer);
 }
 
-void			lexi(void)
+int			lexi(void)
 {
 	t_lexer *lexer;
 	t_token *token;
@@ -85,5 +85,6 @@ void			lexi(void)
 	while ((token = lexer_get_next_token(lexer)))
 		token = token->next;
 	free(lexer);
-	// check_ast();
+	check_ast();
+	return (0);
 }

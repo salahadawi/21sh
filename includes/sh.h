@@ -6,7 +6,7 @@
 /*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/10 12:20:24 by sadawi            #+#    #+#             */
-/*   Updated: 2021/03/09 07:03:31 by jwilen           ###   ########.fr       */
+/*   Updated: 2021/03/11 15:09:12 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,8 @@
 
 # define OPERATOR (TOKEN_SEMI|TOKEN_PIPE|TOKEN_LRGER|TOKEN_SMLER|TOKEN_ET)
 # define REDIRECTIONS (TOKEN_SMLER|TOKEN_LRGER|TOKEN_INSERTION|TOKEN_EXTRACTION)
+# define RESERVED_WORD ("done""case" "do" "elif" "else" "esac" "fi" "for" "if" "in" "then" "until" "while")
+// # define RESERVED_WORD (!|{|}|case|do|done|elif|else|esac|fi|for|if|in|then|until|while)
 //# define TOKEN_END_ERROR (//)
 
 typedef int				t_builtin_func (char **args);
@@ -222,7 +224,7 @@ void					set_terminal(char *id);
 int						ft_putschar(int c);
 void					save_cursor_position(void);
 void					restore_terminal_mode(void);
-void					lexi(void);
+int						lexi(void);
 void					create_input_tok(int type, char *str);
 t_token					*create_input_token(int type, char *value);
 int						list_len_token();
@@ -405,6 +407,6 @@ char					*adding_str_to_newstr(char *newstr, char *str,
 char					*adding_str_to_paste(int index, char *newstr,
 						char *str, char *paste);
 void					free_paths(char **paths, int i);
-void        check_ast(void);
+int				        check_ast(void);
 
 #endif
