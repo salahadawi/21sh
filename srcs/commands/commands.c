@@ -6,7 +6,7 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/12 16:07:17 by jwilen            #+#    #+#             */
-/*   Updated: 2021/03/10 15:36:21 by sadawi           ###   ########.fr       */
+/*   Updated: 2021/03/11 19:09:34 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,8 @@ t_command		*get_commands(void)
 		{
 			tmp = get_next_command();
 			commands = tmp;
-			commands->num = command_num++;
+			if (commands)
+				commands->num = command_num++;
 		}
 		else
 		{
@@ -387,7 +388,8 @@ void			run_commands(void)
 			advance_tokens();
 		//print_commands(commands);
 		//run_commands_group(commands);
-		handle_job(commands);
+		if (commands)
+			handle_job(commands);
 		//free_command(commands); 	// jwi //should not free before a job is done
 	}
 	
