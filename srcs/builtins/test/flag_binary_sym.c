@@ -1,27 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   handle_builtins.c                                  :+:      :+:    :+:   */
+/*   flag_binary_sym.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/04/17 14:19:51 by sadawi            #+#    #+#             */
-/*   Updated: 2021/03/14 17:50:44 by jwilen           ###   ########.fr       */
+/*   Created: 2021/03/15 09:18:58 by jwilen            #+#    #+#             */
+/*   Updated: 2021/03/15 09:24:06 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "sh.h"
+#include "test.h"
 
-int		handle_builtins(char **args)
+int		flag_sym_eq_test(char *left, char *right, int *result)
 {
-	int i;
+	if (ft_strequ(left, right))
+		*result = 0;
+	else
+		*result = 1;
+	return (0);
+}
 
-	i = 0;
-	while (g_21sh->builtins.names[i])
-	{
-		if (ft_strequ(g_21sh->builtins.names[i], args[0]))
-			return (g_21sh->builtins.funcs[i](args));
-		i++;
-	}
-	return (handle_shortcuts(args));
+int		flag_sym_noteq_test(char *left, char *right, int *result)
+{
+	if (!ft_strequ(left, right))
+		*result = 0;
+	else
+		*result = 1;
+	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/10 12:20:24 by sadawi            #+#    #+#             */
-/*   Updated: 2021/03/11 15:09:12 by jwilen           ###   ########.fr       */
+/*   Updated: 2021/03/11 15:39:06 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,9 +79,6 @@
 
 # define OPERATOR (TOKEN_SEMI|TOKEN_PIPE|TOKEN_LRGER|TOKEN_SMLER|TOKEN_ET)
 # define REDIRECTIONS (TOKEN_SMLER|TOKEN_LRGER|TOKEN_INSERTION|TOKEN_EXTRACTION)
-# define RESERVED_WORD ("done""case" "do" "elif" "else" "esac" "fi" "for" "if" "in" "then" "until" "while")
-// # define RESERVED_WORD (!|{|}|case|do|done|elif|else|esac|fi|for|if|in|then|until|while)
-//# define TOKEN_END_ERROR (//)
 
 typedef int				t_builtin_func (char **args);
 
@@ -177,6 +174,7 @@ char					*ft_strsubchar(char const *s, size_t start, char c);
 int						builtin_echo(char **args);
 int						builtin_exit(char **args);
 int						builtin_env(char **args);
+int						builtin_test(char **args);
 int						check_names_match(char *var1, char *var2);
 void					add_env(char *arg);
 int						builtin_setenv(char **args);
