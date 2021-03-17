@@ -1,29 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.c                                            :+:      :+:    :+:   */
+/*   builtin_hash.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/11 17:30:05 by jwilen            #+#    #+#             */
-/*   Updated: 2021/03/16 08:31:31 by jwilen           ###   ########.fr       */
+/*   Created: 2021/03/15 14:04:57 by jwilen            #+#    #+#             */
+/*   Updated: 2021/03/16 14:59:29 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "sh.h"
+#include "../includes/sh.h"
+#include "hash.h"
 
-void	handle_error(char *message, int reset)
+size_t		ft_ntab_len(const char **tab)
 {
-	ft_fprintf(STDERR_FILENO, "Error: %s.\n", message);
-	if (reset)
-		restore_terminal_mode();
-	free(g_21sh->line);
+	int	i;
+
+	if (!tab)
+		return (0);
+	i = 0;
+	while (tab[i])
+		i++;
+	return (i);
 }
 
-int		print_invalid_option(char c)
+int			builtin_hash(char **args)
 {
-	ft_fprintf(STDERR_FILENO, "-%c: invalid option\n", c);
-	ft_fprintf(STDERR_FILENO,
-		"hash usage [-lr] [-p pathname] [-d] [name ...]\n");
-	return (0);
+    return (hash_builtin(ft_ntab_len((const char**)args), args));
 }

@@ -6,13 +6,47 @@
 /*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 14:20:38 by sadawi            #+#    #+#             */
-/*   Updated: 2021/02/12 09:21:14 by jwilen           ###   ########.fr       */
+/*   Updated: 2021/03/16 08:19:19 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh.h"
 
-char	*get_env_value(char *name)
+// static	int		ft_strcmp_before_c(char *search, char *str, char c)
+// {
+// 	int		i;
+
+// 	if (!search || !str || !c)
+// 		return (0);
+// 	i = -1;
+// 	while (str[++i] && str[i] != c && search[i])
+// 	{
+// 		if (str[i] != search[i])
+// 			return (0);
+// 	}
+// 	if (!search[i] && str[i] == c)
+// 		return (i);
+// 	else
+// 		return (0);
+// }
+
+// char			*get_envline_value(char *search, char **env)
+// {
+// 	int		i;
+// 	int		offset;
+
+// 	if (!search)
+// 		return (NULL);
+// 	i = -1;
+// 	while (env && env[++i])
+// 	{
+// 		if ((offset = ft_strcmp_before_c(search, env[i], '=')))
+// 			return (&(env[i][offset + 1]));
+// 	}
+// 	return (NULL);
+// }
+
+char			*get_env_value(char *name)
 {
 	int len;
 	int i;
@@ -34,7 +68,7 @@ char	*get_env_value(char *name)
 	return (NULL);
 }
 
-int		get_env_name_len(char *str)
+int				get_env_name_len(char *str)
 {
 	int i;
 
@@ -44,7 +78,7 @@ int		get_env_name_len(char *str)
 	return (i);
 }
 
-int		count_env_amount(char *envp[])
+int				count_env_amount(char *envp[])
 {
 	int i;
 

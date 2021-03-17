@@ -1,29 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.c                                            :+:      :+:    :+:   */
+/*   prime.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/11/11 17:30:05 by jwilen            #+#    #+#             */
-/*   Updated: 2021/03/16 08:31:31 by jwilen           ###   ########.fr       */
+/*   Created: 2021/03/16 10:20:45 by jwilen            #+#    #+#             */
+/*   Updated: 2021/03/16 10:24:06 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "sh.h"
+#include "hash.h"
 
-void	handle_error(char *message, int reset)
+static int		is_prime(int nb)
 {
-	ft_fprintf(STDERR_FILENO, "Error: %s.\n", message);
-	if (reset)
-		restore_terminal_mode();
-	free(g_21sh->line);
+	int	i;
+
+	if (nb < 2)
+		return (0);
+	if (nb <= 3)
+		return (1);
+	if ((nb % 2 == 0) || (nb % 3 == 0))
+		return (0);
+	i = 5;
+	while (i * i < (int)nb)
+	{
+		if ((nb % i == 0) || (nb % (i + 2) == 0))
+			return (0);
+		i += 6;
+	}
+	return (1);
 }
 
-int		print_invalid_option(char c)
+int				get_new_prime(int nb)
 {
-	ft_fprintf(STDERR_FILENO, "-%c: invalid option\n", c);
-	ft_fprintf(STDERR_FILENO,
-		"hash usage [-lr] [-p pathname] [-d] [name ...]\n");
+	while (++nb && nb <= INT_MAX)
+	{
+		if (is_prime(nb))
+			return (nb);
+	}
 	return (0);
 }

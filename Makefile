@@ -6,7 +6,7 @@
 #    By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/04/10 19:27:20 by sadawi            #+#    #+#              #
-#    Updated: 2021/03/15 09:40:58 by jwilen           ###   ########.fr        #
+#    Updated: 2021/03/16 12:30:06 by jwilen           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,10 +19,14 @@ AUTOCOMPLETE = autocomplete_commands.c autocomplete_commands_alfa.c \
 autocomplete_commands_beta.c
 
 BUILTINS = builtin_cd.c builtin_echo.c builtin_env.c builtin_exit.c \
-builtin_setenv.c builtin_test.c builtin_unsetenv.c handle_builtins.c
+builtin_setenv.c builtin_test.c builtin_unsetenv.c builtin_hash.c \
+handle_builtins.c 
 
 BUILTINS_TEST = flag_bcdef.c flag_glprs.c flag_suwxz.c flag_binary.c \
 flag_binary_util.c flag_binary_sym.c check_values.c get_options.c util.c 
+
+BUILTINS_HASH = hash_main.c hash_print.c get_args.c reset.c hash_init.c \
+hashmap_functions.c prime.c hash_paths.c    
 
 COMMANDS = commands.c commands_alfa.c commands_beta.c commands_gamma.c \
 execute_command.c commands_delta.c commands_epsilon.c
@@ -60,6 +64,7 @@ SRCS = $(addprefix srcs/, $(CFILES)) \
 $(addprefix srcs/autocomplete/, $(AUTOCOMPLETE)) \
 $(addprefix srcs/builtins/, $(BUILTINS)) \
 $(addprefix srcs/builtins/test/, $(BUILTINS_TEST)) \
+$(addprefix srcs/builtins/hash/, $(BUILTINS_HASH)) \
 $(addprefix srcs/commands/, $(COMMANDS)) \
 $(addprefix srcs/heredoc/, $(HEREDOC)) \
 $(addprefix srcs/history/, $(HISTORY)) \
