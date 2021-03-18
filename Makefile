@@ -6,7 +6,7 @@
 #    By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/04/10 19:27:20 by sadawi            #+#    #+#              #
-#    Updated: 2021/03/16 12:30:06 by jwilen           ###   ########.fr        #
+#    Updated: 2021/03/17 10:43:00 by jwilen           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ autocomplete_commands_beta.c
 
 BUILTINS = builtin_cd.c builtin_echo.c builtin_env.c builtin_exit.c \
 builtin_setenv.c builtin_test.c builtin_unsetenv.c builtin_hash.c \
-handle_builtins.c 
+handle_builtins.c builtin_type.c
 
 BUILTINS_TEST = flag_bcdef.c flag_glprs.c flag_suwxz.c flag_binary.c \
 flag_binary_util.c flag_binary_sym.c check_values.c get_options.c util.c 

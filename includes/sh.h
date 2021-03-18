@@ -6,7 +6,7 @@
 /*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/10 12:20:24 by sadawi            #+#    #+#             */
-/*   Updated: 2021/03/15 14:32:50 by jwilen           ###   ########.fr       */
+/*   Updated: 2021/03/17 10:42:46 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -176,6 +176,7 @@ int						builtin_echo(char **args);
 int						builtin_exit(char **args);
 int						builtin_env(char **args);
 int						builtin_hash(char **args);
+int						builtin_type(char **args);
 int						builtin_test(char **args);
 int						check_names_match(char *var1, char *var2);
 void					add_env(char *arg);

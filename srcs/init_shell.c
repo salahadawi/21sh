@@ -6,7 +6,7 @@
 /*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 14:12:23 by sadawi            #+#    #+#             */
-/*   Updated: 2021/03/16 14:38:50 by jwilen           ###   ########.fr       */
+/*   Updated: 2021/03/17 10:40:37 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	init_builtins(void)
 	char	*builtin_names;
 	int		count;
 
-	builtin_names = "echo exit env setenv unsetenv cd test hash";
+	builtin_names = "echo exit env setenv unsetenv cd test hash type";
 	g_21sh->builtins.names = ft_strsplit(builtin_names, ' ');
 	count = 0;
 	while (g_21sh->builtins.names[count])
@@ -54,7 +54,7 @@ void	init_builtins(void)
 	g_21sh->builtins.funcs[5] = &builtin_cd;
 	g_21sh->builtins.funcs[6] = &builtin_test;
 	g_21sh->builtins.funcs[7] = &builtin_hash;
-	
+	g_21sh->builtins.funcs[8] = &builtin_type;
 }
 
 /*
