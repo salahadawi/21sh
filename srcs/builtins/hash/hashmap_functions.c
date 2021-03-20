@@ -6,7 +6,7 @@
 /*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 09:23:34 by jwilen            #+#    #+#             */
-/*   Updated: 2021/03/17 08:24:52 by jwilen           ###   ########.fr       */
+/*   Updated: 2021/03/20 06:55:21 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,17 +35,17 @@ void			map_copy(t_hashmap *previous, t_hashmap **new)
 
 unsigned int	hashing(const char *key)
 {
-	unsigned int	address;
+	unsigned int	hash_address;
 	unsigned int	i;
 
-	address = 0;
+	hash_address = 0;
 	i = 0;
 	while (key[i])
 	{
-		address = key[i] + (address << 6) + (address << 16) - address;
+		hash_address = key[i] + (hash_address * (6 ^ 6)) + (hash_address *(16 ^ 16)) - hash_address;
 		i++;
 	}
-	return (address);
+	return (hash_address);
 }
 
 static void		go_forward(t_hash_item **item, t_hash_item **prev, int *len)
@@ -60,7 +60,7 @@ char			*check_map(const char *key, t_hashmap *hashmap, t_hashopt opt)
 	t_hash_item		*item;
 
 	item = hashmap->items[hashing(key) % hashmap->size];
-	while (item)
+	while (item && item != 0)
 	{
 		if (!ft_strcmp(key, item->key))
 		{
