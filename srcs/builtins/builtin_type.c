@@ -6,7 +6,7 @@
 /*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/17 10:41:38 by jwilen            #+#    #+#             */
-/*   Updated: 2021/03/20 07:49:51 by jwilen           ###   ########.fr       */
+/*   Updated: 2021/03/20 08:03:08 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,26 @@ static char			*check_path(char *arg)
 {
 	char		**paths;
 	char		*path;
+	int			i;
 
+	i = 0;
 	paths = get_paths();
 	if ((path = find_path(arg, paths)))
+	{
+		while (paths[i])
+		{
+			free(paths[i]);
+			i++;
+		}
+		free(paths);
 		return (path);
+	}
+	while (paths[i])
+	{
+		free(paths[i]);
+		i++;
+	}
+	free(paths);
 	return (NULL);
 }
 
