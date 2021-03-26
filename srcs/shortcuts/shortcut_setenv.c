@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shortcut_setenv.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 14:11:32 by sadawi            #+#    #+#             */
-/*   Updated: 2021/02/05 14:12:32 by sadawi           ###   ########.fr       */
+/*   Updated: 2021/03/23 08:45:04 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,12 @@ int		shortcut_setenv(char **args)
 			return (0);
 	}
 	i = 0;
-	while (args[i])
+	while (args[i] && ft_strncmp(args[i], "setenv", 6) == 0)
 	{
 		if (ft_strchr(args[i], '='))
 		{
 			add_env(args[i]);
-			ft_printf("%s added to enviroment!\n", args[i]);
+			ft_printf("%s added to enviroment!!!\n", args[i]);
 		}
 		i++;
 	}

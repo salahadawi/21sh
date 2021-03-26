@@ -6,7 +6,7 @@
 /*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/10 12:20:24 by sadawi            #+#    #+#             */
-/*   Updated: 2021/03/17 10:42:46 by jwilen           ###   ########.fr       */
+/*   Updated: 2021/03/26 21:41:59 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,6 +115,14 @@ typedef struct			s_history
 	struct s_history	*next;
 }						t_history;
 
+typedef struct			s_alias
+{
+	char				*alias_name;
+	char				*real_name;
+	struct s_alias		*prev;
+	struct s_alias		*next;
+}						t_alias;
+
 typedef struct			s_tok
 {
 	char				*str;
@@ -146,6 +154,10 @@ typedef struct			s_21sh
 	char				*history_file_path;
 	int					history_fd;
 	t_history			*history;
+	t_alias				*alias;
+	t_alias				*head_alias;
+	int					alias_fd;
+	char				*alias_file_path;
 	char				*copied_input;
 	t_token				*head;
 	t_token				*token;
@@ -178,6 +190,8 @@ int						builtin_env(char **args);
 int						builtin_hash(char **args);
 int						builtin_type(char **args);
 int						builtin_test(char **args);
+int						builtin_alias(char **args);
+int						builtin_unalias(char **args);
 int						check_names_match(char *var1, char *var2);
 void					add_env(char *arg);
 int						builtin_setenv(char **args);
@@ -267,6 +281,18 @@ void					add_to_history(char *line);
 void					save_command_history(void);
 int						same_as_previous_command();
 void					free_history(void);
+
+
+/*
+** Alias functiuons
+*/
+void					open_alias_file(void);
+void					get_alias_file_path(void);
+void					free_alias(void);
+void		free_alias_node(t_alias **head_ref, t_alias *del);
+t_alias		*new_alias_node(char *line, t_alias *prev);
+void		add_to_alias(char *line);
+char		*produce_back_front(char *line, int i, size_t len, size_t len2);
 
 /*
 ** Termcaps functions

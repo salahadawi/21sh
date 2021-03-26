@@ -6,18 +6,26 @@
 /*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 14:23:12 by sadawi            #+#    #+#             */
-/*   Updated: 2021/03/11 15:07:15 by jwilen           ###   ########.fr       */
+/*   Updated: 2021/03/26 21:34:00 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh.h"
+static void		init_alias(void)
+{
+	t_alias		*head;
 
-void	loop_shell(void)
+	g_21sh->alias = NULL;
+	head = g_21sh->alias;
+	g_21sh->head_alias = g_21sh->alias;
+}	
+void			loop_shell(void)
 {
 	int		loop;
 
 	loop = 1;
 	get_history_file_path();
+	init_alias();
 	while (loop)
 	{
 		open_history_file();
@@ -35,6 +43,7 @@ void	loop_shell(void)
 			move_cursor_newline();
 		}
 		free_history();
+		// free_alias();
 		free(g_21sh->line);
 	}
 }
