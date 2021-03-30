@@ -6,7 +6,7 @@
 #    By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/04/10 19:27:20 by sadawi            #+#    #+#              #
-#    Updated: 2021/03/26 21:41:29 by jwilen           ###   ########.fr        #
+#    Updated: 2021/03/28 20:32:50 by jwilen           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,7 @@ flag_binary_util.c flag_binary_sym.c check_values.c get_options.c util.c
 BUILTINS_HASH = hash_main.c hash_print.c get_args.c reset.c hash_init.c \
 hashmap_functions.c prime.c hash_paths.c    
 
-BUILTINS_ALIAS = alias_file.c builtin_unalias.c \
+BUILTINS_ALIAS = alias_file.c builtin_unalias.c modify_line_with_alias.c \
 
 COMMANDS = commands.c commands_alfa.c commands_beta.c commands_gamma.c \
 execute_command.c commands_delta.c commands_epsilon.c

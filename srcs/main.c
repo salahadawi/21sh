@@ -6,7 +6,7 @@
 /*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/15 12:28:40 by sadawi            #+#    #+#             */
-/*   Updated: 2021/03/08 14:20:38 by jwilen           ###   ########.fr       */
+/*   Updated: 2021/03/30 08:53:03 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,7 @@ int		main(int argc, char **argv, char *envp[])
 	g_debug ? 0 : clear_screen(); // DEBUGGING
 	loop_shell();
 	restore_terminal_mode();
+	free_alias();
 	free(g_21sh);
 	return (0);
 }

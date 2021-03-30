@@ -6,7 +6,7 @@
 /*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/29 11:42:33 by jwilen            #+#    #+#             */
-/*   Updated: 2021/03/02 14:07:57 by jwilen           ###   ########.fr       */
+/*   Updated: 2021/03/27 20:57:39 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ t_token		*lexer_collect_id(t_lexer *lexer)
 		lexer_advance(lexer);
 		free(s);
 	}
+	value = value_alias(value);
 	if ((token_type = lexer_collect_file_aggregation(lexer, &value, &s)))
 		return (create_input_token(token_type, value));
 	return (create_input_token(TOKEN_ID, value));

@@ -6,24 +6,45 @@
 /*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/21 08:02:07 by jwilen            #+#    #+#             */
-/*   Updated: 2021/03/26 21:11:42 by jwilen           ###   ########.fr       */
+/*   Updated: 2021/03/29 15:14:59 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh.h"
 
-void			save_command_alias(char *args)
+int				len_eql(char *arg)
+{
+	int		i;
+
+	i = 0;
+	// ft_printf("ARG: %s\n", arg);
+	while(ft_strchr(&arg[i], '=')!= 0)
+		i++;
+	return (i);
+}
+
+void			save_command_alias(char **args)
 {
 	size_t	len;
 	size_t	len2;
 	char	*front;
 	t_alias	*current;
+	int		j = 0;
 
 	current = g_21sh->alias;
-	len = ft_strlen(ft_strchr(args, '='));
-	len2 = ft_strlen(args);
+	len2 = 0;
+	len = len_eql(args[0]);
+	while (args[j])
+	{
+		len2 +=ft_strlen(args[j]);
+		j++;
+	}
 	if (len2 > 0)
+	{
+	
 		front = produce_back_front(args, 0, len, len2);
+		// ft_printf("FRONT: %s\n", front);
+	}
 	if (!current)
 	{
 		add_to_alias(args);
@@ -68,9 +89,10 @@ int				builtin_alias(char **args)
 		print_alias(tmp);
 	while (args[i])
 	{
+
 		if (ft_strchr(args[i], EQUAL))
 		{
-			save_command_alias(args[i]);
+			save_command_alias(&args[i]);
 			ft_printf("%s added alias!\n", args[i]);
 		}
 		else if (!ft_strncmp(args[i], "-p", 2))

@@ -6,11 +6,13 @@
 /*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 14:23:12 by sadawi            #+#    #+#             */
-/*   Updated: 2021/03/26 21:34:00 by jwilen           ###   ########.fr       */
+/*   Updated: 2021/03/30 09:11:20 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh.h"
+#include "../includes/lexer.h"
+
 static void		init_alias(void)
 {
 	t_alias		*head;
@@ -18,7 +20,23 @@ static void		init_alias(void)
 	g_21sh->alias = NULL;
 	head = g_21sh->alias;
 	g_21sh->head_alias = g_21sh->alias;
-}	
+}
+
+char			*value_alias(char *value)
+{
+	t_alias	*current;
+
+	current = g_21sh->alias;
+	while(current)
+	{
+		if ((!ft_strcmp(value, current->alias_name)) && (!ft_strchr(current->real_name, ' ')))
+			value = current->real_name;
+		current = current->next;
+	}
+	// ft_printf("value: %s\n", value);
+	return(value);
+}
+
 void			loop_shell(void)
 {
 	int		loop;
@@ -35,6 +53,7 @@ void			loop_shell(void)
 		if (get_input() < 1)
 			break ;
 		save_command_history();
+		//run_alias();
 		if (lexi() == 0)
 		{
 			ft_printf("\n");
@@ -43,7 +62,6 @@ void			loop_shell(void)
 			move_cursor_newline();
 		}
 		free_history();
-		// free_alias();
 		free(g_21sh->line);
 	}
 }

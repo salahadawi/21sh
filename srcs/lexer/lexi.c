@@ -6,7 +6,7 @@
 /*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/17 07:22:21 by jwilen            #+#    #+#             */
-/*   Updated: 2021/03/11 15:07:33 by jwilen           ###   ########.fr       */
+/*   Updated: 2021/03/30 09:07:15 by jwilen           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,9 @@ int			lexi(void)
 {
 	t_lexer *lexer;
 	t_token *token;
-
+	
+	// modify_line_with_alias();
+	// ft_printf("\nnew:%s\n", g_21sh->line);
 	lexer = init_lexer(g_21sh->line);
 	g_21sh->token = NULL;
 	g_21sh->head = g_21sh->token;
