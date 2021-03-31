@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_shell.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: jochumwilen <jochumwilen@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 14:12:23 by sadawi            #+#    #+#             */
-/*   Updated: 2021/03/26 21:38:16 by jwilen           ###   ########.fr       */
+/*   Updated: 2021/03/31 17:58:28 by jochumwilen      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,8 @@ void	init_builtins(void)
 	char	*builtin_names;
 	int		count;
 
-	builtin_names = "echo exit env setenv unsetenv cd test hash type alias unalias";
+	builtin_names = "echo exit env setenv unsetenv cd \
+	test hash type alias unalias";
 	g_21sh->builtins.names = ft_strsplit(builtin_names, ' ');
 	count = 0;
 	while (g_21sh->builtins.names[count])
@@ -57,7 +58,6 @@ void	init_builtins(void)
 	g_21sh->builtins.funcs[8] = &builtin_type;
 	g_21sh->builtins.funcs[9] = &builtin_alias;
 	g_21sh->builtins.funcs[10] = &builtin_unalias;
-	
 }
 
 /*

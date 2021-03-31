@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sh.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: jochumwilen <jochumwilen@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/10 12:20:24 by sadawi            #+#    #+#             */
-/*   Updated: 2021/03/28 20:52:36 by jwilen           ###   ########.fr       */
+/*   Updated: 2021/03/31 18:34:47 by jochumwilen      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -282,21 +282,18 @@ void					save_command_history(void);
 int						same_as_previous_command();
 void					free_history(void);
 
-
 /*
 ** Alias functiuons
 */
-// void					open_alias_file(void);
-// void					get_alias_file_path(void);
 void					free_alias(void);
 void					free_alias_node(t_alias **head_ref, t_alias *del);
 t_alias					*new_alias_node(char **line, t_alias *prev);
 void					add_to_alias(char **line);
-char					*produce_back_front(char **line, int i, size_t len, size_t len2);
+char					*produce_back_front(char **line, int i, size_t len,
+						size_t len2);
 char					*value_alias(char *value);
-int				len_eql(char *arg);
-void    modify_line_with_alias(void);
-
+int						len_eql(char *arg);
+void					modify_line_with_alias(void);
 
 /*
 ** Termcaps functions
@@ -315,21 +312,15 @@ void					handle_signal_resize(void);
 void					handle_signal(int sig);
 void					restore_signals(void);
 void					init_signal_handling(void);
-
 int						get_input();
 void					check_str(void);
-
 void					find_prompt_y(void);
 void					init_key_sequences();
 char					*str_add_str(char *str, char *str2);
-
 int						init_ast_execution(t_ast *ast);
-
 int						check_syntax(t_token *token);
-
 void					print_input();
 int						input_too_large(void);
-
 int						filename_character_allowed(char c);
 
 /*
@@ -438,6 +429,6 @@ char					*adding_str_to_newstr(char *newstr, char *str,
 char					*adding_str_to_paste(int index, char *newstr,
 						char *str, char *paste);
 void					free_paths(char **paths, int i);
-int				        check_ast(void);
+int						check_ast(void);
 
 #endif

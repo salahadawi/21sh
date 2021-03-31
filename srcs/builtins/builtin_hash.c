@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_hash.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: jochumwilen <jochumwilen@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/15 14:04:57 by jwilen            #+#    #+#             */
-/*   Updated: 2021/03/16 14:59:29 by jwilen           ###   ########.fr       */
+/*   Updated: 2021/03/31 17:59:22 by jochumwilen      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,5 @@ size_t		ft_ntab_len(const char **tab)
 
 int			builtin_hash(char **args)
 {
-    return (hash_builtin(ft_ntab_len((const char**)args), args));
+	return (hash_builtin(ft_ntab_len((const char**)args), args));
 }

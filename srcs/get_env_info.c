@@ -3,48 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   get_env_info.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: jochumwilen <jochumwilen@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 14:20:38 by sadawi            #+#    #+#             */
-/*   Updated: 2021/03/16 08:19:19 by jwilen           ###   ########.fr       */
+/*   Updated: 2021/03/31 18:30:39 by jochumwilen      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh.h"
-
-// static	int		ft_strcmp_before_c(char *search, char *str, char c)
-// {
-// 	int		i;
-
-// 	if (!search || !str || !c)
-// 		return (0);
-// 	i = -1;
-// 	while (str[++i] && str[i] != c && search[i])
-// 	{
-// 		if (str[i] != search[i])
-// 			return (0);
-// 	}
-// 	if (!search[i] && str[i] == c)
-// 		return (i);
-// 	else
-// 		return (0);
-// }
-
-// char			*get_envline_value(char *search, char **env)
-// {
-// 	int		i;
-// 	int		offset;
-
-// 	if (!search)
-// 		return (NULL);
-// 	i = -1;
-// 	while (env && env[++i])
-// 	{
-// 		if ((offset = ft_strcmp_before_c(search, env[i], '=')))
-// 			return (&(env[i][offset + 1]));
-// 	}
-// 	return (NULL);
-// }
 
 char			*get_env_value(char *name)
 {

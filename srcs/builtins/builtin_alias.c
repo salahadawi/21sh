@@ -3,24 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_alias.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: jochumwilen <jochumwilen@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/21 08:02:07 by jwilen            #+#    #+#             */
-/*   Updated: 2021/03/29 15:14:59 by jwilen           ###   ########.fr       */
+/*   Updated: 2021/03/31 18:05:47 by jochumwilen      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh.h"
 
-int				len_eql(char *arg)
+static void		compare_and_free(char *front, t_alias *current)
 {
-	int		i;
-
-	i = 0;
-	// ft_printf("ARG: %s\n", arg);
-	while(ft_strchr(&arg[i], '=')!= 0)
-		i++;
-	return (i);
+	if (!ft_strcmp(front, current->alias_name))
+		free_alias_node(&g_21sh->alias, current);
 }
 
 void			save_command_alias(char **args)
@@ -29,22 +24,16 @@ void			save_command_alias(char **args)
 	size_t	len2;
 	char	*front;
 	t_alias	*current;
-	int		j = 0;
+	int		j;
 
+	j = 0;
 	current = g_21sh->alias;
 	len2 = 0;
 	len = len_eql(args[0]);
-	while (args[j])
-	{
-		len2 +=ft_strlen(args[j]);
-		j++;
-	}
+	while (args[j++])
+		len2 += ft_strlen(args[j]);
 	if (len2 > 0)
-	{
-	
 		front = produce_back_front(args, 0, len, len2);
-		// ft_printf("FRONT: %s\n", front);
-	}
 	if (!current)
 	{
 		add_to_alias(args);
@@ -52,8 +41,7 @@ void			save_command_alias(char **args)
 	}
 	while (current)
 	{
-		if (!ft_strcmp(front, current->alias_name))
-			free_alias_node(&g_21sh->alias, current);
+		compare_and_free(front, current);
 		current = current->next;
 	}
 	add_to_alias(args);
@@ -61,9 +49,9 @@ void			save_command_alias(char **args)
 
 static void		print_alias(t_alias *tmp)
 {
-	while(tmp)
+	while (tmp)
 	{
-		ft_fprintf(STDERR_FILENO, "%s=%s\n", tmp->alias_name,tmp->real_name);
+		ft_fprintf(STDERR_FILENO, "%s=%s\n", tmp->alias_name, tmp->real_name);
 		tmp = tmp->next;
 	}
 }
@@ -89,7 +77,6 @@ int				builtin_alias(char **args)
 		print_alias(tmp);
 	while (args[i])
 	{
-
 		if (ft_strchr(args[i], EQUAL))
 		{
 			save_command_alias(&args[i]);

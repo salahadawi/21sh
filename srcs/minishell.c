@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: jochumwilen <jochumwilen@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 14:23:12 by sadawi            #+#    #+#             */
-/*   Updated: 2021/03/30 09:11:20 by jwilen           ###   ########.fr       */
+/*   Updated: 2021/03/31 17:57:57 by jochumwilen      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,14 +27,14 @@ char			*value_alias(char *value)
 	t_alias	*current;
 
 	current = g_21sh->alias;
-	while(current)
+	while (current)
 	{
-		if ((!ft_strcmp(value, current->alias_name)) && (!ft_strchr(current->real_name, ' ')))
+		if ((!ft_strcmp(value, current->alias_name)) &&
+		(!ft_strchr(current->real_name, ' ')))
 			value = current->real_name;
 		current = current->next;
 	}
-	// ft_printf("value: %s\n", value);
-	return(value);
+	return (value);
 }
 
 void			loop_shell(void)
@@ -53,7 +53,6 @@ void			loop_shell(void)
 		if (get_input() < 1)
 			break ;
 		save_command_history();
-		//run_alias();
 		if (lexi() == 0)
 		{
 			ft_printf("\n");

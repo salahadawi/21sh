@@ -3,14 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   check_values.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: jochumwilen <jochumwilen@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/15 09:26:19 by jwilen            #+#    #+#             */
-/*   Updated: 2021/03/15 10:25:02 by jwilen           ###   ########.fr       */
+/*   Updated: 2021/03/31 18:27:06 by jochumwilen      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "test.h"
+
+int			return_inv(int ret, int inv)
+{
+	if (inv % 2)
+		return (!ret);
+	return (ret);
+}
 
 static int	check_unary_values_alfa(char *path, int flag)
 {

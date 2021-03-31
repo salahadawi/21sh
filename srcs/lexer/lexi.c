@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexi.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: jochumwilen <jochumwilen@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/17 07:22:21 by jwilen            #+#    #+#             */
-/*   Updated: 2021/03/30 09:07:15 by jwilen           ###   ########.fr       */
+/*   Updated: 2021/03/31 18:29:49 by jochumwilen      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,13 +74,11 @@ t_lexer			*init_lexer(char *contents)
 	return (lexer);
 }
 
-int			lexi(void)
+int				lexi(void)
 {
 	t_lexer *lexer;
 	t_token *token;
-	
-	// modify_line_with_alias();
-	// ft_printf("\nnew:%s\n", g_21sh->line);
+
 	lexer = init_lexer(g_21sh->line);
 	g_21sh->token = NULL;
 	g_21sh->head = g_21sh->token;

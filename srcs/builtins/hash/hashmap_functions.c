@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hashmap_functions.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: jochumwilen <jochumwilen@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/16 09:23:34 by jwilen            #+#    #+#             */
-/*   Updated: 2021/03/20 06:55:21 by jwilen           ###   ########.fr       */
+/*   Updated: 2021/03/31 18:06:13 by jochumwilen      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,8 @@ unsigned int	hashing(const char *key)
 	i = 0;
 	while (key[i])
 	{
-		hash_address = key[i] + (hash_address * (6 ^ 6)) + (hash_address *(16 ^ 16)) - hash_address;
+		hash_address = key[i] + (hash_address * (6 ^ 6)) +
+		(hash_address * (16 ^ 16)) - hash_address;
 		i++;
 	}
 	return (hash_address);

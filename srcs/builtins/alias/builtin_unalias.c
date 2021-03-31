@@ -3,19 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_unalias.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: jochumwilen <jochumwilen@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/26 21:39:44 by jwilen            #+#    #+#             */
-/*   Updated: 2021/03/29 15:13:54 by jwilen           ###   ########.fr       */
+/*   Updated: 2021/03/31 18:23:05 by jochumwilen      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sh.h"
 
+static int		delete_alias_un(char **args, int i, t_alias *tmp)
+{
+	if (!ft_strcmp(args[i], tmp->alias_name))
+	{
+		free_alias_node(&g_21sh->alias, tmp);
+		ft_fprintf(2, "unalias: %s deleted\n", args[i]);
+		return (1);
+	}
+	return (0);
+}
+
 int				builtin_unalias(char **args)
 {
-	int			i;
 	t_alias		*tmp;
+	int			i;
 	int			j;
 
 	i = 1;
@@ -29,19 +40,12 @@ int				builtin_unalias(char **args)
 			ft_fprintf(2, "unalias: bad option: %s\n", args[i]);
 		while (tmp)
 		{
-			if (!ft_strcmp(args[i], tmp->alias_name))
-			{
-				free_alias_node(&g_21sh->alias, tmp);
-				ft_fprintf(2, "unalias: %s deleted\n", args[i]);
-				j = 1;
-				break ;
-			}
+			j = delete_alias_un(args, i, tmp);
 			tmp = tmp->next;
 		}
 		if (j == 0)
 			ft_fprintf(2, "unalias: no such hash table element: %s\n", args[i]);
 		i++;
-		
 	}
 	return (1);
 }

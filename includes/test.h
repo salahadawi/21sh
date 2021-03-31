@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   test.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: jochumwilen <jochumwilen@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/11 22:06:23 by jwilen            #+#    #+#             */
-/*   Updated: 2021/03/15 10:23:34 by jwilen           ###   ########.fr       */
+/*   Updated: 2021/03/31 18:33:15 by jochumwilen      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,20 +18,20 @@
 typedef enum	e_test {
 	flag_b = 1,
 	flag_c,
-    flag_d,
-    flag_e,
-    flag_f,
-    flag_g,
-    flag_cap_l,
-    flag_p,
-    flag_r,
-    flag_s,
-    flag_cap_s,
-    flag_u,
-    flag_w,
-    flag_x,
-    flag_z,
-    op_eq,
+	flag_d,
+	flag_e,
+	flag_f,
+	flag_g,
+	flag_cap_l,
+	flag_p,
+	flag_r,
+	flag_s,
+	flag_cap_s,
+	flag_u,
+	flag_w,
+	flag_x,
+	flag_z,
+	op_eq,
 	op_ne,
 	op_ge,
 	op_gt,
@@ -39,7 +39,7 @@ typedef enum	e_test {
 	op_le,
 	op_sym_eq,
 	op_sym_noteq,
-}               t_test;
+}				t_test;
 
 /*
 **  test functions
@@ -48,6 +48,7 @@ int				check_errors(char **argv, int argc);
 char			**check_inv(char **args, int *inv);
 void			ft_free_ntab(char **tab);
 int				free_new_argv(char **new_argv, int ret);
+int				return_inv(int ret, int inv);
 
 /*
 **  Unery flag functions

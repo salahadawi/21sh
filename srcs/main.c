@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: jochumwilen <jochumwilen@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/15 12:28:40 by sadawi            #+#    #+#             */
-/*   Updated: 2021/03/30 08:53:03 by jwilen           ###   ########.fr       */
+/*   Updated: 2021/03/31 17:55:08 by jochumwilen      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,18 +77,18 @@ void	init_key_sequences(void)
 int		main(int argc, char **argv, char *envp[])
 {
 	(void)(argc && argv);
-	g_debug = (argc > 1); // ENABLE DEBUGGING, DISABLES TERMCAPS
+	g_debug = (argc > 1);
 	if (!(g_21sh = (t_21sh*)ft_memalloc(sizeof(t_21sh))))
 		handle_error("Malloc failed", 1);
 	g_21sh->stdin = dup(STDIN_FILENO);
 	g_21sh->stdout = dup(STDOUT_FILENO);
 	g_21sh->copy_start = -1;
-	g_debug ? 0 : init_termcaps(); // DEBUGGING
+	g_debug ? 0 : init_termcaps();
 	init_signal_handling();
-	g_debug ? 0 : create_terminal_raw_mode(); // DEBUGGING
-	g_debug ? 0 : set_terminal_raw_mode(); // DEBUGGING
+	g_debug ? 0 : create_terminal_raw_mode();
+	g_debug ? 0 : set_terminal_raw_mode();
 	init_env(envp);
-	g_debug ? 0 : clear_screen(); // DEBUGGING
+	g_debug ? 0 : clear_screen();
 	loop_shell();
 	restore_terminal_mode();
 	free_alias();

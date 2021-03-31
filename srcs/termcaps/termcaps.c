@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   termcaps.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: jochumwilen <jochumwilen@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/11 17:00:00 by jwilen            #+#    #+#             */
-/*   Updated: 2021/02/06 16:04:55 by sadawi           ###   ########.fr       */
+/*   Updated: 2021/03/31 18:29:14 by jochumwilen      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@ void	init_termcaps(void)
 	if (!(isatty(0)))
 		handle_error("Not a terminal", 0);
 	if (!(terminal_name = getenv("TERM")))
-		;//handle_error("Terminal enviroment variable not found", 0);
+		handle_error("Terminal enviroment variable not found", 0);
 	if (tgetent(NULL, terminal_name) < 1)
-		;//handle_error("Terminal specified in env not found", 0);
+		handle_error("Terminal specified in env not found", 0);
 	init_key_sequences();
 	tcgetattr(STDOUT_FILENO, &g_21sh->old);
 	ioctl(STDOUT_FILENO, TIOCGWINSZ, &g_21sh->window);

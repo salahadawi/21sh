@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   autocomplete_commands.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: jochumwilen <jochumwilen@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/12 09:25:45 by jwilen            #+#    #+#             */
-/*   Updated: 2021/03/08 15:12:29 by jwilen           ###   ########.fr       */
+/*   Updated: 2021/03/31 18:31:12 by jochumwilen      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,12 +83,8 @@ void		autocomplete(char **line, char previous_pressed_key)
 		partial_command = get_partial_command(*line);
 		if (partial_command[0] == '\0')
 			matching_commands = get_dir_commands(".");
-		else if (check_command_valid_dir(partial_command)) //CLOSE DIR
-		// some kind of check to make sure . and .. dirs are not immediately opened if files starting with . or .. exist
-		{
-			//check if command matches more than just valid dir
+		else if (check_command_valid_dir(partial_command))
 			matching_commands = get_dir_commands(partial_command);
-		}
 		else
 			matching_commands = get_matching_commands(partial_command);
 	}

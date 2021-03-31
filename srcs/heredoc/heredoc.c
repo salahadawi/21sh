@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: jochumwilen <jochumwilen@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/14 21:20:43 by jwilen            #+#    #+#             */
-/*   Updated: 2021/03/05 12:20:34 by jwilen           ###   ########.fr       */
+/*   Updated: 2021/03/31 18:28:15 by jochumwilen      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,7 @@ int		handle_keys_heredoc(char **line, char *previous_pressed_key)
 	else if (c == TAB)
 		autocomplete(line, *previous_pressed_key);
 	else if (c == CTRL_D)
-	{
-	//restore_terminal_mode();
-		return (-1); //temporary, need to restore terminal and free memory here
-	}
+		return (-1);
 	else if (ft_isprint(c))
 		*line = str_add_char_heredoc(line, c);
 	*previous_pressed_key = c;
@@ -80,9 +77,9 @@ int		get_heredoc_input(char **line)
 
 	*line = ft_strnew(0);
 	save_cursor_position_heredoc();
-	while ((value = handle_keys_heredoc(line, &previous_pressed_key)) > 0)
+	while ((value =
+	handle_keys_heredoc(line, &previous_pressed_key)) > 0)
 	{
-		//should not exit from child process, instead find some way to return 0 here
 		if (input_too_large_heredoc(line))
 			break ;
 		move_cursor_start_heredoc();
@@ -110,7 +107,7 @@ void	redirect_heredoc_to_input(char *eof)
 	{
 		if (ft_strequ(line, eof))
 			break ;
-		ft_putendl_fd(line, fd); // write to tmp file
+		ft_putendl_fd(line, fd);
 		free(line);
 		ft_fprintf(g_21sh->stdout, "\nheredoc> ");
 	}
