@@ -3,17 +3,17 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+         #
+#    By: jochumwilen <jochumwilen@student.42.fr>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/04/10 19:27:20 by sadawi            #+#    #+#              #
-#    Updated: 2021/03/28 20:32:50 by jwilen           ###   ########.fr        #
+#    Updated: 2021/03/31 17:50:36 by jochumwilen      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = 21sh
 
 CFILES =  get_env_info.c init_shell.c main.c \
-minishell.c 
+minishell.c
 
 AUTOCOMPLETE = autocomplete_commands.c autocomplete_commands_alfa.c \
 autocomplete_commands_beta.c
@@ -23,10 +23,10 @@ builtin_setenv.c builtin_test.c builtin_unsetenv.c builtin_hash.c \
 handle_builtins.c builtin_type.c builtin_alias.c
 
 BUILTINS_TEST = flag_bcdef.c flag_glprs.c flag_suwxz.c flag_binary.c \
-flag_binary_util.c flag_binary_sym.c check_values.c get_options.c util.c 
+flag_binary_util.c flag_binary_sym.c check_values.c get_options.c util.c
 
 BUILTINS_HASH = hash_main.c hash_print.c get_args.c reset.c hash_init.c \
-hashmap_functions.c prime.c hash_paths.c    
+hashmap_functions.c prime.c hash_paths.c
 
 BUILTINS_ALIAS = alias_file.c builtin_unalias.c modify_line_with_alias.c \
 
@@ -43,8 +43,8 @@ INPUT = input_str.c copy.c paste.c expand_input.c \
 KEYINPUT = handle_keys.c move_cursor_direction.c move_cursor.c read_key.c \
 move_word.c handle_keys_alfa.c
 
-LEXER =  lexi.c lexi2.c token.c token_functions.c \
-lexer_alfa.c lexer_collect.c lexer_collect_strings.c
+LEXER =  lexi.c lexi2.c token.c token_functions.c lexer_alfa.c \
+lexer_collect.c lexer_collect_strings.c lexer_start_string.c 
 
 RAWMODE = rawmode.c \
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: jochumwilen <jochumwilen@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/17 14:03:41 by jwilen            #+#    #+#             */
-/*   Updated: 2021/02/23 11:34:27 by jwilen           ###   ########.fr       */
+/*   Updated: 2021/03/31 17:51:11 by jochumwilen      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,5 +35,9 @@ t_token				*lexer_collect_id(t_lexer *lexer);
 t_token				*lexer_collect_et(t_lexer *lexer);
 t_token				*lexer_advance_with_token(t_lexer *lexer, t_token *token);
 char				*lexer_get_current_char_as_string(t_lexer *lexer);
+char				*start_lexer_string(char *new_str);
+char				*start_lexer_qstring(char *new_str);
+char				*lexer_string_qstring(char *new_str);
+char				*lexer_string_string(char *new_str);
 
 #endif
