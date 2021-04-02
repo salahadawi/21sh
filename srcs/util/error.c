@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/11 17:30:05 by jwilen            #+#    #+#             */
-/*   Updated: 2021/03/16 08:31:31 by jwilen           ###   ########.fr       */
+/*   Updated: 2021/04/02 14:55:29 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ void	handle_error(char *message, int reset)
 	if (reset)
 		restore_terminal_mode();
 	free(g_21sh->line);
+	exit(1);
 }
 
 int		print_invalid_option(char c)
