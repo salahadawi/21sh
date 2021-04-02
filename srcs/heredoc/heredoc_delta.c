@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc_delta.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/15 15:04:58 by jwilen            #+#    #+#             */
-/*   Updated: 2021/03/05 12:19:04 by jwilen           ###   ########.fr       */
+/*   Updated: 2021/04/02 19:20:59 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@ char	*str_remove_char_heredoc(char **str, int index)
 		return (*str);
 	if (!(newstr = (char*)ft_memalloc(ft_strlen(*str))))
 		handle_error("Malloc failed", 1);
-	i = 0;
-	while (i++ < index)
+	i = -1;
+	while (++i < index)
 		newstr[i] = (*str)[i];
 	if (!(*str)[i])
 	{
