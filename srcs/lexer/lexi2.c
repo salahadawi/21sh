@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexi2.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: jochumwilen <jochumwilen@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/29 11:42:33 by jwilen            #+#    #+#             */
-/*   Updated: 2021/03/27 20:57:39 by jwilen           ###   ########.fr       */
+/*   Updated: 2021/03/31 21:38:39 by jochumwilen      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,11 +66,13 @@ t_token		*lexer_collect_id(t_lexer *lexer)
 
 	if (!(value = (char*)ft_memalloc(sizeof(char) + 1)))
 		handle_error("Malloc failed", 1);
-	while (lexer->c != '\0' && lexer->c != BACKSLASH && lexer->c != ' ' &&
+	while (lexer->c != '\0' && lexer->c != ' ' &&
 	lexer->c != ENTER && lexer->c != STRING && lexer->c != QSTRING &&
 	lexer->c != ';' && lexer->c != '|' && lexer->c != '>' && lexer->c != '<' &&
 	lexer->c != '&')
 	{
+		if (lexer->c == BACKSLASH)
+			lexer_advance(lexer);
 		value = ft_relloc(&value);
 		s = lexer_get_current_char_as_string(lexer);
 		ft_strcat(value, s);

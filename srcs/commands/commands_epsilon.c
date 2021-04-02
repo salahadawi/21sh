@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   commands_epsilon.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: jochumwilen <jochumwilen@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/22 11:30:56 by jwilen            #+#    #+#             */
-/*   Updated: 2021/03/08 10:35:39 by jwilen           ###   ########.fr       */
+/*   Updated: 2021/03/31 18:48:11 by jochumwilen      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
