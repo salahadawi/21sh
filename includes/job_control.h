@@ -6,7 +6,7 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/08 16:39:07 by sadawi            #+#    #+#             */
-/*   Updated: 2021/03/09 20:47:45 by sadawi           ###   ########.fr       */
+/*   Updated: 2021/03/11 16:14:24 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,5 +42,11 @@ typedef struct		s_job
 pid_t		ft_tcgetpgrp(int fd);
 
 void		ft_tcsetpgrp(int fd, pid_t prgp);
+
+void		do_job_notification (void);
+
+void		put_job_in_foreground(t_job *job, int cont);
+
+void		put_job_in_background(t_job *job, int cont);
 
 #endif

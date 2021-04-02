@@ -6,7 +6,7 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 14:23:12 by sadawi            #+#    #+#             */
-/*   Updated: 2021/03/10 15:36:25 by sadawi           ###   ########.fr       */
+/*   Updated: 2021/03/11 17:22:01 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void	loop_shell(void)
 	{
 		open_history_file();
 		g_21sh->cursor.x = 0;
+		do_job_notification();
 		print_shell_info();
 		get_autocomplete_commands();
 		if (get_input() < 1)
@@ -34,6 +35,7 @@ void	loop_shell(void)
 
 		ft_printf("\n");
 		handle_expansion();
+		do_job_notification();
 		run_commands();
 		move_cursor_newline(); //if output didn't end with newline
 		free_history();

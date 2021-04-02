@@ -6,7 +6,7 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/11 16:54:31 by jwilen            #+#    #+#             */
-/*   Updated: 2021/03/09 20:56:40 by sadawi           ###   ########.fr       */
+/*   Updated: 2021/03/11 17:03:09 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,10 @@ void	handle_signal(int sig)
 	else if (sig == SIGWINCH)
 		handle_signal_resize();
 	else if (sig == SIGCHLD)
-		;//handle_signal_interrupt();
+	{
+		//do_job_notification();
+		//handle_signal_interrupt();
+	}
 	else
 	{
 		;

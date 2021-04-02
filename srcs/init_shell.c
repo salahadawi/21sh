@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_shell.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 14:12:23 by sadawi            #+#    #+#             */
-/*   Updated: 2021/02/24 08:54:02 by jwilen           ###   ########.fr       */
+/*   Updated: 2021/03/11 16:13:51 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	init_builtins(void)
 	char	*builtin_names;
 	int		count;
 
-	builtin_names = "echo exit env setenv unsetenv cd";
+	builtin_names = "echo exit env setenv unsetenv cd jobs fg bg";
 	g_21sh->builtins.names = ft_strsplit(builtin_names, ' ');
 	count = 0;
 	while (g_21sh->builtins.names[count])
@@ -50,6 +50,10 @@ void	init_builtins(void)
 	g_21sh->builtins.funcs[3] = &builtin_setenv;
 	g_21sh->builtins.funcs[4] = &builtin_unsetenv;
 	g_21sh->builtins.funcs[5] = &builtin_cd;
+	g_21sh->builtins.funcs[6] = builtin_jobs;
+	g_21sh->builtins.funcs[7] = builtin_fg;	
+	g_21sh->builtins.funcs[8] = builtin_bg;
+	
 }
 
 /*

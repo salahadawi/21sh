@@ -6,7 +6,7 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/12 16:07:17 by jwilen            #+#    #+#             */
-/*   Updated: 2021/03/11 19:09:34 by sadawi           ###   ########.fr       */
+/*   Updated: 2021/03/11 21:06:35 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -171,7 +171,7 @@ void launch_process(t_job *job, t_process *process)
 	if (job->pipes && process->command->next)
 		pipe_output(job->pipes, process->command->num);
 	close_pipes(job->pipes);
-	handle_redirections(process->command);
+	handle_redirections(process->command); //should redirections happen before pipes?? example: ls >/dev/null | cat -e
 	args = command_arguments_to_arr(process->command);
 	if (!handle_builtins(args)) // change to exit with proper builtin return values // could get exit value from waitpid?
 		handle_binaries(args);
@@ -208,7 +208,7 @@ int			job_is_completed(t_job *job)
 	return (1);
 }
 
-int mark_process_status(pid_t pid, int status)
+int			mark_process_status(pid_t pid, int status)
 {
 	t_job		*tmp_job;
 	t_process	*tmp_process;
@@ -250,6 +250,70 @@ int mark_process_status(pid_t pid, int status)
 		return -1;
 }
 
+void		update_status(void)
+{
+	int		status;
+	pid_t	pid;
+
+	pid = waitpid (WAIT_ANY, &status, WUNTRACED|WNOHANG);
+  	while (!mark_process_status (pid, status))
+		pid = waitpid (WAIT_ANY, &status, WUNTRACED|WNOHANG);
+}
+
+void	free_job(t_job *job)
+{
+	t_process	*process;
+	t_process	*next_process;
+
+	process = job->first_process;
+	while (process)
+	{
+		next_process = process->next;
+		free_command(process->command);
+		free(process);
+		process = next_process;
+	}
+	free(job->pipes);
+	free(job);
+}
+
+void		do_job_notification(void)
+{
+	t_job	*job;
+	t_job	*prev;
+	t_job	*next;
+
+  /* Update status information for child processes.  */
+	update_status ();
+
+	prev = NULL;
+	job = g_21sh->jobs;
+	while (job)
+	{
+		next = job->next;
+		if (job_is_completed(job))
+		{
+			if (job->ground == BACKGROUND)
+				format_job_info(job, "completed");
+			if (prev)
+				prev->next = job->next;
+			else
+				g_21sh->jobs = job->next;
+			free_job(job);
+		}
+		else 
+		{
+			if (job_is_stopped(job) && !job->notified)
+			{
+				format_job_info(job, "stopped");
+				job->notified = 1;
+			}
+			prev = job;
+		}
+		job = next;
+	}
+}
+
 void	wait_for_job(t_job *job)
 {
 	int		status;
@@ -271,15 +335,13 @@ void put_job_in_foreground(t_job *job, int cont)
 	(void)cont;
 	/* Put the job into the foreground.  */
 	ft_tcsetpgrp(STDIN_FILENO, job->pgid);
-	ft_printf("|%d|\n", (int)job->pgid);
 	/* Send the job a continue signal, if necessary.  */
-	//   if (cont)
-	//     {
-	//       tcsetattr (shell_terminal, TCSADRAIN, &j->tmodes);
-	//       if (kill (- j->pgid, SIGCONT) < 0)
-	//         perror ("kill (SIGCONT)");
-	//     }
-
+	if (cont)
+	{
+		tcsetattr(STDIN_FILENO, TCSADRAIN, &job->tmodes);
+		if (kill(-job->pgid, SIGCONT) < 0)
+			handle_error("kill (SIGCONT)", 0);
+	}
 	/* Wait for it to report.  */
 	wait_for_job(job);
 
@@ -323,7 +385,7 @@ void 			launch_job(t_job *job)
 				job->pgid = pid;
 				setpgid(pid, job->pgid);
 			}
-			//execute_builtin_in_parent(command);
+			//execute_builtin_in_parent(tmp->command); //only if job in foreground?
 			if (job->pipes && tmp->command->num > 0)
 				close(job->pipes[(tmp->command->num - 1) * 2]);
 			if (job->pipes && tmp->command->next)
@@ -331,8 +393,9 @@ void 			launch_job(t_job *job)
 		}
 		tmp = tmp->next;
 	}
-	format_job_info(job, "launched");
-	if (job->ground)
+	if (job->ground == BACKGROUND)
+		format_job_info(job, "launched");
+	if (job->ground == FOREGROUND)
 		put_job_in_foreground(job, 0);
 	else
 		put_job_in_background(job, 0);

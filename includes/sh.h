@@ -6,7 +6,7 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/10 12:20:24 by sadawi            #+#    #+#             */
-/*   Updated: 2021/03/08 21:06:55 by sadawi           ###   ########.fr       */
+/*   Updated: 2021/03/11 16:14:17 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -195,6 +195,9 @@ void					wait_for_child(pid_t pid);
 int						exec_cmd(char **args);
 int						find_size_pointers(char *str, char *ptr);
 int						get_env_name_len(char *str);
+int						builtin_jobs(char **args);
+int						builtin_fg(char **args);
+int						builtin_bg(char **args);
 
 /*
 ** Expand tilde & dollar functions
