@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jochumwilen <jochumwilen@student.42.fr>    +#+  +:+       +#+        */
+/*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/14 21:20:43 by jwilen            #+#    #+#             */
-/*   Updated: 2021/03/31 18:28:15 by jochumwilen      ###   ########.fr       */
+/*   Updated: 2021/04/02 18:46:33 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,7 @@ void	redirect_heredoc_to_input(char *eof)
 	if ((fd = open(".heredoc.tmp", O_WRONLY | O_CREAT | O_TRUNC, 0666)) == -1)
 		handle_error("Open failed", 1);
 	ft_fprintf(g_21sh->stdout, "heredoc> ");
+	signal(SIGINT, SIG_IGN);
 	while (get_heredoc_input(&line))
 	{
 		if (ft_strequ(line, eof))
@@ -111,6 +112,7 @@ void	redirect_heredoc_to_input(char *eof)
 		free(line);
 		ft_fprintf(g_21sh->stdout, "\nheredoc> ");
 	}
+	signal(SIGINT, handle_signal);
 	free(line);
 	ft_fprintf(g_21sh->stdout, "\n");
 	close(fd);

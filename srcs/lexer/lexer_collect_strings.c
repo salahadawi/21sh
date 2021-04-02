@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_collect_strings.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jochumwilen <jochumwilen@student.42.fr>    +#+  +:+       +#+        */
+/*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 11:30:06 by jwilen            #+#    #+#             */
-/*   Updated: 2021/03/31 17:52:06 by jochumwilen      ###   ########.fr       */
+/*   Updated: 2021/04/02 17:19:24 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,9 @@ char		*lexer_string_qstring(char *new_str)
 	while (new_str && !ft_strchr(new_str, QSTRING))
 	{
 		ft_printf("\nquote>");
+		signal(SIGINT, SIG_IGN);
 		get_input();
+		signal(SIGINT, handle_signal);
 		new_str = ft_relloc(&new_str);
 		ft_strcat(new_str, "\n");
 		new_str = ft_strjoinfree(new_str, g_21sh->line);
@@ -38,7 +40,9 @@ char		*lexer_string_string(char *new_str)
 	while (new_str && !ft_strchr(new_str, STRING))
 	{
 		ft_printf("\ndquote>");
+		signal(SIGINT, SIG_IGN);
 		get_input();
+		signal(SIGINT, handle_signal);
 		new_str = ft_relloc(&new_str);
 		ft_strcat(new_str, "\n");
 		new_str = ft_strjoinfree(new_str, g_21sh->line);
