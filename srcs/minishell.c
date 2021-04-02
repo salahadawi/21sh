@@ -6,7 +6,7 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 14:23:12 by sadawi            #+#    #+#             */
-/*   Updated: 2021/04/02 13:49:51 by sadawi           ###   ########.fr       */
+/*   Updated: 2021/04/02 17:10:15 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,10 @@ void			loop_shell(void)
 		open_history_file();
 		g_21sh->cursor.x = 0;
 		print_shell_info();
+		signal(SIGINT, handle_signal);
 		if (get_input() < 1)
 			break ;
+		signal(SIGINT, SIG_IGN);
 		save_command_history();
 		if (lexi() == 0)
 		{
