@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc_beta.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/15 14:23:56 by jwilen            #+#    #+#             */
-/*   Updated: 2021/02/24 08:58:02 by jwilen           ###   ########.fr       */
+/*   Updated: 2021/04/02 19:00:36 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	handle_delete_heredoc(char **line)
 {
 	*line = str_remove_char(*line, ft_strlen(*line)
 	+ g_21sh->cursor_heredoc.x);
-	move_cursor_right();
+	move_cursor_right_heredoc();
 }
 
 void	cursor_jump_up_heredoc(char *line, int *left_len)
