@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_exit.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: jochumwilen <jochumwilen@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 14:07:38 by sadawi            #+#    #+#             */
-/*   Updated: 2021/04/02 15:36:54 by sadawi           ###   ########.fr       */
+/*   Updated: 2021/04/03 00:04:59 by jochumwilen      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int		builtin_exit(char **args)
 {
-	//restore_terminal_mode(); add later, breaks 'leaks --atExit'
+	restore_terminal_mode();
 	(void)(args);
 	free(g_21sh->line);
 	exit(0);
