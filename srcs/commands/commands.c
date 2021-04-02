@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   commands.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/12 16:07:17 by jwilen            #+#    #+#             */
-/*   Updated: 2021/03/10 08:24:30 by jwilen           ###   ########.fr       */
+/*   Updated: 2021/04/02 15:07:41 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,8 @@ void			run_commands(void)
 		commands = get_commands();
 		if (g_21sh->token)
 			advance_tokens();
-		run_commands_group(commands);
+		if (commands)
+			run_commands_group(commands);
 		free_command(commands);
 	}
 }
