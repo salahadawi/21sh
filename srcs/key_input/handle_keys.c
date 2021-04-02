@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_keys.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/11 15:43:13 by jwilen            #+#    #+#             */
-/*   Updated: 2021/03/05 12:30:11 by jwilen           ###   ########.fr       */
+/*   Updated: 2021/04/02 13:50:02 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,6 @@ static void	handle_keys_c(char c)
 		copy_start();
 	else if (c == CTRL_P)
 		paste();
-	else if (c == TAB)
-		autocomplete(&g_21sh->line, g_21sh->previous_pressed_key);
 	else if (c == CTRL_D && !ft_strlen(g_21sh->line))
 	{
 		restore_terminal_mode();

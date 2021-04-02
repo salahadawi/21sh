@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jochumwilen <jochumwilen@student.42.fr>    +#+  +:+       +#+        */
+/*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 14:23:12 by sadawi            #+#    #+#             */
-/*   Updated: 2021/03/31 17:57:57 by jochumwilen      ###   ########.fr       */
+/*   Updated: 2021/04/02 13:49:51 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ void			loop_shell(void)
 		open_history_file();
 		g_21sh->cursor.x = 0;
 		print_shell_info();
-		get_autocomplete_commands();
 		if (get_input() < 1)
 			break ;
 		save_command_history();
