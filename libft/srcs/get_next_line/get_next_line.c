@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/25 14:36:30 by sadawi            #+#    #+#             */
-/*   Updated: 2021/03/06 07:15:08 by jwilen           ###   ########.fr       */
+/*   Updated: 2021/04/02 14:51:28 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ int			find_nl(t_fd **buf)
 			if (ft_strequ((*buf)->str, ""))
 			{
 				free((*buf)->str);
+				(*buf)->fd = -1;
 				return (1);
 			}
 			return (0);
