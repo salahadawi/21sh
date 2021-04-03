@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sh.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jochumwilen <jochumwilen@student.42.fr>    +#+  +:+       +#+        */
+/*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/10 12:20:24 by sadawi            #+#    #+#             */
-/*   Updated: 2021/04/02 23:29:06 by jochumwilen      ###   ########.fr       */
+/*   Updated: 2021/04/03 13:10:45 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,9 +77,6 @@
 # define TEXT_INVERSE_VIDEO "mr"
 # define TEXT_UNDERLINE "us"
 # define TEXT_NORMAL "me"
-
-# define OPERATOR (TOKEN_SEMI|TOKEN_PIPE|TOKEN_LRGER|TOKEN_SMLER|TOKEN_ET)
-# define REDIRECTIONS (TOKEN_SMLER|TOKEN_LRGER|TOKEN_INSERTION|TOKEN_EXTRACTION)
 
 typedef int				t_builtin_func (char **args);
 
