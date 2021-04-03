@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_keys.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jochumwilen <jochumwilen@student.42.fr>    +#+  +:+       +#+        */
+/*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/11 15:43:13 by jwilen            #+#    #+#             */
-/*   Updated: 2021/04/02 22:10:42 by jochumwilen      ###   ########.fr       */
+/*   Updated: 2021/04/03 13:18:37 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,7 @@ static void	handle_keys_c(char c)
 	else if (c == CTRL_P)
 		paste();
 	else if (c == CTRL_D && !ft_strlen(g_21sh->line))
-	{
-		restore_terminal_mode();
 		builtin_exit(&g_21sh->line);
-	}
 	else if (ft_isprint(c))
 		g_21sh->line = str_add_char(g_21sh->line, c);
 	g_21sh->previous_pressed_key = c;
