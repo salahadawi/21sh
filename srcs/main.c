@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jochumwilen <jochumwilen@student.42.fr>    +#+  +:+       +#+        */
+/*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/15 12:28:40 by sadawi            #+#    #+#             */
-/*   Updated: 2021/03/31 17:55:08 by jochumwilen      ###   ########.fr       */
+/*   Updated: 2021/04/03 13:14:05 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ void	init_key_sequences(void)
 int		main(int argc, char **argv, char *envp[])
 {
 	(void)(argc && argv);
-	g_debug = (argc > 1);
+	g_debug = 0;
 	if (!(g_21sh = (t_21sh*)ft_memalloc(sizeof(t_21sh))))
 		handle_error("Malloc failed", 1);
 	g_21sh->stdin = dup(STDIN_FILENO);
