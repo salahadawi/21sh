@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_shell.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jochumwilen <jochumwilen@student.42.fr>    +#+  +:+       +#+        */
+/*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 14:12:23 by sadawi            #+#    #+#             */
-/*   Updated: 2021/03/31 17:58:28 by jochumwilen      ###   ########.fr       */
+/*   Updated: 2021/04/03 09:45:33 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,7 @@ void	init_builtins(void)
 	char	*builtin_names;
 	int		count;
 
-	builtin_names = "echo exit env setenv unsetenv cd \
-	test hash type alias unalias";
+	builtin_names = "echo exit env setenv unsetenv cd";
 	g_21sh->builtins.names = ft_strsplit(builtin_names, ' ');
 	count = 0;
 	while (g_21sh->builtins.names[count])
@@ -53,11 +52,6 @@ void	init_builtins(void)
 	g_21sh->builtins.funcs[3] = &builtin_setenv;
 	g_21sh->builtins.funcs[4] = &builtin_unsetenv;
 	g_21sh->builtins.funcs[5] = &builtin_cd;
-	g_21sh->builtins.funcs[6] = &builtin_test;
-	g_21sh->builtins.funcs[7] = &builtin_hash;
-	g_21sh->builtins.funcs[8] = &builtin_type;
-	g_21sh->builtins.funcs[9] = &builtin_alias;
-	g_21sh->builtins.funcs[10] = &builtin_unalias;
 }
 
 /*
