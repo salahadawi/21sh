@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_exit.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jochumwilen <jochumwilen@student.42.fr>    +#+  +:+       +#+        */
+/*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 14:07:38 by sadawi            #+#    #+#             */
-/*   Updated: 2021/04/03 00:04:59 by jochumwilen      ###   ########.fr       */
+/*   Updated: 2021/04/03 13:37:02 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,5 @@ int		builtin_exit(char **args)
 {
 	restore_terminal_mode();
 	(void)(args);
-	free(g_21sh->line);
 	exit(0);
 }
