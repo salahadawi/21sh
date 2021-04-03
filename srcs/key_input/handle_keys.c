@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_keys.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: jochumwilen <jochumwilen@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/11 15:43:13 by jwilen            #+#    #+#             */
-/*   Updated: 2021/04/02 13:50:02 by sadawi           ###   ########.fr       */
+/*   Updated: 2021/04/02 22:10:42 by jochumwilen      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ static void	handle_keys_c(char c)
 		handle_backspace();
 	else if (c == CTRL_K && ft_strlen(g_21sh->line) > 0)
 		copy_start();
+	else if (c == CTRL_U && ft_strlen(g_21sh->line) > 0)
+		cut();
 	else if (c == CTRL_P)
 		paste();
 	else if (c == CTRL_D && !ft_strlen(g_21sh->line))

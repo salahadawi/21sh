@@ -6,7 +6,7 @@
 /*   By: jochumwilen <jochumwilen@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/10 12:20:24 by sadawi            #+#    #+#             */
-/*   Updated: 2021/03/31 18:34:47 by jochumwilen      ###   ########.fr       */
+/*   Updated: 2021/04/02 23:29:06 by jochumwilen      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@
 # define ENTER 10
 # define CTRL_K 11
 # define CTRL_P 16
+# define CTRL_U 21
 # define ESCAPE 27
 # define HOME 72
 # define END 70
@@ -324,10 +325,12 @@ int						input_too_large(void);
 int						filename_character_allowed(char c);
 
 /*
-** Copy paste functions
+** Copy paste cut functions
 */
 void					copy_start();
 void					paste();
+void					cut(void);
+void					cut_new_line(int len);
 char					*str_add_paste(char *str, char *paste);
 
 /*
