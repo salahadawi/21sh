@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_setenv.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/17 14:08:24 by sadawi            #+#    #+#             */
-/*   Updated: 2021/03/23 08:28:23 by jwilen           ###   ########.fr       */
+/*   Updated: 2021/04/03 09:43:35 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ int		builtin_setenv(char **args)
 	i = 1;
 	while (args[i])
 	{
-		print_error(ft_sprintf("%s\n", args[0]));
 		if (ft_strchr(args[i], EQUAL))
 		{
 			add_env(args[i]);
