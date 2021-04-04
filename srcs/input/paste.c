@@ -6,7 +6,7 @@
 /*   By: jochumwilen <jochumwilen@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/09 12:02:11 by jwilen            #+#    #+#             */
-/*   Updated: 2021/04/02 23:28:44 by jochumwilen      ###   ########.fr       */
+/*   Updated: 2021/04/03 00:25:41 by jochumwilen      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static char		*str_cut(char *str, int len)
 	char	*newstr;
 
 	index = ft_strlen(g_21sh->line) + g_21sh->cursor.x;
-	if (!(newstr = (char*)ft_memalloc(ft_strlen(str) - (len + 1))))
+	if (!(newstr = (char*)ft_memalloc(ft_strlen(str) - (len - 1))))
 		handle_error("Malloc failed", 1);
 	newstr = cut_str(index, newstr, str, len);
 	free(str);
