@@ -52,7 +52,7 @@ void	print_input(void)
 
 int		input_too_large(void)
 {
-	if (ft_strlen(g_21sh->line) > 100000)
+	if (ft_strlen(g_21sh->line) > ARG_MAX)
 	{
 		free(g_21sh->line);
 		ft_fprintf(2, "\nError: Input exceeds ARG_MAX.");

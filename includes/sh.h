@@ -38,6 +38,7 @@
 # endif
 
 # define FILENAME_MAX_SIZE 255
+# define ARG_MAX 10000
 
 # define CLEAR_SCREEN "cl"
 # define LEFT_SEQUENCE "kl"

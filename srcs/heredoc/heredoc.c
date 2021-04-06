@@ -6,7 +6,7 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/14 21:20:43 by jwilen            #+#    #+#             */
-/*   Updated: 2021/04/02 18:46:33 by sadawi           ###   ########.fr       */
+/*   Updated: 2021/04/06 19:49:48 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int		input_too_large_heredoc(char **line)
 {
-	if (ft_strlen(*line) > 100000)
+	if (ft_strlen(*line) > ARG_MAX)
 	{
 		free(*line);
 		ft_fprintf(2, "\nError: Input exceeds ARG_MAX.");
