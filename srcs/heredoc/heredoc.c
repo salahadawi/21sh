@@ -85,6 +85,7 @@ int		get_heredoc_input(char **line)
 		print_input_heredoc(*line);
 		move_cursor_heredoc(*line);
 	}
+	g_21sh->cursor_heredoc.x = 0;
 	if (value == -1)
 		return (0);
 	return (1);
