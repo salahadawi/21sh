@@ -6,7 +6,7 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/10 12:20:24 by sadawi            #+#    #+#             */
-/*   Updated: 2021/04/03 13:10:45 by sadawi           ###   ########.fr       */
+/*   Updated: 2021/04/06 19:39:46 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -430,5 +430,8 @@ char					*adding_str_to_paste(int index, char *newstr,
 						char *str, char *paste);
 void					free_paths(char **paths, int i);
 int						check_ast(void);
+
+void					copy_input(void);
+void					paste_input(void);
 
 #endif

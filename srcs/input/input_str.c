@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   input_str.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jwilen <jwilen@student.hive.fi>            +#+  +:+       +#+        */
+/*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/11 17:12:41 by jwilen            #+#    #+#             */
-/*   Updated: 2021/03/30 09:03:19 by jwilen           ###   ########.fr       */
+/*   Updated: 2021/04/06 19:22:04 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void	copy_input(void)
 {
+	free(g_21sh->copied_input);
 	g_21sh->copied_input = ft_strdup(g_21sh->line);
 }
 
