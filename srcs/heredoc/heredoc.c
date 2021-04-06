@@ -40,8 +40,6 @@ int		handle_keys_heredoc(char **line, char *previous_pressed_key)
 		handle_backspace_heredoc(line);
 	else if (c == ENTER)
 		return (0);
-	else if (c == TAB)
-		autocomplete(line, *previous_pressed_key);
 	else if (c == CTRL_D)
 		return (-1);
 	else if (ft_isprint(c))
