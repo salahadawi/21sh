@@ -6,7 +6,7 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/23 11:30:06 by jwilen            #+#    #+#             */
-/*   Updated: 2021/04/02 17:19:24 by sadawi           ###   ########.fr       */
+/*   Updated: 2021/04/07 08:00:41 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ char		*lexer_string_qstring(char *new_str)
 		ft_strcat(new_str, "\n");
 		new_str = ft_strjoinfree(new_str, g_21sh->line);
 		g_21sh->line = NULL;
+		g_21sh->cursor.x = 0;
 	}
 	new_str[ft_strlen(new_str) - 1] = '\0';
 	return (new_str);
@@ -47,6 +48,7 @@ char		*lexer_string_string(char *new_str)
 		ft_strcat(new_str, "\n");
 		new_str = ft_strjoinfree(new_str, g_21sh->line);
 		g_21sh->line = NULL;
+		g_21sh->cursor.x = 0;
 	}
 	new_str[ft_strlen(new_str) - 1] = '\0';
 	return (new_str);
