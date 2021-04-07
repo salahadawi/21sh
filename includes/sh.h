@@ -6,7 +6,7 @@
 /*   By: sadawi <sadawi@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/04/10 12:20:24 by sadawi            #+#    #+#             */
-/*   Updated: 2021/04/06 19:39:46 by sadawi           ###   ########.fr       */
+/*   Updated: 2021/04/07 07:53:55 by sadawi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@
 # endif
 
 # define FILENAME_MAX_SIZE 255
-# define ARG_MAX 10000
+# define FT_LINE_MAX 10000
 
 # define CLEAR_SCREEN "cl"
 # define LEFT_SEQUENCE "kl"
